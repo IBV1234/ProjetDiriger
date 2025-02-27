@@ -1,0 +1,3 @@
+
+#Empêche de naviguer dans les dossiers du site via l'URL
+Options All -Indexes
