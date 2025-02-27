@@ -6,7 +6,7 @@
     <title>Knapsack</title>
 </head>
 <body>
-    <h1>Hellow word</h1>
+    <h1>Hellow wordd</h1>
 
 </body>
 </html>
