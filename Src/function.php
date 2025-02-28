@@ -10,8 +10,8 @@ function Uripath(){
 function routeController( string $path){
 
     $valideRouteController = false;
-    if(array_key_exists($path,ROUTE)){
-        $filePath = 'Controllers/' .ROUTE[$path];
+    if(array_key_exists($path,ROUTES)){
+        $filePath = 'Controllers/' .ROUTES[$path];
 
         if(file_exists($filePath)){
 
