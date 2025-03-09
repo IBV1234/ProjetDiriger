@@ -1,0 +1,18 @@
+.text-yellow-fallout {
+    color: #fcef6f;
+}
+.bg-yellow-fallout {
+    background-color: #fef8b7;
+}
+.img-nav {
+    width: 150px;
+    height: 150px;
+}
+.header-height {
+    height: auto;
+}
+@media (min-width: 576px) {
+    .header-height {
+        height: 150px;
+    }
+}

@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <header class="px-3 py-1 border-bottom">
-    <div class="d-flex flex-wrap justify-content-between align-items-center p-2 mt-2 w-100 bg-warning-subtle rounded rounded-1">
-      <a href="/" class="text-decoration-none" style="color: var(--bs-warning-bg-subtle);">
+  <header class="header-height px-3 py-1 border-bottom position-relative">
+    <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-1">
+      <a href="/" class="text-decoration-none text-yellow-fallout">
         <div class="bg-black py-2 px-3 rounded-circle">
           <h2>Knapsack</h2>
         </div>
@@ -15,5 +15,10 @@
         </li>
       </ul>
     </div>
+    <div class="img-nav p-1 d-none d-sm-block position-absolute bottom-0 start-50 translate-middle-x">
+      <a href="/">
+        <img src="/public/images/VaultBoy-Nav.png" class="img-fluid" alt="VaultBoy">
+      </a>
+    </div>
   </header>
-</div>  
+</div>
