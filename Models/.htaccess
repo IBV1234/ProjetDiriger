@@ -1,5 +1,0 @@
-#Interdire l'accès à tout le contenu du dossier.Toutes les requêtes HTTP vers le dossier log ou ses fichiers seront bloquées
-<Files *>
-    Order Deny,Allow
-    Deny from all
-</Files>
