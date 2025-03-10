@@ -9,3 +9,6 @@
     <link href="/public/css/style.css" rel="stylesheet">
 </head>
 <body>
+
+<!-- Container -->
+<div class="container-fluid">
