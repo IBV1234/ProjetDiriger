@@ -73,7 +73,26 @@ class User
     public function setHp(int $hp): void {
         $this->hp = $hp;
     }
+    public function setUser(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp): void {
+        $this->id = $id;
+        $this->alias = $alias;
+        $this->lastName = $lastName;
+        $this->firstName = $firstName;
+        $this->email = $email;
+        $this->password = $password;
+        $this->isAdmin = $isAdmin;
+        $this->balance = $balance;
+        $this->hp = $hp;
+        $this->setAlias($alias);
+        $this->setFirstName($firstName);    
+        $this->setLastName($lastName);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setBalance($balance);
+        $this->setHp($hp);
 
+
+    }
 
     public function toArray(): array {
         return [
