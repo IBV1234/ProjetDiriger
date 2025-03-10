@@ -8,11 +8,7 @@
     <link href="/public/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/css/style.css" rel="stylesheet">
 </head>
-<<<<<<< HEAD
 <body>
 
 <!-- Container -->
 <div class="container-fluid">
-=======
-<body>
->>>>>>> 80adbeead334cb2210eaa4ce9e12ba205703bf55

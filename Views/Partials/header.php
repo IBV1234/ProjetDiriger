@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 
   <header class="header-height px-3 py-1 position-relative">
     <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-3">
-=======
-<div class="container-fluid">
-  <header class="header-height px-3 py-1 border-bottom position-relative">
-    <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-1">
->>>>>>> 80adbeead334cb2210eaa4ce9e12ba205703bf55
       <a href="/" class="text-decoration-none text-yellow-fallout">
         <div class="bg-black py-2 px-3 rounded-circle">
           <h2>Knapsack</h2>
@@ -27,12 +21,5 @@
       </a>
     </div>
   </header>
-<<<<<<< HEAD
   
   <main class="bg-yellow-fallout rounded rounded-3 p-2 mx-3">
-=======
-</div>
-
-<!-- Main content -->
-<div class="container">
->>>>>>> 80adbeead334cb2210eaa4ce9e12ba205703bf55
