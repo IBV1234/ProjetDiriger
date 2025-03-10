@@ -22,3 +22,6 @@
     </div>
   </header>
 </div>
+
+<!-- Main content -->
+<div class="container">
