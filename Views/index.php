@@ -4,8 +4,10 @@ require 'partials/header.php';
 
 ?>
 
-<main>
-    <h1>hello world</h1>
-</main>
+        <div class="row">
+            <div class="col-md-3">
+                <h1>Hello World</h1>
+            </div>
+        </div>
 
 <?php require 'partials/footer.php' ?>
