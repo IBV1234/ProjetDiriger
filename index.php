@@ -1,6 +1,8 @@
 <?php
-require_once 'Configurations/configuration.php';
-require_once 'src/function.php';
-require_once 'Routes/routes.php';
 
-routeController(Uripath());
+require 'src/router.php';
+require 'src/functions.php';
+require 'src/configuration.php';
+require 'src/initialization.php';
+
+route(urlPath());

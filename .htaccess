@@ -1,8 +1,4 @@
-# Activer le moteur de réécriture
 RewriteEngine On
 
-# Ne pas réécrire les URL qui commencent par "public/"
 RewriteRule ^(public/) - [L]
-
-# Rediriger toutes les autres requêtes vers index.php
 RewriteRule ^(.*)$ index.php [L,QSA]
