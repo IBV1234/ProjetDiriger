@@ -3,7 +3,7 @@
 class User 
 {
 
-    private int $id;
+    private int $idItem;
     private string $alias;
     private string $lastName;
     private string $firstName;
@@ -14,7 +14,7 @@ class User
     private int $hp;
     
     public function __construct(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp) {
-        $this->id = $id;
+        $this->idItem = $id;
         $this->alias = $alias;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
@@ -27,7 +27,7 @@ class User
 
     // Getters
     public function getId(): int {
-        return $this->id;
+        return $this->idItem;
     }
     public function getAlias(): string {
         return $this->alias;
@@ -73,30 +73,9 @@ class User
     public function setHp(int $hp): void {
         $this->hp = $hp;
     }
-    public function setUser(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp): void {
-        $this->id = $id;
-        $this->alias = $alias;
-        $this->lastName = $lastName;
-        $this->firstName = $firstName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->isAdmin = $isAdmin;
-        $this->balance = $balance;
-        $this->hp = $hp;
-        $this->setAlias($alias);
-        $this->setFirstName($firstName);    
-        $this->setLastName($lastName);
-        $this->setEmail($email);
-        $this->setPassword($password);
-        $this->setBalance($balance);
-        $this->setHp($hp);
-
-
-    }
-
     public function toArray(): array {
         return [
-            'id' => $this->id,
+            'id' => $this->idItem,
             'alias' => $this->alias,
             'lastName' => $this->lastName,
             'firstName' => $this->firstName,

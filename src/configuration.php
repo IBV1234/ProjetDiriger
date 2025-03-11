@@ -2,5 +2,6 @@
 
 const ROUTES = [
 
-    '/' => 'index.php'
+    '/' => 'index.php',
+    '/panier-achat' => 'panier-achat.php',
 ];
