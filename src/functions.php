@@ -13,4 +13,14 @@ function getPrixTotal($panier,$Quantité=1)
     }
     return $total;
 }
+
+function getPoidsTotal($panier)
+{
+    $total = 0;
+   
+    foreach ($panier as $key => $item) {
+        $total += $item['poids'];
+    }
+    return $total;
+}
 //code here

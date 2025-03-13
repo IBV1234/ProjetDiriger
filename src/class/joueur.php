@@ -1,6 +1,6 @@
 <?php
 
-class User 
+class Joueur 
 {
 
     private int $idItem;
@@ -50,7 +50,9 @@ class User
     public function getBalance(): float {
         return $this->balance;
     }
-
+    public function getHp(){
+        return $this->hp;
+    }
     // Setters
     public function setAlias(string $alias): void {
         $this->alias = $alias;
