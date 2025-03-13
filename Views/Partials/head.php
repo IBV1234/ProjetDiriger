@@ -7,6 +7,8 @@
     <!-- <link rel="icon" type="image/x-icon" href="/public/img/insert-picture-icon.png"> -->
     <link href="/public/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/css/style.css" rel="stylesheet">
+    <link href="/public/css/panier.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 

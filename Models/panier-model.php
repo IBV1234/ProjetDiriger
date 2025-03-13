@@ -41,7 +41,15 @@ class PanierModel implements ModelInterface
             
         } catch (PDOException $e) {
     
-            throw new PDOException($e->getMessage(), $e->getCode());
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
             
         }
 
@@ -74,7 +82,15 @@ class PanierModel implements ModelInterface
             
         } catch (PDOException $e) {
     
-            throw new PDOException($e->getMessage(), $e->getCode());
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
             
         }  
 
@@ -92,7 +108,15 @@ class PanierModel implements ModelInterface
             $stm->execute();
             
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
         }
     }
     

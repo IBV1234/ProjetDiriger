@@ -1,7 +1,7 @@
 <?php
 
 require 'src/class/Database.php';
-require "src/sessions.php";
+require "src/session.php";
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();

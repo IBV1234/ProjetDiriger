@@ -19,7 +19,7 @@ class ItemModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienimage,estDisponible FROM Items');
+            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienphoto,estDisponible FROM Items');
     
             $stm->execute();
     
@@ -38,7 +38,7 @@ class ItemModel implements ModelInterface
                         $row['prix'],
                         $row['poids'],
                         $row['utilite'],
-                        $row['lienimage'],
+                        $row['lienphoto'],
                         $row['estDisponible']
                         );
 
@@ -48,14 +48,24 @@ class ItemModel implements ModelInterface
 
             }
             
-            return null;
+           
             
         } catch (PDOException $e) {
     
-            throw new PDOException($e->getMessage(), $e->getCode());
-            
-        }
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
+              redirect('Views/error.php');
+            }
+        return null;
     }
 
     public function selectById(int $idItem) : null|Item {
@@ -84,16 +94,31 @@ class ItemModel implements ModelInterface
                     $data['estDisponible']
                     );
 
+                    file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+                    redirect('Views/error.php');
+
             }
             
-            return null;
+           
             
         } catch (PDOException $e) {
     
-            throw new PDOException($e->getMessage(), $e->getCode());
-            
-        }  
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
+              redirect('Views/error.php');
+
+        }  
+        return null;
     }
     public function insert(Item $item) : void {
         try {
@@ -112,7 +137,19 @@ class ItemModel implements ModelInterface
             $stm->execute();
             
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+              redirect('Views/error.php');
+
         }
     }
     

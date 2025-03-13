@@ -10,6 +10,41 @@ function sessionStart(): void
 
 }
 
+function deleteItemSessionById(int $id): void
+{
+    sessionStart();
+
+    $panier = $_SESSION['panier'];
+
+    foreach ($panier as $key => $item) {
+
+        if ($item['id'] === $id) {
+
+            unset($panier[$key]);
+
+            break;
+        }
+    }
+
+    $_SESSION['panier'] = $panier;
+
+}
+
+function PayerItemSession(): void
+{
+    sessionStart();
+
+    $panier = $_SESSION['panier'];
+
+
+        foreach ($panier as $key => $item) {
+            unset($panier[$key]);
+
+        }
+
+    $_SESSION['panier'] = $panier;
+
+}
 function sessionDestroy(): void
 {
 

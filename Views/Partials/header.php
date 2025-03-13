@@ -22,4 +22,6 @@
     </div>
   </header>
   
-  <main class="bg-yellow-fallout rounded rounded-3 p-2 mx-3">
+
+  <main class="<?= !empty($_SESSION['panier'])?'bg-yellow-fallout rounded rounded-3 p-2 mx-3 ':'bg-yellow-fallout rounded rounded-3 p-2 mx-3 main-panier' ?>">
+
