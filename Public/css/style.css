@@ -13,9 +13,6 @@
 .bg-light-blue-fallout {
     background-color: #BDD1E9;
 }
-.bg-light-green-fallout {
-    background-color: #9BD997;
-}
 .img-nav {
     width: 150px;
     height: 150px;
@@ -27,8 +24,4 @@
     .header-height {
         height: 150px;
     }
-}
-.cart-button {
-    color: black;
-    border: black;
 }

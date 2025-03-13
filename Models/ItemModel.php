@@ -9,7 +9,7 @@ class ItemModel implements ModelInterface
     // La propriété pourrait être déclarée hors constructeur
     // private PDO $pdo
 
-    // Ici la propriété $pdo est déclarée dans le constructeur directement
+    // Ici la propriété $pdo est déclarée dans le constructeur directeme
     public function __construct(private PDO $pdo) {}
     
     public function selectAll() : null|array {
@@ -71,7 +71,7 @@ class ItemModel implements ModelInterface
     public function selectById(int $idItem) : null|Item {
 
         try{
-            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienimage,estDisponible FROM Items WHERE idItem = :idItem');
+            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienphoto,estDisponible FROM Items WHERE idItem = :idItem');
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             
@@ -90,7 +90,7 @@ class ItemModel implements ModelInterface
                     $data['prix'],
                     $data['poids'],
                     $data['utilite'],
-                    $data['lienimage'],
+                    $data['lienphoto'],
                     $data['estDisponible']
                     );
 
@@ -131,7 +131,7 @@ class ItemModel implements ModelInterface
             $stm->bindValue(":prix", $item->getPrix(), PDO::PARAM_INT);
             $stm->bindValue(":poids", $item->getPoids(), PDO::PARAM_INT);
             $stm->bindValue(":utilite", $item->getUtilite(), PDO::PARAM_INT);
-            $stm->bindValue(":lienphoto", $item->getLienPhoto(), PDO::PARAM_STR);
+            $stm->bindValue(":lienphoto", $item->getLienImage(), PDO::PARAM_STR);
             $stm->bindValue(":estDisponible", $item->getEstDisponible(), PDO::PARAM_INT);
     
             $stm->execute();
@@ -151,6 +151,14 @@ class ItemModel implements ModelInterface
               redirect('Views/error.php');
 
         }
+    }
+    public function translateType(string $itemType):string {
+        $itemTypes = ["swd" => "Épée"]; //rajouter les types
+        foreach ($itemTypes as $key => $type) {
+            if($itemType == $key)
+                return $type;
+        }
+        return "unknown";
     }
     
 }

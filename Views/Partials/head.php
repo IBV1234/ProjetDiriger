@@ -9,6 +9,7 @@
     <link href="/public/coreui-pro-5.10.0-dist/css/coreui.min.css" rel="stylesheet">
     <link href="/public/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="/public/css/style.css" rel="stylesheet">
+    <link href="/public/css/item.css" rel="stylesheet">
 </head>
 <body>
 

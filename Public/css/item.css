@@ -1,0 +1,12 @@
+.cart-button {
+    color: black;
+    border-color: black;
+    text-decoration: none;
+}
+.item-image {
+    width: 400px;
+    height: 400px;
+}
+.bg-light-green-fallout {
+    background-color: #9BD997;
+}
