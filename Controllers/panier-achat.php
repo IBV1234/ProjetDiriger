@@ -45,8 +45,11 @@ if (!isset($_SESSION['joueur'])) {
     ];
 }
 
-const maxPois =20;
-$dexteriter = 20;
+const maxPoids =20;
+if(!isset($_SESSION["sessionDex"])){
+    $_SESSION["sessionDex"] =20;
+}
+$dexteriter = $_SESSION["sessionDex"];
 
 if(!empty($_SESSION['panier']) ){
     $_SESSION["isEmptyPanier"] = false;

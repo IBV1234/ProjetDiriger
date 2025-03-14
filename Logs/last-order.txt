@@ -1,0 +1,5 @@
+{"prixTotal":1509.9,"poidsTotal":25,"items":[{"id":"2","poids":"2.5","prix":"150.99","nom":"\u00c9p\u00e9e magique","quantity":"10"}]}
+{"prixTotal":603.96,"poidsTotal":10,"items":[{"id":"2","poids":"2.5","prix":"150.99","nom":"\u00c9p\u00e9e magique","quantity":"4"}]}
+{"prixTotal":1509.9,"poidsTotal":25,"items":[{"id":"2","poids":"2.5","prix":"150.99","quantity":"10"}]}
+{"prixTotal":1358.91,"poidsTotal":22.5,"items":[{"id":"2","poids":"2.5","prix":"150.99","quantity":"9"}]}
+{"prixTotal":452.97,"poidsTotal":7.5,"items":[{"id":"2","poids":"2.5","prix":"150.99","quantity":"3"}]}

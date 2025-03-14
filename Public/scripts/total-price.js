@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     //querySelectorAll('input[type="number"]: Sélectionne tous les champs de quantité 
     //[id^="quantity-"] → Sélectionne tous les inputs dont l'ID commence par "quantity-
     const quantityInputs = document.querySelectorAll('input[type="number"][id^="quantity-"]');

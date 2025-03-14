@@ -15,41 +15,36 @@ document.addEventListener('DOMContentLoaded', function() {
             let totalPoids = 0;
             let quantity = 0
             let getPoids = 0
-            let  dex  = parseInt(dexteriter.textContent);
-
             quantityInputs.forEach(input => {//Recalcule le total pour chaque produit dans le panier.
-                totalPoids = 0;
                 quantity = 0
                 quantity = parseInt(input.value);
                 getPoids = 0
                 getPoids = parseFloat(input.closest('.col').querySelector('#poids').innerText); // contient le poids de chaque items à la fois
                 totalPoids += getPoids * quantity;
             });
-
-            
-            if(totalPoids > getMaxPoids){
-                const userConfirmed = confirm('Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?');
-
-                if (userConfirmed) {
-                    dex-=1;
-                    dexteriter.textContent = dex.toFixed();
-                    AfficherPoidsTotalElement.textContent = totalPoids.toFixed(2);
-
-                }else{
-
-                    totalPoids = getPoids * quantity ; // Adjust totalPoids
-                    AfficherPoidsTotalElement.textContent = totalPoids.toFixed(1);
-                    console.log(AfficherPoidsTotalElement.textContent ,"poidTotal si annuler");
-                    dexteriter.textContent = dex.toFixed();
-                }
-            }else{
                 AfficherPoidsTotalElement.textContent = totalPoids.toFixed(1);//toFixed(2) → Affiche 1 décimales (ex: 9.5)
-
-            }
-
+            
         });
     });
 
+    window.pay = function() {
+        let totalPoids = parseFloat(AfficherPoidsTotalElement.textContent);
+        let dex = parseInt(dexteriter.textContent);
 
+        if (totalPoids > parseInt(getMaxPoids)) {
+            const userConfirmed = confirm('Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?');
+
+            if (userConfirmed) {
+                dex -= 1;
+                dexteriter.textContent = dex.toFixed();
+                document.getElementById('payerForm').submit();
+            } else {
+                // console.log(AfficherPoidsTotalElement.textContent, "poidTotal si annuler");
+                dexteriter.textContent = dex.toFixed();
+            }
+        } else {
+            document.getElementById('payerForm').submit();
+        }
+    };
   }
 });
