@@ -42,7 +42,7 @@ if(isPost()){
     // if(!empty($_SESSION['panier'])){
     //     PayerItemSession();
     // }
-    
+
     redirect("/");
 }
 redirect("/");
