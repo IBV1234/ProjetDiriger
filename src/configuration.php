@@ -1,6 +1,6 @@
 <?php
 
 const ROUTES = [
-
-    '/' => 'index.php'
+    '/' => 'index.php',
+    '/connexion' => 'connexion.php',
 ];
