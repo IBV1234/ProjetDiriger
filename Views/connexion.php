@@ -11,7 +11,7 @@ require 'partials/header.php';
     </div>
     <div class="container-sm px-4 py-5 rounded-3 bg-blue-fallout max-width-connexion pb-4">
         <div class="mx-auto">
-            <form action="index.php?action=login" method="post">
+            <form method="post">
                 <div class="mb-3">
                 <input type="email" class="form-control" id="email" name="email" placeholder="Courriel" required>
                 </div>
@@ -28,9 +28,12 @@ require 'partials/header.php';
             </form>
             <div class="pt-5">
                 <p class="text-center mt-3 p-2 rounded-3" style="background: white;">Pas encore inscrit ? Inscris-toi !</p>
-                <button type="submit" class="btn btn-dark btn-block w-100">Inscription</button>
+                <a href="/inscription" class="btn btn-dark btn-block w-100">Inscription</a>
             </div>
         </div>
+        <?php if($error): ?>
+            <div class="alert alert-danger" role="alert"><?=$error?></div>
+        <?php endif; ?>
     </div>
 </div>
 

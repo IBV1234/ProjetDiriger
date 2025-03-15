@@ -7,7 +7,7 @@ class UserModel implements ModelInterface
 {
 
     // La propriété pourrait être déclarée hors constructeur
-    // private PDO $pdo
+    // private PDO $pdo;
 
     // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
@@ -94,5 +94,47 @@ class UserModel implements ModelInterface
 
     }
 
+    public function getUserByEmail(string $email): null|User {
+        try{
+            $user = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM joueurs WHERE email=:email');
+            $user->bindValue(":id", $email, PDO::PARAM_INT);
+            $user->execute();
+    
+            $data = $user->fetch(PDO::FETCH_ASSOC);
+
+            if(! empty($data)) {
+                return new User(
+                    $data['id'],
+                    $data['alias'],
+                    $data['nom'],
+                    $data['prenom'],
+                    $data['courriel'],
+                    $data['password'],
+                    $data['isadmin'],
+                    $data['solde'],
+                    $data['hp']
+                );
+            }
+            return null;
+            
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }  
+    }
+
+    public function verifyPasswordUser(string $hashpassword, string $password): bool {
+        try{
+            $match = $this->pdo->prepare('EXECUTE function ....');
+            $match->bindValue(":hashpassword", $hashpassword, PDO::PARAM_STR);
+            $match->bindValue(":password", $password, PDO::PARAM_STR);
+            $match->execute();
+
+            $data = $match->fetch(PDO::FETCH_ASSOC);
+            return $data;
+
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 
