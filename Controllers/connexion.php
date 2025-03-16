@@ -9,14 +9,14 @@ sessionStart();
 $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
 $userModel = new UserModel($pdo);
 $rememberMeDays = 30;
-$error = null;
+if(!isset($_SESSION['error'])) $_SESSION['error'] = null;
 
 //AFFICHAGE...........................
 require 'views/connexion.php';
 
 //TRAITEMENT..........................
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
+    $_SESSION['error'] = null;
     $email = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
     $remember = isset($_POST['remember']) ? true : false;
@@ -33,11 +33,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     }
 
-    (empty($email) || empty($password)) ? $error = 'Veuillez remplir tous les champs.' : $error = 'Courriel ou mot de passe invalide.';
+    (empty($email) || empty($password)) ? $_SESSION['error'] = 'Veuillez remplir tous les champs.' : $_SESSION['error'] = 'Courriel ou mot de passe invalide.';
 }
 
 /*
 NOTES PERSONNELLES:
     - Ajouter les identifiants de l'usager dans la page connexion
-    - Remplir les fonctions getUserByEmail et verifyPasswordUser dans UserModel
+    - s'assurer du fonctionnement de verificationMotDePasse dans BD (varbinary)
 */

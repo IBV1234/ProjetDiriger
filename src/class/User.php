@@ -12,8 +12,10 @@ class User
     private int $isAdmin;
     private float $balance;
     private int $hp;
+    private int $dexterite;
+    private int $poidsMax;
     
-    public function __construct(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp) {
+    public function __construct(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp, int $dexterite, int $poidsMax) {
         $this->id = $id;
         $this->alias = $alias;
         $this->lastName = $lastName;
@@ -23,6 +25,8 @@ class User
         $this->isAdmin = $isAdmin;
         $this->balance = $balance;
         $this->hp = $hp;
+        $this->dexterite = $dexterite;
+        $this->poidsMax = $poidsMax;
     }
 
     // Getters
@@ -50,6 +54,12 @@ class User
     public function getBalance(): float {
         return $this->balance;
     }
+    public function getDexterite(): int {
+        return $this->dexterite;
+    }
+    public function getPoidsMax(): int {
+        return $this->poidsMax;
+    }
 
     // Setters
     public function setAlias(string $alias): void {
@@ -73,6 +83,12 @@ class User
     public function setHp(int $hp): void {
         $this->hp = $hp;
     }
+    public function setDexterite(int $dexterite): void {
+        $this->hp = $dexterite;
+    }
+    public function setPoidsMax(int $poidsMax): void {
+        $this->poidsMax = $poidsMax;
+    }
 
 
     public function toArray(): array {
@@ -85,7 +101,9 @@ class User
             'password' => $this->password,
             'isAdmin' => $this->isAdmin,
             'balance' => $this->balance,
-            'hp' => $this->hp
+            'hp' => $this->hp,
+            'dexterite' => $this->dexterite,
+            'poidsMax' => $this->poidsMax
         ];
     }
 } 

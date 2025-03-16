@@ -19,7 +19,7 @@ class UserModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM usagers');
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs');
     
             $stm->execute();
     
@@ -30,16 +30,18 @@ class UserModel implements ModelInterface
                 foreach ($data as $row) {
 
                     $users[] = new User(
-                        $row['id'],
-                        $row['alias'],
-                        $row['nom'],
-                        $row['prenom'],
-                        $row['courriel'],
-                        $row['password'],
-                        $row['isadmin'],
-                        $row['solde'],
-                        $row['hp']
-                        );
+                        $data['idJoueur'],
+                        $data['alias'],
+                        $data['nom'],
+                        $data['prenom'],
+                        $data['courriel'],
+                        $data['motDePasse'],
+                        $data['estAdmin'],
+                        $data['capital'],
+                        $data['pointDeVie'],
+                        $data['dexterite'],
+                        $data['poidMax']
+                    );
 
                 }
 
@@ -60,7 +62,7 @@ class UserModel implements ModelInterface
     public function selectById(int $id) : null|User {
 
         try{
-            $stm = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM usagers WHERE id=:id');
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
     
             $stm->bindValue(":id", $id, PDO::PARAM_INT);
             
@@ -71,15 +73,17 @@ class UserModel implements ModelInterface
             if(! empty($data)) {
 
                 return new User(
-                    $data['id'],
+                    $data['idJoueur'],
                     $data['alias'],
                     $data['nom'],
                     $data['prenom'],
                     $data['courriel'],
-                    $data['password'],
-                    $data['isadmin'],
-                    $data['solde'],
-                    $data['hp']
+                    $data['motDePasse'],
+                    $data['estAdmin'],
+                    $data['capital'],
+                    $data['pointDeVie'],
+                    $data['dexterite'],
+                    $data['poidMax']
                     );
 
             }
@@ -96,23 +100,25 @@ class UserModel implements ModelInterface
 
     public function getUserByEmail(string $email): null|User {
         try{
-            $user = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM joueurs WHERE email=:email');
-            $user->bindValue(":id", $email, PDO::PARAM_INT);
+            $user = $this->pdo->prepare('CALL chercherJoueurParCourriel(:email)');
+            $user->bindValue(":email", $email, PDO::PARAM_INT);
             $user->execute();
     
             $data = $user->fetch(PDO::FETCH_ASSOC);
 
             if(! empty($data)) {
                 return new User(
-                    $data['id'],
+                    $data['idJoueur'],
                     $data['alias'],
                     $data['nom'],
                     $data['prenom'],
-                    $data['courriel'],
-                    $data['password'],
-                    $data['isadmin'],
-                    $data['solde'],
-                    $data['hp']
+                    $$email,
+                    $data['motDePasse'],
+                    $data['estAdmin'],
+                    $data['capital'],
+                    $data['pointDeVie'],
+                    $data['dexterite'],
+                    $data['poidMax']
                 );
             }
             return null;
@@ -124,13 +130,14 @@ class UserModel implements ModelInterface
 
     public function verifyPasswordUser(string $hashpassword, string $password): bool {
         try{
-            $match = $this->pdo->prepare('EXECUTE function ....');
+            $match = $this->pdo->prepare('SELECT verificationMotDePasse(:password, :hashpassword)');
             $match->bindValue(":hashpassword", $hashpassword, PDO::PARAM_STR);
             $match->bindValue(":password", $password, PDO::PARAM_STR);
             $match->execute();
 
             $data = $match->fetch(PDO::FETCH_ASSOC);
-            return $data;
+            if($data == 1) return true;
+            return false;
 
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());

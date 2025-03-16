@@ -31,8 +31,8 @@ require 'partials/header.php';
                 <a href="/inscription" class="btn btn-dark btn-block w-100">Inscription</a>
             </div>
         </div>
-        <?php if($error): ?>
-            <div class="alert alert-danger" role="alert"><?=$error?></div>
+        <?php if($_SESSION['error']): ?>
+            <div class="alert alert-danger mt-3" role="alert"><?=$_SESSION['error']?></div>
         <?php endif; ?>
     </div>
 </div>
