@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     (empty($email) || empty($password)) ? $_SESSION['error'] = 'Veuillez remplir tous les champs.' : $_SESSION['error'] = 'Courriel ou mot de passe invalide.';
+    redirect('/connexion');
 }
 
 /*
