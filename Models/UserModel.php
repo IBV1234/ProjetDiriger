@@ -35,7 +35,6 @@ class UserModel implements ModelInterface
                         $data['nom'],
                         $data['prenom'],
                         $data['courriel'],
-                        $data['motDePasse'],
                         $data['estAdmin'],
                         $data['capital'],
                         $data['pointDeVie'],
@@ -78,7 +77,6 @@ class UserModel implements ModelInterface
                     $data['nom'],
                     $data['prenom'],
                     $data['courriel'],
-                    $data['motDePasse'],
                     $data['estAdmin'],
                     $data['capital'],
                     $data['pointDeVie'],
@@ -101,7 +99,7 @@ class UserModel implements ModelInterface
     public function getUserByEmail(string $email): null|User {
         try{
             $user = $this->pdo->prepare('CALL chercherJoueurParCourriel(:email)');
-            $user->bindValue(":email", $email, PDO::PARAM_INT);
+            $user->bindValue(":email", $email, PDO::PARAM_STR);
             $user->execute();
     
             $data = $user->fetch(PDO::FETCH_ASSOC);
@@ -112,8 +110,7 @@ class UserModel implements ModelInterface
                     $data['alias'],
                     $data['nom'],
                     $data['prenom'],
-                    $$email,
-                    $data['motDePasse'],
+                    $email,
                     $data['estAdmin'],
                     $data['capital'],
                     $data['pointDeVie'],
@@ -128,15 +125,16 @@ class UserModel implements ModelInterface
         }  
     }
 
-    public function verifyPasswordUser(string $hashpassword, string $password): bool {
+    public function verifyPasswordUser(string $password, string $email): bool {
         try{
-            $match = $this->pdo->prepare('SELECT verificationMotDePasse(:password, :hashpassword)');
-            $match->bindValue(":hashpassword", $hashpassword, PDO::PARAM_STR);
+            $match = $this->pdo->prepare('SELECT verificationMotDePasse(:password, :email)');
+            $match->bindValue(":email", $email, PDO::PARAM_STR);
             $match->bindValue(":password", $password, PDO::PARAM_STR);
             $match->execute();
 
-            $data = $match->fetch(PDO::FETCH_ASSOC);
-            if($data == 1) return true;
+            $data = $match->fetch(PDO::FETCH_NUM);
+            if($data[0] == 1) 
+                return true;
             return false;
 
         } catch (PDOException $e) {

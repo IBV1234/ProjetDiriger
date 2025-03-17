@@ -8,20 +8,18 @@ class User
     private string $lastName;
     private string $firstName;
     private string $email;
-    private string $password;
     private int $isAdmin;
     private float $balance;
     private int $hp;
     private int $dexterite;
     private int $poidsMax;
     
-    public function __construct(int $id, string $alias, string $lastName, string $firstName, string $email, string $password, int $isAdmin, float $balance, int $hp, int $dexterite, int $poidsMax) {
+    public function __construct(int $id, string $alias, string $lastName, string $firstName, string $email, int $isAdmin, float $balance, int $hp, int $dexterite, int $poidsMax) {
         $this->id = $id;
         $this->alias = $alias;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
         $this->email = $email;
-        $this->password = $password;
         $this->isAdmin = $isAdmin;
         $this->balance = $balance;
         $this->hp = $hp;
@@ -44,9 +42,6 @@ class User
     }
     public function getEmail(): string {
         return $this->email;
-    }
-    public function getPassword(): string {
-        return $this->password;
     }
     public function getIsAdmin(): int {
         return $this->isAdmin;
@@ -73,9 +68,6 @@ class User
     }
     public function setEmail(string $email): void {
         $this->$email = $email;
-    }
-    public function setPassword(string $password): void {
-        $this->$password = $password;
     }
     public function setBalance(float $balance): void {
         $this->balance = $balance;

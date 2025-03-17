@@ -33,7 +33,7 @@ require 'partials/header.php';
         </div>
         <?php if($_SESSION['error']): ?>
             <div class="alert alert-danger mt-3" role="alert"><?=$_SESSION['error']?></div>
-        <?php endif; ?>
+        <?php endif; ?>    
     </div>
 </div>
 
