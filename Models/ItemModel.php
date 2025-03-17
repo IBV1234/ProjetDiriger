@@ -19,7 +19,7 @@ class ItemModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items where idItem!= 16');
+            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items');
     
             $stm->execute();
     
@@ -118,6 +118,7 @@ class ItemModel implements ModelInterface
         }  
         return null;
     }
+    /*
     public function insert(Item $item) : void {
         try {
             $stm = $this->pdo->prepare("CALL ajouterItem(:nomItem,:typeitem, :poids, :quantiteStock :prix, :utilite, :photo, :flagDispo ,:descriptionItem)");
@@ -149,7 +150,7 @@ class ItemModel implements ModelInterface
               redirect('Views/error.php');
 
         }
-    }
+    }*/
     
 }
 

@@ -42,5 +42,3 @@ $solde = $caps-$PrixTotal;
 $_SESSION['joueur'][0]['solde'] = $solde;
 
 }
-
-//code here

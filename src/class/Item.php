@@ -1,6 +1,7 @@
 <?php
 class Item {
     
+
     private ?int $idItem;
     private string $typeitem;
     private string $nom;
@@ -67,13 +68,13 @@ class Item {
     }
 
     public function getLienPhoto(): string {
-        return $this->lienphoto;
+        return "public/images/" . $this->lienphoto;
     }
 
     public function getEstDisponible(): int {
         return $this->estDisponible;
     }
-    public function description(): string {
-        return $this->estDisponible;
+    public function getDescription(): string {
+        return $this->description;
     }
 }
