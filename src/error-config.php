@@ -47,7 +47,9 @@ ini_set('error_log', 'Logs/error.txt');
 // Pas de logging automatique si on défini une fonction personnalisée
 function customErrorHandler($error_level, $error_message, $error_file, $error_line)
 {
-    error_log("Error : $error_level | $error_message | $error_file | $error_line");
+  $message = "Error : $error_level | $error_message | $error_file | $error_line";
+    error_log($message.PHP_EOL,3 ,"Logs/error.txt"); // message_type: 3 veut dire que le message est ajouté au fichier destination.
+
     header('Location: views/error.php');
 }
 
