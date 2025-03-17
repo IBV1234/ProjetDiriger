@@ -7,6 +7,7 @@ require 'partials/header.php';
 
         <div class="bg-yellow-fallout rounded rounded-3 p-2">
             <div class="row">
+<!-- À copier pour chaque item -->
                 <div class="col-sm-6 col-md-4 col-xl-3 px-4 py-3">
                     <a href="/item" class="text-decoration-none text-black">
                         <div class="ratio ratio-1x1">
@@ -22,10 +23,11 @@ require 'partials/header.php';
                         </div>
                     </a>
                     <div class="d-flex justify-content-center align-items-center p-2">
-                        <h3 class="pe-2">5</h3>
-                        <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="5"></div>
+                        <h3 class="pe-2">3.2</h3>
+                        <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="3.2"></div>
                     </div>
                 </div>
+<!-- /À copier pour chaque item -->
             </div>
         </div>
 
