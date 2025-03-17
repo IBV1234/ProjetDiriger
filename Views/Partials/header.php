@@ -6,7 +6,7 @@
         <h2>Knapsack</h2>
       </div>
     </a>
-    <?php if (!isset($_SESSION['joueur'])): ?>
+    <?php if (!isset($_SESSION['user'])): ?>
 
       <ul class="nav nav-underline p-2">
         <li class="nav-item">
@@ -20,7 +20,7 @@
         
         <a class="user-img" href="#">
           <i class='bx bx-user-pin fs-1' type='solid'></i>
-          <?php  echo  $_SESSION['joueur'][0]['prenom']?> <?php echo $_SESSION['joueur'][0]['nom']?>
+          <?php  echo  $_SESSION['user'][0]['prenom']?> <?php echo $_SESSION['user'][0]['nom']?>
         </a>
 
     <?php endif ?>

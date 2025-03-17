@@ -38,3 +38,11 @@
         ]
     }
 
+
+
+
+{"prixTotal":432,"poidsTotal":25,"items":{"1":{"id":"7","utilite":"10","poids":"10","prix":"50","quantite":"1"},"3":{"id":"9","utilite":"1","poids":"1","prix":"5","quantite":"1"},"4":{"id":"10","utilite":"3","poids":"2","prix":"30","quantite":"1"},"5":{"id":"11","utilite":"3","poids":"1","prix":"75","quantite":"1"},"6":{"id":"12","utilite":"6","poids":"2","prix":"120","quantite":"1"},"7":{"id":"13","utilite":"95","poids":"3","prix":"100","quantite":"1"},"8":{"id":"14","utilite":"1","poids":"5","prix":"12","quantite":"1"},"9":{"id":"15","utilite":"7","poids":"1","prix":"40","quantite":"1"}}}
+{"prixTotal":302,"poidsTotal":13,"items":{"4":{"id":"10","utilite":"3","poids":"2","prix":"30","quantite":"1"},"6":{"id":"12","utilite":"6","poids":"2","prix":"120","quantite":"1"},"7":{"id":"13","utilite":"95","poids":"3","prix":"100","quantite":"1"},"8":{"id":"14","utilite":"1","poids":"5","prix":"12","quantite":"1"},"9":{"id":"15","utilite":"7","poids":"1","prix":"40","quantite":"1"}}}
+{"prixTotal":302,"poidsTotal":13,"items":{"4":{"id":"10","utilite":"3","poids":"2","prix":"30","quantite":"1"},"6":{"id":"12","utilite":"6","poids":"2","prix":"120","quantite":"1"},"7":{"id":"13","utilite":"95","poids":"3","prix":"100","quantite":"1"},"8":{"id":"14","utilite":"1","poids":"5","prix":"12","quantite":"1"},"9":{"id":"15","utilite":"7","poids":"1","prix":"40","quantite":"1"}}}
+{"prixTotal":302,"poidsTotal":13,"items":{"4":{"id":"10","utilite":"3","poids":"2","prix":"30","quantite":"1"},"6":{"id":"12","utilite":"6","poids":"2","prix":"120","quantite":"1"},"7":{"id":"13","utilite":"95","poids":"3","prix":"100","quantite":"1"},"8":{"id":"14","utilite":"1","poids":"5","prix":"12","quantite":"1"},"9":{"id":"15","utilite":"7","poids":"1","prix":"40","quantite":"1"}}}
+{"prixTotal":302,"poidsTotal":13,"items":{"4":{"id":"10","utilite":"3","poids":"2","prix":"30","quantite":"1"},"6":{"id":"12","utilite":"6","poids":"2","prix":"120","quantite":"1"},"7":{"id":"13","utilite":"95","poids":"3","prix":"100","quantite":"1"},"8":{"id":"14","utilite":"1","poids":"5","prix":"12","quantite":"1"},"9":{"id":"15","utilite":"7","poids":"1","prix":"40","quantite":"1"}}}

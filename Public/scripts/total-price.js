@@ -1,20 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    const Empty = document.getElementById('sessionEmpty').value;
+    window.isEmpty = (Empty === "true");
+    if (!window.isEmpty && window.isEmpty!=="") {
+        //querySelectorAll('input[type="number"]: Sélectionne tous les champs de quantité 
+        //[id^="quantity-"] → Sélectionne tous les inputs dont l'ID commence par "quantity-
 
-    //querySelectorAll('input[type="number"]: Sélectionne tous les champs de quantité 
-    //[id^="quantity-"] → Sélectionne tous les inputs dont l'ID commence par "quantity-
-    const quantityInputs = document.querySelectorAll('input[type="number"][id^="quantity-"]');
-    const prixTotalElement = document.getElementById('prixTotal');
-
-    quantityInputs.forEach(input => {//forEach(input => {...}) → Parcourt chaque input de quantité
-        input.addEventListener('change', function() {// input.addEventListener('change', function() {...}) → Déclenche une action lorsqu'un utilisateur modifie la quantité.
+        // Sélectionne tous les champs de quantité dont l'ID commence par "quantity-"
+        const quantityInputs = document.querySelectorAll('input[type="number"][id^="quantity-"]');
+        window.prixTotalElement = document.getElementById('prixTotal'); // Élément affichant le prix total
+        // Fonction pour recalculer et mettre à jour le prix total
+        function updatePrixTotal() {
             let total = 0;
-            quantityInputs.forEach(input => {//Recalcule le total pour chaque produit dans le panier.
-                const price = parseFloat(input.getAttribute('data-price'));// Récupère le prix unitaire du produit depuis l'attribut HTML data-price (parseFloat convertit en nombre).
-                const quantity = parseInt(input.value);//Récupère la quantité sélectionnée par l'utilisateur
+
+            quantityInputs.forEach(input => {
+                const price = parseFloat(input.getAttribute('data-price')); // Récupère le prix unitaire 
+                const quantity = parseInt(input.value, 10) ?? 0; // Récupère la quantité sélectionnée
                 total += price * quantity;
             });
-            //Met à jour l'affichage du prix total dans <span id="prixTotal">
-            prixTotalElement.textContent = total.toFixed(2);//toFixed(2) → Affiche 2 décimales (ex: 9.50 au lieu de 9.5).
+
+            window.prixTotalElement.textContent = total.toFixed(); // Affichage avec 2 décimales
+        }
+
+        // Ajoute un écouteur d'événement à chaque input pour mettre à jour le prix total
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', updatePrixTotal);
         });
-    });
+
+        // Initialise le prix total au chargement de la page
+        updatePrixTotal();
+    }
+
+
+
 });
+

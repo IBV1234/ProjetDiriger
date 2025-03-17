@@ -115,3 +115,76 @@
   border-radius: 30px;
 
 }
+.sticky {
+  position: sticky; /* Fixe l'élément à un endroit spécifique */
+  top: 0; /* Place le div en haut de la page */
+  right: 0; /* Aligne le div à droite */
+  width: auto; /* Ajuste la largeur automatiquement */
+  z-index: 1000; /* S'assure que le div soit au-dessus des autres éléments */
+
+}
+.stickyBtn {
+  position: fixed; /* Fixe l'élément à un endroit spécifique */
+  bottom: 15px; 
+  right: 100px; 
+  z-index: 1000; /* S'assure que le bouton soit au-dessus des autres éléments */
+
+}
+.stickyPrice{
+  position: fixed; /* Fixe l'élément à un endroit spécifique */
+  bottom: 40px; 
+  left: 10%; 
+  z-index: 1000;
+  color:rgb(78, 233, 22)
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+  .custom-container .row {
+      gap: 10px;
+  }
+
+  .container-info-inventaire {
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 10px;
+  }
+
+  .containe-info {
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+  }
+
+  .containe-info .content{
+    margin-top: 10%;
+    margin-left: 70%;
+  }
+  .button-container {
+      justify-content: center;
+  }
+
+  .button {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+  }
+
+  .stickyBtn {
+      right: 10px;
+      bottom: 10px;
+      width: auto;
+      padding: 10px 20px;
+  }
+
+  .stickyPrice {
+      left: 10%;
+      bottom: 30px;
+  }
+
+  .img {
+      width: 120px;
+      height: 120px;
+  }
+}

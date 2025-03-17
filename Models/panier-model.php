@@ -14,7 +14,7 @@ class PanierModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idPanier,idItem, quantite FROM Panier_item');
+            $stm = $this->pdo->prepare('SELECT joueurs_idJoueurs,items_idItem, quantitePanier FROM lePanier');
     
             $stm->execute();
     
@@ -37,7 +37,7 @@ class PanierModel implements ModelInterface
 
             }
             
-            return null;
+        
             
         } catch (PDOException $e) {
     
@@ -50,17 +50,20 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
             
         }
-
+        return null;
     }
 
-    public function selectById(int $idItem) : null|PanierItem { // selectionne le panier du joueur
+    public function selectById(int $idJoueur) : null|PanierItem { // selectionne le panier du joueur
 
         try{
-            $stm = $this->pdo->prepare('SELECT idPanier,idItem, quantite FROM Panier_item WHERE idItem = :idItem');
+            $stm = $this->pdo->prepare('SELECT joueurs_idJoueurs,items_idItem, quantitePanier FROM lePanier WHERE joueurs_idJoueurs = :joueurs_idJoueurs');
     
-            $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
+            $stm->bindValue(":idItem", $idJoueur, PDO::PARAM_INT);
             
             $stm->execute();
     
@@ -78,7 +81,7 @@ class PanierModel implements ModelInterface
 
             }
             
-            return null;
+          
             
         } catch (PDOException $e) {
     
@@ -91,9 +94,11 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-            
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
         }  
-
+        return null;
     }
     public function insert(int $idItem,int $quantite,int $idJoueur) : void {
         try {
@@ -102,9 +107,6 @@ class PanierModel implements ModelInterface
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             $stm->bindValue(":quantite", $quantite, PDO::PARAM_INT);
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
-
-    
-    
             $stm->execute();
             
         } catch (PDOException $e) {
@@ -117,6 +119,32 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
+    public function insertSacADos($idJoueur) : void {
+        try {
+            $stm = $this->pdo->prepare("CALL majInventaire(:idJoueur)");
+
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+            
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
         }
     }
     
