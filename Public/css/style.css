@@ -11,7 +11,7 @@
     background-color: #477bb7;
 }
 .bg-light-blue-fallout {
-    background-color: #BDD1E9;
+    background-color: #bdd1e9;
 }
 .img-nav {
     width: 150px;
@@ -20,7 +20,7 @@
 .header-height {
     height: auto;
 }
-@media (min-width: 576px) {
+@media (min-width: 768px) {
     .header-height {
         height: 150px;
     }
