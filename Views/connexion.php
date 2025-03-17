@@ -13,13 +13,21 @@ require 'partials/header.php';
         <div class="mx-auto">
             <form method="post">
                 <div class="mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Courriel" required>
+                    <?php if($isRemembered): ?>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Courriel" required value=<?=$email?>>
+                    <?php else: ?>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Courriel" required>
+                    <?php endif;?>
                 </div>
                 <div class="mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
                 </div>
                 <div class="mb-3 form-check">
-                    <input class="form-check-input" type="checkbox" value="remember" id="rememberBox">
+                    <?php if($isRemembered): ?>
+                        <input class="form-check-input" type="checkbox" value="remember" name="rememberBox" id="rememberBox" checked="true">
+                    <?php else: ?>
+                        <input class="form-check-input" type="checkbox" value="remember" name="rememberBox" id="rememberBox">
+                    <?php endif;?>
                     <label class="form-check-label" for="rememberBox">
                         Se souvenir de moi
                     </label>
