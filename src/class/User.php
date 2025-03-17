@@ -90,7 +90,6 @@ class User
             'lastName' => $this->lastName,
             'firstName' => $this->firstName,
             'email' => $this->email,
-            'password' => $this->password,
             'isAdmin' => $this->isAdmin,
             'balance' => $this->balance,
             'hp' => $this->hp,
