@@ -1,3 +1,5 @@
 <?php
-
-//code here
+function isPost()
+{
+    return $_SERVER['REQUEST_METHOD'] === 'POST';
+}

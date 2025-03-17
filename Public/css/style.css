@@ -25,3 +25,17 @@
         height: 150px;
     }
 }
+
+/* Connexion CSS */
+.bg-blue-fallout {
+    background-color: #BDD1E9;
+}
+.bg-color-yellow-text{
+    background-color: #FCEF6F;
+}
+::placeholder {
+    text-align: center; 
+}
+.max-width-connexion {
+    max-width: 600px;
+}

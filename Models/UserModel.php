@@ -7,7 +7,7 @@ class UserModel implements ModelInterface
 {
 
     // La propriété pourrait être déclarée hors constructeur
-    // private PDO $pdo
+    // private PDO $pdo;
 
     // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
@@ -19,7 +19,7 @@ class UserModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM usagers');
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs');
     
             $stm->execute();
     
@@ -30,16 +30,17 @@ class UserModel implements ModelInterface
                 foreach ($data as $row) {
 
                     $users[] = new User(
-                        $row['id'],
-                        $row['alias'],
-                        $row['nom'],
-                        $row['prenom'],
-                        $row['courriel'],
-                        $row['password'],
-                        $row['isadmin'],
-                        $row['solde'],
-                        $row['hp']
-                        );
+                        $data['idJoueur'],
+                        $data['alias'],
+                        $data['nom'],
+                        $data['prenom'],
+                        $data['courriel'],
+                        $data['estAdmin'],
+                        $data['capital'],
+                        $data['pointDeVie'],
+                        $data['dexterite'],
+                        $data['poidMax']
+                    );
 
                 }
 
@@ -60,7 +61,7 @@ class UserModel implements ModelInterface
     public function selectById(int $id) : null|User {
 
         try{
-            $stm = $this->pdo->prepare('SELECT id, alias, nom, prenom, courriel, isadmin, password, solde, hp FROM usagers WHERE id=:id');
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
     
             $stm->bindValue(":id", $id, PDO::PARAM_INT);
             
@@ -71,15 +72,16 @@ class UserModel implements ModelInterface
             if(! empty($data)) {
 
                 return new User(
-                    $data['id'],
+                    $data['idJoueur'],
                     $data['alias'],
                     $data['nom'],
                     $data['prenom'],
                     $data['courriel'],
-                    $data['password'],
-                    $data['isadmin'],
-                    $data['solde'],
-                    $data['hp']
+                    $data['estAdmin'],
+                    $data['capital'],
+                    $data['pointDeVie'],
+                    $data['dexterite'],
+                    $data['poidMax']
                     );
 
             }
@@ -94,5 +96,50 @@ class UserModel implements ModelInterface
 
     }
 
+    public function getUserByEmail(string $email): null|User {
+        try{
+            $user = $this->pdo->prepare('CALL chercherJoueurParCourriel(:email)');
+            $user->bindValue(":email", $email, PDO::PARAM_STR);
+            $user->execute();
+    
+            $data = $user->fetch(PDO::FETCH_ASSOC);
+
+            if(! empty($data)) {
+                return new User(
+                    $data['idJoueur'],
+                    $data['alias'],
+                    $data['nom'],
+                    $data['prenom'],
+                    $email,
+                    $data['estAdmin'],
+                    $data['capital'],
+                    $data['pointDeVie'],
+                    $data['dexterite'],
+                    $data['poidMax']
+                );
+            }
+            return null;
+            
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }  
+    }
+
+    public function verifyPasswordUser(string $password, string $email): bool {
+        try{
+            $match = $this->pdo->prepare('SELECT verificationMotDePasse(:password, :email)');
+            $match->bindValue(":email", $email, PDO::PARAM_STR);
+            $match->bindValue(":password", $password, PDO::PARAM_STR);
+            $match->execute();
+
+            $data = $match->fetch(PDO::FETCH_NUM);
+            if($data[0] == 1) 
+                return true;
+            return false;
+
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 
