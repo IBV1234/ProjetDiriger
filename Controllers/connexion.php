@@ -39,5 +39,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 /*
 NOTES PERSONNELLES:
     - Ajouter les identifiants de l'usager dans la page connexion (remember)
-    - erreur session ne part pas quand on change de page (ex: index)
+    - Erreur de connexion ne part pas quand on change de page (ex: connexion(erreur)-->index-->connexion(erreur))
 */
