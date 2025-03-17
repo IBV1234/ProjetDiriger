@@ -5,36 +5,36 @@ class Item {
     private string $typeitem;
     private string $nom;
     private int $qtestock;
-    private string $description;
     private float $prix;
     private float $poids;
     private int $utilite;
     private string $lienphoto;
     private int $estDisponible;
+    private string $description;
 
     public function __construct(
         ?int $idItem,
         string $typeitem,
         string $nom,
         int $qtestock,
-        string $description, 
         float $prix,
         float $poids,
         int $utilite,
         string $lienphoto,
-        int $estDisponible
+        int $estDisponible, 
+        ?string $description = ''
     ) {
         $this->idItem = $idItem;
         $this->typeitem = $typeitem;
         $this->nom = $nom;
         $this->qtestock = $qtestock;
-        $this->description = $description;
+        $this->estDisponible = $estDisponible;
         $this->prix = $prix;
         $this->poids = $poids;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
-        $this->estDisponible = $estDisponible;
-    }
+        $this->description = $description ?? '';
+        }
 
     // Getters
     public function getIdItem(): ?int {
@@ -53,9 +53,6 @@ class Item {
         return $this->qtestock;
     }
 
-    public function getDescription(): string {
-        return $this->description;
-    }
 
     public function getPrix(): float {
         return $this->prix;
@@ -70,10 +67,13 @@ class Item {
     }
 
     public function getLienPhoto(): string {
-        return $this->lienphoto;
+        return "public/images/" . $this->lienphoto;
     }
 
     public function getEstDisponible(): int {
         return $this->estDisponible;
+    }
+    public function getDescription(): string {
+        return $this->description;
     }
 }

@@ -25,8 +25,9 @@ require 'partials/header.php';
                         <div class="m-3">
                             <p>Prix : <?php echo $item->getPrix() ?></p>
                             <p><?php echo $item->getDescription() ?></p>
-                            <p><?php echo $item->getNom() ?> est de type : <?php echo $itemModel->translateType($item->getTypeItem()) ?></p>
+                            <p><?php echo $item->getNom() ?> est de type : <?php echo $item->getTypeItem() ?></p>
                             <p>Poids : <?php echo $item->getPoids()?></p>
+                            <p>Utilité : <?php echo $item->getUtilite()?></p>
                         </div>
                     </div>
                 </div>

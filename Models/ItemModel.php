@@ -9,7 +9,7 @@ class ItemModel implements ModelInterface
     // La propriété pourrait être déclarée hors constructeur
     // private PDO $pdo
 
-    // Ici la propriété $pdo est déclarée dans le constructeur directeme
+    // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
     
     public function selectAll() : null|array {
@@ -19,7 +19,7 @@ class ItemModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienphoto,estDisponible FROM Items');
+            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items');
     
             $stm->execute();
     
@@ -31,15 +31,15 @@ class ItemModel implements ModelInterface
 
                     $Item[] = new Item(
                         $row['idItem'],
-                        $row['typeitem'],
-                        $row['nom'],
-                        $row['qtestock'],
-                        $row['description'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['quantiteStock'],
                         $row['prix'],
                         $row['poids'],
                         $row['utilite'],
-                        $row['lienphoto'],
-                        $row['estDisponible']
+                        $row['photo'],
+                        $row['flagDispo'],
+                        $row['descriptionItem']
                         );
 
                 }
@@ -71,7 +71,7 @@ class ItemModel implements ModelInterface
     public function selectById(int $idItem) : null|Item {
 
         try{
-            $stm = $this->pdo->prepare('SELECT idItem, typeitem, nom, qtestock, description, prix, poids, utilite, lienphoto,estDisponible FROM Items WHERE idItem = :idItem');
+            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items WHERE idItem = :idItem');
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             
@@ -86,17 +86,14 @@ class ItemModel implements ModelInterface
                     $data['typeitem'],
                     $data['nom'],
                     $data['qtestock'],
-                    $data['description'],
                     $data['prix'],
                     $data['poids'],
                     $data['utilite'],
-                    $data['lienphoto'],
+                    $data['lienimage'],
                     $data['estDisponible']
                     );
 
-                    file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
-
-                    redirect('Views/error.php');
+                  
 
             }
             
@@ -113,6 +110,7 @@ class ItemModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
+
               file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
               redirect('Views/error.php');
@@ -120,18 +118,18 @@ class ItemModel implements ModelInterface
         }  
         return null;
     }
+    /*
     public function insert(Item $item) : void {
         try {
-            $stm = $this->pdo->prepare("CALL ajouterItem(:typeitem, :nom, :qtestock, :description, :prix, :poids, :utilite, :lienphoto, :estDisponible)");
+            $stm = $this->pdo->prepare("CALL ajouterItem(:nomItem,:typeitem, :poids, :quantiteStock :prix, :utilite, :photo, :flagDispo ,:descriptionItem)");
     
             $stm->bindValue(":typeitem", $item->getTypeItem(), PDO::PARAM_STR);
             $stm->bindValue(":nom", $item->getNom(), PDO::PARAM_STR);
             $stm->bindValue(":qtestock", $item->getQteStock(), PDO::PARAM_INT);
-            $stm->bindValue(":description", $item->getDescription(), PDO::PARAM_STR);
             $stm->bindValue(":prix", $item->getPrix(), PDO::PARAM_INT);
             $stm->bindValue(":poids", $item->getPoids(), PDO::PARAM_INT);
             $stm->bindValue(":utilite", $item->getUtilite(), PDO::PARAM_INT);
-            $stm->bindValue(":lienphoto", $item->getLienImage(), PDO::PARAM_STR);
+            $stm->bindValue(":lienphoto", $item->getLienPhoto(), PDO::PARAM_STR);
             $stm->bindValue(":estDisponible", $item->getEstDisponible(), PDO::PARAM_INT);
     
             $stm->execute();
@@ -146,20 +144,13 @@ class ItemModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
+
               file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
               redirect('Views/error.php');
 
         }
-    }
-    public function translateType(string $itemType):string {
-        $itemTypes = ["swd" => "Épée"]; //rajouter les types
-        foreach ($itemTypes as $key => $type) {
-            if($itemType == $key)
-                return $type;
-        }
-        return "unknown";
-    }
+    }*/
     
 }
 
