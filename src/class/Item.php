@@ -1,5 +1,6 @@
 <?php
 class Item {
+    
 
     private ?int $idItem;
     private string $typeitem;
@@ -10,7 +11,7 @@ class Item {
     private int $utilite;
     private string $lienphoto;
     private int $estDisponible;
-    private string $description;
+    private string  $description;
 
     public function __construct(
         ?int $idItem,
