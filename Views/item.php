@@ -35,11 +35,13 @@ require 'partials/header.php';
                 <div class="col d-flex m-3">
                     <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="5"></div>
                 </div>
-                <div class="col d-flex align-items-center flex-column m-3">
-                    <div class="flex-row bg-light-green-fallout cart-button btn">   
-                        <i class="bi bi-cart-check m-2"></i><a href="/panier-achat">Ajouter au panier</a> <!-- make this add the item to the cart in the SESSION -->
+                <form method="POST">
+                    <div class="col d-flex align-items-center flex-column m-3">
+                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit">   
+                            <i class="bi bi-cart-check m-2"></i>Ajouter au panier <!-- make this add the item to the cart in the SESSION -->
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
