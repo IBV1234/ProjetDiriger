@@ -30,6 +30,6 @@ class PanierItem {
         return $this->idPanier;
     }
 
-  
+
 
 }
