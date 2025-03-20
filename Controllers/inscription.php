@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 'alias' => $alias
             );
             $userModel->inscriptionJoueur($joueur);
+            $_SESSION['user'] = $userModel->getUserByEmail($courriel);
             redirect('/');
         }
     }else{
