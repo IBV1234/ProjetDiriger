@@ -68,7 +68,10 @@ class Item {
     }
 
     public function getLienPhoto(): string {
+
         return "public/images/" . $this->lienphoto;
+      
+
     }
 
     public function getEstDisponible(): int {

@@ -10,22 +10,25 @@ class ItemModel implements ModelInterface
     // private PDO $pdo
 
     // Ici la propriété $pdo est déclarée dans le constructeur directement
-    public function __construct(private PDO $pdo) {}
-    
-    public function selectAll() : null|array {
-        
+    public function __construct(private PDO $pdo)
+    {
+    }
+
+    public function selectAll(): null|array
+    {
+
         $Item = [];
 
-        try{
+        try {
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items');
-    
+            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items where idItem!=6');
+
             $stm->execute();
-    
+
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-            if (! empty($data)) {
+            if (!empty($data)) {
 
                 foreach ($data as $row) {
 
@@ -40,18 +43,18 @@ class ItemModel implements ModelInterface
                         $row['photo'],
                         $row['flagDispo'],
                         $row['descriptionItem']
-                        );
+                    );
 
                 }
 
                 return $Item;
 
             }
-            
-           
-            
+
+
+
         } catch (PDOException $e) {
-    
+
             // throw new PDOException($e->getMessage(), $e->getCode());
             $errorMessage = sprintf(
                 "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
@@ -60,26 +63,27 @@ class ItemModel implements ModelInterface
                 $e->getMessage(),
                 $e->getFile(),
                 $e->getLine()
-              );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+            );
+            file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('Views/error.php');
-            }
+            redirect('Views/error.php');
+        }
         return null;
     }
 
-    public function selectById(int $idItem) : null|Item {
+    public function selectById(int $idItem): null|Item
+    {
 
-        try{
+        try {
             $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items WHERE idItem = :idItem');
-    
+
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
-            
+
             $stm->execute();
-    
+
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
+            if (!empty($data)) {
 
                 return new Item(
                     $data['idItem'],
@@ -91,16 +95,16 @@ class ItemModel implements ModelInterface
                     $data['utilite'],
                     $data['lienimage'],
                     $data['estDisponible']
-                    );
+                );
 
-                  
+
 
             }
-            
-           
-            
+
+
+
         } catch (PDOException $e) {
-    
+
             // throw new PDOException($e->getMessage(), $e->getCode());
             $errorMessage = sprintf(
                 "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
@@ -109,13 +113,13 @@ class ItemModel implements ModelInterface
                 $e->getMessage(),
                 $e->getFile(),
                 $e->getLine()
-              );
+            );
 
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+            file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('Views/error.php');
+            redirect('Views/error.php');
 
-        }  
+        }
         return null;
     }
     /*
@@ -151,6 +155,61 @@ class ItemModel implements ModelInterface
 
         }
     }*/
-    
+
+    public function selectAllInerJoin($idJoueur)
+    {
+        $items = [];
+        try {
+
+            $stm = $this->pdo->prepare('CALL selectAll(:idJoueur)');
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+
+            $stm->execute();
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($data)) {
+
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['quantiteStock'],
+                        $row['prix'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['photo'],
+                        $row['flagDispo'],
+                        $row['descriptionItem']
+                    );
+                }
+
+
+
+            }
+            return !empty($items) ? $items : null;
+
+
+        } catch (PDOException $e) {
+
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+            );
+
+            file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+            redirect('Views/error.php');
+
+        }
+        
+
+    }
 }
 

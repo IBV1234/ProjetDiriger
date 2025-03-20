@@ -5,12 +5,14 @@ if(isPost()){
     require 'src/session.php';
     require 'src/class/Database.php';
     require 'Models/panier-model.php';
+    require 'Models/UserModel.php';
 
     sessionStart();
 
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
     $lePanier =  new PanierModel($pdo);
+    $userModel = new UserModel($pdo);
 
 
     // Récupération des valeurs
@@ -23,31 +25,22 @@ if(isPost()){
     // $panier = $_SESSION['panier'];
 
     $prixTotal = getPrixTotalPayer(   $items);
-    $poidsTotal = getPoidsTotal($items );
+    $poidsSacDos = $lePanier->getPoidsSacDos($_SESSION['user']->getId());
+    $caps =  $_SESSION['user']->getBalance();
+    $soldeFinal = $caps - $prixTotal;
+    $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
+    $_SESSION['user']->setSolde($soldeFinal );
 
-    setSolde($prixTotal);
+        $dexterite = intval($_SESSION['user']->getDexterite());
 
-    if(isset($_SESSION['sessionDex'])) {
-
-        $dexterite = intval($_SESSION['sessionDex']);
-
-        if ($poidsTotal > $maxPoids) {
+        if ($poidsSacDos > $maxPoids) {
             $dexterite -= 1;
-            $_SESSION['sessionDex'] = $dexterite;
+            $userModel->nouvelleDexterite($dexterite,$_SESSION['user']->getId());
+            $_SESSION['user']->setDexterite($dexterite);
         }
-    }
-
     
-    foreach($items as $key => $item){
 
-        $id = (int)$item['id'];
-        $quantité = (int)$item['quantite'];
-
-        $lePanier->insert($id,  $quantité ,1);
-
-    }
-
-    $lePanier->insertSacADos(1);
+    $lePanier->insertSacADos((int)$_SESSION['user']->getId());
 
 
     // Enregistrer la commande 
@@ -61,11 +54,10 @@ if(isPost()){
     file_put_contents('Logs/last-order.txt', $lastOrderJson . PHP_EOL, FILE_APPEND);
     
 
-    // mis en commnetaire pour tester
-    // if(!empty($_SESSION['panier'])){
-    //     PayerItemSession();
-    // }
+    redirect("/panier-achat");
+
+}else{
     redirect("/");
+
 }
-redirect("/");
 

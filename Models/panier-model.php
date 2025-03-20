@@ -14,7 +14,7 @@ class PanierModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT joueurs_idJoueurs,items_idItem, quantitePanier FROM lePanier');
+            $stm = $this->pdo->prepare('SELECT joueurs_idJoueur,items_idItem, quantitePanier FROM lePanier');
     
             $stm->execute();
     
@@ -25,9 +25,9 @@ class PanierModel implements ModelInterface
                 foreach ($data as $row) {
 
                     $PanierItem[] = new PanierItem(
-                        $row['idPanier'],
-                        $row['idItem'],
-                        $row['quantite'],
+                        $row['joueurs_idJoueur'],
+                        $row['items_idItem'],
+                        $row['quantitePanier'],
                      
                         );
 
@@ -147,6 +147,127 @@ class PanierModel implements ModelInterface
               redirect('Views/error.php');
         }
     }
+
+    public function getPoidsSacDos($idJoueur) : ?int {
+        try {
+            $stm = $this->pdo->prepare("SELECT getPoidsSacADos(:idJoueur) AS poids"); 
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+            
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if (!empty($result) && isset($result['poids'])) {
+                return (int) $result['poids']; 
+            }
+    
+            return null;
+
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
+    public function getPoidsPanier($idJoueur) : ?int {
+        try {
+            $stm = $this->pdo->prepare("SELECT getPoidsPanier(:idJoueur) AS poidsPanier"); 
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+            
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if (!empty($result) && isset($result['poidsPanier'])) {
+                return (int) $result['poidsPanier']; 
+            }
+    
+            return null;
+
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
+    public function getPrixPanier($idJoueur) : ?int {
+        try {
+            $stm = $this->pdo->prepare("SELECT getPrixPanier(:idJoueur) AS prixTotal"); 
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+            
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if (!empty($result) && isset($result['prixTotal'])) {
+                return (int) $result['prixTotal']; 
+            }
+    
+            return null;
+
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
+    public function UtiliteInSac($idJoueur) : ?int {
+        try {
+            $stm = $this->pdo->prepare("SELECT UtiliteInSac(:idJoueur) AS utiliteInSac"); 
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+            
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if (!empty($result) && isset($result['utiliteInSac'])) {
+                return (int) $result['utiliteInSac']; 
+            }
+    
+            return null;
+
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
     
 }
 

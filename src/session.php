@@ -30,21 +30,7 @@ function deleteItemSessionById(int $id): void
 
 }
 
-function PayerItemSession(): void
-{
-    sessionStart();
 
-    $panier = $_SESSION['panier'];
-
-
-        foreach ($panier as $key => $item) {
-            unset($panier[$key]);
-
-        }
-
-    $_SESSION['panier'] = $panier;
-
-}
 function sessionDestroy(): void
 {
 

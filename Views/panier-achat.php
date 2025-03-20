@@ -6,52 +6,62 @@ require "views/Partials/header.php";
 <div class="container custom-container">
 
 <input type="hidden" id="sessionEmpty" value="<?= $_SESSION['isEmptyPanier'] ? 'true' : 'false' ?>">
-    <?php if (!empty($_SESSION['panier'])): ?>
+    <?php if (!empty($panier)): ?>
 
         <form method="post" id="payerForm" action="/payer">
             <div class="container-info-inventaire sticky">
-                <div class="text-decoration">Caps:  <span id="caps" name="caps"><?= $caps ?></span></div>
+                <div class="text-decoration">
+                <img src="/public/images/caps.png" class="bag" alt="caps" /> 
+                    <span id="caps" name="caps"><?= $caps ?></span>
+                </div>
                 <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
 
                 <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
                 <div class="text-decoration">Max: <?= maxPoids ?> lbs</div>
                 <div class="text-decoration">
-                    <img src="/public/images/sac.png" class="bag" alt="backpack" />
+                    <img src="/public/images/panier.png" class="bag" alt="panier" />
                     <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
                     <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
                 </div>
+                <div  class="text-decoration">
+                     <img src="/public/images/sac.png" class="bag" alt="sac" />
+                     <span id="poidsSacDos" name="sac"><?= $poidsSacDos ?></span>
+                        lbs
+                </div>
+                <input type="hidden" id="utilite" value="<?= $UtiliteInSac?>">
+
             </div>
 
             <div class="row">
-                <?php foreach ($_SESSION['panier'] as $key => $item): ?>
+                <?php foreach ($panier as $key => $item): ?>
                     <div class="col">
                         <div class="mb-3">
-                            <div class="mb-3 text-decoration"> <?= $item['nom'] ?></div>
+                            <div class="mb-3 text-decoration"> <?= $item->getNom()?></div>
 
                             <div class="containe-info">
-                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item['id'] ?>">
-                                <input type="hidden" name="items[<?= $key ?>][utilite]" id="utilite" value="<?= $item['utilite'] ?>">
-                                <input type="hidden" name="items[<?= $key ?>][poids]" value="<?= $item['poids'] ?>">
-                                <input type="hidden" name="items[<?= $key ?>][prix]" value="<?= $item['prix'] ?>">
+                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getIdItem() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][poids]" value="<?=$item->getPoids() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][prix]" value="<?= $item->getPrix()  ?>">
+                                <input type="hidden"  name="items[<?= $key ?>][utilites]" id="utilites" value="<?= $item->getUtilite()?>">
 
 
                                 <div class="mb-3">
-                                    <img src="<?= $item['lienphoto'] ?>" class="img" alt="épée">
+                                    <img src="<?=$item->getLienPhoto()  ?>" class="img" alt="épée">
                                 </div>
 
                                 <div >
                                     <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
                                     <input type="number"  id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="1"
-                                        min="1" max="<?=$item['quantite']?>" data-price="<?= $item['prix'] ?>">
+                                        min="1" max="<?=$item->getQteStock()  ?>" data-price="<?= $item->getPrix() ?>">
                                 </div>
-                                <div class="text-decoration">Prix Unitaire: <?= $item['prix'] ?>$</div>
+                                <div class="text-decoration">Prix Unitaire: <?= $item->getPrix() ?>$</div>
                                 <div class="content">
-                                    <a href="/delete-item/?id=<?= $item['id'] ?>">
+                                    <a href="/delete-item/?id=<?=  $item->getIdItem()  ?>">
                                         <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="mb-3 text-decoration">Poids: <span id="poids"><?= $item['poids'] ?></span> lb</div>
+                            <div class="mb-3 text-decoration">Poids: <span id="poids"><?=$item->getPoids()  ?></span> lb</div>
                         </div>
                     </div>
                 <?php endforeach ?>
