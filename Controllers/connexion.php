@@ -14,9 +14,6 @@ $isRemembered = isset($_COOKIE['user']);
 if(!isset($_SESSION['error'])) $_SESSION['error'] = null;
 if($isRemembered) $email = $userModel->selectById((int)$_COOKIE['user'])->getEmail();
 
-//AFFICHAGE...........................
-require 'views/connexion.php';
-
 //TRAITEMENT..........................
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $_SESSION['error'] = null;
@@ -43,7 +40,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     redirect('/connexion');
 }
 
-/*
-NOTES PERSONNELLES:
-    - Erreur de connexion ne part pas quand on change de page (ex: connexion(erreur)-->index-->connexion(erreur))
-*/
+//AFFICHAGE...........................
+require 'views/connexion.php';
