@@ -149,5 +149,34 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+
+    public function inscriptionJoueur(array $joueur){
+        try{
+            $request = $this->pdo->prepare('CALL inscriptionJoueur(:alias, :nom, :prenom, :motdepasse, :email)');
+            $request->bindValue(':alias', $joueur['alias'], PDO::PARAM_STR);
+            $request->bindValue(':nom', $joueur['nom'], PDO::PARAM_STR);
+            $request->bindValue(':prenom', $joueur['prenom'], PDO::PARAM_STR);
+            $request->bindValue(':motdepasse', $joueur['motdepasse'], PDO::PARAM_STR);
+            $request->bindValue(':email', $joueur['courriel'], PDO::PARAM_STR);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function verificationAliasExistant(string $alias){
+        try{
+            $request = $this->pdo->prepare('SELECT verificationAliasExistant(:alias)');
+            $request->bindValue(':alias', $alias, PDO::PARAM_STR);
+            $request->execute();
+            $data = $request->fetch(PDO::FETCH_NUM);
+
+            if($data[0] == 1) 
+                return true;
+            return false;
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 

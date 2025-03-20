@@ -11,9 +11,6 @@ $userModel = new UserModel($pdo);
 
 if(!isset($_SESSION['error'])) $_SESSION['error'] = null;
 
-//AFFICHAGE...........................
-require 'views/inscription.php';
-
 //TRAITEMENT..........................
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $_SESSION['error'] = null;
@@ -31,9 +28,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //ERREURS UTILISATEURS
         if($user) $_SESSION['error'] = 'Vous avez déjà un compte. Connectez-vous !';
         if($password != $confirmPassword) $_SESSION['error'] = 'Vos mots de passe ne sont pas les mêmes.';
+        if($userModel->verificationAliasExistant($alias)) $_SESSION['error'] = 'Cet alias est déjà pris.';
 
         //INSCRIPTION JOUEUR
         if($_SESSION['error'] == null){
+            $joueur = array(
+                'courriel' => $email,
+                'motdepasse' => $password,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'alias' => $alias
+            );
+            $userModel->inscriptionJoueur($joueur);
             redirect('/');
         }
     }else{
@@ -42,3 +48,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     redirect('/connexion');
 }
+
+//AFFICHAGE...........................
+require 'views/inscription.php';
