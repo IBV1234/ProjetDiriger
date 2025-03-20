@@ -7,7 +7,7 @@ require 'partials/header.php';
 
 <div class="container-sm rounded-3 pb-5 bg-yellow-fallout">
     <div class="pt-4 d-flex justify-content-center">
-        <p class="d-inline-block fw-semibold fs-2 bg-color-yellow-text px-2 rounded-1">Profil</p>
+        <p class="d-inline-block fw-semibold fs-2 bg-color-yellow-text px-2 rounded-1">Modification du Profil</p>
     </div>
     <div class="container-sm px-4 py-5 rounded-3 bg-lightblue-fallout max-width-profil pb-4">
         <div class="mx-auto">
