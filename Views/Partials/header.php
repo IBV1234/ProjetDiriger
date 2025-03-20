@@ -6,6 +6,7 @@
         </div>
       </a>
 <!-- Disconnected only -->
+<?php if(!isset($_SESSION['user'])): ?>
       <ul class="nav nav-underline p-2">
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/inscription">Inscription</a>
@@ -14,8 +15,10 @@
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
         </li>
       </ul>
+<?php endif; ?>
 <!-- /Disconnected only -->
 <!-- Connected only -->
+<?php if(isset($_SESSION['user'])): ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
@@ -31,7 +34,8 @@
             <li><a class="dropdown-item" href="#">Déconnection</a></li>
           </ul>
         </div> 
-      </div> 
+      </div>
+<?php endif; ?>
 <!-- /Connected only -->
     </div>
 <!-- Index seulement -->
