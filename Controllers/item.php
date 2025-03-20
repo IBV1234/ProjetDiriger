@@ -14,21 +14,29 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $items = $itemModel->selectAll();
-$_SESSION['item'] = $items[10];
+$_SESSION['item'] = $items[3];
 $userModel = new UserModel($pdo);
 $user = $userModel->getUserByEmail("monsieurtesteur@gmail.com");
 $_SESSION['user'] = $user;
 
 //get item from index.................................................
+
+/*
+if(!isset($_GET['id']))
+    redirect("error");
+else {
+    $item = $itemModel->selectById($_GET['id']);
+}
+*/
+
 if(!isset($_SESSION['item']))
     redirect("error");
-
 $item = $_SESSION['item'];
 
 //send item to cart...................................................
 if(isPost()){
     $panierModel = new PanierModel($pdo);
-    $panierModel->insert($_SESSION['item']->getIdItem(), 1, $_SESSION['user']->getId());
+    $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
     //add popup showing success...
 }
 
