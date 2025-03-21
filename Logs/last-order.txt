@@ -40,11 +40,6 @@
 
 
 
-{"prixTotal":45,"poidsTotal":2,"items":[{"id":"9","utilite":"1","poids":"1","prix":"5","quantite":"1"},{"id":"16","utilite":"0","poids":"1","prix":"40","quantite":"1"}]}
-{"prixTotal":45,"poidsTotal":2,"items":[{"id":"9","utilite":"1","poids":"1","prix":"5","quantite":"1"},{"id":"16","utilite":"0","poids":"1","prix":"40","quantite":"1"}]}
-{"prixTotal":45,"poidsTotal":2,"items":[{"id":"9","utilite":"1","poids":"1","prix":"5","quantite":"1"},{"id":"16","utilite":"0","poids":"1","prix":"40","quantite":"1"}]}
-{"prixTotal":12,"poidsTotal":5,"items":[{"id":"14","poids":"5","prix":"12","quantite":"1"}]}
-{"prixTotal":48,"poidsTotal":20,"items":[{"id":"14","poids":"5","prix":"12","quantite":"4"}]}
-{"prixTotal":12,"poidsTotal":null,"items":[{"id":"14","poids":"5","prix":"12","utilites":"1","quantite":"1"}]}
-{"prixTotal":120,"poidsTotal":null,"items":[{"id":"10","poids":"2","prix":"30","utilites":"0","quantite":"4"}]}
-{"prixTotal":120,"poidsTotal":null,"items":[{"id":"10","poids":"2","prix":"30","utilites":"0","quantite":"4"}]}
+{"prixTotal":50,"poidsTotal":null,"items":[{"id":"7","poids":"10","prix":"50","utilites":"0","quantite":"1"}]}
+{"prixTotal":5,"poidsTotal":null,"items":[{"id":"9","poids":"1","prix":"5","utilites":"1","quantite":"1"}]}
+{"prixTotal":5,"poidsTotal":null,"items":[{"id":"9","poids":"1","prix":"5","utilites":"1","quantite":"1"}]}

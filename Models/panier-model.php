@@ -2,7 +2,7 @@
 
 require_once 'src/class/ModelInterface.php';
 require_once 'src/class/panier_item.php';
-
+require_once 'src/class/Item.php';
 class PanierModel implements ModelInterface
 {
     public function __construct(private PDO $pdo) {}
@@ -100,6 +100,88 @@ class PanierModel implements ModelInterface
         }  
         return null;
     }
+
+    public function deleteItemPanier(int $pidItem,int $pIdJoueur){
+        try{
+            $stm = $this->pdo->prepare("DELETE FROM lePanier WHERE items_idItem = :pidItem AND joueurs_idJoueur = :pIdJoueur");
+            $stm->bindValue(":pidItem",$pidItem,PDO::PARAM_INT);
+            $stm->bindValue("pIdJoueur",$pIdJoueur,PDO::PARAM_INT);
+            $stm->execute();
+
+
+        }catch(PDOException $e){
+
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
+    public function selectAllInerJoin($idJoueur)
+    {
+        $items = [];
+        try {
+
+            $stm = $this->pdo->prepare('CALL selectAll(:idJoueur)');
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+
+            $stm->execute();
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($data)) {
+
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['quantiteStock'],
+                        $row['prix'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['photo'],
+                        $row['flagDispo'],
+                        $row['descriptionItem']
+                    );
+                }
+
+
+
+            }
+            return !empty($items) ? $items : null;
+
+
+        } catch (PDOException $e) {
+
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+            );
+
+            file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+            redirect('Views/error.php');
+
+        }
+        
+
+    }
+
     public function insert(int $idItem,int $quantite,int $idJoueur) : void {
         try {
             $stm = $this->pdo->prepare("CALL ajouterPanier(:idItem, :quantite,:idJoueur)");

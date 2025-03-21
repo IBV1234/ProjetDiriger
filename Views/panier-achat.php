@@ -5,30 +5,30 @@ require "views/Partials/header.php";
 
 <div class="container custom-container">
 
-<input type="hidden" id="sessionEmpty" value="<?= $_SESSION['isEmptyPanier'] ? 'true' : 'false' ?>">
+<input type="hidden" id="sessionEmpty" value="<?= htmlspecialchars($_SESSION['isEmptyPanier'] ? 'true' : 'false', ENT_QUOTES, 'UTF-8') ?>">
     <?php if (!empty($panier)): ?>
 
         <form method="post" id="payerForm" action="/payer">
             <div class="container-info-inventaire sticky">
                 <div class="text-decoration">
                 <img src="/public/images/caps.png" class="bag" alt="caps" /> 
-                    <span id="caps" name="caps"><?= $caps ?></span>
+                    <span id="caps" name="caps"><?= htmlspecialchars($caps, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
-                <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
+                <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= htmlspecialchars($dexteriter, ENT_QUOTES, 'UTF-8') ?></span></div>
 
-                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
-                <div class="text-decoration">Max: <?= maxPoids ?> lbs</div>
+                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= htmlspecialchars(maxPoids, ENT_QUOTES, 'UTF-8') ?>">
+                <div class="text-decoration">Max: <?= htmlspecialchars(maxPoids, ENT_QUOTES, 'UTF-8') ?> lbs</div>
                 <div class="text-decoration">
                     <img src="/public/images/panier.png" class="bag" alt="panier" />
-                    <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
-                    <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
+                    <span id="poidsTotal"><?= htmlspecialchars($poidsTotal, ENT_QUOTES, 'UTF-8') ?></span> lbs
+                    <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= htmlspecialchars($poidsTotal, ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div  class="text-decoration">
                      <img src="/public/images/sac.png" class="bag" alt="sac" />
-                     <span id="poidsSacDos" name="sac"><?= $poidsSacDos ?></span>
+                     <span id="poidsSacDos" name="sac"><?= htmlspecialchars($poidsSacDos, ENT_QUOTES, 'UTF-8') ?></span>
                         lbs
                 </div>
-                <input type="hidden" id="utilite" value="<?= $UtiliteInSac?>">
+                <input type="hidden" id="utilite" value="<?= htmlspecialchars($UtiliteInSac, ENT_QUOTES, 'UTF-8') ?>">
 
             </div>
 
@@ -36,42 +36,41 @@ require "views/Partials/header.php";
                 <?php foreach ($panier as $key => $item): ?>
                     <div class="col">
                         <div class="mb-3">
-                            <div class="mb-3 text-decoration"> <?= $item->getNom()?></div>
+                            <div class="mb-3 text-decoration"> <?= htmlspecialchars($item->getNom(), ENT_QUOTES, 'UTF-8') ?></div>
 
                             <div class="containe-info">
-                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getIdItem() ?>">
-                                <input type="hidden" name="items[<?= $key ?>][poids]" value="<?=$item->getPoids() ?>">
-                                <input type="hidden" name="items[<?= $key ?>][prix]" value="<?= $item->getPrix()  ?>">
-                                <input type="hidden"  name="items[<?= $key ?>][utilites]" id="utilites" value="<?= $item->getUtilite()?>">
-
+                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][id]" value="<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>">
+                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][poids]" value="<?= htmlspecialchars($item->getPoids(), ENT_QUOTES, 'UTF-8') ?>">
+                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][prix]" value="<?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>">
+                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][utilites]" id="utilites" value="<?= htmlspecialchars($item->getUtilite(), ENT_QUOTES, 'UTF-8') ?>">
 
                                 <div class="mb-3">
-                                    <img src="<?=$item->getLienPhoto()  ?>" class="img" alt="épée">
+                                    <img src="<?= htmlspecialchars($item->getLienPhoto(), ENT_QUOTES, 'UTF-8') ?>" class="img" alt="épée">
                                 </div>
 
-                                <div >
-                                    <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
-                                    <input type="number"  id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="1"
-                                        min="1" max="<?=$item->getQteStock()  ?>" data-price="<?= $item->getPrix() ?>">
+                                <div>
+                                    <label class="text-decoration" for="quantity-<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>">Quantité :</label>
+                                    <input type="number" id="quantity-<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][quantite]" value="1"
+                                        min="1" max="<?= htmlspecialchars($item->getQteStock(), ENT_QUOTES, 'UTF-8') ?>" data-price="<?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>">
                                 </div>
-                                <div class="text-decoration">Prix Unitaire: <?= $item->getPrix() ?>$</div>
+                                <div class="text-decoration">Prix Unitaire: <?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>$</div>
                                 <div class="content">
-                                    <a href="/delete-item/?id=<?=  $item->getIdItem()  ?>">
-                                        <i class='bx bx-x-circle'></i>
+                                <a href="/delete-item/?id=<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>&idJoueur=<?= htmlspecialchars($_SESSION['user']->getId(), ENT_QUOTES, 'UTF-8') ?>">
+                                <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="mb-3 text-decoration">Poids: <span id="poids"><?=$item->getPoids()  ?></span> lb</div>
+                            <div class="mb-3 text-decoration">Poids: <span id="poids"><?= htmlspecialchars($item->getPoids(), ENT_QUOTES, 'UTF-8') ?></span> lb</div>
                         </div>
                     </div>
                 <?php endforeach ?>
 
                 <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration"
-                        id="prixTotal"><?= $prixTotal ?></span>$</div>
-                <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
+                        id="prixTotal"><?= htmlspecialchars($prixTotal, ENT_QUOTES, 'UTF-8') ?></span>$</div>
+                <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= htmlspecialchars($prixTotal, ENT_QUOTES, 'UTF-8') ?>">
 
                 <div class="button-container">
-                    <button class="btn btn-success button stickyBtn" type="button" onclick="pay()"  id ="payer"name="payer">Payer</button>
+                    <button class="btn btn-success button stickyBtn" type="button" onclick="pay()" id="payer" name="payer">Payer</button>
                 </div>
                 <div><a class="acceuil" href="/">Accueil</a></div>
             </div>
@@ -89,7 +88,15 @@ require "views/Partials/header.php";
 </div>
 
 </div>
+<!-- htmlspecialchars:
+ENT_QUOTES : Ce paramètre indique que les guillemets simples (') et doubles (")
+ doivent être convertis en entités HTML. Par exemple, ' devient &#039; et " devient &quot;. 
+ Cela aide à prévenir les injections de code malveillant dans les attributs HTML. 
 
+'UTF-8':
+ garantit que les caractères spéciaux sont correctement encodés et affichés, 
+ surtout pour les applications multilingues.
+-->
 <?php
 require "views/Partials/footer.php";
 ?>

@@ -11,31 +11,30 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $items = $itemModel->selectAll();
-$lePanier =  new PanierModel($pdo);
+$PanierModel =  new PanierModel($pdo);
 
-// sessionDestroy();
-
-//  $lePanier->insert(14,  1 ,2); //  for test
+//sessionDestroy();
+//$PanierModel->insert(9,  1 ,2); //  for test
 const maxPoids = 15;
 
  $caps =  $_SESSION['user']->getBalance();
 
 
-$poidsSacDos = $lePanier->getPoidsSacDos($_SESSION['user']->getId());
+$poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
 
 
 $dexteriter = $_SESSION['user']->getDexterite();
 
 
-$panier = $itemModel->selectAllInerJoin($_SESSION['user']->getId());
+$panier = $PanierModel->selectAllInerJoin($_SESSION['user']->getId());
 
-$UtiliteInSac = $lePanier->UtiliteInSac($_SESSION['user']->getId());
+$UtiliteInSac = $PanierModel->UtiliteInSac($_SESSION['user']->getId());
 
 if(!empty($panier)){
 
     $_SESSION["isEmptyPanier"] = false;
-    $prixTotal = $lePanier->getPrixPanier($_SESSION['user']->getId());
-    $poidsTotal = $lePanier->getPoidsPanier($_SESSION['user']->getId());
+    $prixTotal = $PanierModel->getPrixPanier($_SESSION['user']->getId());
+    $poidsTotal = $PanierModel->getPoidsPanier($_SESSION['user']->getId());
 
 }else{
     

@@ -11,25 +11,22 @@ if(isPost()){
 
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
-    $lePanier =  new PanierModel($pdo);
+    $PanierModel =  new PanierModel($pdo);
     $userModel = new UserModel($pdo);
 
 
     // Récupération des valeurs
     $maxPoids = intval($_POST['maxPoids']);
-    $poids = floatval($_POST['poidsTotal']);
-    $prix = floatval($_POST['prixTotal']);
     $items = $_POST['items'] ?? [];
 
 
-    // $panier = $_SESSION['panier'];
-
-    $prixTotal = getPrixTotalPayer(   $items);
-    $poidsSacDos = $lePanier->getPoidsSacDos($_SESSION['user']->getId());
+    $prixTotal = getPrixTotalPayer($items);
+    $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
     $caps =  $_SESSION['user']->getBalance();
     $soldeFinal = $caps - $prixTotal;
+
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
-    $_SESSION['user']->setSolde($soldeFinal );
+    $_SESSION['user']->setBalance($soldeFinal);
 
         $dexterite = intval($_SESSION['user']->getDexterite());
 
@@ -40,7 +37,7 @@ if(isPost()){
         }
     
 
-    $lePanier->insertSacADos((int)$_SESSION['user']->getId());
+    $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
 
 
     // Enregistrer la commande 

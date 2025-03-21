@@ -1,17 +1,17 @@
 <?php
 require 'src/session.php';
 require 'src/class/Database.php';
-require 'Models/ItemModel.php';
+require 'Models/panier-model.php';
 
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
-$itemModel = new ItemModel($pdo);
-$panier = $itemModel->selectAllInerJoin($_SESSION['user']->getId());
+$PanierModel =  new PanierModel($pdo);
+$idJoueur = (int)$_GET['idJoueur'];
+$Panier = $PanierModel->selectAllInerJoin($idJoueur);
 
 $id = (int)$_GET['id'];
-
-if(!empty($panier)){
-    deleteItemSessionById($id );
+if(!empty($Panier)){
+    $PanierModel->deleteItemPanier($id,$idJoueur);
 }
 redirect("/panier-achat");

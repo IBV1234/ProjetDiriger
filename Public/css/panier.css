@@ -135,7 +135,11 @@
   bottom: 40px; 
   left: 10%; 
   z-index: 1000;
-  color:rgb(78, 233, 22)
+  color:rgb(78, 233, 22);
+  background-color: white;
+  border-radius:20px;
+  width: 12%;
+  height: 5%;
 }
 
 /* Mobiles */
@@ -170,7 +174,10 @@
       padding: 12px;
       font-size: 14px;
   }
-
+  .sticky{
+    background-color: white;
+    border-radius: 20px;
+  }
   .stickyBtn {
       right: 10px;
       bottom: 10px;
@@ -181,6 +188,9 @@
   .stickyPrice {
       left: 10%;
       bottom: 30px;
+      width: 40%;
+      background-color: white;
+      
   }
 
   .img {
