@@ -7,3 +7,11 @@ Exception ERROR : 2025-03-13 13:20:04 | Code : 42S22 | Message : SQLSTATE[42S22]
 Exception ERROR : 2025-03-17 16:28:40 | Code : 42S02 | Message : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbknapsak10.Items' doesn't exist | Fichier : C:\wamp64\www\Web Projet\ProjetDiriger\Models\ItemModel.php | Ligne : 24
 Exception ERROR : 2025-03-17 16:28:48 | Code : 42S02 | Message : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbknapsak10.Items' doesn't exist | Fichier : C:\wamp64\www\Web Projet\ProjetDiriger\Models\ItemModel.php | Ligne : 24
 Exception ERROR : 2025-03-17 16:30:41 | Code : 42S02 | Message : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbknapsak10.Items' doesn't exist | Fichier : C:\wamp64\www\Web Projet\ProjetDiriger\Models\ItemModel.php | Ligne : 24
+[18-Mar-2025 20:04:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond in C:\wamp64\www\ProjetDiriger\src\class\Database.php:20
+Stack trace:
+#0 C:\wamp64\www\ProjetDiriger\src\class\Database.php(34): Database->__construct(Array, Array)
+#1 C:\wamp64\www\ProjetDiriger\controllers\index.php(9): Database::getInstance(Array, Array)
+#2 C:\wamp64\www\ProjetDiriger\src\router.php(20): require('C:\\wamp64\\www\\P...')
+#3 C:\wamp64\www\ProjetDiriger\index.php(10): route('/')
+#4 {main}
+  thrown in C:\wamp64\www\ProjetDiriger\src\class\Database.php on line 20

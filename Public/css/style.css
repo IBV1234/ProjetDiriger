@@ -17,14 +17,8 @@
     width: 150px;
     height: 150px;
 }
-
-
-
 .header-height {
-
     height: auto;
-
-  
 }
 @media (min-width: 768px) {
     .header-height {

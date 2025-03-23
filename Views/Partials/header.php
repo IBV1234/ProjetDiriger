@@ -1,16 +1,3 @@
-
-<!-- Isaac -->
-<!-- <header class="header-height px-3 py-1 position-relative">
-  <div
-    class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-3">
-    <a href="/" class="text-decoration-none text-yellow-fallout">
-      <div class="bg-black py-2 px-3 rounded-circle">
-        <h2>Knapsack</h2>
-      </div>
-    </a>
-    <?php if (!isset($_SESSION['user'])): ?> -->
-<!-- /Isaac -->
-
   <header class="header-height px-3 py-1 position-relative">
     <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-3">
       <a href="/" class="text-decoration-none text-yellow-fallout">
@@ -28,18 +15,6 @@
         </li>
       </ul>
 <!-- /Disconnected only -->
-
-<!-- Isaac -->
-    <!-- <?php else: ?>
-        
-        <a class="user-img" href="#">
-          <i class='bx bx-user-pin fs-1' type='solid'></i>
-          <?php  echo  $_SESSION['user'][0]['prenom']?> <?php echo $_SESSION['user'][0]['nom']?>
-        </a>
-
-    <?php endif ?> -->
-<!-- /Isaac -->
-
 <!-- Connected only -->
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier" class="text-decoration-none text-black pe-4">
@@ -63,24 +38,28 @@
     <div class="d-flex justify-content-between align-items-center">
       <div class="row ms-3">
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="armesSwitch" value="option1">
+          <input class="form-check-input" type="checkbox" id="armesSwitch" value="arme">
           <label class="form-check-label" for="armesSwitch">Armes</label>
         </div>
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="nourritureSwitch" value="option1">
+          <input class="form-check-input" type="checkbox" id="nourritureSwitch" value="nourriture">
           <label class="form-check-label" for="nourritureSwitch">Nourriture</label>
         </div>
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="option1">
+          <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="médicament">
           <label class="form-check-label" for="medicamentsSwitch">Médicaments</label>
         </div>
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="armuresSwitch" value="option1">
+          <input class="form-check-input" type="checkbox" id="armuresSwitch" value="armure">
           <label class="form-check-label" for="armuresSwitch">Armures</label>
+        </div>
+        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <input class="form-check-input" type="checkbox" id="munitionsSwitch" value="munition">
+          <label class="form-check-label" for="munitionsSwitch">Munitions</label>
         </div>
       </div>
       <div class="me-3 mt-2">
-        <select class="form-select-sm" aria-label="Note d'évaluation">
+        <select class="form-select-sm" aria-label="Note d'évaluation" id="starSelect">
           <option selected>Nombre d'étoiles</option>
           <option value="1">1 Étoile et plus</option>
           <option value="2">2 Étoiles et plus</option>
