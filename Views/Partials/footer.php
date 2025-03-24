@@ -1,3 +1,4 @@
+
         </main>
 
         <footer class="mx-3">
@@ -21,15 +22,16 @@
                     <h6>Emerik Couture</h6>
                     <h6>Isaac Bernard Vital</h6>
                     <h6>Sabrina Huot-Milliard</h6>
-                </div>
-            </div>
-        </footer>
-        
+        </div>
     </div>
+
+</footer>
+</div>
     <!-- Container -->
     <script src="/public/scripts/total-price.js"></script>
     <script src="/public/scripts/controller-poids.js"></script>
     <script src="/public/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="/public/coreui-pro-5.10.0-dist/js/coreui.bundle.min.js"></script>
+
 </body>
 </html>

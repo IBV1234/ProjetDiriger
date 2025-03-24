@@ -82,7 +82,6 @@ class User
         $this->poidsMax = $poidsMax;
     }
 
-
     public function toArray(): array {
         return [
             'id' => $this->id,
