@@ -18,7 +18,7 @@ $(function() {
         $('[data-filter]').each(function() {
             const filterData = $(this).data('filter'); // Get the data-filter attribute
             const matchesCheckbox = values.some(value => filterData.includes(value));
-            const divStars = parseInt(filterData.match(/\d+/), 10) || 0; // Extract the first number in the data-filter
+            const divStars = parseFloat(filterData.match(/[\d.]+/)) || 0; // Extract the first float number in the data-filter
 
             // Toggle visibility based on conditions
             $(this).toggleClass('d-none', !(matchesCheckbox && divStars >= selectedStars));
