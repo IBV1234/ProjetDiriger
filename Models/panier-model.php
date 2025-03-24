@@ -349,7 +349,5 @@ class PanierModel implements ModelInterface
               redirect('Views/error.php');
         }
     }
-
-    
 }
 

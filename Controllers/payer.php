@@ -25,6 +25,10 @@ if(isPost()){
     $caps =  $_SESSION['user']->getBalance();
     $soldeFinal = $caps - $prixTotal;
 
+
+
+
+    $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
     $_SESSION['user']->setBalance($soldeFinal);
 
@@ -35,10 +39,6 @@ if(isPost()){
             $userModel->nouvelleDexterite($dexterite,$_SESSION['user']->getId());
             $_SESSION['user']->setDexterite($dexterite);
         }
-    
-
-    $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
-
 
     // Enregistrer la commande 
     $_SESSION['last_order'] = [
