@@ -9,4 +9,6 @@ const ROUTES = [
     '/panier-achat' => 'panier-achat.php',
     '/delete-item' => 'delete-item.php',
     '/payer' => 'payer.php',
+    '/inventaire' => 'inventaire.php',
+    '/deconnexion' => 'deconnexion.php'
 ];
