@@ -11,10 +11,10 @@ class Item {
     private int $utilite;
     private string $lienphoto;
     private int $flagDispo;
-    private string|null $descriptionItem;
-    private float|null $rating;
+    private string $descriptionItem;
+    private int $rating;
 
-    public function __construct(int $idItem, string $typeItem, string $nomItem, int $qteStock, int $prix, int $poids, int $utilite, string $lienphoto, int $flagDispo, string|null $descriptionItem, float|null $rating) {
+    public function __construct(int $idItem, string $typeItem, string $nomItem, int $qteStock, int $prix, int $poids, int $utilite, string $lienphoto, int $flagDispo, string $descriptionItem, int $rating) {
         $this->idItem = $idItem;
         $this->typeItem = $typeItem;
         $this->nomItem = $nomItem;

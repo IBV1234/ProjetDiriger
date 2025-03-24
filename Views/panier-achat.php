@@ -43,7 +43,7 @@ require "views/Partials/header.php";
 
                             <div class="containe-info">
                                 <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][id]"
-                                    value="<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>">
+                                    value="<?= htmlspecialchars($item->getId(), ENT_QUOTES, 'UTF-8') ?>">
                                 <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][poids]"
                                     value="<?= htmlspecialchars($item->getPoids(), ENT_QUOTES, 'UTF-8') ?>">
                                 <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][prix]"
@@ -68,7 +68,7 @@ require "views/Partials/header.php";
                                     <?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>$</div>
                                 <div class="content">
                                     <a
-                                        href="/delete-item/?id=<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>&idJoueur=<?= htmlspecialchars($_SESSION['user']->getId(), ENT_QUOTES, 'UTF-8') ?>">
+                                        href="/delete-item/?id=<?= htmlspecialchars($item->getId(), ENT_QUOTES, 'UTF-8') ?>&idJoueur=<?= htmlspecialchars($_SESSION['user']->getId(), ENT_QUOTES, 'UTF-8') ?>">
                                         <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>

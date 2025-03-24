@@ -38,8 +38,8 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['lienphoto'],
                         $row['flagDispo'],
-                        $row['descriptionItem'],
-                        $row['rating']
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
 
@@ -80,8 +80,8 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['photo'],
                         $row['flagDispo'],
-                        $row['descriptionItem'],
-                        $row['rating']
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
 
@@ -122,8 +122,8 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['lienphoto'],
                         $row['flagDispo'],
-                        $row['descriptionItem'],
-                        $row['rating']
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
 
@@ -165,8 +165,8 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['lienphoto'],
                         $row['flagDispo'],
-                        $row['descriptionItem'],
-                        $row['rating']
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
 

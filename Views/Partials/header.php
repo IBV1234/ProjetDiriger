@@ -23,7 +23,7 @@
 <!-- Connected only -->
 <?php if(isset($_SESSION['user'])): ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
-        <a href="/panier" class="text-decoration-none text-black pe-4">
+        <a href="/panier-achat" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
         </a>
 
