@@ -8,7 +8,7 @@ require 'partials/header.php';
         <div class="bg-yellow-fallout rounded rounded-3 p-2">
             <div class="row">
 <!-- À copier pour chaque item -->
-                <?php foreach ($items as $item) : ?>
+                <?php if($items != null) foreach ($items as $item) : ?>
                     <div class="col-sm-6 col-md-4 col-xl-3 px-4 py-3" data-filter="<?= $item->getType()?>-<?= $item->getRating()?>">
                         <a href="/item?id=<?= $item->getId() ?>" class="text-decoration-none text-black">
                             <div class="ratio ratio-1x1">
@@ -17,7 +17,11 @@ require 'partials/header.php';
                                     <img src="<?= $item->getLienPhoto() ?>" class="img-fluid" alt="placeholder">
                                     <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
                                         <div style="transform: skew(0deg, -5deg);">
-                                            <h2><?= $item->getQteStock() ?></h2>
+                                            <h2>
+                                                <img src="/public/images/sac.png" class="bag" alt="panier" />
+                                                <span></span>
+                                                <?= $item->getQteStock() ?>
+                                            </h2>
                                         </div>
                                     </div>
                                 </div>
@@ -30,6 +34,11 @@ require 'partials/header.php';
                     </div>
                 <?php endforeach; ?>
 <!-- /À copier pour chaque item -->
+                <?php if($items == null) :?>
+                    <div class="pt-4 d-flex justify-content-center">
+                        <p class="d-inline-block fw-semibold fs-2 bg-color-yellow-text px-2 rounded-1">Votre inventaire est vide !</p>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 

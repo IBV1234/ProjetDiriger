@@ -6,6 +6,8 @@ require 'src/class/Item.php';
 require 'Models/ItemModel.php';
 require 'src/class/User.php';
 
+$_SESSION['controller'] = 'inventaire';
+
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
@@ -16,10 +18,9 @@ $items = $itemModel->selectByInventory($_SESSION['user']->getId());
 require 'views/inventaire.php';
 
 /* NOTES PERSONELLES:
-    -   mettre une icone sac a dos a cote de la quantite
-    -   mettre "votre inventaire est vide !" quand il n'y a pas d'item
-    -   considerer la logique d'items essentiels dans le sac a dos
-    -   ajouter des boutons comme "consommer" pour la nourriture/medicaments
+    DANS DETAILS
+    -   Considerer la logique d'items essentiels
+    -   Ajouter des boutons comme "consommer" pour la nourriture/medicaments
     -   Ajouter un bouton supprimer
     -   Ajouter un bouton vendre
 */
