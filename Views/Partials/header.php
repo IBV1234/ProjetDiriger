@@ -46,7 +46,7 @@
           <label class="form-check-label" for="nourritureSwitch">Nourriture</label>
         </div>
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="médicament">
+          <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="medicament">
           <label class="form-check-label" for="medicamentsSwitch">Médicaments</label>
         </div>
         <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
