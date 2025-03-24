@@ -2,79 +2,88 @@
 class Item {
     
 
-    private ?int $idItem;
-    private string $typeitem;
-    private string $nom;
-    private int $qtestock;
-    private float $prix;
-    private float $poids;
+    private int $idItem;
+    private string $nomItem;
+    private string $typeItem;
+    private int $poids;
+    private int $qteStock;
+    private int $prix;
     private int $utilite;
     private string $lienphoto;
-    private int $estDisponible;
-    private string  $description;
+    private int $flagDispo;
+    private string|null $descriptionItem;
+    private float|null $rating;
 
-    public function __construct(
-        ?int $idItem,
-        string $typeitem,
-        string $nom,
-        int $qtestock,
-        float $prix,
-        float $poids,
-        int $utilite,
-        string $lienphoto,
-        int $estDisponible, 
-        ?string $description = ''
-    ) {
+    public function __construct(int $idItem, string $typeItem, string $nomItem, int $qteStock, int $prix, int $poids, int $utilite, string $lienphoto, int $flagDispo, string|null $descriptionItem, float|null $rating) {
         $this->idItem = $idItem;
-        $this->typeitem = $typeitem;
-        $this->nom = $nom;
-        $this->qtestock = $qtestock;
-        $this->estDisponible = $estDisponible;
+        $this->typeItem = $typeItem;
+        $this->nomItem = $nomItem;
+        $this->qteStock = $qteStock;
         $this->prix = $prix;
         $this->poids = $poids;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
-        $this->description = $description ?? '';
-        }
+        $this->flagDispo = $flagDispo;
+        $this->descriptionItem = $descriptionItem;
+        $this->rating = $rating;
+    }
 
     // Getters
-    public function getIdItem(): ?int {
+    public function getId(): int {
         return $this->idItem;
     }
-
-    public function getTypeItem(): string {
-        return $this->typeitem;
-    }
-
     public function getNom(): string {
-        return $this->nom;
+        return $this->nomItem;
     }
-
-    public function getQteStock(): int {
-        return $this->qtestock;
+    public function getType(): string {
+        return $this->typeItem;
     }
-
-
-    public function getPrix(): float {
-        return $this->prix;
-    }
-
-    public function getPoids(): float {
+    public function getPoids(): int {
         return $this->poids;
     }
-
+    public function getQteStock(): int {
+        return $this->qteStock;
+    }
+    public function getPrix(): int {
+        return $this->prix;
+    }
     public function getUtilite(): int {
         return $this->utilite;
     }
-
     public function getLienPhoto(): string {
         return "public/images/" . $this->lienphoto;
     }
-
-    public function getEstDisponible(): int {
-        return $this->estDisponible;
+    public function getFlagDispo(): int {
+        return $this->flagDispo;
     }
-    public function getDescription(): string {
-        return $this->description;
+    public function getDescription(): string|null {
+        return $this->descriptionItem;
+    }
+    public function getRating(): float {
+        if ($this->rating !== null) {
+            return round($this->rating, 1);
+        }
+        return 0;
+    }
+
+    //Fonction spécifique
+    public function estDisponible(): bool {
+        return $this->flagDispo === 1;
+    }
+
+    public function toArray(): array {
+        return [
+            'idItem' => $this->idItem,
+            'typeItem' => $this->typeItem,
+            'nomItem' => $this->nomItem,
+            'qteStock' => $this->qteStock,
+            'prix' => $this->prix,
+            'poids' => $this->poids,
+            'utilite' => $this->utilite,
+            'lienphoto' => $this->lienphoto,
+            'flagDispo' => $this->flagDispo,
+            'descriptionItem' => $this->descriptionItem,
+            'rating' => $this->rating
+        ];
     }
 }
