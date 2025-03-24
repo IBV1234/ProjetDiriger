@@ -1,3 +1,4 @@
+
   <header class="header-height px-3 py-1 position-relative">
     <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-3">
       <a href="/" class="text-decoration-none text-yellow-fallout">
@@ -6,6 +7,8 @@
         </div>
       </a>
 <!-- Disconnected only -->
+<?php if(!isset($_SESSION['user'])): ?>
+
       <ul class="nav nav-underline p-2">
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/inscription">Inscription</a>
@@ -14,12 +17,16 @@
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
         </li>
       </ul>
+
+<?php endif; ?>
 <!-- /Disconnected only -->
 <!-- Connected only -->
+<?php if(isset($_SESSION['user'])): ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
         </a>
+
         <div class="dropdown p-2">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
@@ -31,8 +38,10 @@
             <li><a class="dropdown-item" href="#">Déconnection</a></li>
           </ul>
         </div> 
-      </div> 
+      </div>
+<?php endif; ?>
 <!-- /Connected only -->
+
     </div>
 <!-- Index seulement -->
     <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>

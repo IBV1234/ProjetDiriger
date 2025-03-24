@@ -51,7 +51,10 @@ class Item {
         return $this->utilite;
     }
     public function getLienPhoto(): string {
+
         return "public/images/" . $this->lienphoto;
+      
+
     }
     public function getFlagDispo(): int {
         return $this->flagDispo;

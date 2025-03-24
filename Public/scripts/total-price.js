@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const Empty = document.getElementById('sessionEmpty').value;
+    const Empty = document.getElementById('sessionEmpty')?.value ?? "true";
     window.isEmpty = (Empty === "true");
     if (!window.isEmpty && window.isEmpty!=="") {
         //querySelectorAll('input[type="number"]: Sélectionne tous les champs de quantité 

@@ -5,50 +5,40 @@ if(isPost()){
     require 'src/session.php';
     require 'src/class/Database.php';
     require 'Models/panier-model.php';
+    require 'Models/UserModel.php';
 
     sessionStart();
 
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
-    $lePanier =  new PanierModel($pdo);
+    $PanierModel =  new PanierModel($pdo);
+    $userModel = new UserModel($pdo);
 
 
     // Récupération des valeurs
     $maxPoids = intval($_POST['maxPoids']);
-    $poids = floatval($_POST['poidsTotal']);
-    $prix = floatval($_POST['prixTotal']);
     $items = $_POST['items'] ?? [];
 
 
-    // $panier = $_SESSION['panier'];
+    $prixTotal = getPrixTotalPayer($items);
+    $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
+    $caps =  $_SESSION['user']->getBalance();
+    $soldeFinal = $caps - $prixTotal;
 
-    $prixTotal = getPrixTotalPayer(   $items);
-    $poidsTotal = getPoidsTotal($items );
 
-    setSolde($prixTotal);
 
-    if(isset($_SESSION['sessionDex'])) {
 
-        $dexterite = intval($_SESSION['sessionDex']);
+    $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
+    $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
+    $_SESSION['user']->setBalance($soldeFinal);
 
-        if ($poidsTotal > $maxPoids) {
+        $dexterite = intval($_SESSION['user']->getDexterite());
+
+        if ($poidsSacDos > $maxPoids) {
             $dexterite -= 1;
-            $_SESSION['sessionDex'] = $dexterite;
+            $userModel->nouvelleDexterite($dexterite,$_SESSION['user']->getId());
+            $_SESSION['user']->setDexterite($dexterite);
         }
-    }
-
-    
-    foreach($items as $key => $item){
-
-        $id = (int)$item['id'];
-        $quantité = (int)$item['quantite'];
-
-        $lePanier->insert($id,  $quantité ,1);
-
-    }
-
-    $lePanier->insertSacADos(1);
-
 
     // Enregistrer la commande 
     $_SESSION['last_order'] = [
@@ -61,11 +51,10 @@ if(isPost()){
     file_put_contents('Logs/last-order.txt', $lastOrderJson . PHP_EOL, FILE_APPEND);
     
 
-    // mis en commnetaire pour tester
-    // if(!empty($_SESSION['panier'])){
-    //     PayerItemSession();
-    // }
+    redirect("/panier-achat");
+
+}else{
     redirect("/");
+
 }
-redirect("/");
 

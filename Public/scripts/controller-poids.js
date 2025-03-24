@@ -8,18 +8,35 @@ document.addEventListener('DOMContentLoaded', function () {
         const quantityInputs = document.querySelectorAll('input[type="number"][id^="quantity-"]'); // Tous les champs de quantité
         const dexteriter = document.getElementById('Dex'); // Affichage de la dextérité
         const soldeJoueur = document.getElementById('caps').textContent;
-        let isCorrectUtilite =false;
+        const poidTotalSac = document.getElementById('poidsSacDos').textContent;
+        const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
+
+        let isCorrectUtiliteInSac =false;
+        let isUtiliteInPanier = false;
+      
 
         
-        function getResultUtiliter(Tabutilites){
-            let isInPanier = false;
-            for (const utiliteValue  of Tabutilites) {
-                if(utiliteValue == '1'){
-                    isInPanier = true;
-                    break;
+        function getResultUtiliteInSac(utilites){
+            let isInSac = false;
+                if(utilites == '1'){
+                    isInSac = true;
+              
                 }
-            }
-            return isInPanier;
+            
+            return isInSac;
+        }
+
+        function getResultUtiliterInPanier(utilites){
+            let isInPainer = false;
+               for(const utilite of utilites){
+                if(utilite == '1'){
+                    isInPainer = true;
+                        break;
+                }
+            
+               }
+            
+            return isInPainer;
         }
       
         function updatePoidsTotal() {        // Fonction pour recalculer et mettre à jour le poids total
@@ -30,11 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const quantity = parseInt(input.value, 10) ; // Assure une valeur numérique
                 const poidsElement = input.closest('.col').querySelector('#poids'); // Récupère l'élément contenant le poids
                 const poids = parseFloat(poidsElement.innerText) ; // Convertit en nombre
-                const utilites = Array.from(document.querySelectorAll('.col #utilite')); // Récupère tous les inputs utilite dans les colonnes    
-                totalPoids += poids * quantity;
-                const valeursUtilites = utilites.map(utilite => utilite.defaultValue);
+                const utilites = Array.from(document.querySelectorAll('.col #utilites')); // Récupère tous les inputs utilite dans les colonnes    
 
-                isCorrectUtilite = getResultUtiliter(valeursUtilites);
+                totalPoids += poids * quantity;
+                let TabUtilites = utilites.map(utilite => utilite.defaultValue);
+                isUtiliteInPanier = getResultUtiliterInPanier(TabUtilites)
+                isCorrectUtiliteInSac = getResultUtiliteInSac(utilitesSac);
 
             });
 
@@ -48,14 +66,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Fonction appelée lors du paiement
         window.pay = function () {
-            let totalPoids = parseFloat(afficherPoidsTotalElement.textContent) ;
+            let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent) ;
             let dex = parseInt(dexteriter.textContent, 10);
                 let solde = parseInt(soldeJoueur);
                 let prixTotal = parseInt(window.prixTotalElement.textContent);
-                
-            if(isCorrectUtilite){
+                let totalPoidAuthorisé = totalPoidsPanier + parseInt(poidTotalSac);
+
+                if(isCorrectUtiliteInSac == false && isUtiliteInPanier!= false ) isCorrectUtiliteInSac = isUtiliteInPanier;
+                if(isCorrectUtiliteInSac == false && isUtiliteInPanier== false)isCorrectUtiliteInSac = false;
+
+            if(isCorrectUtiliteInSac){
                 if( prixTotal <=solde ){
-                    if ( totalPoids > maxPoids) {
+                    if ( totalPoidAuthorisé > maxPoids) {
                         const userConfirmed = confirm(
                             'Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?'
                         );

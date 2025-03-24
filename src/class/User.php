@@ -76,12 +76,11 @@ class User
         $this->hp = $hp;
     }
     public function setDexterite(int $dexterite): void {
-        $this->hp = $dexterite;
+        $this->dexterite = $dexterite;
     }
     public function setPoidsMax(int $poidsMax): void {
         $this->poidsMax = $poidsMax;
     }
-
 
     public function toArray(): array {
         return [
