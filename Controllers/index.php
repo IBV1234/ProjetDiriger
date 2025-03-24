@@ -12,4 +12,6 @@ $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $items = $itemModel->selectActive();
 
+$_SESSION['controller'] = 'index';
+
 require 'views/index.php';

@@ -35,40 +35,42 @@
 <!-- /Connected only -->
     </div>
 <!-- Index seulement -->
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="row ms-3">
-        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="armesSwitch" value="arme">
-          <label class="form-check-label" for="armesSwitch">Armes</label>
+    <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="row ms-3">
+          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+            <input class="form-check-input" type="checkbox" id="armesSwitch" value="arme">
+            <label class="form-check-label" for="armesSwitch">Armes</label>
+          </div>
+          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+            <input class="form-check-input" type="checkbox" id="nourritureSwitch" value="nourriture">
+            <label class="form-check-label" for="nourritureSwitch">Nourriture</label>
+          </div>
+          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+            <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="medicament">
+            <label class="form-check-label" for="medicamentsSwitch">Médicaments</label>
+          </div>
+          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+            <input class="form-check-input" type="checkbox" id="armuresSwitch" value="armure">
+            <label class="form-check-label" for="armuresSwitch">Armures</label>
+          </div>
+          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+            <input class="form-check-input" type="checkbox" id="munitionsSwitch" value="munition">
+            <label class="form-check-label" for="munitionsSwitch">Munitions</label>
+          </div>
         </div>
-        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="nourritureSwitch" value="nourriture">
-          <label class="form-check-label" for="nourritureSwitch">Nourriture</label>
-        </div>
-        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="medicament">
-          <label class="form-check-label" for="medicamentsSwitch">Médicaments</label>
-        </div>
-        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="armuresSwitch" value="armure">
-          <label class="form-check-label" for="armuresSwitch">Armures</label>
-        </div>
-        <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
-          <input class="form-check-input" type="checkbox" id="munitionsSwitch" value="munition">
-          <label class="form-check-label" for="munitionsSwitch">Munitions</label>
+        <div class="me-3 mt-2">
+          <select class="form-select-sm" aria-label="Note d'évaluation" id="starSelect">
+            <option selected>Nombre d'étoiles</option>
+            <option value="1">1 Étoile et plus</option>
+            <option value="2">2 Étoiles et plus</option>
+            <option value="3">3 Étoiles et plus</option>
+            <option value="4">4 Étoiles et plus</option>
+            <option value="5">5 Étoiles</option>
+          </select>
         </div>
       </div>
-      <div class="me-3 mt-2">
-        <select class="form-select-sm" aria-label="Note d'évaluation" id="starSelect">
-          <option selected>Nombre d'étoiles</option>
-          <option value="1">1 Étoile et plus</option>
-          <option value="2">2 Étoiles et plus</option>
-          <option value="3">3 Étoiles et plus</option>
-          <option value="4">4 Étoiles et plus</option>
-          <option value="5">5 Étoiles</option>
-        </select>
-      </div>
-    </div>
+    <?php endif; ?>
 <!-- /Index seulement -->
     <div class="img-nav d-none d-sm-block position-absolute top-0 start-50 translate-middle-x">
       <a href="/">
