@@ -16,7 +16,6 @@ if (!isset($_SESSION['error']))
 if ($isRemembered)
     $email = $userModel->selectById((int) $_COOKIE['user'])->getEmail();
 
-//AFFICHAGE...........................
 //TRAITEMENT..........................
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['error'] = null;
@@ -48,10 +47,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     (empty($email) || empty($password)) ? $_SESSION['error'] = 'Veuillez remplir tous les champs.' : $_SESSION['error'] = 'Courriel ou mot de passe invalide.';
     redirect('/connexion');
 }
-
-/*
-NOTES PERSONNELLES:
-    - Erreur de connexion ne part pas quand on change de page (ex: connexion(erreur)-->index-->connexion(erreur))
-*/
-
+//AFFICHAGE...........................
 require 'views/connexion.php';

@@ -5,50 +5,35 @@ require_once 'src/class/User.php';
 
 class UserModel implements ModelInterface
 {
-
-    // La propriété pourrait être déclarée hors constructeur
-    // private PDO $pdo;
-
-    // Ici la propriété $pdo est déclarée dans le constructeur directement
-    public function __construct(private PDO $pdo)
-    {
-    }
-
-    public function selectAll(): null|array
-    {
-
+    public function __construct(private PDO $pdo) {}
+    
+    public function selectAll() : null|array {
+        
         $users = [];
 
-        try {
-
-            // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs');
-
+        try{
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, capital, pointDeVie, dexterite, poidMax FROM joueurs');
             $stm->execute();
-
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-            if (!empty($data)) {
+            if (! empty($data)) {
 
                 foreach ($data as $row) {
-
                     $users[] = new User(
-                        $data['idJoueur'],
-                        $data['alias'],
-                        $data['nom'],
-                        $data['prenom'],
-                        $data['courriel'],
-                        $data['estAdmin'],
-                        $data['capital'],
-                        $data['pointDeVie'],
-                        $data['dexterite'],
-                        $data['poidMax']
+                        $row['idJoueur'],
+                        $row['alias'],
+                        $row['nom'],
+                        $row['prenom'],
+                        $row['courriel'],
+                        $row['estAdmin'],
+                        $row['capital'],
+                        $row['pointDeVie'],
+                        $row['dexterite'],
+                        $row['poidMax']
                     );
-
                 }
 
                 return $users;
-
             }
 
             return null;
@@ -64,8 +49,8 @@ class UserModel implements ModelInterface
     public function selectById(int $id): null|User
     {
 
-        try {
-            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, motDePasse, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
+        try{
+            $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
 
             $stm->bindValue(":id", $id, PDO::PARAM_INT);
 
@@ -154,6 +139,7 @@ class UserModel implements ModelInterface
             $request->bindValue(":nouveauSolde", $newSolde, PDO::PARAM_INT);
             $request->bindValue(":idDuJoueur", $idJoueur, PDO::PARAM_INT);
             $request->execute();
+
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
@@ -164,6 +150,35 @@ class UserModel implements ModelInterface
             $request->bindValue(":nouvelleDexterite", $newDexterite, PDO::PARAM_INT);
             $request->bindValue(":idDuJoueur", $idJoueur, PDO::PARAM_INT);
             $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function inscriptionJoueur(array $joueur){
+        try{
+            $request = $this->pdo->prepare('CALL inscriptionJoueur(:alias, :nom, :prenom, :motdepasse, :email)');
+            $request->bindValue(':alias', $joueur['alias'], PDO::PARAM_STR);
+            $request->bindValue(':nom', $joueur['nom'], PDO::PARAM_STR);
+            $request->bindValue(':prenom', $joueur['prenom'], PDO::PARAM_STR);
+            $request->bindValue(':motdepasse', $joueur['motdepasse'], PDO::PARAM_STR);
+            $request->bindValue(':email', $joueur['courriel'], PDO::PARAM_STR);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function verificationAliasExistant(string $alias){
+        try{
+            $request = $this->pdo->prepare('SELECT verificationAliasExistant(:alias)');
+            $request->bindValue(':alias', $alias, PDO::PARAM_STR);
+            $request->execute();
+            $data = $request->fetch(PDO::FETCH_NUM);
+
+            if($data[0] == 1) 
+                return true;
+            return false;
         }catch(PDOException $e){
             throw new PDOException($e->getMessage(), $e->getCode());
         }
