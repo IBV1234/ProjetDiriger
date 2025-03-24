@@ -11,7 +11,6 @@ $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $items = $itemModel->selectAll();
 $item = $items[10];
-
 //get item from index
 
 //send item to cart

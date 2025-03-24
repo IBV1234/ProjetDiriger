@@ -20,19 +20,13 @@
         <a href="/panier" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
         </a>
-        <div class="dropdown p-2">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="#">Admin</a></li>
-            <li><a class="dropdown-item" href="#">Profil</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Déconnection</a></li>
-          </ul>
-        </div> 
-      </div> 
-<!-- /Connected only -->
+        <ul class="dropdown-menu text-small">
+          <li><a class="dropdown-item" href="#">Admin</a></li>
+          <li><a class="dropdown-item" href="#">Profil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Déconnection</a></li>
+        </ul>
+      </div>
     </div>
 <!-- Index seulement -->
     <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>

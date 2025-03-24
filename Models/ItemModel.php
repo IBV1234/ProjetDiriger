@@ -16,16 +16,17 @@ class ItemModel implements ModelInterface
         
         $items = [];
 
-        try{
+        try {
 
             // $this->pdo-> car $pdo est une propriété de l'objet
             $stm = $this->pdo->prepare('CALL ItemsGetAll()');
-    
-            $stm->execute();
-    
-            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
+            $stm->execute();
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+          
             if (! empty($data)) {
+
                 foreach ($data as $row) {
                     $items[] = new Item(
                         $row['idItem'],
@@ -149,9 +150,9 @@ class ItemModel implements ModelInterface
             $stm->bindValue(":type", $type, PDO::PARAM_INT);
             
             $stm->execute();
-    
-            $data = $stm->fetch(PDO::FETCH_ASSOC);
 
+            $data = $stm->fetch(PDO::FETCH_ASSOC);
+          
             if (! empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -219,6 +220,8 @@ class ItemModel implements ModelInterface
 
         }
     }*/
+
+  
     
 }
 
