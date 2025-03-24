@@ -17,6 +17,7 @@ class UserModel implements ModelInterface
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
             if (! empty($data)) {
+
                 foreach ($data as $row) {
                     $users[] = new User(
                         $row['idJoueur'],
@@ -34,29 +35,30 @@ class UserModel implements ModelInterface
 
                 return $users;
             }
-            
+
             return null;
-            
+
         } catch (PDOException $e) {
-    
+
             throw new PDOException($e->getMessage(), $e->getCode());
-            
+
         }
 
     }
 
-    public function selectById(int $id) : null|User {
+    public function selectById(int $id): null|User
+    {
 
         try{
             $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
-    
+
             $stm->bindValue(":id", $id, PDO::PARAM_INT);
-            
+
             $stm->execute();
-    
+
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
+            if (!empty($data)) {
 
                 return new User(
                     $data['idJoueur'],
@@ -70,27 +72,29 @@ class UserModel implements ModelInterface
                     $data['dexterite'],
                     $data['poidMax']
                 );
+
             }
-            
+
             return null;
-            
+
         } catch (PDOException $e) {
-    
+
             throw new PDOException($e->getMessage(), $e->getCode());
-            
+
         }
 
     }
 
-    public function getUserByEmail(string $email): null|User {
-        try{
+    public function getUserByEmail(string $email): null|User
+    {
+        try {
             $user = $this->pdo->prepare('CALL chercherJoueurParCourriel(:email)');
             $user->bindValue(":email", $email, PDO::PARAM_STR);
             $user->execute();
-    
+
             $data = $user->fetch(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
+            if (!empty($data)) {
                 return new User(
                     $data['idJoueur'],
                     $data['alias'],
@@ -105,21 +109,22 @@ class UserModel implements ModelInterface
                 );
             }
             return null;
-            
+
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
-        }  
+        }
     }
 
-    public function verifyPasswordUser(string $password, string $email): bool {
-        try{
+    public function verifyPasswordUser(string $password, string $email): bool
+    {
+        try {
             $match = $this->pdo->prepare('SELECT verificationMotDePasse(:password, :email)');
             $match->bindValue(":email", $email, PDO::PARAM_STR);
             $match->bindValue(":password", $password, PDO::PARAM_STR);
             $match->execute();
 
             $data = $match->fetch(PDO::FETCH_NUM);
-            if($data[0] == 1) 
+            if ($data[0] == 1)
                 return true;
             return false;
 
@@ -127,18 +132,18 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-
-    public function nouveauSolde(int $newSolde, int $idJoueur){
-        try{
+    public function nouveauSolde(int $newSolde, int $idJoueur)
+    {
+        try {
             $request = $this->pdo->prepare('CALL majSolde(:nouveauSolde, :idDuJoueur)');
             $request->bindValue(":nouveauSolde", $newSolde, PDO::PARAM_INT);
             $request->bindValue(":idDuJoueur", $idJoueur, PDO::PARAM_INT);
             $request->execute();
-        } catch(PDOException $e){
+
+        } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-
     public function nouvelleDexterite(int $newDexterite, int $idJoueur){
         try{
             $request = $this->pdo->prepare('CALL majDexterite(:nouvelleDexterite, :idDuJoueur)');

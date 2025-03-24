@@ -11,25 +11,66 @@ class ItemModel implements ModelInterface
 
     // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
-    
+
     public function selectAll() : null|array {
         
-        $Item = [];
+        $items = [];
+
+        try {
+
+            // $this->pdo-> car $pdo est une propriété de l'objet
+            $stm = $this->pdo->prepare('CALL ItemsGetAll()');
+
+            $stm->execute();
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+          
+            if (! empty($data)) {
+
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['qteStock'],
+                        $row['prix'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['lienphoto'],
+                        $row['flagDispo'],
+                        $row['descriptionItem'],
+                        $row['rating']
+                    );
+                }
+
+                return $items;
+            }
+
+            return null;
+
+        } catch (PDOException $e) {
+
+            throw new PDOException($e->getMessage(), $e->getCode());
+
+        }
+    }
+
+    public function selectActive() : null|array {
+        
+        $items = [];
 
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items');
+            $stm = $this->pdo->prepare('CALL ItemsGetActive()');
     
             $stm->execute();
     
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
             if (! empty($data)) {
-
                 foreach ($data as $row) {
-
-                    $Item[] = new Item(
+                    $items[] = new Item(
                         $row['idItem'],
                         $row['typeItem'],
                         $row['nomItem'],
@@ -39,83 +80,111 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['photo'],
                         $row['flagDispo'],
-                        $row['descriptionItem']
-                        );
-
+                        $row['descriptionItem'],
+                        $row['rating']
+                    );
                 }
 
-                return $Item;
-
+                return $items;
             }
-            
-           
-            
+
+            return null;
+
         } catch (PDOException $e) {
-    
-            // throw new PDOException($e->getMessage(), $e->getCode());
-            $errorMessage = sprintf(
-                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
-                date('Y-m-d H:i:s'),
-                $e->getCode(),
-                $e->getMessage(),
-                $e->getFile(),
-                $e->getLine()
-              );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('Views/error.php');
-            }
-        return null;
+            throw new PDOException($e->getMessage(), $e->getCode());
+            
+        }
     }
 
-    public function selectById(int $idItem) : null|Item {
+    public function selectByType(int $type) : null|array {
+
+        $items = [];
 
         try{
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items WHERE idItem = :idItem');
+            $stm = $this->pdo->prepare('CALL ItemsGetByType(:type)');
     
-            $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
+            $stm->bindValue(":type", $type, PDO::PARAM_INT);
             
             $stm->execute();
     
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
-
-                return new Item(
-                    $data['idItem'],
-                    $data['typeitem'],
-                    $data['nom'],
-                    $data['qtestock'],
-                    $data['prix'],
-                    $data['poids'],
-                    $data['utilite'],
-                    $data['lienimage'],
-                    $data['estDisponible']
+            if (! empty($data)) {
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['qteStock'],
+                        $row['prix'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['lienphoto'],
+                        $row['flagDispo'],
+                        $row['descriptionItem'],
+                        $row['rating']
                     );
+                }
 
-                  
-
+                return $items;
             }
             
-           
+            return null;
             
         } catch (PDOException $e) {
     
-            // throw new PDOException($e->getMessage(), $e->getCode());
-            $errorMessage = sprintf(
-                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
-                date('Y-m-d H:i:s'),
-                $e->getCode(),
-                $e->getMessage(),
-                $e->getFile(),
-                $e->getLine()
-              );
-
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
-
-              redirect('Views/error.php');
-
+            throw new PDOException($e->getMessage(), $e->getCode());
+            
         }  
+
+    }
+
+    public function selectActiveByType(int $type) : null|array {
+
+        $items = [];
+
+        try{
+            $stm = $this->pdo->prepare('CALL ItemsGetActiveByType(:type)');
+    
+            $stm->bindValue(":type", $type, PDO::PARAM_INT);
+            
+            $stm->execute();
+
+            $data = $stm->fetch(PDO::FETCH_ASSOC);
+          
+            if (! empty($data)) {
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['qteStock'],
+                        $row['prix'],
+                        $row['poids'],
+                        $row['utilite'],
+                        $row['lienphoto'],
+                        $row['flagDispo'],
+                        $row['descriptionItem'],
+                        $row['rating']
+                    );
+                }
+
+                return $items;
+            }
+            
+            return null;
+            
+        } catch (PDOException $e) {
+    
+            throw new PDOException($e->getMessage(), $e->getCode());
+            
+        }  
+
+    }
+    
+    public function selectById(int $id): null {
+        //dummy function to avoid error of not implementing the interface
         return null;
     }
     /*
@@ -151,6 +220,8 @@ class ItemModel implements ModelInterface
 
         }
     }*/
+
+  
     
 }
 
