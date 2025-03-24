@@ -18,7 +18,7 @@ $items = $itemModel->selectByInventory($_SESSION['user']->getId());
 require 'views/inventaire.php';
 
 /* NOTES PERSONELLES:
-    DANS DETAILS
+    DANS DETAILS (A FAIRE SPRINT 2)
     -   Considerer la logique d'items essentiels
     -   Ajouter des boutons comme "consommer" pour la nourriture/medicaments
     -   Ajouter un bouton supprimer
