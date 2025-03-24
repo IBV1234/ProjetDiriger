@@ -19,7 +19,8 @@ class ItemModel implements ModelInterface
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items');
+            $stm = $this->pdo->prepare('SELECT i.idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem, evaluation 
+                                               FROM items i LEFT JOIN commentaires c ON i.idItem = c.idItem');
     
             $stm->execute();
     
@@ -39,7 +40,8 @@ class ItemModel implements ModelInterface
                         $row['utilite'],
                         $row['photo'],
                         $row['flagDispo'],
-                        $row['descriptionItem']
+                        $row['descriptionItem'],
+                        $row['evaluation']
                         );
 
                 }
@@ -71,7 +73,8 @@ class ItemModel implements ModelInterface
     public function selectById(int $idItem) : null|Item {
 
         try{
-            $stm = $this->pdo->prepare('SELECT idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem FROM items WHERE idItem = :idItem');
+            $stm = $this->pdo->prepare('SELECT i.idItem, nomItem,typeItem, poids,quantiteStock, prix, utilite, photo,flagDispo,descriptionItem, evaluation 
+                                               FROM items i LEFT JOIN commentaire c  ON i.idItem = c.idItem WHERE i.idItem = :idItem');
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             
@@ -90,7 +93,8 @@ class ItemModel implements ModelInterface
                     $data['poids'],
                     $data['utilite'],
                     $data['lienimage'],
-                    $data['estDisponible']
+                    $data['estDisponible'],
+                    $data['evalutation']
                     );
 
                   

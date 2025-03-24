@@ -14,7 +14,7 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $items = $itemModel->selectAll();
-$_SESSION['item'] = $items[3];
+$_SESSION['item'] = $items[10];
 $userModel = new UserModel($pdo);
 $user = $userModel->getUserByEmail("monsieurtesteur@gmail.com");
 $_SESSION['user'] = $user;
@@ -36,8 +36,10 @@ $item = $_SESSION['item'];
 //send item to cart...................................................
 if(isPost()){
     $panierModel = new PanierModel($pdo);
-    $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
-    //add popup showing success...
+    if($panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
+        $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
+    //else
+        //tell user item is already in cart
 }
 
 require 'views/item.php';       

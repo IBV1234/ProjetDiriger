@@ -28,6 +28,7 @@ require 'partials/header.php';
                             <p><?php echo $item->getNom() ?> est de type : <?php echo $item->getTypeItem() ?></p>
                             <p>Poids : <?php echo $item->getPoids()?> lbs</p>
                             <p>Utilité : <?php echo $item->getUtilite()?></p>
+                            <p>Rating : <?php echo $item->getRating()?></p>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ class Item {
     private string $lienphoto;
     private int $estDisponible;
     private string $description;
+    private int $rating;
 
     public function __construct(
         ?int $idItem,
@@ -22,7 +23,8 @@ class Item {
         int $utilite,
         string $lienphoto,
         int $estDisponible, 
-        ?string $description = ''
+        ?string $description = '',
+        ?int $rating = 0
     ) {
         $this->idItem = $idItem;
         $this->typeitem = $typeitem;
@@ -34,6 +36,7 @@ class Item {
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
         $this->description = $description ?? '';
+        $this->rating = $rating ?? 0;
         }
 
     // Getters
@@ -75,5 +78,8 @@ class Item {
     }
     public function getDescription(): string {
         return $this->description;
+    }
+    public function getRating(): int {
+        return $this->rating;
     }
 }
