@@ -55,6 +55,9 @@ class User
     public function getPoidsMax(): int {
         return $this->poidsMax;
     }
+    public function getHp(): int {
+        return $this->hp;
+    }
 
     // Setters
     public function setAlias(string $alias): void {

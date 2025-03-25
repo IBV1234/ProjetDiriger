@@ -36,10 +36,10 @@ $item = $_SESSION['item'];
 //send item to cart...................................................
 if(isPost()){
     $panierModel = new PanierModel($pdo);
-    if($panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
+    if(!$panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
         $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
-    //else
-        //tell user item is already in cart
+    else
+        redirect("/"); //We could add notification later
 }
 
 require 'views/item.php';       

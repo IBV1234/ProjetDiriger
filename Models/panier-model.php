@@ -180,7 +180,7 @@ class PanierModel implements ModelInterface
     }
     public function isItemInPanier($idJoueur, $idItem) : bool {
         try {
-            $stm = $this->pdo->prepare("CALL itemDansPanier(:idJoueur, :idItem"); 
+            $stm = $this->pdo->prepare("CALL itemDansPanier(:idJoueur, :idItem)"); 
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             $stm->execute();

@@ -19,18 +19,18 @@ require 'partials/header.php';
             </div>
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Nom d'utilisateur<br>
-                <input type="text" class="form-control mt-1" disabled value="PLACEHOLDER">
+                <input type="text" class="form-control mt-1" disabled value="<?php echo $user->getAlias() ?>">
             </div>
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Poid Maximum<br>
-                <input type="text" class="form-control mt-1" disabled value="PLACEHOLDER">
+                <input type="text" class="form-control mt-1" disabled value="<?php echo $user->getPoidsMax() ?>">
             </div><div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Capital<br>
-                <input type="text" class="form-control mt-1" disabled value="PLACEHOLDER">
+                <input type="text" class="form-control mt-1" disabled value="<?php echo $user->getBalance() ?>">
             </div>
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Points de vie<br>
-                <input type="text" class="form-control mt-1" disabled value="PLACEHOLDER">
+                <input type="text" class="form-control mt-1" disabled value="<?php echo $user->getHp() ?>">
             </div>
         </div>
     </div>
