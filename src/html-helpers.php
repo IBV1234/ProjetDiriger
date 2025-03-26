@@ -26,5 +26,3 @@
 
         return htmlStartTag($name, $attributes) . $text . htmlEndTag($name);
     }
-
-?>

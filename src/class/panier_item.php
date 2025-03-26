@@ -1,35 +1,35 @@
 <?php
 class PanierItem {
-    private ?int $idPanier;
+    private ?int $joueurs_idJoueurs;
 
-    private ?int $idItem;
-    private int $quantite;
+    private ?int $items_idItem;
+    private int $quantitePanier;
 
 
     public function __construct(
-        int $idItem,
-        int $quantite,
-        ?int $idPanier,
+        int $joueurs_idJoueurs,
+        int $items_idItem,
+        ?int $quantitePanier,
 
     ) {
-        $this->idItem = $idItem;
-        $this->quantite = $quantite;
-        $this->idPanier = $idPanier;
+        $this->joueurs_idJoueurs = $joueurs_idJoueurs;
+        $this->items_idItem = $items_idItem;
+        $this->quantitePanier = $quantitePanier;
 
     }
 
     // Getters
-    public function getIdItem(): ?int {
-        return $this->idItem;
+    public function getIdJoueur(): ?int {
+        return $this->joueurs_idJoueurs;
     }
 
     public function getQuantite(): string {
-        return $this->quantite;
+        return $this->quantitePanier;
     }
-    public function getIdPanier(): ?int {
-        return $this->idPanier;
+    public function getIdItem(): ?int {
+        return $this->items_idItem;
     }
 
-
+  
 
 }
