@@ -102,25 +102,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const verifyPassword = verifyPasswordInput.value;
 
             if (newPassword === verifyPassword) {
-                feedbackLabel.textContent = 'Password changed successfully!';
-                feedbackLabel.className = 'mt-2 fw-bold feedback-label text-success';
-                // Example for AJAX or controller call
-                // fetch('/your-controller-endpoint', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ userId: USER_ID, password: newPassword })
-                // }).then(response => response.json())
-                //   .then(data => console.log(data))
-                //   .catch(error => console.error('Error:', error));
-
-                // Restore original state
-                cancelIcon.click();
+                fetch('/account-modify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        newPassword: newPassword
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        feedbackLabel.textContent = 'Password changed successfully!';
+                        feedbackLabel.className = 'mt-2 fw-bold feedback-label text-success';
+                        setTimeout(() => cancelIcon.click(), 2000);
+                    } else {
+                        feedbackLabel.textContent = data.error || 'Failed to change password.';
+                        feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
+                    }
+                });
             } else {
                 feedbackLabel.textContent = 'Passwords do not match.';
                 feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
             }
         });
-
         cancelIcon.addEventListener('click', (event) => {
             event.preventDefault();
 

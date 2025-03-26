@@ -143,9 +143,9 @@ class UserModel implements ModelInterface
     }
     public function modifierPasswordUser(string $nouvPassword, user $user): bool{
         try{
-            $stm = $this->pdo->prepare('CALL ChangeUserPassword(:userId, :newPassword, @success)');
-            $stm->bindValue(":userId", $stm, PDO::PARAM_INT);
-            $stm->bindValue(":newPassword", $stm, PDO::PARAM_STR);
+            $stm = $this->pdo->prepare('CALL modifierPasswordUser(:userId, :newPassword, @success)');
+            $stm->bindValue(":userId", $user->getId(), PDO::PARAM_INT);
+            $stm->bindValue(":newPassword", $nouvPassword, PDO::PARAM_STR);
             $stm->execute();
 
             $result = $this->pdo->query('SELECT @success')->fetch(PDO::FETCH_NUM);
