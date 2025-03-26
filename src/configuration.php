@@ -3,6 +3,8 @@
 const ROUTES = [
 
     '/' => 'index.php',
+    '/account' => 'account.php',
+    '/account-modify' => 'account-modify.php'
     '/connexion' => 'connexion.php',
     '/inscription' => 'inscription.php',
     '/item' => 'item.php',
