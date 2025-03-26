@@ -20,16 +20,16 @@
 .header-height {
     height: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     .header-height {
         height: 150px;
     }
 }
 
 /* Connexion CSS */
-.bg-blue-fallout {
+/* .bg-blue-fallout {
     background-color: #BDD1E9;
-}
+} */
 .bg-color-yellow-text{
     background-color: #FCEF6F;
 }

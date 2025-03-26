@@ -16,8 +16,9 @@ require 'partials/header.php';
                                     <h4 class="text-white"><?= $item->getNom() ?></h4>
                                     <img src="<?= $item->getLienPhoto() ?>" class="img-fluid" alt="placeholder">
                                     <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
-                                        <div style="transform: skew(0deg, -5deg);">
+                                        <div style="transform: skew(0deg, -5deg);" class="d-flex">
                                             <h2><?= $item->getPrix() ?></h2>
+                                            <img src="/public/images/caps_icon.webp" alt="caps" width="30" height="30" class="mt-2 ms-1">
                                         </div>
                                     </div>
                                 </div>
