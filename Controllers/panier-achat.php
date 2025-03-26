@@ -9,11 +9,8 @@ require 'Models/UserModel.php';
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
-$itemModel = new ItemModel($pdo);
-$items = $itemModel->selectAll();
 $PanierModel =  new PanierModel($pdo);
 
-//sessionDestroy();
 //$PanierModel->insert(9,  1 ,5); //  for test
 const maxPoids = 15;
 

@@ -10,7 +10,7 @@ require "views/Partials/header.php";
 
         <form method="post" id="payerForm" action="/payer">
             <div class="container-info-inventaire sticky">
-            <div clas="deleteAllItem"> <a href="/delete-item/?id=all" a> Abandoner le panier </a> </div>
+                <div clas="deleteAllItem"> <a href="/delete-item/?id=all&idJoueur=<?= $_SESSION['user']->getId()?>" a> Abandoner le panier </a> </div>
 
                 <div class="text-decoration">
                     <img src="/public/images/caps.png" class="bag" alt="caps" />
@@ -38,51 +38,45 @@ require "views/Partials/header.php";
                 <?php foreach ($panier as $key => $item): ?>
                     <div class="col">
                         <div class="mb-3">
-                            <div class="mb-3 text-decoration"> <?= htmlspecialchars($item->getNom(), ENT_QUOTES, 'UTF-8') ?>
+                            <div class="mb-3 text-decoration"> <?= $item->getNom() ?>
                             </div>
 
                             <div class="containe-info">
-                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][id]"
-                                    value="<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>">
-                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][poids]"
-                                    value="<?= htmlspecialchars($item->getPoids(), ENT_QUOTES, 'UTF-8') ?>">
-                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][prix]"
-                                    value="<?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>">
-                                <input type="hidden" name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][utilites]"
-                                    id="utilites" value="<?= htmlspecialchars($item->getUtilite(), ENT_QUOTES, 'UTF-8') ?>">
+                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getId() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][poids]" value="<?= $item->getPoids() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][prix]" value="<?= $item->getPrix() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][utilites]" id="utilites"
+                                    value="<?= $item->getUtilite() ?>">
 
                                 <div class="mb-3">
-                                    <img src="<?= htmlspecialchars($item->getLienPhoto(), ENT_QUOTES, 'UTF-8') ?>" class="img"
-                                        alt="épée">
+                                    <img src="<?= $item->getLienPhoto() ?>" class="img" alt="épée">
                                 </div>
 
                                 <div>
-                                    <label class="text-decoration"
-                                        for="quantity-<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>">Quantité :</label>
-                                    <input type="number" id="quantity-<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>"
-                                        name="items[<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>][quantite]" value="1"
-                                        min="1" max="<?= htmlspecialchars($item->getQteStock(), ENT_QUOTES, 'UTF-8') ?>"
-                                        data-price="<?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>">
+                                    <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
+                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="1"
+                                        min="1" max="<?= $item->getQteStock() ?>" data-price="<?= $item->getPrix() ?>">
                                 </div>
                                 <div class="text-decoration">Prix Unitaire:
-                                    <?= htmlspecialchars($item->getPrix(), ENT_QUOTES, 'UTF-8') ?>$</div>
+                                    <?= $item->getPrix() ?>$
+                                </div>
                                 <div class="content">
                                     <a
-                                        href="/delete-item/?id=<?= htmlspecialchars($item->getIdItem(), ENT_QUOTES, 'UTF-8') ?>&idJoueur=<?= htmlspecialchars($_SESSION['user']->getId(), ENT_QUOTES, 'UTF-8') ?>">
+                                        href="/delete-item/?id=<?= $item->getId() ?>&idJoueur=<?= $_SESSION['user']->getId()?>">
                                         <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="mb-3 text-decoration">Poids: <span
-                                    id="poids"><?= htmlspecialchars($item->getPoids(), ENT_QUOTES, 'UTF-8') ?></span> lb</div>
+                                    id="poids"><?= $item->getPoids() ?></span> lb</div>
                         </div>
                     </div>
                 <?php endforeach ?>
 
                 <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration"
-                        id="prixTotal"><?= htmlspecialchars($prixTotal, ENT_QUOTES, 'UTF-8') ?></span>$</div>
+                        id="prixTotal"><?= $prixTotal ?></span>$</div>
                 <input type="hidden" name="prixTotal" id="hiddenPrixTotal"
-                    value="<?= htmlspecialchars($prixTotal, ENT_QUOTES, 'UTF-8') ?>">
+                    value="<?= $prixTotal ?>">
 
                 <div class="button-container">
                     <button class="btn btn-success button stickyBtn" type="button" onclick="pay()" id="payer"

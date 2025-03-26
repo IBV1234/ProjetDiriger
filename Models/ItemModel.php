@@ -32,14 +32,14 @@ class ItemModel implements ModelInterface
                         $row['idItem'],
                         $row['typeItem'],
                         $row['nomItem'],
-                        $row['qteStock'],
+                        $row['qteStock']?? 0,
                         $row['prix'],
                         $row['poids'],
                         $row['utilite'],
                         $row['lienphoto'],
                         $row['flagDispo'],
-                        $row['descriptionItem'],
-                        $row['rating']
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
 
