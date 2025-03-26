@@ -1,5 +1,8 @@
-
+<?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index'): ?>
+  <header class="px-3 py-1 position-relative">
+<?php else: ?>
   <header class="header-height px-3 py-1 position-relative">
+<?php endif; ?>
     <div class="d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center p-2 mt-2 bg-yellow-fallout rounded rounded-3">
       <a href="/" class="text-decoration-none text-yellow-fallout">
         <div class="bg-black py-2 px-3 rounded-circle">
@@ -15,6 +18,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black fw-semibold" href="/account">Account</a>
         </li>
       </ul>
 
@@ -34,8 +40,9 @@
           <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item" href="#">Admin</a></li>
             <li><a class="dropdown-item" href="#">Profil</a></li>
+            <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Déconnection</a></li>
+            <li><a class="dropdown-item" href="/deconnexion">Déconnection</a></li>
           </ul>
         </div> 
       </div>
@@ -47,23 +54,23 @@
     <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>
       <div class="d-flex justify-content-between align-items-center">
         <div class="row ms-3">
-          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <div class="col-12 col-md-auto form-check form-check-inline form-switch">
             <input class="form-check-input" type="checkbox" id="armesSwitch" value="arme">
             <label class="form-check-label" for="armesSwitch">Armes</label>
           </div>
-          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <div class="col-12 col-md-8 col-lg-auto form-check form-check-inline form-switch">
             <input class="form-check-input" type="checkbox" id="nourritureSwitch" value="nourriture">
             <label class="form-check-label" for="nourritureSwitch">Nourriture</label>
           </div>
-          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <div class="col-12 col-md-auto col-lg-6 form-check form-check-inline form-switch">
             <input class="form-check-input" type="checkbox" id="medicamentsSwitch" value="medicament">
             <label class="form-check-label" for="medicamentsSwitch">Médicaments</label>
           </div>
-          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <div class="col-12 col-md-8 col-lg-auto form-check form-check-inline form-switch">
             <input class="form-check-input" type="checkbox" id="armuresSwitch" value="armure">
             <label class="form-check-label" for="armuresSwitch">Armures</label>
           </div>
-          <div class="col-12 col-md-4 col-xl form-check form-check-inline form-switch">
+          <div class="col-12 col-md-auto form-check form-check-inline form-switch">
             <input class="form-check-input" type="checkbox" id="munitionsSwitch" value="munition">
             <label class="form-check-label" for="munitionsSwitch">Munitions</label>
           </div>
