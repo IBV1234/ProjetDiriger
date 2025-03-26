@@ -16,6 +16,9 @@
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-black fw-semibold" href="/account">Account</a>
+        </li>
       </ul>
 
 <?php endif; ?>

@@ -10,3 +10,8 @@
 .bg-light-green-fallout {
     background-color: #9BD997;
 }
+.image-bg{
+    background-color: #BDD1E9;
+    padding: 3px;
+    border-radius: 3%;
+}

@@ -10,11 +10,23 @@ class Item {
     private int $prix;
     private int $utilite;
     private string $lienphoto;
-    private int $flagDispo;
-    private string|null $descriptionItem;
-    private float|null $rating;
+    private int $estDisponible;
+    private string $description;
+    private int $rating;
 
-    public function __construct(int $idItem, string $typeItem, string $nomItem, int $qteStock, int $prix, int $poids, int $utilite, string $lienphoto, int $flagDispo, string|null $descriptionItem, float|null $rating) {
+    public function __construct(
+        ?int $idItem,
+        string $typeitem,
+        string $nom,
+        int $qtestock,
+        float $prix,
+        float $poids,
+        int $utilite,
+        string $lienphoto,
+        int $estDisponible, 
+        ?string $description = '',
+        ?int $rating = 0
+    ) {
         $this->idItem = $idItem;
         $this->typeItem = $typeItem;
         $this->nomItem = $nomItem;
@@ -23,9 +35,8 @@ class Item {
         $this->poids = $poids;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
-        $this->flagDispo = $flagDispo;
-        $this->descriptionItem = $descriptionItem;
-        $this->rating = $rating;
+        $this->description = $description ?? '';
+        $this->rating = $rating ?? 0;
     }
 
     // Getters
@@ -89,4 +100,8 @@ class Item {
             'rating' => $this->rating
         ];
     }
+    public function getRating(): int {
+        return $this->rating;
+    }
 }
+

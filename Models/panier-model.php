@@ -3,6 +3,7 @@
 require_once 'src/class/ModelInterface.php';
 require_once 'src/class/panier_item.php';
 require_once 'src/class/Item.php';
+
 class PanierModel implements ModelInterface
 {
     public function __construct(private PDO $pdo) {}
@@ -28,7 +29,6 @@ class PanierModel implements ModelInterface
                         $row['joueurs_idJoueur'],
                         $row['items_idItem'],
                         $row['quantitePanier'],
-                     
                         );
 
                 }
@@ -100,7 +100,7 @@ class PanierModel implements ModelInterface
         }  
         return null;
     }
-
+  
     public function deleteItemPanier(int $pidItem,int $pIdJoueur){
         try{
             $stm = $this->pdo->prepare("DELETE FROM lePanier WHERE items_idItem = :pidItem AND joueurs_idJoueur = :pIdJoueur");
@@ -258,7 +258,6 @@ class PanierModel implements ModelInterface
     
               redirect('Views/error.php');
         }
-    }
 
     public function getPoidsPanier($idJoueur) : ?int {
         try {
@@ -297,13 +296,11 @@ class PanierModel implements ModelInterface
             $stm->execute();
             
             $result = $stm->fetch(PDO::FETCH_ASSOC);
-            
             if (!empty($result) && isset($result['prixTotal'])) {
                 return (int) $result['prixTotal']; 
             }
     
             return null;
-
         } catch (PDOException $e) {
             // throw new PDOException($e->getMessage(), $e->getCode());
             $errorMessage = sprintf(
@@ -350,4 +347,3 @@ class PanierModel implements ModelInterface
         }
     }
 }
-
