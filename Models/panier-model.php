@@ -283,6 +283,7 @@ class PanierModel implements ModelInterface
     
               redirect('Views/error.php');
         }
+    }
 
     public function getPoidsPanier($idJoueur) : ?int {
         try {

@@ -16,9 +16,9 @@ class Item {
 
     public function __construct(
         ?int $idItem,
-        string $typeitem,
-        string $nom,
-        int $qtestock,
+        string $typeItem,
+        string $nomItem,
+        int $qteStock,
         float $prix,
         float $poids,
         int $utilite,
@@ -35,6 +35,7 @@ class Item {
         $this->poids = $poids;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
+        // $this->estDisponible = $estDisponible;
         $this->description = $description ?? '';
         $this->rating = $rating ?? 0;
     }
@@ -68,10 +69,10 @@ class Item {
 
     }
     public function getFlagDispo(): int {
-        return $this->flagDispo;
+        return $this->estDisponible;
     }
     public function getDescription(): string|null {
-        return $this->descriptionItem;
+        return $this->description;
     }
     public function getRating(): float {
         if ($this->rating !== null) {
@@ -82,7 +83,7 @@ class Item {
 
     //Fonction spécifique
     public function estDisponible(): bool {
-        return $this->flagDispo === 1;
+        return $this->estDisponible === 1;
     }
 
     public function toArray(): array {
@@ -95,13 +96,10 @@ class Item {
             'poids' => $this->poids,
             'utilite' => $this->utilite,
             'lienphoto' => $this->lienphoto,
-            'flagDispo' => $this->flagDispo,
-            'descriptionItem' => $this->descriptionItem,
+            'flagDispo' => $this->estDisponible,
+            'descriptionItem' => $this->description,
             'rating' => $this->rating
         ];
-    }
-    public function getRating(): int {
-        return $this->rating;
     }
 }
 
