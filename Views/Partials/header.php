@@ -19,6 +19,9 @@
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-black fw-semibold" href="/account">Account</a>
+        </li>
       </ul>
 
 <?php endif; ?>
@@ -37,8 +40,9 @@
           <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item" href="#">Admin</a></li>
             <li><a class="dropdown-item" href="#">Profil</a></li>
+            <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Déconnection</a></li>
+            <li><a class="dropdown-item" href="/deconnexion">Déconnection</a></li>
           </ul>
         </div> 
       </div>

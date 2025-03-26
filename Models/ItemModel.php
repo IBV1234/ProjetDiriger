@@ -63,7 +63,7 @@ class ItemModel implements ModelInterface
 
             // $this->pdo-> car $pdo est une propriété de l'objet
             $stm = $this->pdo->prepare('CALL ItemsGetActive()');
-    
+
             $stm->execute();
     
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -81,8 +81,9 @@ class ItemModel implements ModelInterface
                         $row['photo'],
                         $row['flagDispo'],
                         $row['descriptionItem'],
-                        $row['rating']
+                        $row['evaluation']
                     );
+
                 }
 
                 return $items;
@@ -96,20 +97,19 @@ class ItemModel implements ModelInterface
             
         }
     }
-
+ 
     public function selectByType(int $type) : null|array {
 
         $items = [];
 
         try{
-            $stm = $this->pdo->prepare('CALL ItemsGetByType(:type)');
+            $stm = $this->pdo->prepare('CALL ItemsGetByType(:type)'); //A modifier dans la DB
     
             $stm->bindValue(":type", $type, PDO::PARAM_INT);
             
             $stm->execute();
     
             $data = $stm->fetch(PDO::FETCH_ASSOC);
-
             if (! empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -123,7 +123,7 @@ class ItemModel implements ModelInterface
                         $row['lienphoto'],
                         $row['flagDispo'],
                         $row['descriptionItem'],
-                        $row['rating']
+                        //$row['rating'] 
                     );
                 }
 
@@ -145,7 +145,7 @@ class ItemModel implements ModelInterface
         $items = [];
 
         try{
-            $stm = $this->pdo->prepare('CALL ItemsGetActiveByType(:type)');
+            $stm = $this->pdo->prepare('CALL ItemsGetActiveByType(:type)'); //A modifier dans la DB
     
             $stm->bindValue(":type", $type, PDO::PARAM_INT);
             
@@ -166,7 +166,7 @@ class ItemModel implements ModelInterface
                         $row['lienphoto'],
                         $row['flagDispo'],
                         $row['descriptionItem'],
-                        $row['rating']
+                        //$row['rating']
                     );
                 }
 
@@ -186,6 +186,45 @@ class ItemModel implements ModelInterface
     public function selectById(int $id): null {
         //dummy function to avoid error of not implementing the interface
         return null;
+    }
+
+    public function selectByInventory(int $idJoueur) : null|array {
+        
+        $items = [];
+
+        try{
+            $stm = $this->pdo->prepare('CALL ItemsDansInventaire(:idDuJoueur)');
+            $stm->bindValue(":idDuJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+    
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (! empty($data)) {
+                foreach ($data as $row) {
+                    $items[] = new Item(
+                        $row['idItem'],
+                        $row['typeItem'],
+                        $row['nomItem'],
+                        $row['quantite'],  //ICI la quantiteStock represente la quantite dans l'inventaire
+                        0,
+                        $row['poids'],
+                        0,
+                        $row['photo'],
+                        0,
+                        null,
+                        $row['evaluation']
+                    );
+                }
+                return $items;
+            }
+
+            return null;
+
+        } catch (PDOException $e) {
+
+            throw new PDOException($e->getMessage(), $e->getCode());
+            
+        }
     }
     /*
     public function insert(Item $item) : void {

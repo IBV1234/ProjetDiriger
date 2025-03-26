@@ -51,7 +51,7 @@ class UserModel implements ModelInterface
 
         try{
             $stm = $this->pdo->prepare('SELECT idJoueur, alias, nom, prenom, courriel, estAdmin, capital, pointDeVie, dexterite, poidMax FROM joueurs WHERE idJoueur=:id');
-
+          
             $stm->bindValue(":id", $id, PDO::PARAM_INT);
 
             $stm->execute();
@@ -71,8 +71,7 @@ class UserModel implements ModelInterface
                     $data['pointDeVie'],
                     $data['dexterite'],
                     $data['poidMax']
-                );
-
+                    );
             }
 
             return null;
@@ -109,12 +108,12 @@ class UserModel implements ModelInterface
                 );
             }
             return null;
-
+   
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
-        }
+        }  
     }
-
+  
     public function verifyPasswordUser(string $password, string $email): bool
     {
         try {
@@ -124,7 +123,7 @@ class UserModel implements ModelInterface
             $match->execute();
 
             $data = $match->fetch(PDO::FETCH_NUM);
-            if ($data[0] == 1)
+            if($data[0] == 1) 
                 return true;
             return false;
 
@@ -132,6 +131,20 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+  
+    public function modifierPasswordUser(string $nouvPassword, user $user): bool{
+        try{
+            $stm = $this->pdo->prepare('CALL modifierPasswordUser(:userId, :newPassword, @success)');
+            $stm->bindValue(":userId", $user->getId(), PDO::PARAM_INT);
+            $stm->bindValue(":newPassword", $nouvPassword, PDO::PARAM_STR);
+            $stm->execute();
+
+            $result = $this->pdo->query('SELECT @success')->fetch(PDO::FETCH_NUM);
+            return $result[0] == 1;
+        } catch (PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+  
     public function nouveauSolde(int $newSolde, int $idJoueur)
     {
         try {
