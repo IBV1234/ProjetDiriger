@@ -11,8 +11,8 @@ class Item {
     private int $utilite;
     private string $lienphoto;
     private int $flagDispo;
-    private string $descriptionItem;
-    private int $rating;
+    private ?string $descriptionItem;
+    private ?int $rating;
 
     public function __construct(int $idItem, string $typeItem, string $nomItem, int $qteStock, int $prix, int $poids, int $utilite, string $lienphoto, int $flagDispo, string $descriptionItem, int $rating) {
         $this->idItem = $idItem;
@@ -24,8 +24,8 @@ class Item {
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
         $this->flagDispo = $flagDispo;
-        $this->descriptionItem = $descriptionItem;
-        $this->rating = $rating;
+        $this->descriptionItem = $descriptionItem?? '';
+        $this->rating = $rating?? 0;
     }
 
     // Getters

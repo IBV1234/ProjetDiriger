@@ -9,8 +9,7 @@ require 'Models/UserModel.php';
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
-$itemModel = new ItemModel($pdo);
-$items = $itemModel->selectAll();
+// $itemModel = new ItemModel($pdo);
 $PanierModel =  new PanierModel($pdo);
 
 //sessionDestroy();

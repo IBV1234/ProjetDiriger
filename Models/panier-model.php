@@ -126,6 +126,30 @@ class PanierModel implements ModelInterface
         }
     }
 
+    public function deleteAllItemPanier(int $pIdJoueur){
+        try{
+            $stm = $this->pdo->prepare("DELETE FROM lePanier WHERE  joueurs_idJoueur = :pIdJoueur");
+            $stm->bindValue("pIdJoueur",$pIdJoueur,PDO::PARAM_INT);
+            $stm->execute();
+
+
+        }catch(PDOException $e){
+
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('Views/error.php');
+        }
+    }
+
     public function selectAllInerJoin($idJoueur)
     {
         $items = [];
@@ -151,7 +175,8 @@ class PanierModel implements ModelInterface
                         $row['utilite'],
                         $row['photo'],
                         $row['flagDispo'],
-                        $row['descriptionItem']
+                        $row['descriptionItem']??'',
+                        $row['evaluation']??0
                     );
                 }
 
