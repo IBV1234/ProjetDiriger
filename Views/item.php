@@ -41,6 +41,7 @@ require 'partials/header.php';
                         <button class="flex-row bg-light-green-fallout cart-button btn" type="submit">   
                             <i class="bi bi-cart-check m-2"></i>Ajouter au panier <!-- make this add the item to the cart in the SESSION -->
                         </button>
+                        <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock : <?php echo $item->getQteStock()?></div>
                     </div>
                 </form>
             </div>

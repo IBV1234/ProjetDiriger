@@ -33,7 +33,7 @@ require 'partials/header.php';
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Mot de passe<br>
                 <input type="password" class="form-control mt-1 mb-2" disabled value="*******">
-                <a class="mb-3 bg-lightblue-fallout account-display-modify-password px-2 pt-1 pb-1" href=""><i class="bi bi-pencil-square"></i></a>
+                <a class="mb-3 bg-lightblue-fallout account-display-modify passwordIcon px-2 pt-1 pb-1" href=""><i class="bi bi-pencil-square"></i></a>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@ require 'partials/header.php';
 document.addEventListener('DOMContentLoaded', () => {
     let isEditing = false; 
 
-    const modifyIcon = document.querySelector('.account-display-modify-password');
+    const modifyIcon = document.querySelector('.passwordIcon');
     const passwordInput = document.querySelector('input[type="password"]');
     const passwordContainer = passwordInput.parentElement; 
 
@@ -109,22 +109,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         newPassword: newPassword
                     })
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not OK');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.success) {
-                        feedbackLabel.textContent = 'Password changed successfully!';
+                        feedbackLabel.textContent = 'Mot de passe changé!';
                         feedbackLabel.className = 'mt-2 fw-bold feedback-label text-success';
-                        setTimeout(() => cancelIcon.click(), 2000);
+                        setTimeout(() => cancelIcon.click(), 10);
                     } else {
-                        feedbackLabel.textContent = data.error || 'Failed to change password.';
+                        feedbackLabel.textContent = data.error || 'Mot de passe déja utilisé';
                         feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
                     }
+                })
+                .catch(error => {
+                    feedbackLabel.textContent = 'La modification du mot de passe a subit une erreur, veuillez resayer';
+                    feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
+                    console.error('Error:', error);
                 });
             } else {
-                feedbackLabel.textContent = 'Passwords do not match.';
+                feedbackLabel.textContent = 'Les mots de passes sont différent';
                 feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
             }
         });
+
         cancelIcon.addEventListener('click', (event) => {
             event.preventDefault();
 
