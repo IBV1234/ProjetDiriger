@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index'): ?>
+<?php if ($controllerFile == "Controllers/index.php"): ?>
   <header class="px-3 py-1 position-relative">
 <?php else: ?>
   <header class="header-height px-3 py-1 position-relative">
@@ -35,7 +35,6 @@
             <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="#">Admin</a></li>
             <li><a class="dropdown-item" href="/account">Profil</a></li>
             <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
@@ -48,7 +47,7 @@
 
     </div>
 <!-- Index seulement -->
-    <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>
+    <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center">
         <div class="row ms-3">
           <div class="col-12 col-md-auto form-check form-check-inline form-switch">
