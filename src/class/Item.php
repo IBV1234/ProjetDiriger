@@ -11,32 +11,32 @@ class Item {
     private string $lienphoto;
     private int $estDisponible;
     private string $description;
-    private int $rating;
+    private int $evaluation;
 
     public function __construct(
         ?int $idItem,
-        string $typeitem,
         string $nom,
+        string $typeitem,
+        float $poids,
         int $qtestock,
         float $prix,
-        float $poids,
         int $utilite,
         string $lienphoto,
         int $estDisponible, 
         ?string $description = '',
-        ?int $rating = 0
+        ?int $evaluation = 0
     ) {
         $this->idItem = $idItem;
-        $this->typeitem = $typeitem;
         $this->nom = $nom;
+        $this->typeitem = $typeitem;
+        $this->poids = $poids;
         $this->qtestock = $qtestock;
         $this->estDisponible = $estDisponible;
         $this->prix = $prix;
-        $this->poids = $poids;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
         $this->description = $description ?? '';
-        $this->rating = $rating ?? 0;
+        $this->evaluation = $evaluation ?? 0;
         }
 
     // Getters
@@ -79,23 +79,8 @@ class Item {
     public function getDescription(): string {
         return $this->description;
     }
-    public function getRating(): int {
-        return $this->rating;
-    }
-    public function toArray(): array {
-        return [
-            'idItem' => $this->idItem,
-            'typeItem' => $this->typeItem,
-            'nomItem' => $this->nomItem,
-            'qteStock' => $this->qteStock,
-            'prix' => $this->prix,
-            'poids' => $this->poids,
-            'utilite' => $this->utilite,
-            'lienphoto' => $this->lienphoto,
-            'flagDispo' => $this->flagDispo,
-            'descriptionItem' => $this->descriptionItem,
-            'rating' => $this->rating
-        ];
+    public function getEvaluation(): int {
+        return $this->evaluation;
     }
 }
 

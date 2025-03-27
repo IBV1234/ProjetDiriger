@@ -10,7 +10,7 @@ $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
 $itemModel = new ItemModel($pdo);
-$items = $itemModel->selectAll();
+$items = $itemModel->selectActive();
 
 $_SESSION['controller'] = 'index';
 

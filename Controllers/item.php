@@ -30,8 +30,7 @@ if(isPost()){
     $panierModel = new PanierModel($pdo);
     if(!$panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
         $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
-    else
-        redirect("/"); //We could add notification later
+    redirect("/");
 }
 
 require 'views/item.php';       
