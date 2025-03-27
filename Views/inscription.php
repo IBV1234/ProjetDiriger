@@ -9,7 +9,7 @@ require 'partials/header.php';
     <div class="pt-4 d-flex justify-content-center">
         <p class="d-inline-block fw-semibold fs-2 bg-color-yellow-text px-2 rounded-1">Inscription</p>
     </div>
-    <div class="container-sm px-4 py-5 rounded-3 bg-blue-fallout max-width-connexion pb-4">
+    <div class="container-sm px-4 py-5 rounded-3 bg-light-blue-fallout max-width-connexion pb-4">
         <div class="mx-auto">
             <form method="post">
                 <div class="mb-3">
