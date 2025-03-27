@@ -10,7 +10,7 @@ require "views/Partials/header.php";
 
         <form method="post" id="payerForm" action="/payer">
             <div class="container-info-inventaire sticky">
-                <div clas="deleteAllItem"> <a href="/delete-item/?id=all&idJoueur=<?= $_SESSION['user']->getId()?>" a> Abandoner le panier </a> </div>
+                <div clas="deleteAllItem"> <a href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>" a> Abandoner le panier </a> </div>
 
                 <div class="text-decoration">
                     <img src="/public/images/caps.png" class="bag" alt="caps" />
@@ -42,7 +42,7 @@ require "views/Partials/header.php";
                             </div>
 
                             <div class="containe-info">
-                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getId() ?>">
+                                <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getIdItem() ?>">
                                 <input type="hidden" name="items[<?= $key ?>][poids]" value="<?= $item->getPoids() ?>">
                                 <input type="hidden" name="items[<?= $key ?>][prix]" value="<?= $item->getPrix() ?>">
                                 <input type="hidden" name="items[<?= $key ?>][utilites]" id="utilites"
@@ -62,7 +62,7 @@ require "views/Partials/header.php";
                                 </div>
                                 <div class="content">
                                     <a
-                                        href="/delete-item/?id=<?= $item->getId() ?>&idJoueur=<?= $_SESSION['user']->getId()?>">
+                                        href="/delete-item?id=<?= $item->getIdItem() ?>&idJoueur=<?= $_SESSION['user']->getId()?>">
                                         <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>
