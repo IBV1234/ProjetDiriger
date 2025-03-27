@@ -25,16 +25,16 @@ require 'partials/header.php';
                         <div class="m-3">
                             <p>Prix : <?php echo $item->getPrix() ?>$</p>
                             <p><?php echo $item->getDescription() ?></p>
-                            <p><?php echo $item->getNom() ?> est de type : <?php echo $item->getTypeItem() ?></p>
+                            <p><?php echo $item->getNom() ?> est de type : <?php echo $item->getType() ?></p>
                             <p>Poids : <?php echo $item->getPoids()?> lbs</p>
                             <p>Utilité : <?php echo $item->getUtilite()?></p>
-                            <p>Rating : <?php echo $item->getRating()?></p>
+                            <p>Rating : <?php echo $item->getEvaluation()?></p>
                         </div>
                     </div>
                 </div>
                 <div class="w-100"></div>
                 <div class="col d-flex m-3">
-                    <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="3.2"></div>
+                    <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="<?php echo $item->getEvaluation()?>"></div>
                 </div>
                 <form method="POST">
                     <div class="col d-flex align-items-center flex-column m-3">
