@@ -283,8 +283,9 @@ class PanierModel implements ModelInterface
     
               redirect('Views/error.php');
         }
+    }
 
-    public function getPoidsPanier($idJoueur) : ?int {
+        public function getPoidsPanier($idJoueur) : ?int {
         try {
             $stm = $this->pdo->prepare("SELECT getPoidsPanier(:idJoueur) AS poidsPanier"); 
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);

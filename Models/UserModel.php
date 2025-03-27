@@ -144,7 +144,7 @@ class UserModel implements ModelInterface
         } catch (PDOException $e){
             throw new PDOException($e->getMessage(), $e->getCode());
         }
-  
+    }
     public function nouveauSolde(int $newSolde, int $idJoueur)
     {
         try {
