@@ -83,4 +83,3 @@ class Item {
         return $this->evaluation;
     }
 }
-
