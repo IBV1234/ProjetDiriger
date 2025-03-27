@@ -36,7 +36,7 @@ class ItemModel implements ModelInterface
                         $row['prix'],
                         $row['poids'],
                         $row['utilite'],
-                        $row['lienphoto'],
+                        $row['photo'],
                         $row['flagDispo'],
                         $row['descriptionItem'] ?? '',
                         $row['evaluation'] ?? 0

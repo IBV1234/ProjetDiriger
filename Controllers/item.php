@@ -9,11 +9,10 @@ require 'Models/UserModel.php';
 
 sessionStart();
 
-//temporary thing -- simulates puting the item in the session........
+//db..................................................................
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
-$items = $itemModel->selectAll();
 
 //get item from index.................................................
 

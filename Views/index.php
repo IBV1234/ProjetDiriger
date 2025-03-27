@@ -10,7 +10,7 @@ require 'partials/header.php';
 <!-- À copier pour chaque item -->
                 <?php foreach ($items as $item) : ?>
                     <div class="col-sm-6 col-md-4 col-xl-3 px-4 py-3" data-filter="<?= $item->getType()?>-<?= $item->getRating()?>">
-                        <a href="/item?id=<?= $item->getId() ?>" class="text-decoration-none text-black">
+                        <a href="/item?id=<?= $item->getIdItem() ?>" class="text-decoration-none text-black">
                             <div class="ratio ratio-1x1">
                                 <div class="d-flex flex-column justify-content-between align-items-center p-4 bg-blue-fallout rounded rounded-3">
                                     <h4 class="text-white"><?= $item->getNom() ?></h4>
