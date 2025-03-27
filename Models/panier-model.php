@@ -167,11 +167,11 @@ class PanierModel implements ModelInterface
                 foreach ($data as $row) {
                     $items[] = new Item(
                         $row['idItem'],
-                        $row['typeItem'],
                         $row['nomItem'],
+                        $row['typeItem'],
+                        $row['poids'],
                         $row['quantiteStock'],
                         $row['prix'],
-                        $row['poids'],
                         $row['utilite'],
                         $row['photo'],
                         $row['flagDispo'],
@@ -401,6 +401,5 @@ class PanierModel implements ModelInterface
 
               redirect('Views/error.php');
         }
-        return false;
     }
 }
