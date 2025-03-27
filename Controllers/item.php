@@ -27,6 +27,8 @@ if(!isset($_SESSION['item']))
 
 //send item to cart...................................................
 if(isPost()){
+    if(!isset($_SESSION['user']))
+        redirect("/connexion");
     $panierModel = new PanierModel($pdo);
     if(!$panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
         $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
