@@ -283,6 +283,7 @@ class PanierModel implements ModelInterface
     
               redirect('Views/error.php');
         }
+    }
 
     public function getPoidsPanier($idJoueur) : ?int {
         try {
@@ -370,5 +371,36 @@ class PanierModel implements ModelInterface
     
               redirect('Views/error.php');
         }
+    }
+    public function isItemInPanier($idJoueur, $idItem) : bool {
+        try {
+            $stm = $this->pdo->prepare("CALL itemDansPanier(:idJoueur, :idItem)"); 
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
+            $stm->execute();
+            
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            
+            if (!empty($result) && isset($result['items_idItem'])) {
+                return true;
+            }
+    
+            return false;
+
+        } catch (PDOException $e) {
+            // throw new PDOException($e->getMessage(), $e->getCode());
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+              redirect('Views/error.php');
+        }
+        return false;
     }
 }
