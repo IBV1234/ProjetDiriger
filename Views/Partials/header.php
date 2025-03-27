@@ -35,7 +35,6 @@
             <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="#">Admin</a></li>
             <li><a class="dropdown-item" href="/account">Profil</a></li>
             <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
