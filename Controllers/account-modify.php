@@ -10,8 +10,7 @@ sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $userModel = new UserModel($pdo);
-
-$_SESSION['user'] = $user;
+$user = $_SESSION['user'];
 
 //modify password logic
 if(isPost()){
