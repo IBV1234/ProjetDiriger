@@ -12,7 +12,7 @@ require 'partials/header.php';
                     <div class="col-sm-6 col-md-4 col-xl-3 px-4 py-3" data-filter="<?= $item->getType()?>-<?= $item->getEvaluation()?>">
                         <a href="/item?id=<?= $item->getIdItem() ?>" class="text-decoration-none text-black">
                             <div class="ratio ratio-1x1">
-                                <div class="d-flex flex-column justify-content-between align-items-center p-4 bg-blue-fallout rounded rounded-3">
+                                <div class="d-flex flex-column justify-content-between align-items-center p-4 bg-blue-fallout rounded rounded-3 shadow-sm">
                                     <h4 class="text-white"><?= $item->getNom() ?></h4>
                                     <img src="<?= $item->getLienPhoto() ?>" class="img-fluid" alt="placeholder">
                                     <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
