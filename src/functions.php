@@ -13,4 +13,3 @@ function getPrixTotalPayer($items)
     }
     return $total;
 }
-

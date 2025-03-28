@@ -34,4 +34,4 @@ if(isPost()){
     redirect("/");
 }
 
-require 'views/item.php';       
+require 'views/item.php';
