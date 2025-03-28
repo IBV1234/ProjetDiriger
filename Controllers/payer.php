@@ -1,5 +1,11 @@
 <?php
 
+////////////////////////////////////////
+if (!isset($_SESSION['user'])) {
+    redirect("/connexion");
+}
+///////////////////////////////////////
+
 if(isPost()){
 
     require 'src/session.php';
