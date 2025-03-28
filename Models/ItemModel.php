@@ -156,16 +156,16 @@ class ItemModel implements ModelInterface
                 foreach ($data as $row) {
                     $items[] = new Item(
                         $row['idItem'],
-                        $row['typeItem'],
                         $row['nomItem'],
-                        $row['quantite'],  //ICI la quantiteStock represente la quantite dans l'inventaire
-                        0,
+                        $row['typeItem'],
                         $row['poids'],
-                        0,
+                        $row['quantite'],
+                        $row['prix']??0,
+                        $row['utilite']??0,
                         $row['photo'],
-                        0,
-                        null,
-                        $row['evaluation'] ?? 0
+                        $row['flagDispo']??0,
+                        $row['descriptionItem']??'',
+                        $row['evaluation']??0
                     );
                 }
                 return $items;
