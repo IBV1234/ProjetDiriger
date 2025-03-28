@@ -2,6 +2,7 @@
 
 require 'src/class/Database.php';
 require 'src/class/Item.php';
+require 'src/class/User.php';
 require 'Models/ItemModel.php';
 require 'src/session.php';
 require 'Models/panier-model.php';

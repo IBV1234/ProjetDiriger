@@ -8,6 +8,12 @@ require 'src/class/User.php';
 
 $_SESSION['controller'] = 'inventaire';
 
+////////////////////////////////////////
+if (!isset($_SESSION['user'])) {
+    redirect("/connexion");
+}
+///////////////////////////////////////
+
 sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();

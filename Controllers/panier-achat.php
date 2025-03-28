@@ -7,6 +7,13 @@ require 'Models/panier-model.php';
 require 'Models/UserModel.php';
 
 sessionStart();
+
+////////////////////////////////////////
+if (!isset($_SESSION['user'])) {
+    redirect("/connexion");
+}
+///////////////////////////////////////
+
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $PanierModel =  new PanierModel($pdo);
