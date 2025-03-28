@@ -4,6 +4,15 @@
 .bg-yellow-fallout {
     background-color: #fef8b7;
 }
+.bg-dark-yellow-fallout {
+    background-color: #fcef6f;
+}
+.bg-blue-fallout {
+    background-color: #477bb7;
+}
+.bg-light-blue-fallout {
+    background-color: #bdd1e9;
+}
 .img-nav {
     width: 150px;
     height: 150px;
@@ -15,4 +24,18 @@
     .header-height {
         height: 150px;
     }
+}
+
+/* Connexion CSS */
+/* .bg-blue-fallout {
+    background-color: #BDD1E9;
+} */
+.bg-color-yellow-text{
+    background-color: #FCEF6F;
+}
+::placeholder {
+    text-align: center; 
+}
+.max-width-connexion {
+    max-width: 600px;
 }

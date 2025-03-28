@@ -1,14 +1,9 @@
 <?php
 
 function urlPath() : string {
-
-    $uri = $_SERVER['REQUEST_URI'];
-
-    $parts = parse_url($uri);
-
-    $path = $parts['path'];
-
-    return $path;
+    $url = $_SERVER['REQUEST_URI'];
+    $urlParts = parse_url($url,PHP_URL_PATH);
+    return $urlParts;
 
 }
 function route(string $route, array $params = null) : void 
@@ -17,7 +12,7 @@ function route(string $route, array $params = null) : void
 
     if (array_key_exists($route, ROUTES)) {
 
-        $controllerFile = 'controllers/' . ROUTES[$route];
+        $controllerFile = 'Controllers/' . ROUTES[$route];
 
         if (file_exists($controllerFile)) {
 
@@ -40,3 +35,12 @@ function redirect(string $url) : void
     exit;
 }
 
+function redirectWitParams(string $path, $param): void
+{
+    if ($param != null) {
+        $path .= "?param=" . urlencode($param);
+    }
+    header('Location: ' . $path);
+    exit;
+
+}

@@ -1,0 +1,45 @@
+
+{
+    "prixTotal": 4982.67,
+    "poidsTotal": 82.5,
+    "items": [
+        {
+            "id": "2",
+            "poids": "2.5",
+            "prix": "150.99",
+            "quantity": "4"
+        },
+        {
+            "id": "2",
+            "poids": "2.5",
+            "prix": "150.99",
+            "quantity": "2"
+        },
+        {
+            "id": "2",
+            "poids": "2.5",
+            "prix": "150.99",
+            "quantity": "5"
+        }
+    ]
+}
+
+
+    {
+        "prixTotal": 452.97,
+        "poidsTotal": 7.5,
+        "items": [
+            {
+                "id": "2",
+                "poids": "2.5",
+                "prix": "150.99",
+                "quantity": "3"
+            }
+        ]
+    }
+
+
+{"prixTotal":3,"poidsTotal":null,"items":[{"id":"10","poids":"13","prix":"2","utilites":"0","quantite":"1"},{"id":"16","poids":"6","prix":"1","utilites":"0","quantite":"1"}]}
+{"prixTotal":1,"poidsTotal":null,"items":[{"id":"16","poids":"5","prix":"1","utilites":"0","quantite":"1"}]}
+{"prixTotal":2,"poidsTotal":null,"items":[{"id":"9","poids":"13","prix":"1","utilites":"1","quantite":"1"},{"id":"16","poids":"3","prix":"1","utilites":"0","quantite":"1"}]}
+{"prixTotal":2,"poidsTotal":null,"items":[{"id":"9","poids":"12","prix":"1","utilites":"1","quantite":"1"},{"id":"16","poids":"1","prix":"1","utilites":"0","quantite":"1"}]}
