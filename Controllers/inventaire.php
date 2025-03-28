@@ -6,15 +6,14 @@ require 'src/class/Item.php';
 require 'Models/ItemModel.php';
 require 'src/class/User.php';
 
-$_SESSION['controller'] = 'inventaire';
-
 ////////////////////////////////////////
+sessionStart();
 if (!isset($_SESSION['user'])) {
     redirect("/connexion");
 }
 ///////////////////////////////////////
 
-sessionStart();
+$_SESSION['controller'] = 'inventaire';
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
