@@ -6,6 +6,10 @@ require 'partials/header.php';
 ?>
 
         <div class="bg-yellow-fallout rounded rounded-3 p-2">
+            <div class="pt-4 d-flex justify-content-center">
+                <p class="d-inline-block fw-semibold fs-3 bg-light-blue-fallout px-2 rounded-1 mx-1">Dexterite du joueur: <?php echo $_SESSION['user']->getDexterite() ?></p>
+                <p class="d-inline-block fw-semibold fs-3 bg-light-blue-fallout px-2 rounded-1 mx-1">  Poids du sac: <?php echo $poidsSac ?> lbs</p>
+            </div>
             <div class="row">
 <!-- À copier pour chaque item -->
                 <?php if($items != null) foreach ($items as $item) : ?>
