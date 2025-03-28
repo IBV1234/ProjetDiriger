@@ -18,10 +18,15 @@ $idJoueur = (int)$_GET['idJoueur'];
 
 $Panier = $PanierModel->selectAllInerJoin($idJoueur);
 
-$id = (int)$_GET['id'] ?? null;
-$all = $_GET['id']?? null;
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    redirect("/panier-achat");
+}
+is_numeric($id) ? $id = (int)$id : $id = null;
+$_GET['id'] == "all" ? $all = $_GET['id'] : null;
 
-if(!empty($Panier) && is_null(($all) && $id!=null)){
+if(!empty($Panier) && $id!=null){
 
     $PanierModel->deleteItemPanier($id,$idJoueur);
 }
