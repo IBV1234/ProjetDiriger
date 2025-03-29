@@ -6,12 +6,17 @@ require 'Models/UserModel.php';
 
 sessionStart();
 
+////////////////////////////////////////
+if (!isset($_SESSION['user'])) {
+    redirect("/connexion");
+}
+///////////////////////////////////////
+
 //temporary thing -- simulates puting the item in the session........
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $userModel = new UserModel($pdo);
-$user = $userModel->getUserByEmail("monsieurtesteur@gmail.com");
-$_SESSION['user'] = $user;
+$user = $_SESSION['user'];
 
 //modify password logic
 if(isPost()){

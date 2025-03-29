@@ -30,9 +30,8 @@ if(isPost()){
     if(!isset($_SESSION['user']))
         redirect("/connexion");
     $panierModel = new PanierModel($pdo);
-    if(!$panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
-        $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
+    $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
     redirect("/");
 }
 
-require 'views/item.php';       
+require 'views/item.php';

@@ -16,8 +16,8 @@ require 'partials/header.php';
                     <img src="<?php echo $item->getLienPhoto() ?>" class="img-fluid item-image image-bg" alt="placeholder">
                 </div>
                 <div class="col d-flex align-items-center flex-column m-3">
-                <div class="bg-dark-yellow-fallout px-2 py-3 rounded-circle" style="transform: skew(0deg, 5deg);">
-                        <div style="transform: skew(0deg, -5deg);">
+                <div class="bg-dark-yellow-fallout px-2 py-4 rounded-circle" style="transform: skew(0deg, 3deg);">
+                        <div style="transform: skew(0deg, -3deg);">
                             <h2><?php echo $item->getNom() ?></h2>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ require 'partials/header.php';
                 </div>
                 <form method="POST">
                     <div class="col d-flex align-items-center flex-column m-3">
-                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit">   
+                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" <?php echo $item->getQteStock() > 0 ? "" : "disabled" ?>>   
                             <i class="bi bi-cart-check m-2"></i>Ajouter au panier <!-- make this add the item to the cart in the SESSION -->
                         </button>
                         <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock : <?php echo $item->getQteStock()?></div>

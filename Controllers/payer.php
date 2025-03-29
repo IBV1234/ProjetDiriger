@@ -1,7 +1,6 @@
 <?php
 
 if(isPost()){
-
     require 'src/session.php';
     require 'src/class/Database.php';
     require 'Models/panier-model.php';
@@ -19,14 +18,10 @@ if(isPost()){
     $maxPoids = intval($_POST['maxPoids']);
     $items = $_POST['items'] ?? [];
 
-
     $prixTotal = getPrixTotalPayer($items);
     $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
     $caps =  $_SESSION['user']->getBalance();
     $soldeFinal = $caps - $prixTotal;
-
-
-
 
     $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
@@ -55,6 +50,4 @@ if(isPost()){
 
 }else{
     redirect("/");
-
 }
-

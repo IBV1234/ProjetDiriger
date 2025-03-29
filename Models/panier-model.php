@@ -209,7 +209,7 @@ class PanierModel implements ModelInterface
 
     public function insert(int $idItem,int $quantite,int $idJoueur) : void {
         try {
-            $stm = $this->pdo->prepare("CALL ajouterPanier(:idItem, :quantite,:idJoueur)");
+            $stm = $this->pdo->prepare("CALL ajouterPanier(:idItem, :idJoueur, :quantite)");
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             $stm->bindValue(":quantite", $quantite, PDO::PARAM_INT);
