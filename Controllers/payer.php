@@ -19,17 +19,20 @@ if(isPost()){
     $items = $_POST['items'] ?? [];
 
     $prixTotal = getPrixTotalPayer($items);
+    $poidPanier = getPoidPanier($items);
     $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
+    $poidAutoriser =  $poidPanier + $poidsSacDos;
+
     $caps =  $_SESSION['user']->getBalance();
     $soldeFinal = $caps - $prixTotal;
 
-    $PanierModel->insertSacADos((int)$_SESSION['user']->getId());
+    $PanierModel->insertSacADos($_SESSION['user']->getId());
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
     $_SESSION['user']->setBalance($soldeFinal);
 
         $dexterite = intval($_SESSION['user']->getDexterite());
 
-        if ($poidsSacDos > $maxPoids) {
+        if ($poidAutoriser > $maxPoids) {
             $dexterite -= 1;
             $userModel->nouvelleDexterite($dexterite,$_SESSION['user']->getId());
             $_SESSION['user']->setDexterite($dexterite);

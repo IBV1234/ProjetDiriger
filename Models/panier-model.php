@@ -176,7 +176,8 @@ class PanierModel implements ModelInterface
                         $row['photo'],
                         $row['flagDispo'],
                         $row['descriptionItem']??'',
-                        $row['evaluation']??0
+                        $row['evaluation']??0,
+                        $row['quantitePanier']??0
                     );
                 }
 
@@ -401,5 +402,7 @@ class PanierModel implements ModelInterface
 
               redirect('Views/error.php');
         }
+        
+        return false;
     }
 }
