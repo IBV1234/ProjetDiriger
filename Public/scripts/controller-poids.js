@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const poidTotalSac = document.getElementById('poidsSacDos').textContent;
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
         const modal = document.getElementById("confirmationModal");
-        // const okButton = document.getElementById("okBtn");
-        // const cancelButton = document.getElementById("cancelBtn");
+
 
         let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
