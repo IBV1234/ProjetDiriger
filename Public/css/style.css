@@ -39,3 +39,24 @@
 .max-width-connexion {
     max-width: 600px;
 }
+.cart-icon  {
+    position: relative;
+}
+.notification-num {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    border-radius: 100%;    
+    width: 25px;
+    height: 25px;
+    display: flex;
+    padding: 2px;
+    color: white;
+    font-weight: bold;
+    background-color: red;
+    align-items: center;
+}
+.notification-num-text {
+    font-size: 20px;
+    text-align: center;
+}

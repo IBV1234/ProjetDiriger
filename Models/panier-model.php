@@ -402,4 +402,29 @@ class PanierModel implements ModelInterface
               redirect('Views/error.php');
         }
     }
+    public function SumPanier($idJoueur) : int|null{
+        try{
+            $stm = $this->pdo->prepare("CALL sumPanier(:idJoueur)");
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            if(empty($result))
+                return null;
+            return $result['sumPanier'];
+        } catch (PDOException $e) {
+        // throw new PDOException($e->getMessage(), $e->getCode());
+        $errorMessage = sprintf(
+            "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+            date('Y-m-d H:i:s'),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine()
+          );
+          file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+          redirect('Views/error.php');
+        }
+    }
 }
