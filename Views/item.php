@@ -9,12 +9,19 @@ require 'partials/header.php';
     <div class="col d-flex align-items-end flex-column mb-3"> <!-- header -->
         <a class="btn bg-dark-yellow-fallout" href="/">Retour</a>
     </div>
-    <div class="w-100">
-        <div class="bg-blue-fallout d-flex rounded m-3"> <!-- body item container -->
+    <div class="d-flex justify-content-center">
+        <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
             <div class="row">
-                <div class="col d-flex align-items-center flex-column m-3">
+                <div class="col d-flex align-items-center flex-column m-3 mt-5">
                     <img src="<?php echo $item->getLienPhoto() ?>" class="img-fluid item-image image-bg" alt="placeholder">
+                    <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
+                        <div style="transform: skew(0deg, -5deg);" class="d-flex">
+                            <h2><?= $item->getPrix() ?></h2>
+                                <img src="/public/images/caps_icon.webp" alt="caps" width="30" height="30" class="mt-2 ms-1">
+                            </div>
+                        </div>
                 </div>
+
                 <div class="col d-flex align-items-center flex-column m-3">
                 <div class="bg-dark-yellow-fallout px-2 py-4 rounded-circle" style="transform: skew(0deg, 3deg);">
                         <div style="transform: skew(0deg, -3deg);">
