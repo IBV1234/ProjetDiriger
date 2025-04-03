@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Vérifie si le panier est vide
-     
-    if (!window.isEmpty && window.isEmpty!=="") {
+    if (!window.isEmpty && window.isEmpty !== "") {
         // Récupère les éléments essentiels
         const maxPoids = parseInt(document.getElementById('maxPoids').value, 10); // Poids maximal autorisé
         const afficherPoidsTotalElement = document.getElementById('poidsTotal'); // Affichage du poids total
@@ -10,43 +9,46 @@ document.addEventListener('DOMContentLoaded', function () {
         const soldeJoueur = document.getElementById('caps').textContent;
         const poidTotalSac = document.getElementById('poidsSacDos').textContent;
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
+        const modal = document.getElementById("confirmationModal");
+        // const okButton = document.getElementById("okBtn");
+        // const cancelButton = document.getElementById("cancelBtn");
 
-        let isCorrectUtiliteInSac =false;
+        let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
-      
 
-        
-        function getResultUtiliteInSac(utilites){
+
+
+        function getResultUtiliteInSac(utilites) {
             let isInSac = false;
-                if(utilites == '1'){
-                    isInSac = true;
-              
-                }
-            
+            if (utilites == '1') {
+                isInSac = true;
+
+            }
+
             return isInSac;
         }
 
-        function getResultUtiliterInPanier(utilites){
+        function getResultUtiliterInPanier(utilites) {
             let isInPainer = false;
-               for(const utilite of utilites){
-                if(utilite == '1'){
+            for (const utilite of utilites) {
+                if (utilite == '1') {
                     isInPainer = true;
-                        break;
+                    break;
                 }
-            
-               }
-            
+
+            }
+
             return isInPainer;
         }
-      
-        function updatePoidsTotal() {        // Fonction pour recalculer et mettre à jour le poids total
+
+        function updatePoidsTotal() {  // Fonction pour recalculer et mettre à jour le poids total
 
             let totalPoids = 0;
 
             quantityInputs.forEach(input => {
-                const quantity = parseInt(input.value, 10) ; // Assure une valeur numérique
+                const quantity = parseInt(input.value, 10); // Assure une valeur numérique
                 const poidsElement = input.closest('.col').querySelector('#poids'); // Récupère l'élément contenant le poids
-                const poids = parseFloat(poidsElement.innerText) ; // Convertit en nombre
+                const poids = parseFloat(poidsElement.innerText); // Convertit en nombre
                 const utilites = Array.from(document.querySelectorAll('.col #utilites')); // Récupère tous les inputs utilite dans les colonnes    
 
                 totalPoids += poids * quantity;
@@ -64,40 +66,78 @@ document.addEventListener('DOMContentLoaded', function () {
             input.addEventListener('change', updatePoidsTotal);
         });
 
+        function showModal() {
+
+            return new Promise((resolve) => {//permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
+                const modal = document.getElementById("confirmationModal")
+             
+                modal.classList.add("show"); // Afficher le modal
+                const okButton = document.getElementById("okBtn");
+                const cancelButton = document.getElementById("cancelBtn");
+        
+               
+        
+                // Ajouter les événements
+                const onOkClick = () => {
+                    modal.classList.remove("show");
+                    resolve(true);
+                    cleanup();//Supprime les écouteurs d'événements pour éviter les bugs.
+                };
+        
+                const onCancelClick = () => {
+                    modal.classList.remove("show");
+                    resolve(false);
+                    cleanup();
+                };
+        
+                const cleanup = () => {//Si l'utilisateur ouvre et ferme plusieurs fois le modal, les événements click peuvent s'accumuler et causer des bugs.
+                    okButton.removeEventListener("click", onOkClick);
+                    cancelButton.removeEventListener("click", onCancelClick);
+                };
+        
+                okButton.addEventListener("click", onOkClick);//Quand l'utilisateur clique sur un bouton, l'action correspondante est exécutée avec la foncton à droite
+                cancelButton.addEventListener("click", onCancelClick);
+            });
+        }
         // Fonction appelée lors du paiement
         window.pay = function () {
-            let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent) ;
+            let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent);
             let dex = parseInt(dexteriter.textContent, 10);
-                let solde = parseInt(soldeJoueur);
-                let prixTotal = parseInt(window.prixTotalElement.textContent);
-                let totalPoidAuthorisé = totalPoidsPanier + parseInt(poidTotalSac);
+            let solde = parseInt(soldeJoueur);
+            let prixTotal = parseInt(window.prixTotalElement.textContent);
+            let totalPoidAuthorisé = totalPoidsPanier + parseInt(poidTotalSac);
 
-                if(isCorrectUtiliteInSac == false && isUtiliteInPanier!= false ) isCorrectUtiliteInSac = isUtiliteInPanier;
-                if(isCorrectUtiliteInSac == false && isUtiliteInPanier== false)isCorrectUtiliteInSac = false;
+            if (isCorrectUtiliteInSac == false && isUtiliteInPanier != false) isCorrectUtiliteInSac = isUtiliteInPanier;
+            if (isCorrectUtiliteInSac == false && isUtiliteInPanier == false) isCorrectUtiliteInSac = false;
 
-            if(isCorrectUtiliteInSac){
-                if( prixTotal <=solde ){
-                    if ( totalPoidAuthorisé > maxPoids) {
-                        const userConfirmed = confirm(
-                            'Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?'
-                        );
-        
-                        if (userConfirmed) {
-                            dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
-                            dexteriter.textContent = dex.toFixed();
-                            document.getElementById('payerForm').submit();
-                        } else {
-                            dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
-                        }
+            if (isCorrectUtiliteInSac) {
+                if (prixTotal <= solde) {
+                    if (totalPoidAuthorisé > maxPoids) {
+                        // const userConfirmed = confirm(
+                        //     'Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?'
+                        // );
+                        showModal().then((userConfirmed) => {
+
+                            if (userConfirmed) {
+                                dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
+                                dexteriter.textContent = dex.toFixed();
+                                document.getElementById('payerForm').submit();
+                            } else {
+
+                                dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
+                            }
+                        })
+
+
                     } else {
                         document.getElementById('payerForm').submit();
                     }
-                }else{
+                } else {
                     confirm("Vous n'avez pas assez de caps pour cette achat");
-                    
-                    
+
+
                 }
-            }else{
+            } else {
                 confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
             }
         };
