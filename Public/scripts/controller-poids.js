@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Vérifie si le panier est vide
     if (!window.isEmpty && window.isEmpty !== "") {
+
+
         // Récupère les éléments essentiels
         const maxPoids = parseInt(document.getElementById('maxPoids').value, 10); // Poids maximal autorisé
         const afficherPoidsTotalElement = document.getElementById('poidsTotal'); // Affichage du poids total
@@ -11,12 +13,42 @@ document.addEventListener('DOMContentLoaded', function () {
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
         const modal = document.getElementById("confirmationModal");
 
-
         let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
 
 
+    
 
+        // Fonction pour envoyer un requête post au controller UpdateItemPanier pour update la quantité dans la bd
+        window.updateItemQuantity = function(inputElement)  {
+            // Récupérer les données de l'élément
+            const itemId = inputElement.getAttribute('data-id');
+            const newQuantity = inputElement.value;
+        
+         
+            // Préparer les données à envoyer
+            const data = {
+                id: itemId,
+                quantite: newQuantity
+            };
+        
+            // Envoyer la requête AJAX
+            fetch('/updateItemPanier', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                console.log('Une erreur est survenue lors de la mise à jour.');
+            });
+        }
+
+
+        
+            //fonction poour savoir si il y a une utilité 1 dans le sac à dos
         function getResultUtiliteInSac(utilites) {
             let isInSac = false;
             if (utilites == '1') {
@@ -27,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return isInSac;
         }
 
+        //fonction poour savoir si il y a une utilité 1 dans le panier
         function getResultUtiliterInPanier(utilites) {
             let isInPainer = false;
             for (const utilite of utilites) {
@@ -39,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return isInPainer;
         }
+
+
 
         function updatePoidsTotal() {  // Fonction pour recalculer et mettre à jour le poids total
 
@@ -60,14 +95,16 @@ document.addEventListener('DOMContentLoaded', function () {
             afficherPoidsTotalElement.textContent = totalPoids.toFixed(); // Met à jour l'affichage
         }
 
+
         // Ajoute un écouteur d'événement à chaque input pour recalculer le poids total lors des changements
         quantityInputs.forEach(input => {
             input.addEventListener('change', updatePoidsTotal);
         });
 
-        function showModal() {
 
-            return new Promise((resolve) => {//permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
+        function showModal(callback) {// Fonction de pop out et confirm custum avec un promesse on peut le faire avec un callback aussi
+
+           // return new Promise((resolve) => {// Promise:permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
                 const modal = document.getElementById("confirmationModal")
              
                 modal.classList.add("show"); // Afficher le modal
@@ -79,13 +116,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Ajouter les événements
                 const onOkClick = () => {
                     modal.classList.remove("show");
-                    resolve(true);
+                    callback(true);
                     cleanup();//Supprime les écouteurs d'événements pour éviter les bugs.
                 };
         
                 const onCancelClick = () => {
                     modal.classList.remove("show");
-                    resolve(false);
+                    callback(false);
                     cleanup();
                 };
         
@@ -96,8 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
         
                 okButton.addEventListener("click", onOkClick);//Quand l'utilisateur clique sur un bouton, l'action correspondante est exécutée avec la foncton à droite
                 cancelButton.addEventListener("click", onCancelClick);
-            });
+           // });
         }
+
+
+
         // Fonction appelée lors du paiement
         window.pay = function () {
             let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent);
@@ -112,12 +152,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isCorrectUtiliteInSac) {
                 if (prixTotal <= solde) {
                     if (totalPoidAuthorisé > maxPoids) {
-                        // const userConfirmed = confirm(
-                        //     'Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?'
-                        // );
-                        showModal().then((userConfirmed) => {
+              
+                        //showModal().then((userConfirmed) => { promesse
 
-                            if (userConfirmed) {
+                            showModal((userConfirmed) => {// callback
+
+                            if ((userConfirmed)) {
                                 dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
                                 dexteriter.textContent = dex.toFixed();
                                 document.getElementById('payerForm').submit();
@@ -125,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
                             }
-                        })
+                       })
 
 
                     } else {

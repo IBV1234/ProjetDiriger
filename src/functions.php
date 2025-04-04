@@ -22,3 +22,12 @@ function getPoidPanier($items){
     }
     return $poids;
 }
+
+function getQtPanier($items){
+    $quantite = 0;
+   
+    foreach ($items as $key => $item) {
+        $quantite += $item['quantite'];
+    }
+    return $quantite;
+}

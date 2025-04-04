@@ -36,15 +36,16 @@ require "views/Partials/header.php";
             </div>
 
             <div class="row">
-             
+
                 <div id="confirmationModal" class="modal">
                     <div class="modal-content">
                         <div>
-                                <p style="font-weight: bold;">Le poids total de votre panier dépasse le poids maximum autorisé. Voulez-vous continuer?</p>
+                            <p style="font-weight: bold;">Le poids total de votre panier dépasse le poids maximum autorisé.
+                                Voulez-vous continuer?</p>
 
                         </div>
                         <div>
-                            <button type="button" id="okBtn" >Continuer</button>
+                            <button type="button" id="okBtn">Continuer</button>
                             <button type="button" id="cancelBtn"> Annuler</button>
                         </div>
                     </div>
@@ -68,9 +69,10 @@ require "views/Partials/header.php";
 
                                 <div>
                                     <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
-                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]"
-                                        value="<?= $item->getQuantitePanier() ?>" min="1" max="<?= $item->getQteStock() ?>"
-                                        data-price="<?= $item->getPrix() ?>">
+                                        <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]"
+                                            value="<?= $item->getQuantitePanier() ?>" min="1" max="<?= $item->getQteStock() ?>"
+                                            data-price="<?= $item->getPrix() ?>" data-id ="<?=$item->getIdItem()?>"
+                                            onchange="updateItemQuantity(this);">
                                 </div>
                                 <div class="text-decoration">Prix Unitaire:
                                     <?= $item->getPrix() ?>$
@@ -87,8 +89,7 @@ require "views/Partials/header.php";
                     </div>
                 <?php endforeach ?>
 
-                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration"
-                        id="prixTotal"><?= $prixTotal ?></span>$</div>
+                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration" id="prixTotal"><?= $prixTotal ?></span>$</div>
                 <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
 
                 <div class="button-container">
@@ -111,15 +112,8 @@ require "views/Partials/header.php";
 </div>
 
 </div>
-<!-- htmlspecialchars:
-ENT_QUOTES : Ce paramètre indique que les guillemets simples (') et doubles (")
- doivent être convertis en entités HTML. Par exemple, ' devient &#039; et " devient &quot;. 
- Cela aide à prévenir les injections de code malveillant dans les attributs HTML. 
 
-'UTF-8':
- garantit que les caractères spéciaux sont correctement encodés et affichés, 
- surtout pour les applications multilingues.
--->
+
 <?php
 require "views/Partials/footer.php";
 ?>
