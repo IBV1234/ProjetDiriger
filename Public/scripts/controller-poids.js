@@ -196,4 +196,10 @@ document.addEventListener('DOMContentLoaded', function () {
  function pay() { ... }, la fonction pay serait définie dans la portée du bloc où elle se trouve. 
  Cela signifie que si on l'appelle dans un autre contexte (comme un événement ou dans un autre autre fichier js), 
  elle ne serait pas accessible
+
+ la promesse est une manière de gérer les opérations asynchrones en JavaScript.
+ Elle permet d'exécuter du code après qu'une opération asynchrone soit terminée,
+ sans bloquer l'exécution du reste du code. Mais dans ce cas,
+ on utilise un callback pour gérer l'affichage du modal et la réponse de l'utilisateur. car le but est de bloquer 
+ l'exécution du reste du code jusqu'à ce que l'utilisateur prenne une décision.
 */
