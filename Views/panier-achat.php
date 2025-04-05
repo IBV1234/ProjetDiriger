@@ -3,43 +3,37 @@ require "views/Partials/head.php";
 require "views/Partials/header.php";
 ?>
 
-<div class="container custom-container">
+    <!-- <input type="hidden" id="sessionEmpty" value="<?= $_SESSION['isEmptyPanier'] ? 'true' : 'false' ?>"> -->
 
-    <input type="hidden" id="sessionEmpty" value="<?= $_SESSION['isEmptyPanier'] ? 'true' : 'false' ?>">
     <?php if (!empty($panier)): ?>
 
         <form method="post" id="payerForm" action="/payer">
-            <div class="container-info-inventaire sticky">
-                <div clas="deleteAllItem"> <a href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>" a> Abandoner le panier </a> </div>
-
-                <div class="text-decoration">
-                    <img src="/public/images/caps.png" class="bag" alt="caps" />
-                    <span id="caps" name="caps"><?= $caps ?></span>
+            <div class="bg-light-blue-fallout rounded rounded-3 p-2 stcky-top d-flex justify-content-end align-items-center">
+                <a class="btn btn-warning mx-2" href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>">Abandoner le panier</a>
+                <div class="d-flex align-items-center mx-2">
+                    <img src="/public/images/caps_icon.webp" class="me-1 ratio ratio-1x1" height="25" alt="caps">
+                    <h5 class="mt-1" id="caps" name="caps"><?= $caps ?></h5>
                 </div>
-                <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
+                <h5 class="mx-2 mt-1">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></h5>
+                <h5 class="mx-2 mt-1">Max: <?= maxPoids ?> lbs</h5>
+                <div class="d-flex align-items-center mx-2">
+                    <img src="/public/images/panier.png" class="me-1 ratio ratio-1x1" height="25" alt="panier">
+                    <h5 class="mt-1" id="poidsTotal"><?= $poidsTotal ?>&nbsp;lbs</h5>
+                </div>
+                <div class="d-flex align-items-center mx-2">
+                    <img src="/public/images/sac.png" class="me-1 ratio ratio-1x1" height="25" alt="sac">
+                    <h5 class="mt-1" id="poidsSacDos" name="sac"><?= $poidsSacDos ?>&nbsp;lbs</h5>
+                </div>
 
+                <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
                 <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
-                <div class="text-decoration">Max: <?= maxPoids ?> lbs</div>
-                <div class="text-decoration">
-                    <img src="/public/images/panier.png" class="bag" alt="panier" />
-                    <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
-                    <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
-                </div>
-                <div class="text-decoration">
-                    <img src="/public/images/sac.png" class="bag" alt="sac" />
-                    <span id="poidsSacDos" name="sac"><?= $poidsSacDos ?></span>
-                    lbs
-                </div>
                 <input type="hidden" id="utilite" value="<?= $UtiliteInSac ?>">
-
             </div>
 
             <div class="row">
                 <?php foreach ($panier as $key => $item): ?>
-                    <div class="col">
-                        <div class="mb-3">
-                            <div class="mb-3 text-decoration"> <?= $item->getNom() ?>
-                            </div>
+                    <div class="col-12 mb-3 bg-light-blue-fallout rounded rounded-3">
+                        <div class="mb-3 text-decoration"> <?= $item->getNom() ?></div>
 
                             <div class="containe-info">
                                 <input type="hidden" name="items[<?= $key ?>][id]" value="<?= $item->getIdItem() ?>">
@@ -69,7 +63,6 @@ require "views/Partials/header.php";
                             </div>
                             <div class="mb-3 text-decoration">Poids: <span
                                     id="poids"><?= $item->getPoids() ?></span> lb</div>
-                        </div>
                     </div>
                 <?php endforeach ?>
 
