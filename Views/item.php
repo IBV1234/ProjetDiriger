@@ -38,7 +38,7 @@ require 'partials/header.php';
                 </div>
                 <form method="POST">
                     <div class="col d-flex align-items-center flex-column m-3">
-                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit">   
+                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" <?php echo $item->getQteStock() > 0 ? "" : "disabled" ?>>   
                             <i class="bi bi-cart-check m-2"></i>Ajouter au panier <!-- make this add the item to the cart in the SESSION -->
                         </button>
                         <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock : <?php echo $item->getQteStock()?></div>

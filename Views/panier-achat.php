@@ -54,7 +54,7 @@ require "views/Partials/header.php";
 
                                 <div>
                                     <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
-                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="1"
+                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="<?=$item->getQuantitePanier()?>"
                                         min="1" max="<?= $item->getQteStock() ?>" data-price="<?= $item->getPrix() ?>">
                                 </div>
                                 <div class="text-decoration">Prix Unitaire:
