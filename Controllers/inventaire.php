@@ -5,22 +5,24 @@ require 'src/session.php';
 require 'src/class/Item.php';
 require 'Models/ItemModel.php';
 require 'src/class/User.php';
-
-sessionStart();
-
-$_SESSION['controller'] = 'inventaire';
+require 'Models/panier-model.php';
 
 ////////////////////////////////////////
+sessionStart();
 if (!isset($_SESSION['user'])) {
     redirect("/connexion");
 }
 ///////////////////////////////////////
 
+$_SESSION['controller'] = 'inventaire';
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
 $itemModel = new ItemModel($pdo);
+$panierModel = new PanierModel($pdo);
 $items = $itemModel->selectByInventory($_SESSION['user']->getId());
+$poidsSac = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
+
 
 require 'views/inventaire.php';
 

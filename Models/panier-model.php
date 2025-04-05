@@ -176,7 +176,8 @@ class PanierModel implements ModelInterface
                         $row['photo'],
                         $row['flagDispo'],
                         $row['descriptionItem']??'',
-                        $row['evaluation']??0
+                        $row['evaluation']??0,
+                        $row['quantitePanier']??0
                     );
                 }
 
@@ -209,7 +210,7 @@ class PanierModel implements ModelInterface
 
     public function insert(int $idItem,int $quantite,int $idJoueur) : void {
         try {
-            $stm = $this->pdo->prepare("CALL ajouterPanier(:idItem, :quantite,:idJoueur)");
+            $stm = $this->pdo->prepare("CALL ajouterPanier(:idItem, :idJoueur, :quantite)");
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             $stm->bindValue(":quantite", $quantite, PDO::PARAM_INT);
@@ -401,5 +402,7 @@ class PanierModel implements ModelInterface
 
               redirect('Views/error.php');
         }
+        
+        return false;
     }
 }

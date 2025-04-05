@@ -40,6 +40,9 @@ require 'partials/header.php';
                 <?php endforeach; ?>
 <!-- /À copier pour chaque item -->
             </div>
+            <div class="pt-4 d-flex justify-content-center d-none" id="noItems">
+                <p class="d-inline-block fw-semibold fs-2 bg-color-yellow-text px-2 rounded-1">Aucun item ne correspond à votre recherche</p>
+            </div>
         </div>
 
         <script src="/public/scripts/index.js"></script>
