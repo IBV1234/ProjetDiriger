@@ -6,6 +6,8 @@ require 'src/class/Item.php';
 require 'Models/ItemModel.php';
 require 'src/class/User.php';
 
+sessionStart();
+
 $_SESSION['controller'] = 'inventaire';
 
 ////////////////////////////////////////
@@ -14,7 +16,6 @@ if (!isset($_SESSION['user'])) {
 }
 ///////////////////////////////////////
 
-sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 
