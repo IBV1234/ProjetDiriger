@@ -25,10 +25,14 @@
 <!-- /Disconnected only -->
 <!-- Connected only -->
 <?php if(isset($_SESSION['user'])): ?>
+  <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier-achat" class="text-decoration-none text-black pe-4">
-          <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
+          <i class="bi bi-cart-fill d-flex cart-icon" style="font-size: 35px;">
+            <?php if($sumPanier != null) echo htmlTag("i", ["class" => "notification-num"], htmlTag("p", ["class" => "ps-1 mt-3 notification-num-text"], $sumPanier . "")) ?>
+          </i>
         </a>
+  <?php endif; ?>
 
         <div class="dropdown p-2">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
