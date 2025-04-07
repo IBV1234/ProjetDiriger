@@ -9,7 +9,7 @@
         <form method="post" id="payerForm" action="/payer">
 
             <div class="p-2 bg-white sticky-top d-flex flex-column flex-md-row justify-content-end align-items-center">
-                <a class="btn btn-warning mx-2" href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>">Abandoner le panier</a>
+                <a class="btn btn-warning mx-2" href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>">Abandonner le panier</a>
                 <div class="d-flex align-items-center mx-2">
                     <img src="/public/images/caps_icon.webp" class="me-1 ratio ratio-1x1" height="25" alt="caps">
                     <h5 class="mt-1" id="caps" name="caps"><?= $caps ?></h5>
@@ -69,18 +69,7 @@
                 <a class="h5 text-black" href="/"> Acceuil</a>
         </div>
     <?php endif ?>
-</div>
 
-</div>
-<!-- htmlspecialchars:
-ENT_QUOTES : Ce paramètre indique que les guillemets simples (') et doubles (")
- doivent être convertis en entités HTML. Par exemple, ' devient &#039; et " devient &quot;. 
- Cela aide à prévenir les injections de code malveillant dans les attributs HTML. 
-
-'UTF-8':
- garantit que les caractères spéciaux sont correctement encodés et affichés, 
- surtout pour les applications multilingues.
--->
 <?php
 
     require "views/Partials/footer.php";
