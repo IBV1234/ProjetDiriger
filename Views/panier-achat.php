@@ -30,9 +30,9 @@
                 <input type="hidden" id="utilite" value="<?= $UtiliteInSac ?>">
             </div>
 
-            <div class="px-5 d-flex flex-column justify-content-center align-items-center">
+            <div class="px-3 px-sm-5 d-flex flex-column justify-content-center align-items-center">
                 <?php foreach ($panier as $key => $item): ?>
-                    <div class="p-2 mb-3 bg-light-blue-fallout rounded rounded-3 d-flex justify-content-between align-items-center w-100 shadow">
+                    <div class="p-2 mb-3 bg-light-blue-fallout rounded rounded-3 d-flex flex-column flex-md-row justify-content-between align-items-center w-100 shadow">
                         <div class="d-flex flex-column justify-content-between align-items-center">
                             <h5><?= $item->getNom() ?></h5>
                             <img src="<?= $item->getLienPhoto() ?>" class="ratio ratio-16x9" height="150" alt="épée">
@@ -58,9 +58,7 @@
             <div class="p-2 d-flex justify-content-between align-items-center w-100">
                 <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
                 <h5 class="mx-2">Prix total: <?= $prixTotal ?>$</h5>
-
                 <a class="text-black mx-2" href="/">Accueil</a>
-
                 <button class="btn btn-success text-white p-3 mx-2" type="button" onclick="pay()" id="payer" name="payer">Payer</button>
             </div>
         </form>
