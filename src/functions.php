@@ -13,3 +13,21 @@ function getPrixTotalPayer($items)
     }
     return $total;
 }
+
+function getPoidPanier($items){
+    $poids = 0;
+   
+    foreach ($items as $key => $item) {
+        $poids += $item['poids']*$item['quantite'];
+    }
+    return $poids;
+}
+
+function getQtPanier($items){
+    $quantite = 0;
+   
+    foreach ($items as $key => $item) {
+        $quantite += $item['quantite'];
+    }
+    return $quantite;
+}

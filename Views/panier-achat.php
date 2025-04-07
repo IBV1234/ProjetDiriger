@@ -10,7 +10,8 @@ require "views/Partials/header.php";
 
         <form method="post" id="payerForm" action="/payer">
             <div class="container-info-inventaire sticky">
-                <div clas="deleteAllItem"> <a href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>" a> Abandoner le panier </a> </div>
+                <div clas="deleteAllItem"> <a href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId() ?>" a>
+                        Abandoner le panier </a> </div>
 
                 <div class="text-decoration">
                     <img src="/public/images/caps.png" class="bag" alt="caps" />
@@ -35,6 +36,19 @@ require "views/Partials/header.php";
             </div>
 
             <div class="row">
+
+                <div id="confirmationModal" class="modal">
+                    <div class="modal-content">
+                        <div>
+                            <p style="font-weight: bold;" id="message"></p>
+
+                        </div>
+                        <div>
+                            <button type="button" id="okBtn">Continuer</button>
+                            <button type="button" id="cancelBtn"> Annuler</button>
+                        </div>
+                    </div>
+                </div>
                 <?php foreach ($panier as $key => $item): ?>
                     <div class="col">
                         <div class="mb-3">
@@ -54,29 +68,28 @@ require "views/Partials/header.php";
 
                                 <div>
                                     <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
-                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]" value="1"
-                                        min="1" max="<?= $item->getQteStock() ?>" data-price="<?= $item->getPrix() ?>">
+                                        <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]"
+                                            value="<?= $item->getQuantitePanier() ?>" min="1" max="<?= $item->getQteStock() ?>"
+                                            data-price="<?= $item->getPrix() ?>" data-id ="<?=$item->getIdItem()?>"
+                                            onchange="updateItemQuantity(this);">
                                 </div>
                                 <div class="text-decoration">Prix Unitaire:
                                     <?= $item->getPrix() ?>$
                                 </div>
                                 <div class="content">
                                     <a
-                                        href="/delete-item?id=<?= $item->getIdItem() ?>&idJoueur=<?= $_SESSION['user']->getId()?>">
+                                        href="/delete-item?id=<?= $item->getIdItem() ?>&idJoueur=<?= $_SESSION['user']->getId() ?>">
                                         <i class='bx bx-x-circle'></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="mb-3 text-decoration">Poids: <span
-                                    id="poids"><?= $item->getPoids() ?></span> lb</div>
+                            <div class="mb-3 text-decoration">Poids: <span id="poids"><?= $item->getPoids() ?></span> lb</div>
                         </div>
                     </div>
                 <?php endforeach ?>
 
-                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration"
-                        id="prixTotal"><?= $prixTotal ?></span>$</div>
-                <input type="hidden" name="prixTotal" id="hiddenPrixTotal"
-                    value="<?= $prixTotal ?>">
+                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration" id="prixTotal"><?= $prixTotal ?></span>$</div>
+                <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
 
                 <div class="button-container">
                     <button class="btn btn-success button stickyBtn" type="button" onclick="pay()" id="payer"
@@ -98,15 +111,8 @@ require "views/Partials/header.php";
 </div>
 
 </div>
-<!-- htmlspecialchars:
-ENT_QUOTES : Ce paramètre indique que les guillemets simples (') et doubles (")
- doivent être convertis en entités HTML. Par exemple, ' devient &#039; et " devient &quot;. 
- Cela aide à prévenir les injections de code malveillant dans les attributs HTML. 
 
-'UTF-8':
- garantit que les caractères spéciaux sont correctement encodés et affichés, 
- surtout pour les applications multilingues.
--->
+
 <?php
 require "views/Partials/footer.php";
 ?>
