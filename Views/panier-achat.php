@@ -40,8 +40,7 @@ require "views/Partials/header.php";
                 <div id="confirmationModal" class="modal">
                     <div class="modal-content">
                         <div>
-                            <p style="font-weight: bold;">Le poids total de votre panier dépasse le poids maximum autorisé.
-                                Voulez-vous continuer?</p>
+                            <p style="font-weight: bold;" id="message"></p>
 
                         </div>
                         <div>

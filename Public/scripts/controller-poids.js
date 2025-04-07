@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-        function showModal(callback) {// Fonction de pop out et confirm custum avec un promesse on peut le faire avec un callback aussi
+        function showModal(callback,text =null) {// Fonction de pop out et confirm custum avec un promesse on peut le faire avec un callback aussi
 
            // return new Promise((resolve) => {// Promise:permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
                 const modal = document.getElementById("confirmationModal")
@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 modal.classList.add("show"); // Afficher le modal
                 const okButton = document.getElementById("okBtn");
                 const cancelButton = document.getElementById("cancelBtn");
-        
+                const messageElement = document.getElementById("message"); // Récupérer l'élément de message
                
-        
+                if(text!=null)messageElement.textContent = text; // Mettre à jour le message
                 // Ajouter les événements
                 const onOkClick = () => {
                     modal.classList.remove("show");
@@ -165,19 +165,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
                             }
-                       })
+                       }, "Vous avez dépassé le poids maximum autorisé, êtes-vous sûr de vouloir continuer ?");
 
 
                     } else {
                         document.getElementById('payerForm').submit();
                     }
                 } else {
-                    confirm("Vous n'avez pas assez de caps pour cette achat");
-
-
+                    // confirm("Vous n'avez pas assez de caps pour cette achat");
+                    showModal((callback) => {
+                        if (callback) {
+                            console.log("");
+                        } else {
+                            console.log(""); // Réaffiche la dextérité sans changement
+                        }
+                    }, "Vous n'avez pas assez de caps pour cette achat");
                 }
+
+                
             } else {
-                confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
+               // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
+                showModal((callback) => {
+                    if (callback) {
+                        console.log("");
+                    } else {
+                        console.log(""); // Réaffiche la dextérité sans changement
+                    }
+                }, "Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
             }
         };
 
