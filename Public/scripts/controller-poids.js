@@ -139,7 +139,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // Fonction appelée lors du paiement
-        window.pay = function () {
+        window.pay() = function () {
+            alert("ok");
             let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent);
             let dex = parseInt(dexteriter.textContent, 10);
             let solde = parseInt(soldeJoueur);
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             showModal((userConfirmed) => {// callback
 
                             if ((userConfirmed)) {
+                                alert("ok");
                                 dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
                                 dexteriter.textContent = dex.toFixed();
                                 document.getElementById('payerForm').submit();
@@ -198,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Initialise le poids total au chargement de la page
         updatePoidsTotal();
     }
+
 });
 
 

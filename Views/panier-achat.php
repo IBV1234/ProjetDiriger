@@ -58,7 +58,7 @@
                 <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
                 <h5 class="mx-2">Prix total: <?= $prixTotal ?>$</h5>
                 <a class="text-black mx-2" href="/">Accueil</a>
-                <button class="btn btn-success text-white p-3 mx-2" type="button" onclick="pay()" id="payer" name="payer">Payer</button>
+                <button class="btn btn-success button stickyBtn" type="button" onclick="pay()" id="payer" name="payer">Payer</button>
             </div>
         </form>
 
