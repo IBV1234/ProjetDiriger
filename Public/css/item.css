@@ -24,7 +24,16 @@
     border-radius: 3%;
 }
 .item-container {
-    width: 70%;
+    width: 85%;
     align-self: center;
     border-radius: 10px;
+}
+.stars {
+    position: absolute;
+    bottom: 3%;
+}
+.item-row-container {
+    width: 100%;
+    align-items: center;
+    margin-left: 2px;
 }
