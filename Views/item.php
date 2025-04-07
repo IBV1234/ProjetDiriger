@@ -12,8 +12,9 @@ require 'partials/header.php';
     <div class="d-flex justify-content-center">
         <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
             <div class="row">
-                <div class="col d-flex align-items-center flex-column m-3 mt-5">
-                    <img src="<?php echo $item->getLienPhoto() ?>" class="img-fluid item-image image-bg" alt="placeholder">
+                <div class="col d-flex align-items-center flex-column m-3 mt-5 position-relative">
+                    <img src="<?php echo $item->getLienPhoto() ?>" class="item-image image-bg" alt="placeholder">
+                    <img src="../public/images/sword-icon.png" class="img-fluid item-type-icon m-2">
                     <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
                         <div style="transform: skew(0deg, -5deg);" class="d-flex">
                             <h2><?= $item->getPrix() ?></h2>
@@ -30,17 +31,14 @@ require 'partials/header.php';
                     </div>
                     <div class="bg-light-blue-fallout rounded m-3 mt-5">
                         <div class="m-3">
-                            <p>Prix : <?php echo $item->getPrix() ?>$</p>
                             <p><?php echo $item->getDescription() ?></p>
-                            <p><?php echo $item->getNom() ?> est de type : <?php echo $item->getType() ?></p>
                             <p>Poids : <?php echo $item->getPoids()?> lbs</p>
                             <p>Utilité : <?php echo $item->getUtilite()?></p>
-                            <p>Rating : <?php echo $item->getEvaluation()?></p>
                         </div>
                     </div>
                 </div>
                 <div class="w-100"></div>
-                <div class="col d-flex m-3">
+                <div class="col d-flex justify-content-center">
                     <div class="pb-2" data-coreui-size="lg" data-coreui-precision="0.10" data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="<?php echo $item->getEvaluation()?>"></div>
                 </div>
                 <form method="POST">
