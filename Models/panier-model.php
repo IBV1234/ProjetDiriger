@@ -405,4 +405,57 @@ class PanierModel implements ModelInterface
         
         return false;
     }
+
+    public function UpdateQtPanier($pIdJoueur,$qtPanier,$idItem){
+      try{
+
+        $stm = $this->pdo->prepare("CALL UpdateQtPanier(:pIdJoueur, :qtPanier, :idItem)");
+        $stm->bindValue("qtPanier",$qtPanier,PDO::PARAM_INT);
+        $stm->bindValue("pIdJoueur",$pIdJoueur,PDO::PARAM_INT);
+        $stm->bindValue("idItem",$idItem,PDO::PARAM_INT);
+
+        $stm->execute();
+
+
+    }catch(PDOException $e){
+
+        $errorMessage = sprintf(
+            "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", 
+            date('Y-m-d H:i:s'),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine()
+          );
+
+          file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+          redirect('Views/error.php');
+    }
+    }
+    public function SumPanier($idJoueur) : int|null{
+        try{
+            $stm = $this->pdo->prepare("CALL sumPanier(:idJoueur)");
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            if(empty($result))
+                return null;
+            return $result['sumPanier'];
+        } catch (PDOException $e) {
+        // throw new PDOException($e->getMessage(), $e->getCode());
+        $errorMessage = sprintf(
+            "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+            date('Y-m-d H:i:s'),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine()
+          );
+          file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+
+          redirect('Views/error.php');
+        }
+    }
 }

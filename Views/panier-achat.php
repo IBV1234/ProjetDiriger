@@ -7,7 +7,6 @@
 
     <?php if (!empty($panier)): ?>
         <form method="post" id="payerForm" action="/payer">
-
             <div class="p-2 bg-white sticky-top d-flex flex-column flex-md-row justify-content-end align-items-center">
                 <a class="btn btn-warning mx-2" href="/delete-item?id=all&idJoueur=<?= $_SESSION['user']->getId()?>">Abandonner le panier</a>
                 <div class="d-flex align-items-center mx-2">
