@@ -20,9 +20,55 @@
 .header-height {
     height: auto;
 }
+.index-title {
+    font-size: 6vw;
+}
+.price-weight {
+    font-size: 7vw;
+}
+.caps-icon-index {
+    margin-top: 2vw;
+    height: 5vw;
+}
 @media (min-width: 576px) {
     .header-height {
         height: 150px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .index-title {
+        font-size: 3.5vw;
+    }
+    .price-weight {
+        font-size: 3.5vw;
+    }
+    .caps-icon-index {
+        margin-top: 1vw;
+        height: 3vw;
+    }
+}
+@media (min-width: 767px) and (max-width: 1199px) {
+    .index-title {
+        font-size: 2.2vw;
+    }
+    .price-weight {
+        font-size: 2.75vw;
+    }
+    .caps-icon-index {
+        margin-top: 0.75vw;
+        height: 2.2vw;
+    }
+}
+@media (min-width: 1199px) {
+    .index-title {
+        font-size: 1.8vw;
+    }
+    .price-weight {
+        font-size: 2vw;
+    }
+    .caps-icon-index {
+        margin-top: 0.5vw;
+        height: 1.5vw;
     }
 }
 
