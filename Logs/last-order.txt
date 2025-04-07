@@ -39,4 +39,3 @@
     }
 
 
-{"prixTotal":100,"poidsTotal":null,"items":[{"id":"13","poids":"3","prix":"100","utilites":"0","quantite":"1"}]}
