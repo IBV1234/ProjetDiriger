@@ -68,10 +68,10 @@ require "views/Partials/header.php";
 
                                 <div>
                                     <label class="text-decoration" for="quantity-<?= $key ?>">Quantité :</label>
-                                        <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]"
-                                            value="<?= $item->getQuantitePanier() ?>" min="1" max="<?= $item->getQteStock() ?>"
-                                            data-price="<?= $item->getPrix() ?>" data-id ="<?=$item->getIdItem()?>"
-                                            onchange="updateItemQuantity(this);">
+                                    <input type="number" id="quantity-<?= $key ?>" name="items[<?= $key ?>][quantite]"
+                                        value="<?= $item->getQuantitePanier() ?>" min="1" max="<?= $item->getQteStock() ?>"
+                                        data-price="<?= $item->getPrix() ?>" data-id="<?= $item->getIdItem() ?>"
+                                        onchange="updateItemQuantity(this);">
                                 </div>
                                 <div class="text-decoration">Prix Unitaire:
                                     <?= $item->getPrix() ?>$
@@ -88,7 +88,8 @@ require "views/Partials/header.php";
                     </div>
                 <?php endforeach ?>
 
-                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration" id="prixTotal"><?= $prixTotal ?></span>$</div>
+                <div class="text-decoration stickyPrice">Prix total: <span class="text-decoration"
+                        id="prixTotal"><?= $prixTotal ?></span>$</div>
                 <input type="hidden" name="prixTotal" id="hiddenPrixTotal" value="<?= $prixTotal ?>">
 
                 <div class="button-container">
@@ -108,8 +109,6 @@ require "views/Partials/header.php";
         </div>
         </form>
     <?php endif ?>
-</div>
-
 </div>
 
 
