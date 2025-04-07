@@ -24,7 +24,7 @@ require 'partials/header.php';
                                         </div>
                                         <div class="bg-dark-yellow-fallout px-3 rounded-circle" style="transform: skew(0deg, 3deg);">
                                             <div style="transform: skew(0deg, -3deg);" class="d-flex">
-                                            <img src="/public/images/weight.png" alt="caps" class="me-1 ratio ratio-1x1 caps-icon-index">
+                                                <img src="/public/images/weight.png" alt="caps" class="me-1 ratio ratio-1x1 caps-icon-index">
                                                 <h2 class="price-weight"><?= $item->getPoids() ?></h2>
                                             </div>
                                         </div>
