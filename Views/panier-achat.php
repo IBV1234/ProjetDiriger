@@ -19,8 +19,8 @@ require "views/Partials/header.php";
                 </div>
                 <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
 
-                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
-                <div class="text-decoration">Max: <?= maxPoids ?> lbs</div>
+                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= $maxPoids ?>">
+                <div class="text-decoration">Max: <?= $maxPoids ?> lbs</div>
                 <div class="text-decoration">
                     <img src="/public/images/panier.png" class="bag" alt="panier" />
                     <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
