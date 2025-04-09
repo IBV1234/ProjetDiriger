@@ -434,6 +434,7 @@ class PanierModel implements ModelInterface
     }
     }
     public function SumPanier($idJoueur) : int|null{
+
         try{
             $stm = $this->pdo->prepare("CALL sumPanier(:idJoueur)");
             $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
@@ -443,8 +444,8 @@ class PanierModel implements ModelInterface
             if(empty($result))
                 return null;
             return $result['sumPanier'];
+
         } catch (PDOException $e) {
-        // throw new PDOException($e->getMessage(), $e->getCode());
         $errorMessage = sprintf(
             "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
             date('Y-m-d H:i:s'),

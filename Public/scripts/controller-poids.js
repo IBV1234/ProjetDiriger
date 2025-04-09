@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const soldeJoueur = document.getElementById('caps').textContent;
         const poidTotalSac = document.getElementById('poidsSacDos').textContent;
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
-        const modal = document.getElementById("confirmationModal");
 
         let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
