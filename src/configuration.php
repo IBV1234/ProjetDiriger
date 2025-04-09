@@ -13,5 +13,6 @@ const ROUTES = [
     '/payer' => 'payer.php',
     '/inventaire' => 'inventaire.php',
     '/deconnexion' => 'deconnexion.php',
-    '/updateItemPanier'=>'updateItemPanier.php'
+    '/updateItemPanier'=>'updateItemPanier.php',
+    '/item-sac' => 'item-sac.php',
 ];
