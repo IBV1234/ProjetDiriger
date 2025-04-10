@@ -13,6 +13,10 @@ sessionStart();
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
+$userModel = new UserModel($pdo);
+$user = $_SESSION['user'];
+$user = $userModel->selectById($user->getId());
+$_SESSION['user'] = $user;
 
 //get item from index.................................................
 
@@ -27,11 +31,23 @@ else {
             break;
         }
     }
+    if($itemQt == 0){
+        redirect("error");
+    }
     if($item == null)
         redirect("error");
     $_SESSION['item'] = $item;
 }
 if(!isset($_SESSION['item']))
     redirect("error");
+
+//Eat item......................................................
+if($_SESSION['user']->getHp() < 10)
+    if(isPost()){
+        if(!isset($_SESSION['user']))
+            redirect("/connexion");
+        $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+        redirect("/inventaire");
+    }
 
 require 'views/item-sac.php';

@@ -67,7 +67,7 @@ require 'partials/header.php';
                 <form method="POST">
                     <div class="col d-flex align-items-center flex-column m-3">
                         <?php if($item->getType() == 'nourriture' || $item->getType() == 'medicament') : ?>
-                            <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" <?php echo $itemQt > 0 ? "" : "disabled" ?>>
+                            <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" <?php echo $itemQt > 0 && $_SESSION['user']->getHp() < 10 ? "" : "disabled" ?>>
                             <i class="m-2"><img src="../public/images/food-icon.png" width="25"></i>Consommer
                         </button>
                         <?php endif; ?>

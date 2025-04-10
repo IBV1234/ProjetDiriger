@@ -17,6 +17,10 @@ if (!isset($_SESSION['user'])) {
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $PanierModel =  new PanierModel($pdo);
+$userModel = new UserModel($pdo);
+$user = $_SESSION['user'];
+$user = $userModel->selectById($user->getId());
+$_SESSION['user'] = $user;
 
 //$PanierModel->insert(9,  1 ,5); //  for test
 const maxPoids = 15;

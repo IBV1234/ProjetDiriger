@@ -39,3 +39,6 @@
     }
 
 
+{"prixTotal":90,"poidsTotal":null,"items":[{"id":"31","poids":"6","prix":"30","utilites":"1","quantite":"3"}]}
+{"prixTotal":120,"poidsTotal":null,"items":[{"id":"31","poids":"6","prix":"30","utilites":"1","quantite":"4"}]}
+{"prixTotal":240,"poidsTotal":null,"items":[{"id":"31","poids":"6","prix":"30","utilites":"1","quantite":"8"}]}
