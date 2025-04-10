@@ -42,12 +42,21 @@ if(!isset($_SESSION['item']))
     redirect("error");
 
 //Eat item......................................................
-if($_SESSION['user']->getHp() < 10)
-    if(isPost()){
-        if(!isset($_SESSION['user']))
-            redirect("/connexion");
-        $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
-        redirect("/inventaire");
+
+if(isPost()){
+    if($_POST['action'] === 'use') {
+        if($_SESSION['user']->getHp() < 10){
+            if (!isset($_SESSION['user']))
+                redirect("/connexion");
+            $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+        }
     }
+    if($_POST['action'] === 'sell') {
+        if (!isset($_SESSION['user']))
+            redirect("/connexion");
+        $userModel->sellItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+    }
+    redirect("/inventaire");
+}
 
 require 'views/item-sac.php';
