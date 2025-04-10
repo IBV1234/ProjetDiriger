@@ -1,0 +1,39 @@
+.cart-button {
+    color: black;
+    border-color: black;
+    text-decoration: none;
+}
+.item-image {
+    height: 100%;
+    width: 100%;
+}
+.item-type-icon {
+    right: 3%;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 10%;
+    background-color: #FCEF6F;
+}
+.bg-light-green-fallout {
+    background-color: #9BD997;
+}
+.image-bg{
+    background-color: #BDD1E9;
+    padding: 3px;
+    border-radius: 3%;
+}
+.item-container {
+    width: 85%;
+    align-self: center;
+    border-radius: 10px;
+}
+.stars {
+    position: absolute;
+    bottom: 3%;
+}
+.item-row-container {
+    width: 100%;
+    align-items: center;
+    margin-left: 2px;
+}
