@@ -75,24 +75,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-        function updatePoidsTotal() {  // Fonction pour recalculer et mettre à jour le poids total
-
+        function updatePoidsTotal() {
             let totalPoids = 0;
 
             quantityInputs.forEach(input => {
-                const quantity = parseInt(input.value, 10); // Assure une valeur numérique
-                const poidsElement = input.closest('.col').querySelector('#poids'); // Récupère l'élément contenant le poids
+                const quantity = parseInt(input.value, 10); // Ensure numeric value
+                const parentContainer = input.closest('.p-2.mb-3'); // Find the closest parent container
+                const poidsElement = parentContainer.querySelector('#poids'); // Use class instead of id
                 const poids = parseFloat(poidsElement.innerText); // Convertit en nombre
-                const utilites = Array.from(document.querySelectorAll('.col #utilites')); // Récupère tous les inputs utilite dans les colonnes    
+                const utilites = Array.from(document.querySelectorAll('#utilites')); // Adjust selector if needed
 
                 totalPoids += poids * quantity;
-                let TabUtilites = utilites.map(utilite => utilite.defaultValue);
-                isUtiliteInPanier = getResultUtiliterInPanier(TabUtilites)
+                const TabUtilites = utilites.map(utilite => utilite.defaultValue);
+                isUtiliteInPanier = getResultUtiliterInPanier(TabUtilites);
                 isCorrectUtiliteInSac = getResultUtiliteInSac(utilitesSac);
-
             });
 
-            afficherPoidsTotalElement.textContent = totalPoids.toFixed(); // Met à jour l'affichage
+            afficherPoidsTotalElement.textContent = totalPoids.toFixed(); // Update total weight display
         }
 
 
@@ -139,8 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // Fonction appelée lors du paiement
-        window.pay() = function () {
-            alert("ok");
+        window.pay = function () {
             let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent);
             let dex = parseInt(dexteriter.textContent, 10);
             let solde = parseInt(soldeJoueur);
@@ -159,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             showModal((userConfirmed) => {// callback
 
                             if ((userConfirmed)) {
-                                alert("ok");
                                 dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
                                 dexteriter.textContent = dex.toFixed();
                                 document.getElementById('payerForm').submit();
@@ -200,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Initialise le poids total au chargement de la page
         updatePoidsTotal();
     }
-
 });
 
 

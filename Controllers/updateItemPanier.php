@@ -4,7 +4,8 @@
     require 'src/session.php';
     require 'src/class/Database.php';
     require 'Models/panier-model.php';
- 
+    require 'Models/UserModel.php';
+
     sessionStart();
     header('Content-Type: application/json');
  
@@ -24,6 +25,3 @@
  
   }
    redirect("/panier-achat");
-
-
-
