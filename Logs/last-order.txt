@@ -39,3 +39,7 @@
     }
 
 
+{"prixTotal":275,"poidsTotal":null,"items":[{"id":"20","poids":"4","prix":"275","utilites":"3","quantite":"1"}]}
+{"prixTotal":600,"poidsTotal":null,"items":[{"id":"18","poids":"5","prix":"300","utilites":"3","quantite":"2"}]}
+{"prixTotal":80,"poidsTotal":null,"items":[{"id":"16","poids":"20","prix":"40","utilites":"5","quantite":"2"}]}
+{"prixTotal":300,"poidsTotal":null,"items":[{"id":"18","poids":"5","prix":"300","utilites":"3","quantite":"1"}]}
