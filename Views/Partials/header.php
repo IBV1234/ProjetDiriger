@@ -1,4 +1,3 @@
-header:
 <?php if ($controllerFile == "Controllers/index.php"): ?>
   <header class="px-3 py-1 position-relative">
 <?php else: ?>
