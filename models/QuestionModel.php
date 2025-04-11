@@ -8,29 +8,20 @@ class QuestionsModel
 
     public function __construct(private PDO $pdo) {}
 
-    public function select_question_reponses() : null|array {
-        
-        $questions = [];
-
+    public function select_question_reponses() : null|Questions {
         try {
             $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires()');
 
             $stm->execute();
 
-            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stm->fetch(PDO::FETCH_ASSOC);
           
-            if (! empty($data)) {
-
-                foreach ($data as $row) {
-                    $questions[] = new Questions(
-                        $row['idEnigme'],
-                        $row['enonce'],
-                        $row['difficulte'],
-   
-                    );
-                }
-
-                return $questions;
+            if (!empty($data)) {
+                return new Questions(
+                    $data['idEnigme'],
+                    $data['enonce'],
+                    $data['difficulte']
+                );
             }
 
             return null;
@@ -53,29 +44,20 @@ class QuestionsModel
         }
     }
 
-    public function chercherQuestionSelonDifficulte($difficulty) : null|array {
-        
-        $questions = [];
-
+    public function chercherQuestionSelonDifficulte($difficulty) : null|Questions {
         try {
             $stm = $this->pdo->prepare('CALL Chercher_Questions_Aleatoires_Selon_laDiffculter(:difficulte)');
             $stm->bindValue(':difficulte', $difficulty, PDO::PARAM_STR);
             $stm->execute();
 
-            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stm->fetch(PDO::FETCH_ASSOC);
           
-            if (! empty($data)) {
-
-                foreach ($data as $row) {
-                    $questions[] = new Questions(
-                        $row['idEnigme'],
-                        $row['enonce'],
-                        $row['difficulte'],
-   
-                    );
-                }
-
-                return $questions;
+            if (!empty($data)) {
+                return new Questions(
+                    $data['idEnigme'],
+                    $data['enonce'],
+                    $data['difficulte']
+                );
             }
 
             return null;

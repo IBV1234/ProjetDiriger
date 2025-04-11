@@ -30,7 +30,7 @@ if ($difficulty) {
     //PDO
     $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
     $QuestionsModel = new QuestionsModel($pdo);
-    $questions = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
+    $question = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
 
     if (isPost()) {
         $idEgnime = (int)$_POST['idEgnime'];

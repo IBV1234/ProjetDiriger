@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 
 $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
 $QuestionsModel = new QuestionsModel($pdo);
-$questions = $QuestionsModel->select_question_reponses();
+$question = $QuestionsModel->select_question_reponses();
 
 if (isPost()) {
     $idEgnime = (int)$_POST['idEgnime'];
