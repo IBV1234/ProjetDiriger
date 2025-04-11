@@ -30,11 +30,11 @@ class Questions {
     public function getdifficulteInLetters(): string {
         switch($this->difficulte) {
             case 'F':
-                return 'Facile';
+                return 'facile';
             case 'M':
-                return 'Moyenne';
+                return 'moyenne';
             case 'D':
-                return 'Difficile';
+                return 'difficile';
     
         }
         return 'Inconnue';
@@ -42,6 +42,4 @@ class Questions {
     public function getdifficulte(): string {
         return $this->difficulte;
     }
-    
- 
 }

@@ -20,17 +20,12 @@ require 'partialsEnigma/header.php';
     <div class="bouton-container">
         <form method="POST" class="bouton-container">
             <input type="hidden" name="idEgnime" value="<?= $question->getIdEgnime() ?>">
-            <!-- en attent de la procédure réponse <?php foreach ($questions as $key => $question): ?>
-                <div class="col-4"style="font-weight: bold; font-size: 17px;">
-                    <p> <?= $question->getEnonce() ?></p>
-                </div>
-                <?php endforeach; ?> -->
-            <button type="submit" name="reponse" value="vert" class="bouton-reponse">
-                Vert
-            </button>
-            <button type="submit" name="reponse" value="rouges" class="bouton-reponse">
-                Rouge
-            </button>
+            
+            <?php foreach ($reponses as $key => $reponse): ?>
+                <button type="submit" name="reponse" value="<?= $reponse->getIdReponse();?>" class="bouton-reponse">
+                    <?= $reponse->getReponse() ?>
+                </button>
+            <?php endforeach; ?>
         </form>
     </div>
 </div>

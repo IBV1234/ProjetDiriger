@@ -4,6 +4,7 @@ require 'src/class/Database.php';
 require 'src/session.php';
 require 'src/class/User.php';
 require 'models/QuestionModel.php';
+require 'models/ReponseModel.php';
 
 ////////////////////////////////////////
 sessionStart();
@@ -31,6 +32,10 @@ if ($difficulty) {
     $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
     $QuestionsModel = new QuestionsModel($pdo);
     $question = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
+
+    $ReponseModel = new ReponseModel($pdo);
+    $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());
+    shuffle($reponses);
 
     if (isPost()) {
         $idEgnime = (int)$_POST['idEgnime'];
