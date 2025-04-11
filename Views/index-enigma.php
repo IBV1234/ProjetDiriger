@@ -16,13 +16,13 @@ require 'partialsEnigma/header.php';
     <div class="container-index">
         <p class="h2">Question selon la difficulté</p>
         <div>
-            <a href="/question.php?difficulty=easy">
+            <a href="/question?difficulty=easy">
                 <img src="/public/images/golden-star.png" alt="etoile-facile" style="width:90px; height: 90px;">
             </a>
-            <a href="/question.php?difficulty=medium">
+            <a href="/question?difficulty=medium">
                 <img src="/public/images/golden-star.png" alt="etoile-moyenne" style="width:90px; height: 90px;">
             </a>
-            <a href="/question.php?difficulty=hard">
+            <a href="/question?difficulty=hard">
                 <img src="/public/images/golden-star.png" alt="etoile-difficile" style="width:90px; height: 90px;">
             </a>
         </div>
