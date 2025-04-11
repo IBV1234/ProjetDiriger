@@ -8,6 +8,18 @@
     align-items: center;
 }
 
+.body-enigma main{
+    background-color: #bacbda;
+
+    /*centering*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/************************ header ***********************/
 .header-enigma{
     background-color: white;
     border-radius: 10px;
@@ -32,44 +44,71 @@
     font-weight: bold;
 }
 
-.header-enigma .col { /*centers le logo dans son div*/
+.header-enigma .col { /*centers les logos dans leur div-parent*/
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-.container-egnime-body{
-    background-color: #bacbda;
+/************************* container ***********************/
+.container-egnime{
+    background-color: white;
+    border-radius: 10px;
+
+    /*width, height*/
+    width: 95%;
+    max-width: 412px;
+    height: fit-content;
+
+    /*display of elements*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-radius: 10px;
-    width: 60%;
-    margin-left: 20%;
-    gap: 15px;
-    
+
+    /*espacements*/
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 2em;
 }
-.container-head {
+
+/************************* boutons reponses ***********************/
+
+.bouton-reponse{
+    /*style*/
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    border: none;
+
+    /*width, margin, height*/
+    width: 90%;
+    max-width: 300px;
+    margin-bottom: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    /*text*/
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold; 
+}
+
+.bouton-container{
+    width: 100%;
     display: flex;
-    background-color: white;
-    grid-template-columns:  auto auto auto;
     justify-content: center;
-    padding: 2em; 
-    padding-bottom: 20px;
-    border-radius: 10px;
-    width: 80%; 
+    align-items: center;
+    flex-direction: column;
 }
+
+/************************* others ***********************/
 
 .cercle{
     background-color: #b9b3b3;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-   
 }
 .cercle-text-1{
     display: flex; 
@@ -86,32 +125,7 @@
     font-weight: bold;
     padding-bottom: 5px; 
 }
-.container-egnime{
-    background-color:white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    margin-left: 20%;
-    margin-right:20%;
-}
 
-.container-reponses{
-    font-weight: bold; 
-    display: flex;
-    font-size: 17px;
-     background-color:#b9b3b3;
-     border-radius: 10px;
-     justify-content: center;
-    align-items: center;
-     width: 60%;
-     height: 50px;
-     border: none;
-
-}
 @media (max-width: 768px) {
     .container-head {
         gap: 10px; 

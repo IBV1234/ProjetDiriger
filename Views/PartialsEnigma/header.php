@@ -28,4 +28,4 @@
         </ul>
     </div> 
 </header>
-<main class="mx-3">
+<main>
