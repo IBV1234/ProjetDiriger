@@ -75,6 +75,42 @@
     padding-bottom: 2em;
 }
 
+.container-index{
+    background-color: white;
+    border-radius: 10px;
+
+    /*width, height*/
+    height: fit-content;
+    width: 100%;
+
+    /*display of elements*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*esapcement dans le parent*/
+    flex: 1;
+
+    /*espacements*/
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 2em;
+    margin-bottom: 0.5em;
+}
+
+.container-gros-index{
+    /*display of elements*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    /*height*/
+    height: 80vh;
+    max-height: 550px;
+}
+
 /************************* boutons reponses ***********************/
 
 .bouton-reponse{
