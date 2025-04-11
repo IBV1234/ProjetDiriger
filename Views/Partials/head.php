@@ -1,4 +1,4 @@
-head:
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,6 +14,7 @@ head:
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="/public/css/item.css" rel="stylesheet">
     <link href="/public/css/account.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/enigme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>

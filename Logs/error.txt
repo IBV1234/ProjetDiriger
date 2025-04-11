@@ -1,1 +1,5 @@
 
+Exception ERROR : 2025-04-11 00:20:45 | Code : 42000 | Message : SQLSTATE[42000]: Syntax error or access violation: 1305 PROCEDURE dbknapsak10.select_question_reponses does not exist | Fichier : C:\wamp64\www\ProjetDiriger\models\model_egnime.php | Ligne : 18
+Exception ERROR : 2025-04-11 00:22:27 | Code : 42000 | Message : SQLSTATE[42000]: Syntax error or access violation: 1305 PROCEDURE dbknapsak10.select_question_reponses does not exist | Fichier : C:\wamp64\www\ProjetDiriger\models\model_egnime.php | Ligne : 18
+Exception ERROR : 2025-04-11 00:22:46 | Code : 42000 | Message : SQLSTATE[42000]: Syntax error or access violation: 1305 PROCEDURE dbknapsak10.select_question_reponses does not exist | Fichier : C:\wamp64\www\ProjetDiriger\models\model_egnime.php | Ligne : 18
+Exception ERROR : 2025-04-11 00:25:01 | Code : 42000 | Message : SQLSTATE[42000]: Syntax error or access violation: 1305 PROCEDURE dbknapsak10.select_question_reponses does not exist | Fichier : C:\wamp64\www\ProjetDiriger\models\model_egnime.php | Ligne : 18

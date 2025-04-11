@@ -1,8 +1,8 @@
 <?php
 
-require_once 'src/class/egnimes.php';
+require_once 'src/class/questions.php';
 
-class EgnimeModel 
+class QuestionsModel 
 {
 
 
@@ -10,10 +10,10 @@ class EgnimeModel
 
     public function select_question_reponses() : null|array {
         
-        $egnimes = [];
+        $questions = [];
 
         try {
-            $stm = $this->pdo->prepare('CALL select_question_reponses()');# à compléter avec la procédure SQL  qui doit être créé par Sabrina
+            $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires()');# à compléter avec la procédure SQL  qui doit être créé par Sabrina
 
             $stm->execute();
 
@@ -22,18 +22,15 @@ class EgnimeModel
             if (! empty($data)) {
 
                 foreach ($data as $row) {
-                    $egnimes[] = new Egnime(
-                        $row['idEgnime'],
+                    $questions[] = new Questions(
+                        $row['idEnigme'],
                         $row['enonce'],
                         $row['difficulte'],
-                        $row['esPigee'],
-                        $row['idReponse'],
-                        $row['laReponse'],
-                        $row['estBonne'],
+   
                     );
                 }
 
-                return $egnimes;
+                return $questions;
             }
 
             return null;
@@ -57,7 +54,7 @@ class EgnimeModel
     }
 
     
-    public function selectEgnimeById(int $idEgnime): null|Egnime {
+    public function selectEgnimeById(int $idEgnime): null|Questions {
         try{
             $stm = $this->pdo->prepare('CALL IdEgnimeetById(:idEgnime)');# à compléter avec la procédure SQL  qui doit être créé par Sabrina
     
@@ -68,14 +65,10 @@ class EgnimeModel
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
             if(! empty($data)) {
-                return new Egnime(
+                return new Questions(
                         $data['idEgnime'],
                         $data['enonce'],
                         $data['difficulte'],
-                        $data['esPigee'],
-                        $data['idReponse'],
-                        $data['laReponse'],
-                        $data['estBonne'],
                     
                 );
             }

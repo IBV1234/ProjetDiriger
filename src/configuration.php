@@ -15,4 +15,5 @@ const ROUTES = [
     '/deconnexion' => 'deconnexion.php',
     '/updateItemPanier'=>'updateItemPanier.php',
     '/item-sac' => 'item-sac.php',
+    '/ramdom_question' => 'ramdom_question.php', 
 ];
