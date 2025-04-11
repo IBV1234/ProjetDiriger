@@ -5,24 +5,25 @@ require 'partialsEnigma/header.php';
 
 ?>
 <div class="container-gros-index">
+
     <!-- aleatoire -->
-    <div class="container-index">
-        <p>Question aléatoire</p>
+    <a class="container-index" href="/random-question" style="text-decoration: none;">
+        <p class="h2" style="color: black;">Question aléatoire</p>
         <img src="/public/images/dice.png" alt="des" style="width:50%; height: 50%;" >
-    </div>
+    </a>
 
     <!-- difficultes -->
     <div class="container-index">
-        <p>Question selon la difficulté</p>
+        <p class="h2">Question selon la difficulté</p>
         <div>
-            <a>
-                <img src="/public/images/golden-star.png" alt="etoile-facile" style="width:90px; height: 90px;" >
+            <a href="/question.php?difficulty=easy">
+                <img src="/public/images/golden-star.png" alt="etoile-facile" style="width:90px; height: 90px;">
             </a>
-            <a>
-                <img src="/public/images/golden-star.png" alt="etoile-moyenne" style="width:90px; height: 90px;" >
+            <a href="/question.php?difficulty=medium">
+                <img src="/public/images/golden-star.png" alt="etoile-moyenne" style="width:90px; height: 90px;">
             </a>
-            <a>
-                <img src="/public/images/golden-star.png" alt="etoile-difficile" style="width:90px; height: 90px;" >
+            <a href="/question.php?difficulty=hard">
+                <img src="/public/images/golden-star.png" alt="etoile-difficile" style="width:90px; height: 90px;">
             </a>
         </div>
     </div>
