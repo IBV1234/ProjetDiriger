@@ -9,13 +9,17 @@
 }
 
 .body-enigma main{
-    background-color: #bacbda;
+    /* background-color: #bacbda; */
 
     /*centering*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    /*width*/
+    width: 95%;
+    max-width: 412px;
 }
 
 
@@ -57,8 +61,6 @@
     border-radius: 10px;
 
     /*width, height*/
-    width: 95%;
-    max-width: 412px;
     height: fit-content;
 
     /*display of elements*/
