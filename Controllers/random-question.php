@@ -1,7 +1,7 @@
 <?php
 require 'src/session.php';
 require 'src/class/database.php';
-require 'models/model_Questions.php';
+require 'models/QuestionModel.php';
 
 sessionStart();
 $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
@@ -13,4 +13,4 @@ if (isPost()) {
     $reponse = $_POST['reponse'];
 }
 
-require "views/ramdom_question.php";
+require "views/random-question.php";
