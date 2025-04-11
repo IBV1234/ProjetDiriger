@@ -1,5 +1,42 @@
 .body-enigma{
     background-color: #bacbda;
+
+    /*centering*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-enigma{
+    background-color: white;
+    border-radius: 10px;
+
+    /*width, height*/
+    width: 95%;
+    max-width: 412px;
+    height: 90px;
+
+    /*display of elements*/
+    display: flex;
+    grid-template-columns:  auto auto auto;
+    justify-content: center;
+}
+
+.link-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.header-enigma .col { /*centers le logo dans son div*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .container-egnime-body{
