@@ -13,7 +13,7 @@ class QuestionsModel
         $questions = [];
 
         try {
-            $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires()');# à compléter avec la procédure SQL  qui doit être créé par Sabrina
+            $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires()');
 
             $stm->execute();
 
@@ -53,6 +53,50 @@ class QuestionsModel
         }
     }
 
+    public function chercherQuestionSelonDifficulte($difficulty) : null|array {
+        
+        $questions = [];
+
+        try {
+            $stm = $this->pdo->prepare('CALL Chercher_Questions_Aleatoires_Selon_laDiffculter(:difficulte)');
+            $stm->bindValue(':difficulte', $difficulty, PDO::PARAM_STR);
+            $stm->execute();
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+          
+            if (! empty($data)) {
+
+                foreach ($data as $row) {
+                    $questions[] = new Questions(
+                        $row['idEnigme'],
+                        $row['enonce'],
+                        $row['difficulte'],
+   
+                    );
+                }
+
+                return $questions;
+            }
+
+            return null;
+
+        } catch (PDOException $e) {
+
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+
+              redirect('views/error.php');
+
+        }
+    }
     
     public function selectEgnimeById(int $idEgnime): null|Questions {
         try{

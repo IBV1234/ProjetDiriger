@@ -15,10 +15,22 @@ if (!isset($_SESSION['user'])) {
 $difficulty = isset($_GET['difficulty']) ? $_GET['difficulty'] : null;
 
 if ($difficulty) {
+    switch($difficulty) {
+        case 'easy':
+            $difficulty = 'F';
+            break;
+        case 'medium':
+            $difficulty = 'M';
+            break;
+        case 'hard':
+            $difficulty = 'D';
+            break;
+    }
+
     //PDO
     $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
     $QuestionsModel = new QuestionsModel($pdo);
-    $questions = $QuestionsModel->select_question_reponses(); // !!!!!!!! a modifier pour la difficulté au lieu de random !!!!!!!!!!!!
+    $questions = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
 
     if (isPost()) {
         $idEgnime = (int)$_POST['idEgnime'];
