@@ -17,5 +17,5 @@ const ROUTES = [
     '/random-question' => '/random-question.php', 
     '/enigma' => '/index-enigma.php',
     '/question' => '/question.php',
-    '/reponse' => '/enigma-reponse.php',
+    '/reponse' => '/reponseEnigma.php',
 ];

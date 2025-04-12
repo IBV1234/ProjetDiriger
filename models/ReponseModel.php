@@ -60,8 +60,8 @@ class ReponseModel
             if(! empty($data)) {
                 return new Reponse(
                     $data['idEnigme'],
-                    $$data['laReponse'],
-                    $$data['estBonne'],
+                    $data['laReponse'],
+                    $data['estBonne'],
                     $data['idReponse']
                 );
             }

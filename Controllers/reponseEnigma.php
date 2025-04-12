@@ -2,9 +2,9 @@
 require 'src/class/Database.php';
 require 'src/session.php';
 require 'src/class/User.php';
-require 'models/QuestionsModel.php';
-require 'models/ReponseModel.php';
 require 'models/UserModel.php';
+require 'models/QuestionModel.php';
+require 'models/ReponseModel.php';
 
 ////////////////////////////////////////
 sessionStart();
@@ -35,12 +35,12 @@ $question = $enigmeModel->selectEgnimeById($idEgnime);
 if($reponse->getEstBonne() == 1) {
     //messages
     $messageAvant = "Bonne réponse !";
-    $messageApres = $question->getCaps(); + " ont été ajoutés à votre compte Knapsack!";
+    $messageApres = strval($question->getCaps()) . " caps ont été ajoutés à votre compte Knapsack!";
     $srcImage = "public/images/valid.png";
 
     //update du solde
-    $_SESSION['user']->setCaps($_SESSION['user']->getCaps() + $question->getCaps());
-    $ModelUser->nouveauSolde($_SESSION['user']->getCaps(), $_SESSION['user']->getId());
+    $_SESSION['user']->setBalance($_SESSION['user']->getBalance() + $question->getCaps());
+    $ModelUser->nouveauSolde($_SESSION['user']->getBalance(), $_SESSION['user']->getId());
 
 } else {
     //messages

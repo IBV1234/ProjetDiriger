@@ -7,20 +7,16 @@ require 'partialsEnigma/header.php';
 
 <div class="container-egnime">
     <!-- premier message -->
-    <p>
-        <?= $messageAvant ?>
-    </p>
+    <p class="h5" style="text-align: center;"><?= $messageAvant ?></p>
 
     <!-- second message -->
-    <p>
-        <?= $messageApres ?>
-    </p>
+    <p class="h5" style="text-align: center;"><?= $messageApres ?></p>
     
     <!-- image -->
-    <img src="<?=$srcImage?>">
+    <img src="<?=$srcImage?>" style="width: 70%; height: auto;">
 
     <!-- retour a l'accueil -->
-    <button type="submit" name="reponse" value="<?= $reponse->getIdReponse();?>" class="bouton-reponse">Retour à l'accueil</button>
+    <a href="/enigma" class="bouton-reponse" style="color:black; text-decoration-line: none;">Retour à l'accueil</a>
 </div>
 
 <?php require 'partialsEnigma/footer.php' ?>
