@@ -11,6 +11,11 @@ require 'partialsEnigma/header.php';
 
     <!-- second message -->
     <p class="h5" style="text-align: center;"><?= $messageApres ?></p>
+
+    <!-- message bonus -->
+    <?php if(isset($messageBonus)) : ?>
+        <p class="h5" style="text-align: center;"><?= $messageBonus ?></p>
+    <?php endif; ?>
     
     <!-- image -->
     <img src="<?=$srcImage?>" style="width: 70%; height: auto;">

@@ -9,7 +9,10 @@ sessionStart();
 if (!isset($_SESSION['user'])) {
     redirect("/connexion");
 }
-///////////////////////////////////////
 
+if(!isset($_SESSION['bonus'])){
+    $_SESSION['bonus'] = 0;
+}
+///////////////////////////////////////
 
 require 'views/index-enigma.php';

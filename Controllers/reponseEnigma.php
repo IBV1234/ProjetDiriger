@@ -11,9 +11,11 @@ sessionStart();
 if (!isset($_SESSION['user'])) {
     redirect("/connexion");
 }
-
 if(!isset($_SESSION['reponse']) || !isset($_SESSION['idEgnime'])) {
     redirect('/enigma');
+}
+if(!isset($_SESSION['bonus'])){
+    $_SESSION['bonus'] = 0;
 }
 ///////////////////////////////////////
 
@@ -33,6 +35,14 @@ $reponse = $reponseModel->selectReponseById($idReponse);
 $question = $enigmeModel->selectEgnimeById($idEgnime);
 
 if($reponse->getEstBonne() == 1) {
+    //bonus
+    $_SESSION['bonus'] += 1;
+    if($_SESSION['bonus'] == 3) {
+        $_SESSION['user']->setBalance($_SESSION['user']->getBalance() + $question->getBonus());
+        $_SESSION['bonus'] = 0;
+        $messageBonus = "Vous avez gagné un bonus de " . $question->getBonus() . " caps pour avoir répondu à trois questions d'affilées!";
+    }
+
     //messages
     $messageAvant = "Bonne réponse !";
     $messageApres = strval($question->getCaps()) . " caps ont été ajoutés à votre compte Knapsack!";

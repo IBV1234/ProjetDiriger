@@ -10,6 +10,9 @@ sessionStart();
 if (!isset($_SESSION['user'])) {
     redirect("/connexion");
 }
+if(!isset($_SESSION['bonus'])){
+    $_SESSION['bonus'] = 0;
+}
 ///////////////////////////////////////
 
 $difficulty = isset($_GET['difficulty']) ? $_GET['difficulty'] : null;

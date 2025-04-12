@@ -58,4 +58,9 @@ class Questions {
         }
         return $caps;
     }
+
+    public function getBonus(): int {
+        return 1000;
+    }
+
 }
