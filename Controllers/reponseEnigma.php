@@ -52,11 +52,17 @@ if($reponse->getEstBonne() == 1) {
     $_SESSION['user']->setBalance($_SESSION['user']->getBalance() + $question->getCaps());
     $ModelUser->nouveauSolde($_SESSION['user']->getBalance(), $_SESSION['user']->getId());
 
+    //statistiques
+    $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  1);
+
 } else {
     //messages
     $messageAvant = "Mauvaise réponse !";
     $messageApres = "Meilleure chance la prochaine fois !";
     $srcImage = "public/images/invalid.png";
+
+    //statistiques
+    $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  0);
 }
 
 require 'views/enigma-reponse.php';

@@ -182,9 +182,6 @@
     color: black;
 }
 
-
-
-
 @media (max-width: 768px) {
     .container-head {
         gap: 10px; 

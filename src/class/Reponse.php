@@ -16,7 +16,6 @@ class Reponse {
         $this->reponse = $reponse;
         $this->estBonne = $estBonne;
         $this->idReponse = $idReponse;
- 
     }
 
     // Getters

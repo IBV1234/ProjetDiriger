@@ -82,7 +82,7 @@ class QuestionsModel
     
     public function selectEgnimeById(int $idEgnime): null|Questions {
         try{
-            $stm = $this->pdo->prepare('CALL chercherEnigmeParId(:idEgnime);');# à compléter avec la procédure SQL  qui doit être créé par Sabrina
+            $stm = $this->pdo->prepare('CALL chercherEnigmeParId(:idEgnime)');
     
             $stm->bindValue(":idEgnime", $idEgnime, PDO::PARAM_INT);
             

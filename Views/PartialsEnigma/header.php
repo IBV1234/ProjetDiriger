@@ -23,6 +23,7 @@
         </a>
         <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item" href="/">Knapsack</a></li>
+            <li><a class="dropdown-item" href="/statistiques">Statistiques</a></li>
             <li><a class="dropdown-item" href="/info">Info</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/deconnexion">Déconnection</a></li>

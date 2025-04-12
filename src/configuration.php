@@ -19,4 +19,5 @@ const ROUTES = [
     '/question' => '/question.php',
     '/reponse' => '/reponseEnigma.php',
     '/info' => '/info-enigma.php',
+    '/statistiques' => '/statistiques-enigma.php',
 ];
