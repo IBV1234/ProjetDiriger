@@ -1,5 +1,4 @@
 <?php
-
 require 'src/class/Database.php';
 require 'src/session.php';
 require 'src/class/User.php';
@@ -37,9 +36,10 @@ if ($difficulty) {
     $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());
     shuffle($reponses);
 
-    if (isPost()) {
-        $idEgnime = (int)$_POST['idEgnime'];
-        $reponse = $_POST['reponse'];
+    if (isPost()) { //envoi de reponse
+        $_SESSION['reponse'] = $_POST['reponse'];
+        $_SESSION['idEgnime'] = $_POST['idEgnime'];
+        redirect('/reponse');
     }
 
 } else {

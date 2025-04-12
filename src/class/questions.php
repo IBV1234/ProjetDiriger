@@ -42,4 +42,20 @@ class Questions {
     public function getdifficulte(): string {
         return $this->difficulte;
     }
+
+    public function getCaps(): int {
+        $caps = null;
+        switch($this->getDifficulte()) {
+            case 'F':
+                $caps = 50;
+                break;
+            case 'M':
+                $caps = 100;
+                break;
+            case 'D':
+                $caps = 150;
+                break;
+        }
+        return $caps;
+    }
 }

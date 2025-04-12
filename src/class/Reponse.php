@@ -3,13 +3,13 @@ class Reponse {
 
     private int $idEgnime;
     private string $reponse;
-    private bool $estBonne;
+    private int $estBonne;
     private int $idReponse;
     
     public function __construct(
         int $idEgnime,
         string $reponse,
-        bool $estBonne,
+        int $estBonne,
         int $idReponse = null
     ) {
         $this->idEgnime = $idEgnime;
@@ -28,7 +28,7 @@ class Reponse {
         return $this->reponse;
     }
 
-    public function getEstBonne(): bool {
+    public function getEstBonne(): int {
         return $this->estBonne;
     }
 
