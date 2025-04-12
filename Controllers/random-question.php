@@ -21,8 +21,9 @@ $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());
 shuffle($reponses);
 
 if (isPost()) {
-    $idEgnime = (int)$_POST['idEgnime'];
-    $reponse = $_POST['reponse'];
+    $_SESSION['reponse'] = $_POST['reponse'];
+    $_SESSION['idEgnime'] = $_POST['idEgnime'];
+    redirect('/reponse');
 }
 
 require "views/random-question.php";
