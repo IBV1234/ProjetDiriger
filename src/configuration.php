@@ -18,4 +18,5 @@ const ROUTES = [
     '/enigma' => '/index-enigma.php',
     '/question' => '/question.php',
     '/reponse' => '/reponseEnigma.php',
+    '/info' => '/info-enigma.php',
 ];

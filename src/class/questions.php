@@ -53,7 +53,7 @@ class Questions {
                 $caps = 100;
                 break;
             case 'D':
-                $caps = 150;
+                $caps = 200;
                 break;
         }
         return $caps;
