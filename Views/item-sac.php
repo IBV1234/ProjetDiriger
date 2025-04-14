@@ -7,7 +7,7 @@ require 'partials/header.php';
 
 <div class="row">
     <div class="col d-flex align-items-end flex-column mb-3"> <!-- header -->
-        <a class="btn bg-dark-yellow-fallout" href="/">Retour</a>
+        <a class="btn bg-dark-yellow-fallout" href="/inventaire">Retour</a>
     </div>
     <div class="d-flex justify-content-center">
         <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
@@ -33,12 +33,13 @@ require 'partials/header.php';
                             <p class="fs-4 fw-semibold"><?php echo $item->getDescription() ?></p>
                             <div class="m-3 pt-3">
                                 <div class="d-flex justify-content-around align-items-center w-100 mt-2">
-                                    <div class="bg-dark-yellow-fallout px-2 rounded-circle"
-                                        style="transform: skew(0deg, 5deg);">
-                                        <div style="transform: skew(0deg, -5deg);" class="d-flex">
-                                            <h2><?= $item->getPrix() ?></h2>
-                                            <img src="/public/images/caps_icon.webp" alt="caps" width="30" height="30"
-                                                class="mt-2 ms-1">
+                                <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
+                                        <div style="transform: skew(0deg, -5deg);">
+                                            <h2>
+                                                <img src="/public/images/sac.png" class="bag" alt="panier" />
+                                                <span></span>
+                                                <?= $itemQt ?>
+                                            </h2>
                                         </div>
                                     </div>
                                     <div class="bg-dark-yellow-fallout px-3 rounded-circle"
@@ -65,19 +66,11 @@ require 'partials/header.php';
                 <div class="w-100"></div>
                 <form method="POST">
                     <div class="col d-flex align-items-center flex-column m-3">
-                        <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" <?php echo $item->getQteStock() > 0 ? "" : "disabled" ?>>
-                            <i class="bi bi-cart-check m-2"></i>Ajouter au panier
-                            <!-- make this add the item to the cart in the SESSION -->
-                        </button>
-                        <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock :
-                            <?php echo $item->getQteStock() ?></div>
+                        <!-- Make the logic for eating items and selling (later for selling) -->
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-    <div>
-        <!-- comment container {NOT TO DO IN SPRINT 1} -->
     </div>
 </div>
 
