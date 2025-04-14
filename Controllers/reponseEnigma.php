@@ -61,6 +61,9 @@ if($reponse->getEstBonne() == 1) {
     $messageApres = "Meilleure chance la prochaine fois !";
     $srcImage = "public/images/invalid.png";
 
+    //update de reponses de suite
+    $_SESSION['bonus'] = 0;
+
     //statistiques
     $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  0);
 }
