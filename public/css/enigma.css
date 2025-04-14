@@ -1,6 +1,6 @@
 .body-enigma{
-    background-color: #bacbda;
-
+    background-image: url("../images/bg-egnima.jpg") ;
+    background-repeat: repeat;
     /*centering*/
     display: flex;
     flex-direction: column;
@@ -23,10 +23,12 @@
 }
 
 
+
 /************************ header ***********************/
 .header-enigma{
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 2, 2);
 
     /*width, height*/
     width: 95%;
@@ -37,8 +39,19 @@
     display: flex;
     grid-template-columns:  auto auto auto;
     justify-content: center;
-}
 
+    /*Header-border*/
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+}
+p,div {
+    font-family: "Alkalami", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
 .link-icon{
     display: flex;
     justify-content: center;
@@ -59,7 +72,10 @@
 .container-egnime{
     background-color: white;
     border-radius: 10px;
-
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
     /*width, height*/
     height: fit-content;
 
@@ -73,11 +89,14 @@
     gap: 10px;
     padding: 10px;
     padding-bottom: 2em;
+
+
 }
 
 .container-index{
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 2, 2);
 
     /*width, height*/
     height: fit-content;
@@ -97,7 +116,16 @@
     padding: 10px;
     padding-bottom: 2em;
     margin-bottom: 0.5em;
+
+    /* Border*/
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+
 }
+
+
 
 .container-gros-index{
     /*display of elements*/
@@ -156,12 +184,32 @@
     font-size: 20px; 
 }
 
+
 .cercle-text-2{
     display: flex; 
     justify-content: center; 
     align-items: center; /* Aligne le contenu au centre */
     font-weight: bold;
     padding-bottom: 5px; 
+}
+.cercle:hover{
+    border: 2px solid rgb(red, rgb(102, 53, 200), blue)
+}
+.star-red{
+    filter: sepia(100%) hue-rotate(-50deg) saturate(700%);
+ 
+}
+
+.star-green{
+    filter: sepia(20%) hue-rotate(50deg) saturate(400%);
+}
+.star-yellow {
+    filter: sepia(20%) hue-rotate(20deg) saturate(600%);
+}
+
+.flotting-bg{
+    box-shadow: 0px 5px 10px rgba(0, 2, 2);
+
 }
 
 /************************* info ************************/
@@ -204,3 +252,4 @@
         width: 80%; 
     }
 }
+
