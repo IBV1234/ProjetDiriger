@@ -33,7 +33,9 @@
           </i>
         </a>
   <?php endif; ?>
-
+        <a href="/enigma" class="text-decoration-none text-black pe-4">
+          <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
+        </a>
         <div class="dropdown p-2">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
@@ -94,5 +96,5 @@
       </a>
     </div>
   </header>
-  
+
   <main class="mx-3">
