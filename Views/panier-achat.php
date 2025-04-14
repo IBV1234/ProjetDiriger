@@ -50,7 +50,7 @@ require "views/Partials/header.php";
                     </div>
                 </div>
                 <?php foreach ($panier as $key => $item): ?>
-                    <div class="col">
+                    <div class="col floating-effect">
                         <div class="mb-3">
                             <div class="mb-3 text-decoration"> <?= $item->getNom() ?>
                             </div>
