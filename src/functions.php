@@ -22,3 +22,28 @@ function getPoidPanier($items){
     }
     return $poids;
 }
+
+function getQtPanier($items){
+    $quantite = 0;
+   
+    foreach ($items as $key => $item) {
+        $quantite += $item['quantite'];
+    }
+    return $quantite;
+}
+
+function getItemTypeIcon($string): string{
+    switch ($string){
+        case "arme" :
+            return "../public/images/sword-icon.png";
+        case "armure" :
+            return "../public/images/armor-icon.png";
+        case "nourriture":
+            return "../public/images/food-icon.png";
+        case "munition":
+            return "../public/images/munition-icon.png";
+        case "medicament":
+            return "../public/images/medicine-icon.png";
+    }
+    return "error";
+}

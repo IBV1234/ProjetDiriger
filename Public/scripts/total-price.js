@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //querySelectorAll('input[type="number"]: Sélectionne tous les champs de quantité 
         //[id^="quantity-"] → Sélectionne tous les inputs dont l'ID commence par "quantity-
 
-        // Sélectionne tous les champs de quantité dont l'ID commence par "quantity-"
         const quantityInputs = document.querySelectorAll('input[type="number"][id^="quantity-"]');
         window.prixTotalElement = document.getElementById('prixTotal'); // Élément affichant le prix total
         // Fonction pour recalculer et mettre à jour le prix total
@@ -33,4 +32,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
-
