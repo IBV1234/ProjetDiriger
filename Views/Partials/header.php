@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index'): ?>
+<?php if ($controllerFile == "Controllers/index.php"): ?>
   <header class="px-3 py-1 position-relative">
 <?php else: ?>
   <header class="header-height px-3 py-1 position-relative">
@@ -19,27 +19,29 @@
         <li class="nav-item">
           <a class="nav-link text-black fw-semibold" href="/connexion">Connexion</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-black fw-semibold" href="/account">Account</a>
-        </li>
       </ul>
 
 <?php endif; ?>
 <!-- /Disconnected only -->
 <!-- Connected only -->
 <?php if(isset($_SESSION['user'])): ?>
+  <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier-achat" class="text-decoration-none text-black pe-4">
-          <i class="bi bi-cart-fill" style="font-size: 35px;"></i>
+          <i class="bi bi-cart-fill d-flex cart-icon" style="font-size: 35px;">
+            <?php if($sumPanier != null) echo htmlTag("i", ["class" => "notification-num"], htmlTag("p", ["class" => "ps-1 mt-3 notification-num-text"], $sumPanier . "")) ?>
+          </i>
         </a>
-
+  <?php endif; ?>
+        <a href="/enigma" class="text-decoration-none text-black pe-4">
+          <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
+        </a>
         <div class="dropdown p-2">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" style="">
-            <li><a class="dropdown-item" href="#">Admin</a></li>
-            <li><a class="dropdown-item" href="#">Profil</a></li>
+            <li><a class="dropdown-item" href="/account">Profil</a></li>
             <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/deconnexion">Déconnection</a></li>
@@ -51,7 +53,7 @@
 
     </div>
 <!-- Index seulement -->
-    <?php if (isset($_SESSION['controller']) && $_SESSION['controller'] === 'index') : ?>
+    <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center">
         <div class="row ms-3">
           <div class="col-12 col-md-auto form-check form-check-inline form-switch">
@@ -94,5 +96,5 @@
       </a>
     </div>
   </header>
-  
+
   <main class="mx-3">

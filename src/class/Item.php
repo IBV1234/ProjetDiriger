@@ -1,107 +1,91 @@
 <?php
 class Item {
-    
 
-    private int $idItem;
-    private string $nomItem;
-    private string $typeItem;
-    private int $poids;
-    private int $qteStock;
-    private int $prix;
+    private ?int $idItem;
+    private string $typeitem;
+    private string $nom;
+    private int $qtestock;
+    private float $prix;
+    private float $poids;
     private int $utilite;
     private string $lienphoto;
     private int $estDisponible;
     private string $description;
-    private int $rating;
+    private float $evaluation;
+    private int $quantitePanier;
 
     public function __construct(
         ?int $idItem,
-        string $typeitem,
         string $nom,
+        string $typeitem,
+        float $poids,
         int $qtestock,
         float $prix,
-        float $poids,
         int $utilite,
         string $lienphoto,
         int $estDisponible, 
         ?string $description = '',
-        ?int $rating = 0
+        ?float $evaluation = 0,
+        ?int $quantitePanier = 0
     ) {
         $this->idItem = $idItem;
-        $this->typeItem = $typeItem;
-        $this->nomItem = $nomItem;
-        $this->qteStock = $qteStock;
-        $this->prix = $prix;
+        $this->nom = $nom;
+        $this->typeitem = $typeitem;
         $this->poids = $poids;
+        $this->qtestock = $qtestock;
+        $this->estDisponible = $estDisponible;
+        $this->prix = $prix;
         $this->utilite = $utilite;
         $this->lienphoto = $lienphoto;
         $this->description = $description ?? '';
-        $this->rating = $rating ?? 0;
-    }
+        $this->evaluation = $evaluation ?? 0;
+        $this->quantitePanier = $quantitePanier??0;
+        }
 
     // Getters
-    public function getId(): int {
+    public function getIdItem(): ?int {
         return $this->idItem;
     }
-    public function getNom(): string {
-        return $this->nomItem;
-    }
+
     public function getType(): string {
-        return $this->typeItem;
+        return $this->typeitem;
     }
-    public function getPoids(): int {
-        return $this->poids;
+
+    public function getNom(): string {
+        return $this->nom;
     }
+
     public function getQteStock(): int {
-        return $this->qteStock;
+        return $this->qtestock;
     }
-    public function getPrix(): int {
+
+
+    public function getPrix(): float {
         return $this->prix;
     }
+
+    public function getPoids(): float {
+        return $this->poids;
+    }
+
     public function getUtilite(): int {
         return $this->utilite;
     }
+
     public function getLienPhoto(): string {
-
         return "public/images/" . $this->lienphoto;
-      
-
-    }
-    public function getFlagDispo(): int {
-        return $this->flagDispo;
-    }
-    public function getDescription(): string|null {
-        return $this->descriptionItem;
-    }
-    public function getRating(): float {
-        if ($this->rating !== null) {
-            return round($this->rating, 1);
-        }
-        return 0;
     }
 
-    //Fonction spécifique
-    public function estDisponible(): bool {
-        return $this->flagDispo === 1;
+    public function getEstDisponible(): int {
+        return $this->estDisponible;
     }
-
-    public function toArray(): array {
-        return [
-            'idItem' => $this->idItem,
-            'typeItem' => $this->typeItem,
-            'nomItem' => $this->nomItem,
-            'qteStock' => $this->qteStock,
-            'prix' => $this->prix,
-            'poids' => $this->poids,
-            'utilite' => $this->utilite,
-            'lienphoto' => $this->lienphoto,
-            'flagDispo' => $this->flagDispo,
-            'descriptionItem' => $this->descriptionItem,
-            'rating' => $this->rating
-        ];
+    public function getDescription(): string {
+        return $this->description;
     }
-    public function getRating(): int {
-        return $this->rating;
+    public function getEvaluation(): float {
+        return round($this->evaluation, 1);
+    }
+    public function getQuantitePanier(): int {
+        return $this->quantitePanier;
     }
 }
-

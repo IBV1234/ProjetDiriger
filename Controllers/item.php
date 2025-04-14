@@ -9,11 +9,10 @@ require 'Models/UserModel.php';
 
 sessionStart();
 
-//temporary thing -- simulates puting the item in the session........
+//db..................................................................
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
-$items = $itemModel->selectAll();
 
 //get item from index.................................................
 
@@ -28,11 +27,11 @@ if(!isset($_SESSION['item']))
 
 //send item to cart...................................................
 if(isPost()){
+    if(!isset($_SESSION['user']))
+        redirect("/connexion");
     $panierModel = new PanierModel($pdo);
-    if(!$panierModel->isItemInPanier($_SESSION['user']->getId(),$item->getIdItem()))
-        $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
-    else
-        redirect("/"); //We could add notification later
+    $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
+    redirect("/");
 }
 
-require 'views/item.php';       
+require 'views/item.php';

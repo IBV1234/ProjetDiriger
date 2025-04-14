@@ -7,14 +7,21 @@ require 'Models/panier-model.php';
 require 'Models/UserModel.php';
 
 sessionStart();
+
+////////////////////////////////////////
+if (!isset($_SESSION['user'])) {
+    redirect("/connexion");
+}
+///////////////////////////////////////
+
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $PanierModel =  new PanierModel($pdo);
 
 //$PanierModel->insert(9,  1 ,5); //  for test
-const maxPoids = 15;
+$maxPoids = $_SESSION['user']->getPoidsMax();
 
- $caps =  $_SESSION['user']->getBalance();
+$caps =  $_SESSION['user']->getBalance();
 
 
 $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
