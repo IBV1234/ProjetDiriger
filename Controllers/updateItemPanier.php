@@ -25,6 +25,3 @@
  
   }
    redirect("/panier-achat");
-
-
-
