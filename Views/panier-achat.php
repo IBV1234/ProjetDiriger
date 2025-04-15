@@ -17,21 +17,22 @@ require "views/Partials/header.php";
                     <img src="/public/images/caps.png" class="bag" alt="caps" />
                     <span id="caps" name="caps"><?= $caps ?></span>
                 </div>
-                <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
+                <h5 class="mx-2 mt-1">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></h5>
+                <h5 class="mx-2 mt-1">Max: <?= $maxPoids ?> lbs</h5>
+                <div class="d-flex align-items-center mx-2">
+                    <img src="/public/images/panier.png" class="me-1 ratio ratio-1x1" height="25" alt="panier">
+                    <h5 class="mt-1"><span id="poidsTotal"><?= $poidsTotal ?></span>&nbsp;lbs</h5>
 
-                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= $maxPoids ?>">
-                <div class="text-decoration">Max: <?= $maxPoids ?> lbs</div>
-                <div class="text-decoration">
-                    <img src="/public/images/panier.png" class="bag" alt="panier" />
-                    <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
-                    <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
                 </div>
                 <div class="text-decoration">
                     <img src="/public/images/sac.png" class="bag" alt="sac" />
                     <span id="poidsSacDos" name="sac"><?= $poidsSacDos ?></span>
                     lbs
                 </div>
-                <input type="hidden" id="utilite" value="<?= $UtiliteInSac ?>">
+
+                <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
+                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= $maxPoids ?>">
+
 
             </div>
 
