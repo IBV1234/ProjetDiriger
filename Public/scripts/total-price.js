@@ -32,9 +32,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-<<<<<<< HEAD
 });
-
-=======
-});
->>>>>>> 95a6259979253c65b943f85035ffc085fb6b78a3
