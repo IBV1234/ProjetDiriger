@@ -2,9 +2,9 @@
 
 require 'src/session.php';
 require 'src/class/Database.php';
-require 'Models/ItemModel.php';
-require 'Models/panier-model.php';
-require 'Models/UserModel.php';
+require 'models/ItemModel.php';
+require 'models/panier-model.php';
+require 'models/UserModel.php';
 
 sessionStart();
 

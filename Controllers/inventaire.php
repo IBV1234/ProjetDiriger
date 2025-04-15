@@ -3,9 +3,9 @@
 require 'src/class/Database.php';
 require 'src/session.php';
 require 'src/class/Item.php';
-require 'Models/ItemModel.php';
+require 'models/ItemModel.php';
 require 'src/class/User.php';
-require 'Models/panier-model.php';
+require 'models/panier-model.php';
 
 ////////////////////////////////////////
 sessionStart();

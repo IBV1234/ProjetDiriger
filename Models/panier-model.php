@@ -50,9 +50,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
             
         }
         return null;
@@ -94,9 +94,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }  
         return null;
     }
@@ -120,9 +120,9 @@ class PanierModel implements ModelInterface
                 $e->getLine()
               );
 
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -144,9 +144,9 @@ class PanierModel implements ModelInterface
                 $e->getLine()
               );
 
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -199,9 +199,9 @@ class PanierModel implements ModelInterface
                 $e->getLine()
             );
 
-            file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+            file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-            redirect('Views/error.php');
+            redirect('views/error.php');
 
         }
         
@@ -227,9 +227,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -250,9 +250,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -280,9 +280,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -310,9 +310,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -338,9 +338,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
 
@@ -368,9 +368,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
     
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
     }
     public function isItemInPanier($idJoueur, $idItem) : bool {
@@ -398,9 +398,9 @@ class PanierModel implements ModelInterface
                 $e->getFile(),
                 $e->getLine()
               );
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('Views/error.php');
+              redirect('views/error.php');
         }
         
         return false;
@@ -428,9 +428,9 @@ class PanierModel implements ModelInterface
             $e->getLine()
           );
 
-          file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+          file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-          redirect('Views/error.php');
+          redirect('views/error.php');
     }
     }
     public function SumPanier($idJoueur) : int|null{
@@ -454,9 +454,9 @@ class PanierModel implements ModelInterface
             $e->getFile(),
             $e->getLine()
           );
-          file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+          file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-          redirect('Views/error.php');
+          redirect('views/error.php');
         }
     }
 }

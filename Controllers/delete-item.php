@@ -1,7 +1,7 @@
 <?php
 require 'src/session.php';
 require 'src/class/Database.php';
-require 'Models/panier-model.php';
+require 'models/panier-model.php';
 
 sessionStart();
 

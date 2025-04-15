@@ -2,10 +2,10 @@
 
 require 'src/class/Database.php';
 require 'src/class/Item.php';
-require 'Models/ItemModel.php';
+require 'models/ItemModel.php';
 require 'src/session.php';
-require 'Models/panier-model.php';
-require 'Models/UserModel.php';
+require 'models/panier-model.php';
+require 'models/UserModel.php';
 
 sessionStart();
 

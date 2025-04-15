@@ -2,7 +2,7 @@
 
 require 'src/class/Database.php';
 require 'src/session.php';
-require 'Models/UserModel.php';
+require 'models/UserModel.php';
 
 sessionStart();
 
