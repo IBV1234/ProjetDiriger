@@ -13,20 +13,13 @@ require 'partials/header.php';
                         <a href="/item?id=<?= $item->getIdItem() ?>" class="text-decoration-none text-black">
                             <div class="ratio ratio-1x1">
                                 <div class="d-flex flex-column justify-content-between align-items-center p-4 bg-blue-fallout rounded rounded-3 shadow-sm">
-                                    <h4 class="text-white index-title"><?= $item->getNom() ?></h4>
+                                    <h4 class="text-white"><?= $item->getNom() ?></h4>
                                     <img src="<?= $item->getLienPhoto() ?>" class="img-fluid" alt="placeholder">
-                                    <div class="d-flex justify-content-around align-items-center w-100">
-                                        <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 3deg);">
-                                            <div style="transform: skew(0deg, -3deg);" class="d-flex">
-                                                <h2 class="price-weight"><?= $item->getPrix() ?></h2>
-                                                <img src="/public/images/caps_icon.webp" alt="caps" class="ms-1 ratio ratio-1x1 caps-icon-index">
-                                            </div>
-                                        </div>
-                                        <div class="bg-dark-yellow-fallout px-3 rounded-circle" style="transform: skew(0deg, 3deg);">
-                                            <div style="transform: skew(0deg, -3deg);" class="d-flex">
-                                                <img src="/public/images/weight.png" alt="caps" class="me-1 ratio ratio-1x1 caps-icon-index">
-                                                <h2 class="price-weight"><?= $item->getPoids() ?></h2>
-                                            </div>
+                                    <div class="bg-dark-yellow-fallout px-2 rounded-circle" style="transform: skew(0deg, 5deg);">
+                                        <div style="transform: skew(0deg, -5deg);" class="d-flex">
+                                            <h2><?= $item->getPrix() ?></h2>
+                                            <img src="/public/images/caps_icon.webp" alt="caps" width="30" height="30" class="mt-2 ms-1">
+
                                         </div>
                                     </div>
                                 </div>

@@ -145,6 +145,7 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+  
     public function nouveauSolde(int $newSolde, int $idJoueur)
     {
         try {
@@ -192,6 +193,26 @@ class UserModel implements ModelInterface
             if($data[0] == 1) 
                 return true;
             return false;
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function useItem(string $userId, string $itemId): void{
+        try{
+            $request = $this->pdo->prepare('CALL useItem(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function sellItem(string $userId, string $itemId): void{
+        try{
+            $request = $this->pdo->prepare('CALL sellItem(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
         }catch(PDOException $e){
             throw new PDOException($e->getMessage(), $e->getCode());
         }

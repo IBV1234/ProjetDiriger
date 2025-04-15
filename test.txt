@@ -1,0 +1,7 @@
+public function updateDexterite(int $newDexterite, PDO $pdo): bool {
+    $this->dexterite = $newDexterite;
+    $stmt = $pdo->prepare("UPDATE users SET dexterite = :dexterite WHERE id = :id");
+    $stmt->bindParam(':dexterite', $this->dexterite, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    return $stmt->execute();
+}

@@ -14,9 +14,13 @@
     width: 40px;
     border-radius: 10%;
     background-color: #FCEF6F;
+
 }
 .bg-light-green-fallout {
     background-color: #9BD997;
+}
+.bg-light-red-fallout {
+    background-color: #F9B3B3;
 }
 .image-bg{
     background-color: #BDD1E9;
@@ -36,4 +40,13 @@
     width: 100%;
     align-items: center;
     margin-left: 2px;
+}
+.sell-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+.bg-light-dark-red-fallout {
+    background-color: #e79191;
 }

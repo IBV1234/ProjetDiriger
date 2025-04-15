@@ -14,6 +14,7 @@ require 'partials/header.php';
 <!-- À copier pour chaque item -->
                 <?php if($items != null) foreach ($items as $item) : ?>
                     <div class="col-sm-6 col-md-4 col-xl-3 px-4 py-3" data-filter="<?= $item->getType()?>-<?= $item->getEvaluation()?>">
+
                         <a href="/item-sac?id=<?= $item->getIdItem() ?>" class="text-decoration-none text-black">
                             <div class="ratio ratio-1x1">
                                 <div class="d-flex flex-column justify-content-between align-items-center p-4 bg-blue-fallout rounded rounded-3">
