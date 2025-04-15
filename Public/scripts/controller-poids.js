@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isCorrectUtiliteInSac == false && isUtiliteInPanier == false) isCorrectUtiliteInSac = false;
 
             if (isCorrectUtiliteInSac) {
+               if(dex > 0) {
                 if (prixTotal <= solde) {
                     if (totalPoidAuthorisé > maxPoids) {
               
@@ -181,6 +182,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 
+               }else{
+                showModal((callback) => {
+                    if (callback) {
+                        console.log("");
+                    } else {
+                        console.log(""); // Réaffiche la dextérité sans changement
+                    }
+                }, "Vous n'avez pas assez de dextérité pour cette achat");
+               }
             } else {
                // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
                 showModal((callback) => {
