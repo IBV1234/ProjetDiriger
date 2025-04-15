@@ -1,7 +1,7 @@
 <?php
 
 require_once 'src/class/ModelInterface.php';
-require_once 'src/class/panier_item.php';
+require_once 'src/class/PanierItem.php';
 require_once 'src/class/Item.php';
 
 class PanierModel implements ModelInterface
