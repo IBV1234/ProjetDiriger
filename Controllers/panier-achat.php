@@ -23,9 +23,9 @@ $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
 
 //$PanierModel->insert(9,  1 ,5); //  for test
-const maxPoids = 15;
+$maxPoids = $_SESSION['user']->getPoidsMax();
 
- $caps =  $_SESSION['user']->getBalance();
+$caps =  $_SESSION['user']->getBalance();
 
 
 $poidsSacDos = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());

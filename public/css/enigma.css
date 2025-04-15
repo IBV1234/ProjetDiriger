@@ -1,0 +1,255 @@
+.body-enigma{
+    background-image: url("../images/bg-egnima.jpg") ;
+    background-repeat: repeat;
+    /*centering*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-enigma main{
+    /* background-color: #bacbda; */
+
+    /*centering*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*width*/
+    width: 95%;
+    max-width: 412px;
+}
+
+
+
+/************************ header ***********************/
+.header-enigma{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 2, 2);
+
+    /*width, height*/
+    width: 95%;
+    max-width: 412px;
+    height: 90px;
+
+    /*display of elements*/
+    display: flex;
+    grid-template-columns:  auto auto auto;
+    justify-content: center;
+
+    /*Header-border*/
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+}
+p,div {
+    font-family: "Alkalami", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+.link-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.header-enigma .col { /*centers les logos dans leur div-parent*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/************************* container ***********************/
+.container-egnime{
+    background-color: white;
+    border-radius: 10px;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+    /*width, height*/
+    height: fit-content;
+
+    /*display of elements*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*espacements*/
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 2em;
+
+
+}
+
+.container-index{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 2, 2);
+
+    /*width, height*/
+    height: fit-content;
+    width: 100%;
+
+    /*display of elements*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*esapcement dans le parent*/
+    flex: 1;
+
+    /*espacements*/
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 2em;
+    margin-bottom: 0.5em;
+
+    /* Border*/
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+
+}
+
+
+
+.container-gros-index{
+    /*display of elements*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    /*height*/
+    height: 80vh;
+    max-height: 550px;
+}
+
+/************************* boutons reponses ***********************/
+
+.bouton-reponse{
+    /*style*/
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    border: none;
+
+    /*width, margin, height*/
+    width: 90%;
+    max-width: 300px;
+    margin-bottom: 0.5em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    /*text*/
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold; 
+}
+
+.bouton-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/************************* others ***********************/
+
+.cercle{
+    background-color: #b9b3b3;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.cercle-text-1{
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; /* Aligne le contenu en haut */
+    font-weight: bold;
+    font-size: 20px; 
+}
+
+
+.cercle-text-2{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; /* Aligne le contenu au centre */
+    font-weight: bold;
+    padding-bottom: 5px; 
+}
+.cercle:hover{
+    border: 2px solid rgb(red, rgb(102, 53, 200), blue)
+}
+.star-red{
+    filter: sepia(100%) hue-rotate(-50deg) saturate(700%);
+ 
+}
+
+.star-green{
+    filter: sepia(20%) hue-rotate(50deg) saturate(400%);
+}
+.star-yellow {
+    filter: sepia(20%) hue-rotate(20deg) saturate(600%);
+}
+
+.flotting-bg{
+    box-shadow: 0px 5px 10px rgba(0, 2, 2);
+
+}
+
+/************************* info ************************/
+.text-titre {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px; 
+    color: black;
+}
+
+.text-normal {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .container-head {
+        gap: 10px; 
+        padding: 5px; 
+        width: 60%; 
+    }
+    .container-egnime-body {
+        width: 80%;
+        margin-left: 10%; 
+        margin-right: 10%; 
+    }
+
+}
+
+@media (max-width: 480px) {
+    .container-head {
+        flex-direction: column; 
+        gap: 5px; 
+        padding: 5px;
+        width: 80%; 
+    }
+}
+
