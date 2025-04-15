@@ -194,16 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                 
-               }else{
-                showModal((callback) => {
-                    if (callback) {
-                        console.log("");
-                    } else {
-                        console.log(""); // Réaffiche la dextérité sans changement
-                    }
-                }, "Vous n'avez pas assez de dextérité pour cette achat");
-               }
-
+            
             } else {
                 // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
                 showModal((callback) => {
