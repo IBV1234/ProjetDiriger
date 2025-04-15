@@ -16,7 +16,7 @@
                     <h5 class="mt-1" id="caps" name="caps"><?= $caps ?></h5>
                 </div>
                 <h5 class="mx-2 mt-1">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></h5>
-                <h5 class="mx-2 mt-1">Max: <?= maxPoids ?> lbs</h5>
+                <h5 class="mx-2 mt-1">Max: <?= $maxPoids ?> lbs</h5>
                 <div class="d-flex align-items-center mx-2">
                     <img src="/public/images/panier.png" class="me-1 ratio ratio-1x1" height="25" alt="panier">
                     <h5 class="mt-1"><span id="poidsTotal"><?= $poidsTotal ?></span>&nbsp;lbs</h5>
@@ -27,7 +27,7 @@
                 </div>
 
                 <input type="hidden" name="poidsTotal" id="hiddenPoidsTotal" value="<?= $poidsTotal ?>">
-                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
+                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= $maxPoids ?>">
                 <input type="hidden" id="utilite" value="<?= $UtiliteInSac ?>">
             </div>
 
