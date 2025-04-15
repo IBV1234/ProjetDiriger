@@ -1,6 +1,6 @@
 <?php
 require 'src/session.php';
-require 'src/class/database.php';
+require 'src/class/Database.php';
 require 'src/class/User.php';
 require 'models/QuestionModel.php';
 require 'models/ReponseModel.php';

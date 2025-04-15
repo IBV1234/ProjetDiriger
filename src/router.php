@@ -12,7 +12,7 @@ function route(string $route, array $params = null) : void
 
     if (array_key_exists($route, ROUTES)) {
 
-        $controllerFile = 'Controllers/' . ROUTES[$route];
+        $controllerFile = 'controllers/' . ROUTES[$route];
 
         if (file_exists($controllerFile)) {
 
@@ -40,7 +40,7 @@ function redirectWitParams(string $path, $param): void
     if ($param != null) {
         $path .= "?param=" . urlencode($param);
     }
-    header('Location: ' . $path);
+    header('location: ' . $path);
     exit;
 
 }
