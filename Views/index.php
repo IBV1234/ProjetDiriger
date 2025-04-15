@@ -19,6 +19,7 @@ require 'partials/header.php';
                                         <div style="transform: skew(0deg, -5deg);" class="d-flex">
                                             <h2><?= $item->getPrix() ?></h2>
                                             <img src="/public/images/caps_icon.webp" alt="caps" width="30" height="30" class="mt-2 ms-1">
+
                                         </div>
                                     </div>
                                 </div>

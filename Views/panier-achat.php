@@ -1,4 +1,5 @@
 <?php
+
 require "views/Partials/head.php";
 require "views/Partials/header.php";
 ?>
@@ -18,8 +19,8 @@ require "views/Partials/header.php";
                 </div>
                 <div class="text-decoration">Dex: <span id="Dex" name="Dex"><?= $dexteriter ?></span></div>
 
-                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= maxPoids ?>">
-                <div class="text-decoration">Max: <?= maxPoids ?> lbs</div>
+                <input type="hidden" id="maxPoids" name="maxPoids" value="<?= $maxPoids ?>">
+                <div class="text-decoration">Max: <?= $maxPoids ?> lbs</div>
                 <div class="text-decoration">
                     <img src="/public/images/panier.png" class="bag" alt="panier" />
                     <span id="poidsTotal"><?= $poidsTotal ?></span> lbs
@@ -107,6 +108,7 @@ ENT_QUOTES : Ce paramètre indique que les guillemets simples (') et doubles (")
  garantit que les caractères spéciaux sont correctement encodés et affichés, 
  surtout pour les applications multilingues.
 -->
+
 <?php
 require "views/Partials/footer.php";
 ?>

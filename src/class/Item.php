@@ -13,6 +13,8 @@ class Item {
     private string $description;
     private float $evaluation;
 
+    private int $quantitePanier;
+
     public function __construct(
         ?int $idItem,
         string $nom,
@@ -24,7 +26,9 @@ class Item {
         string $lienphoto,
         int $estDisponible, 
         ?string $description = '',
-        ?float $evaluation = 0
+
+        ?float $evaluation = 0,
+        ?int $quantitePanier = 0
     ) {
         $this->idItem = $idItem;
         $this->nom = $nom;
@@ -37,6 +41,8 @@ class Item {
         $this->lienphoto = $lienphoto;
         $this->description = $description ?? '';
         $this->evaluation = $evaluation ?? 0;
+
+        $this->quantitePanier = $quantitePanier??0;
         }
 
     // Getters
@@ -81,5 +87,9 @@ class Item {
     }
     public function getEvaluation(): float {
         return round($this->evaluation, 1);
+    }
+
+    public function getQuantitePanier(): int {
+        return $this->quantitePanier;
     }
 }
