@@ -1,1 +1,0 @@
-{"prixTotal":150,"poidsTotal":null,"items":[{"quantite":"3","id":"7","poids":"10","prix":"50","utilites":"5"}]}
