@@ -7,14 +7,14 @@
                     ?
                 </div>
                 <div class="cercle-text-2">
-                    Enigma
+                   <p> Enigma</p>
                 </div>
             </div>
         </a>
     </div>
     <!-- alias joueur -->
     <div class="col cercle-text-2" style="font-size: 20px;">
-        <?=$_SESSION['user']->getAlias();?>
+       <?=$_SESSION['user']->getAlias();?>
     </div>
     <!-- menu -->
     <div class="dropdown col">
