@@ -36,15 +36,35 @@
         <a href="/enigma" class="text-decoration-none text-black pe-4">
           <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
         </a>
-        <div class="dropdown p-2">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/public/images/placeholder-square" width="45" height="45" class="rounded-circle">
-          </a>
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <?= $_SESSION['user']->getAlias()  ?>
+          </button>
           <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item" href="/account">Profil</a></li>
             <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/deconnexion">Déconnection</a></li>
+            <li></li>
+            <li>
+              <a href="/account" class="d-flex align-items-center dropdown-item">
+                <img src="/public/images/caps_icon.webp" class="me-1" height="20" alt="caps">
+                <?= $_SESSION["user"]->getBalance() ?>
+              </a>
+            </li>
+            <li>
+              <a href="/account" class="dropdown-item">Dex: <?= $_SESSION["user"]->getDexterite() ?></a>
+            </li>
+            <li>
+              <a href="/inventaire" class="d-flex align-items-center dropdown-item">
+                <img src="/public/images/sac.png" class="me-1" height="25" alt="sac">
+                <?= $_SESSION["poidsSac"] ?> lbs
+              </a>
+            </li>
+            <li>
+              <a href="/inventaire" class="dropdown-item">Max: <?= $_SESSION["user"]->getPoidsMax() ?> lbs</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/deconnexion">Déconnexion</a></li>
           </ul>
         </div> 
       </div>

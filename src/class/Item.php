@@ -12,6 +12,7 @@ class Item {
     private int $estDisponible;
     private string $description;
     private float $evaluation;
+
     private int $quantitePanier;
 
     public function __construct(
@@ -25,6 +26,7 @@ class Item {
         string $lienphoto,
         int $estDisponible, 
         ?string $description = '',
+
         ?float $evaluation = 0,
         ?int $quantitePanier = 0
     ) {
@@ -39,6 +41,7 @@ class Item {
         $this->lienphoto = $lienphoto;
         $this->description = $description ?? '';
         $this->evaluation = $evaluation ?? 0;
+
         $this->quantitePanier = $quantitePanier??0;
         }
 
@@ -85,6 +88,7 @@ class Item {
     public function getEvaluation(): float {
         return round($this->evaluation, 1);
     }
+
     public function getQuantitePanier(): int {
         return $this->quantitePanier;
     }

@@ -133,9 +133,9 @@ class ItemModel implements ModelInterface
                 $e->getLine()
               );
 
-              file_put_contents('Logs/error.txt', $errorMessage, FILE_APPEND);
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('Views/error.php');
+              redirect('views/error.php');
 
         }  
         return null;

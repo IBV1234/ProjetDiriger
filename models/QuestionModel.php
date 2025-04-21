@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/class/questions.php';
+require_once 'src/class/Questions.php';
 
 class QuestionsModel 
 {

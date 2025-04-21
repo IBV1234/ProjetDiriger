@@ -17,8 +17,17 @@ class Database
           
         } catch(PDOException $e) {
             
-            throw new PDOException($e->getMessage(), $e->getCode());
-
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('views/error.php');
           }
       
     }

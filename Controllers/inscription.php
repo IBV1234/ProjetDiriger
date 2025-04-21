@@ -1,7 +1,7 @@
 <?php
 
 require 'src/session.php';
-require 'src/class/database.php';
+require 'src/class/Database.php';
 require 'models/UserModel.php';
 
 //INITIALISATION......................
