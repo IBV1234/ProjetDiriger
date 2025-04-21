@@ -1,4 +1,4 @@
-<?php if ($controllerFile == "controllers/index.php"): ?> 
+<?php if ($controllerFile == "Controllers/index.php"): ?>
   <header class="px-3 py-1 position-relative">
 <?php else: ?>
   <header class="header-height px-3 py-1 position-relative">
@@ -25,7 +25,7 @@
 <!-- /Disconnected only -->
 <!-- Connected only -->
 <?php if(isset($_SESSION['user'])): ?>
-  <?php if ($controllerFile == "controllers/index.php") : ?> 
+  <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier-achat" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill d-flex cart-icon" style="font-size: 35px;">
@@ -53,7 +53,7 @@
 
     </div>
 <!-- Index seulement -->
-    <?php if ($controllerFile == "controllers/index.php") : ?> 
+    <?php if ($controllerFile == "Controllers/index.php") : ?>
       <div class="d-flex justify-content-between align-items-center">
         <div class="row ms-3">
           <div class="col-12 col-md-auto form-check form-check-inline form-switch">
