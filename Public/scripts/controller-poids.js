@@ -148,11 +148,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isCorrectUtiliteInSac == false && isUtiliteInPanier == false) isCorrectUtiliteInSac = false;
 
             if (isCorrectUtiliteInSac) {
-                if (dex > 0) {
-                    if (prixTotal <= solde) {
-                        if (totalPoidAuthorisé > maxPoids) {
+               if(dex > 0) {
+                if (prixTotal <= solde) {
+                    if (totalPoidAuthorisé > maxPoids) {
+              
+                        //showModal().then((userConfirmed) => { promesse
 
-                            //showModal().then((userConfirmed) => { promesse
 
                             showModal((userConfirmed) => {// callback
 
@@ -192,6 +193,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
 
+                
+            
             } else {
                 // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
                 showModal((callback) => {
