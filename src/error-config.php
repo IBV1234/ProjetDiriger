@@ -39,7 +39,7 @@ ini_set('log_errors', 1);
 //=============
 
 // 4- error_log défini le chemin vers le fichier de log personnalisé
-ini_set('error_log', 'Logs/error.txt');
+ini_set('error_log', 'logs/error.txt');
 
 //=============
 
@@ -48,9 +48,9 @@ ini_set('error_log', 'Logs/error.txt');
 function customErrorHandler($error_level, $error_message, $error_file, $error_line)
 {
   $message = "Error : $error_level | $error_message | $error_file | $error_line";
-    error_log($message.PHP_EOL,3 ,"Logs/error.txt"); // message_type: 3 veut dire que le message est ajouté au fichier destination.
+    error_log($message.PHP_EOL,3 ,"logs/error.txt"); // message_type: 3 veut dire que le message est ajouté au fichier destination.
 
-    header('Location: views/error.php');
+    header('location: views/error.php');
 }
 
 // 6- On doit enregistrer la fonction personnalisée

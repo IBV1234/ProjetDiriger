@@ -138,9 +138,11 @@
   color:rgb(78, 233, 22);
   background-color: white;
   border-radius:20px;
-  width: 18%;
+  width: 12%;
   height: 5%;
 }
+
+
 
 .modal{
   visibility: hidden;

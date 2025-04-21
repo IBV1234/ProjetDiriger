@@ -3,8 +3,8 @@
 if(isPost()){
     require 'src/session.php';
     require 'src/class/Database.php';
-    require 'Models/panier-model.php';
-    require 'Models/UserModel.php';
+    require 'models/PanierModel.php';
+    require 'models/UserModel.php';
 
     sessionStart();
 

@@ -12,6 +12,7 @@ function getPrixTotalPayer($items)
         $total += $item['prix']*$item['quantite'];
     }
     return $total;
+
 }
 
 function getPoidPanier($items){

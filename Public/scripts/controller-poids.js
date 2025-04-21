@@ -16,21 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
         let isUtiliteInPanier = false;
 
 
-    
+
 
         // Fonction pour envoyer un requête post au controller UpdateItemPanier pour update la quantité dans la bd
-        window.updateItemQuantity = function(inputElement)  {
+        window.updateItemQuantity = function (inputElement) {
             // Récupérer les données de l'élément
             const itemId = inputElement.getAttribute('data-id');
             const newQuantity = inputElement.value;
-        
-         
+
+
             // Préparer les données à envoyer
             const data = {
                 id: itemId,
                 quantite: newQuantity
             };
-        
+
             // Envoyer la requête AJAX
             fetch('/updateItemPanier', {
                 method: 'POST',
@@ -39,15 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify(data)
             })
-            .catch(error => {
-                console.error('Erreur:', error);
-                console.log('Une erreur est survenue lors de la mise à jour.');
-            });
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    console.log('Une erreur est survenue lors de la mise à jour.');
+                });
         }
 
 
-        
-            //fonction poour savoir si il y a une utilité 1 dans le sac à dos
+
+        //fonction poour savoir si il y a une utilité 1 dans le sac à dos
         function getResultUtiliteInSac(utilites) {
             let isInSac = false;
             if (utilites == '1') {
@@ -100,38 +100,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-        function showModal(callback,text =null) {// Fonction de pop out et confirm custum avec un promesse on peut le faire avec un callback aussi
+        function showModal(callback, text = null) {// Fonction de pop out et confirm custum avec un promesse on peut le faire avec un callback aussi
 
-           // return new Promise((resolve) => {// Promise:permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
-                const modal = document.getElementById("confirmationModal")
-             
-                modal.classList.add("show"); // Afficher le modal
-                const okButton = document.getElementById("okBtn");
-                const cancelButton = document.getElementById("cancelBtn");
-                const messageElement = document.getElementById("message"); // Récupérer l'élément de message
-               
-                if(text!=null)messageElement.textContent = text; // Mettre à jour le message
-                // Ajouter les événements
-                const onOkClick = () => {
-                    modal.classList.remove("show");
-                    callback(true);
-                    cleanup();//Supprime les écouteurs d'événements pour éviter les bugs.
-                };
-        
-                const onCancelClick = () => {
-                    modal.classList.remove("show");
-                    callback(false);
-                    cleanup();
-                };
-        
-                const cleanup = () => {//Si l'utilisateur ouvre et ferme plusieurs fois le modal, les événements click peuvent s'accumuler et causer des bugs.
-                    okButton.removeEventListener("click", onOkClick);
-                    cancelButton.removeEventListener("click", onCancelClick);
-                };
-        
-                okButton.addEventListener("click", onOkClick);//Quand l'utilisateur clique sur un bouton, l'action correspondante est exécutée avec la foncton à droite
-                cancelButton.addEventListener("click", onCancelClick);
-           // });
+            // return new Promise((resolve) => {// Promise:permet de gérer cette attente sans bloquer l'exécution du reste du code(ok ou annuler).
+            const modal = document.getElementById("confirmationModal")
+
+            modal.classList.add("show"); // Afficher le modal
+            const okButton = document.getElementById("okBtn");
+            const cancelButton = document.getElementById("cancelBtn");
+            const messageElement = document.getElementById("message"); // Récupérer l'élément de message
+
+            if (text != null) messageElement.textContent = text; // Mettre à jour le message
+            // Ajouter les événements
+            const onOkClick = () => {
+                modal.classList.remove("show");
+                callback(true);
+                cleanup();//Supprime les écouteurs d'événements pour éviter les bugs.
+            };
+
+            const onCancelClick = () => {
+                modal.classList.remove("show");
+                callback(false);
+                cleanup();
+            };
+
+            const cleanup = () => {//Si l'utilisateur ouvre et ferme plusieurs fois le modal, les événements click peuvent s'accumuler et causer des bugs.
+                okButton.removeEventListener("click", onOkClick);
+                cancelButton.removeEventListener("click", onCancelClick);
+            };
+
+            okButton.addEventListener("click", onOkClick);//Quand l'utilisateur clique sur un bouton, l'action correspondante est exécutée avec la foncton à droite
+            cancelButton.addEventListener("click", onCancelClick);
+            // });
         }
 
 
@@ -148,41 +148,55 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isCorrectUtiliteInSac == false && isUtiliteInPanier == false) isCorrectUtiliteInSac = false;
 
             if (isCorrectUtiliteInSac) {
+               if(dex > 0) {
                 if (prixTotal <= solde) {
                     if (totalPoidAuthorisé > maxPoids) {
               
                         //showModal().then((userConfirmed) => { promesse
 
+
                             showModal((userConfirmed) => {// callback
 
-                            if ((userConfirmed)) {
-                                dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
-                                dexteriter.textContent = dex.toFixed();
-                                document.getElementById('payerForm').submit();
-                            } else {
+                                if ((userConfirmed)) {
+                                    dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
+                                    dexteriter.textContent = dex.toFixed();
+                                    document.getElementById('payerForm').submit();
+                                } else {
 
-                                dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
-                            }
-                       }, "Vous avez dépassé le poids maximum autorisé, êtes-vous sûr de vouloir continuer ?");
+                                    dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
+                                }
+                            }, "Vous avez dépassé le poids maximum autorisé, êtes-vous sûr de vouloir continuer ?");
 
 
+                        } else {
+                            document.getElementById('payerForm').submit();
+                        }
                     } else {
-                        document.getElementById('payerForm').submit();
+                        // confirm("Vous n'avez pas assez de caps pour cette achat");
+                        showModal((callback) => {
+                            if (callback) {
+                                console.log("");
+                            } else {
+                                console.log(""); // Réaffiche la dextérité sans changement
+                            }
+                        }, "Vous n'avez pas assez de caps pour cette achat");
                     }
-                } else {
-                    // confirm("Vous n'avez pas assez de caps pour cette achat");
+                }else{
+                    // confirm("Vous n'avez pas assez de dextérité pour cette achat");
                     showModal((callback) => {
                         if (callback) {
                             console.log("");
                         } else {
                             console.log(""); // Réaffiche la dextérité sans changement
                         }
-                    }, "Vous n'avez pas assez de caps pour cette achat");
+                    }, "Vous n'avez pas assez de dextérité pour cet achat");
                 }
 
+
                 
+            
             } else {
-               // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
+                // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
                 showModal((callback) => {
                     if (callback) {
                         console.log("");
