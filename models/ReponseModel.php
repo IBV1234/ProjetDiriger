@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/class/reponse.php';
+require_once 'src/class/Reponse.php';
 
 class ReponseModel 
 {

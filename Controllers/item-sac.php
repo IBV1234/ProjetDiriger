@@ -4,7 +4,7 @@ require 'src/class/Database.php';
 require 'src/class/Item.php';
 require 'models/ItemModel.php';
 require 'src/session.php';
-require 'models/panier-model.php';
+require 'models/PanierModel.php';
 require 'models/UserModel.php';
 
 sessionStart();
