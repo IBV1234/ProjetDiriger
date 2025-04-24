@@ -1,0 +1,1 @@
+Exception ERROR : 2025-04-24 13:29:38 | Code : 22003 | Message : SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'qtPanier' at row 1 | Fichier : C:\wamp64\www\ProjetDiriger\models\PanierModel.php | Ligne : 415

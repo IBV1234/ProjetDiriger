@@ -11,12 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const soldeJoueur = document.getElementById('caps').textContent;
         const poidTotalSac = document.getElementById('poidsSacDos').textContent;
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
-
         let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
-
-
-
 
         // Fonction pour envoyer un requête post au controller UpdateItemPanier pour update la quantité dans la bd
         window.updateItemQuantity = function (inputElement) {
@@ -57,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return isInSac;
         }
+
+     
 
         //fonction poour savoir si il y a une utilité 1 dans le panier
         function getResultUtiliterInPanier(utilites) {
@@ -136,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
         // Fonction appelée lors du paiement
         window.pay = function () {
             let totalPoidsPanier = parseFloat(afficherPoidsTotalElement.textContent);
@@ -181,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         }, "Vous n'avez pas assez de caps pour cette achat");
                     }
                 }else{
-                    // confirm("Vous n'avez pas assez de dextérité pour cette achat");
                     showModal((callback) => {
                         if (callback) {
                             console.log("");
@@ -193,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             } else {
-                // confirm("Les types d'items nourritures et les  types d'items médicaments sont obligatoire dans le panier");
                 showModal((callback) => {
                     if (callback) {
                         console.log("");
