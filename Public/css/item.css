@@ -49,3 +49,46 @@
 .bg-light-dark-red-fallout {
     background-color: #e79191;
 }
+.container-comments{
+    display: flex;
+    margin-left: 8%;
+    flex-direction:column ;
+    align-items: center;
+    padding-top: 4%;
+   background-color: #4169E1;
+   border-radius: 20px;
+    width: 84% ;
+    height: 300px;
+}
+.container-body-comment{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 80% ;
+    height:140px ;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #DCDCDC;
+}
+.container-icon-comment{
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: auto auto auto;
+    gap:30px;
+    height: auto;
+    width: auto;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: #FCEF6F;
+}
+textarea{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    border-radius: 20px;
+}
+.img-icon{
+    height: 45px;
+    width: 45px;
+    border-radius: 30px;
+}

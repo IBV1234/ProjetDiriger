@@ -70,14 +70,34 @@ require 'partials/header.php';
                             <!-- make this add the item to the cart in the SESSION -->
                         </button>
                         <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock :
-                            <?php echo $item->getQteStock() ?></div>
+                            <?php echo $item->getQteStock() ?>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div>
+    <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
+        <div class="container-body-comment">
+            <form method="post" action="/ajoutCommentaire">
+                <input type="hidden" name="idItem" value="<?= $idItem ?>">
+                <div class="container-icon-comment">
+                    <div>
+                            <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
+                            <span style="font-weight: bold;"> Marc</span>
+                    </div>
+                    <div>
+                        <textarea name="leCommentaire" placeholder="Votre commentaire" maxlength="35" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" id="Mac">Envoyer</button><!-- changer pour lorsqu'on appui sur enter-->
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 
