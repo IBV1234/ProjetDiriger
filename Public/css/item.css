@@ -74,13 +74,14 @@
     padding: 20px;
     border-radius: 30px;
     background-color: #DCDCDC;
+
 }
 .container-body-comment::-webkit-scrollbar {
     width: 15px; /* Largeur de la barre de défilement */
 }
 
 .container-body-comment::-webkit-scrollbar-thumb {
-    background-color: black; /* Couleur de la barre */
+    background-color:#FFD700; /* Couleur de la barre */
     border-radius: 10px; /* Arrondi de la barre */
 }
 
@@ -91,13 +92,19 @@
 .container-icon-comment{
     display: flex;
     flex-direction: row;
-    grid-template-rows: auto auto auto;
+    flex-basis: 70%;
+    grid-template-rows: auto auto;
     gap:10px;
     height: auto;
     width: auto;
     border-radius: 30px;
     padding: 10px;
     background-color: #FCEF6F;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5); /* Ombre */
+}
+.container-icon-comment:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 textarea{
     padding-left: 20px;
@@ -115,6 +122,9 @@ textarea{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    margin-top: 10%;
+    flex-basis: 70%;
     gap:30px;
     height: auto;
     width: auto;

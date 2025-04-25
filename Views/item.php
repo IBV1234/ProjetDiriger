@@ -101,20 +101,17 @@ require 'partials/header.php';
 
                 <?php foreach ($comentaires as $key => $commentaire): ?>
                     <div class="container-icon-comment">
-                        <div>
+                        <div style="border-right: 2px solid black;">
                             <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
                         </div>
                         <div>
-                        <p style="font-weight: bold;"> <?= $commentaire->getAlias(); ?> a dit:</p>
+                            <p style="font-weight: bold; color:blue;"> <?= $commentaire->getAlias(); ?> a dit:</p>
 
                         </div>
-                        <div>
-                            <p style="font-weight: bold;"> <?= $commentaire->getLeCommentaire(); ?></p>
+                        <div >
+                            <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?></p>
                         </div>
-                        <div>
-                            <button type="submit" id="Mac">Envoyer</button> 
-
-                        </div>
+                      
                     </div>
                 <?php endforeach ?>
             <?php else: ?>
