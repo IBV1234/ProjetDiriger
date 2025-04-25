@@ -5,57 +5,30 @@ require_once 'src/class/Commentaire.php';
  {
     public function __construct(private PDO $pdo) {}
 
-
-    public function selectAll() : null|array {
-        
-        $commentaires = [];
-
-        try {
-            $stm = $this->pdo->prepare('CALL()');
-
-            $stm->execute();
-
-            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-          
-            if (! empty($data)) {
-
-                foreach ($data as $row) {
-                    $commentaires[] = new Commentaire(
-                            $row['idJoueur'],
-                            $row['idItem'],
-                            $row['leCommentaire']
-
-                    );
-                }
-
-                return $commentaires;
-            }
-
-            return null;
-
-        } catch (PDOException $e) {
-
-            throw new PDOException($e->getMessage(), $e->getCode());
-
-        }
-    }
-    public function selectByItem(int $idItem): null|Commentaire {
+    public function selectByItem(int $idItem): array {
+        $commentaires =[];
         try{
-            $stm = $this->pdo->prepare('CALL (:idItem)');
+            $stm = $this->pdo->prepare('CALL CommentairesParItem(:idItem)');
     
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
             
             $stm->execute();
     
-            $data = $stm->fetch(PDO::FETCH_ASSOC);
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
-                return new Commentaire(
-                        $data['idJoueur'],
-                        $data['idItem'],
-                        $data['leCommentaire']
+            if (! empty($data)) {
 
-                );
+                foreach ($data as $row) {
+                    $commentaires[] = new Commentaire(
+                            $row['alias'],
+                            $row['idItem'],
+                            $row['leCommentaire'],
+                            $row['evaluation'],
+
+                    );
+                }
+
+                return $commentaires;
             }
         } catch (PDOException $e) {
     
@@ -73,7 +46,7 @@ require_once 'src/class/Commentaire.php';
               redirect('views/error.php');
 
         }  
-        return null;
+        return $commentaires;
     }
 
  }

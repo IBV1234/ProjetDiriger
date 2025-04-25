@@ -80,7 +80,7 @@ require 'partials/header.php';
     <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
         <div class="container-body-comment">
-            <form method="post" action="/ajoutCommentaire">
+            <!-- <form method="post" action="/ajoutCommentaire">
                 <input type="hidden" name="idItem" value="<?= $idItem ?>">
                 <div class="container-icon-comment">
                     <div>
@@ -91,11 +91,37 @@ require 'partials/header.php';
                         <textarea name="leCommentaire" placeholder="Votre commentaire" maxlength="35" required></textarea>
                     </div>
                     <div>
-                        <button type="submit" id="Mac">Envoyer</button><!-- changer pour lorsqu'on appui sur enter-->
+                        <button type="submit" id="Mac">Envoyer</button> changer pour lorsqu'on appui sur enter
 
                     </div>
                 </div>
-            </form>
+            </form> 
+            -->
+            <?php if (!empty($comentaires)): ?>
+
+                <?php foreach ($comentaires as $key => $commentaire): ?>
+                    <div class="container-icon-comment">
+                        <div>
+                            <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
+                        </div>
+                        <div>
+                        <p style="font-weight: bold;"> <?= $commentaire->getAlias(); ?> a dit:</p>
+
+                        </div>
+                        <div>
+                            <p style="font-weight: bold;"> <?= $commentaire->getLeCommentaire(); ?></p>
+                        </div>
+                        <div>
+                            <button type="submit" id="Mac">Envoyer</button> 
+
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            <?php else: ?>
+                <div class="noComment">
+                    <p> l'item n'a aucun commentaire pour l'instant</p>
+                </div>
+            <?php endif ?>
         </div>
 
     </div>
