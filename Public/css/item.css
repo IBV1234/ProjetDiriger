@@ -59,6 +59,7 @@
    border-radius: 20px;
     width: 84% ;
     height: 350px;
+    position: relative;
 }
 .container-body-comment{
     display: flex;

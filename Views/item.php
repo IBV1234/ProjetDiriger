@@ -79,6 +79,12 @@ require 'partials/header.php';
     </div>
     <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
+         <div  style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire"> 
+                <button type="button" style="background: none; border: none;" onclick=""><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
+                    <img  width="30px" height="30px"src="public/images/Add-message.png">
+
+                </button>
+         </div>
         <div class="container-body-comment">
             <!-- <form method="post" action="/ajoutCommentaire">
                 <input type="hidden" name="idItem" value="<?= $idItem ?>">
