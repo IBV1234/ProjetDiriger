@@ -91,7 +91,7 @@ require 'partials/header.php';
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
                 <input type="hidden" name="idItem" value="<?=$_SESSION['item']->getIdItem()?>" >
                 <textarea style="width: 80%;" name="comment" id="comment"  placeholder="Entrez votre commentaire"
-                    maxlength="25"></textarea>
+                    maxlength="35"></textarea>
                     <div>
                         <label class="h5"  id="labelQt"for="quantity">Nombre d'étoile :</label>
                         <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
