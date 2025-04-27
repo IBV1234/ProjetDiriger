@@ -49,4 +49,31 @@ require_once 'src/class/Commentaire.php';
         return $commentaires;
     }
 
+    public function insertCommentaire($_idItem,$_idJoueur,$_leCommentaire,$_evaluation,){
+       try{
+        $stm = $this->pdo->prepare('CALL InsererUnCommentaire(:_idItem,:_idJoueur,:_leCommentaire,:_evaluation)');
+    
+        $stm->bindValue(":_idItem", $_idItem, PDO::PARAM_INT);
+        $stm->bindValue(":_idJoueur", $_idJoueur, PDO::PARAM_INT);
+        $stm->bindValue(":_leCommentaire", $_leCommentaire, PDO::PARAM_STR);
+        $stm->bindValue(":_evaluation", $_evaluation, PDO::PARAM_INT);
+
+        $stm->execute();
+       }catch(PDOException $e){
+
+        $errorMessage = sprintf(
+            "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+            date('Y-m-d H:i:s'),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine()
+          );
+
+          file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+
+          redirect('views/error.php');
+       }
+    }
+
  }

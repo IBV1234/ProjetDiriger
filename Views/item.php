@@ -79,30 +79,27 @@ require 'partials/header.php';
     </div>
     <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
-         <div  style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire"> 
-                <button type="button" style="background: none; border: none;" onclick=""><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
-                    <img  width="30px" height="30px"src="public/images/Add-message.png">
+        <div  id="icon-message"class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
+            style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
+            <button type="button" style="background: none; border: none;"
+                onclick="showTextAerea(this)"><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
+                <img width="30px" height="30px" src="public/images/Add-message.png">
 
-                </button>
-         </div>
+            </button>
+        </div>
+        <div class="add-comment">
+            <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
+                <input type="hidden" name="idItem" value="<?=$_SESSION['item']->getIdItem()?>" >
+                <textarea style="width: 80%;" name="comment" id="comment"  placeholder="Entrez votre commentaire"
+                    maxlength="25"></textarea>
+                    <div>
+                        <label class="h5"  id="labelQt"for="quantity">Nombre d'étoile :</label>
+                        <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
+                    </div>
+            </form>
+        </div>
         <div class="container-body-comment">
-            <!-- <form method="post" action="/ajoutCommentaire">
-                <input type="hidden" name="idItem" value="<?= $idItem ?>">
-                <div class="container-icon-comment">
-                    <div>
-                            <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
-                            <span style="font-weight: bold;"> Marc</span>
-                    </div>
-                    <div>
-                        <textarea name="leCommentaire" placeholder="Votre commentaire" maxlength="35" required></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" id="Mac">Envoyer</button> changer pour lorsqu'on appui sur enter
 
-                    </div>
-                </div>
-            </form> 
-            -->
             <?php if (!empty($comentaires)): ?>
 
                 <?php foreach ($comentaires as $key => $commentaire): ?>
@@ -114,10 +111,11 @@ require 'partials/header.php';
                             <p style="font-weight: bold; color:blue;"> <?= $commentaire->getAlias(); ?> a dit:</p>
 
                         </div>
-                        <div >
-                            <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?></p>
+                        <div>
+                            <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
+                            </p>
                         </div>
-                      
+
                     </div>
                 <?php endforeach ?>
             <?php else: ?>

@@ -457,4 +457,35 @@ class PanierModel implements ModelInterface
           redirect('views/error.php');
         }
     }
+    public function isInSacAdos($pIdJoueur,$idItem){
+        try{
+
+            $stm = $this->pdo->prepare("CALL isInSacAdos(:idItem,:pIdJoueur)");
+            $stm->bindValue("pIdJoueur",$pIdJoueur,PDO::PARAM_INT);
+            $stm->bindValue("idItem",$idItem,PDO::PARAM_INT);
+    
+            $stm->execute();
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            if(empty($result))
+                return false;
+            else{
+                return true;
+            }
+    
+        }catch(PDOException $e){
+    
+            $errorMessage = sprintf(
+                "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", 
+                date('Y-m-d H:i:s'),
+                $e->getCode(),
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+              );
+    
+              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+    
+              redirect('views/error.php');
+        }
+    }
 }

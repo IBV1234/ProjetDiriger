@@ -38,7 +38,7 @@ function redirect(string $url) : void
 function redirectWitParams(string $path, $param): void
 {
     if ($param != null) {
-        $path .= "?param=" . urlencode($param);
+        $path .= "?id=" . urlencode($param);
     }
     header('Location: ' . $path);
     exit;

@@ -52,14 +52,18 @@
 .container-comments{
     display: flex;
     margin-left: 8%;
-    flex-direction:column ;
+    flex-direction:row ; 
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     padding-top: 4%;
    background-color: #4169E1;
    border-radius: 20px;
     width: 84% ;
-    height: 350px;
+    padding-left: 0;
+    height: auto;
     position: relative;
+    padding-bottom: 2%;
 }
 .container-body-comment{
     display: flex;
@@ -67,16 +71,19 @@
     align-items: flex-start;
     flex-wrap: wrap;
     overflow-y: auto;
+    margin-top: 3%;
     gap: 20px;
     justify-content: center;
     width: 80% ;
     text-align: center;
     height:250px;
     padding: 20px;
+    margin: 0;
     border-radius: 30px;
     background-color: #DCDCDC;
 
 }
+
 .container-body-comment::-webkit-scrollbar {
     width: 15px; /* Largeur de la barre de défilement */
 }
@@ -133,4 +140,15 @@ textarea{
     border-radius: 10px;
     padding: 10px;
     background-color: #FCEF6F;
+}
+.hide-add-message{
+    visibility:hidden;
+}
+.add-comment{
+    display: flex;
+    justify-content: center;
+    width: 50% ;
+    text-align: center;
+    height:auto;
+    border-radius: 30px;
 }
