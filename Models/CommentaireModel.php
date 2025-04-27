@@ -20,6 +20,7 @@ require_once 'src/class/Commentaire.php';
 
                 foreach ($data as $row) {
                     $commentaires[] = new Commentaire(
+                            $row['idJoueur'],
                             $row['alias'],
                             $row['idItem'],
                             $row['leCommentaire'],
@@ -49,7 +50,7 @@ require_once 'src/class/Commentaire.php';
         return $commentaires;
     }
 
-    public function insertCommentaire($_idItem,$_idJoueur,$_leCommentaire,$_evaluation,){
+    public function insertCommentaire($_idItem,$_idJoueur,$_leCommentaire,$_evaluation){
        try{
         $stm = $this->pdo->prepare('CALL InsererUnCommentaire(:_idItem,:_idJoueur,:_leCommentaire,:_evaluation)');
     
@@ -74,6 +75,32 @@ require_once 'src/class/Commentaire.php';
 
           redirect('views/error.php');
        }
+    }
+
+    public function deleteComment($idItem,$idJoueur){
+        try{
+            $stm = $this->pdo->prepare('DELETE FROM commentaires WHERE idJoueur = :idJoueur AND idItem = :idItem');
+    
+            $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
+            $stm->bindValue(":idJoueur", $idJoueur, PDO::PARAM_INT);
+            $stm->execute();
+
+        }catch(PDOException $e){
+            
+        $errorMessage = sprintf(
+            "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
+            date('Y-m-d H:i:s'),
+            $e->getCode(),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine()
+          );
+
+          file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+
+          redirect('views/error.php');
+       }
+        
     }
 
  }

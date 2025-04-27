@@ -79,7 +79,7 @@ require 'partials/header.php';
     </div>
     <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
-        <div  id="icon-message"class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
+        <div id="icon-message" class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
             style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
             <button type="button" style="background: none; border: none;"
                 onclick="showTextAerea(this)"><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
@@ -89,13 +89,13 @@ require 'partials/header.php';
         </div>
         <div class="add-comment">
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
-                <input type="hidden" name="idItem" value="<?=$_SESSION['item']->getIdItem()?>" >
-                <textarea style="width: 80%;" name="comment" id="comment"  placeholder="Entrez votre commentaire"
+                <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
+                <textarea style="width: 80%;" name="comment" id="comment" placeholder="Entrez votre commentaire"
                     maxlength="35"></textarea>
-                    <div>
-                        <label class="h5"  id="labelQt"for="quantity">Nombre d'étoile :</label>
-                        <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
-                    </div>
+                <div>
+                    <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
+                    <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
+                </div>
             </form>
         </div>
         <div class="container-body-comment">
@@ -115,6 +115,14 @@ require 'partials/header.php';
                             <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
                             </p>
                         </div>
+                        <?php if ($visibilityIconAddMessageIcon): ?>
+                            <div class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '':'hide-add-message'?>">
+                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
+                                    <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
+
+                                </a>
+                            </div>
+                        <?php endif ?>
 
                     </div>
                 <?php endforeach ?>

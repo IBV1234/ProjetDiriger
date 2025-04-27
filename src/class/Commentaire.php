@@ -1,5 +1,6 @@
 <?php
 class Commentaire {
+    private ?int $idJoueur;
 
     private string $alias;
     private int $idItem;
@@ -7,12 +8,14 @@ class Commentaire {
     private ?float $evaluation;
   
     public function __construct(
+        ?int $idJoueur,
         string $alias,
         int $idItem,
         string $leCommentaire,
         ?float $evaluation = 0,
         
     ) {
+        $this->idJoueur = $idJoueur?? 0;
         $this->alias = $alias;
         $this->idItem = $idItem;
         $this->leCommentaire = $leCommentaire;
@@ -20,6 +23,9 @@ class Commentaire {
         }
 
     // Getters
+    public function getIdJoueur(): int {
+        return $this->idJoueur;
+    }
     public function getAlias(): string {
         return $this->alias;
     }

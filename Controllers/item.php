@@ -18,6 +18,7 @@ $panierModel = new panierModel($pdo);
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;
 $isInPanier = false;
+
 if(!isset($_GET['id']))
     redirect("error");
 else {
