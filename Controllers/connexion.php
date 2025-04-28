@@ -3,6 +3,7 @@
 require 'src/session.php';
 require 'src/class/Database.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 //INITIALISATION......................
 sessionStart();
@@ -29,8 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              if ($user && $userModel->verifyPasswordUser($password, $email)) {
                 $_SESSION['user'] = $user;
 
-         
+                //MAJ de la session
+                $panierModel = new PanierModel($pdo);
+                $_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
 
+         
                 if ($remember) {
                     setcookie('user', $user->getId(), time() + (3600 * 24 * $rememberMeDays), '/');
                 } else {

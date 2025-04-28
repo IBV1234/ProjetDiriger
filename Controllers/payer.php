@@ -3,8 +3,8 @@
 if(isPost()){
     require 'src/session.php';
     require 'src/class/Database.php';
-    require 'models/PanierModel.php';
     require 'models/UserModel.php';
+    require 'models/PanierModel.php';
 
     sessionStart();
 
@@ -48,9 +48,28 @@ if(isPost()){
     $lastOrderJson = json_encode($_SESSION['last_order']);
     file_put_contents('Logs/last-order.txt', $lastOrderJson . PHP_EOL, FILE_APPEND);
     
+    //MAJ de la session
+    $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
 
     redirect("/panier-achat");
 
 }else{
+    //MAJ de la session
+    require 'src/session.php';
+    require 'src/class/Database.php';
+    require 'models/UserModel.php';
+    require 'models/PanierModel.php';
+
+    sessionStart();
+    $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
+    $pdo = $db->getPDO();
+
+    $userModel = new UserModel($pdo);
+    $PanierModel =  new PanierModel($pdo);
+
+    $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
+
     redirect("/");
 }

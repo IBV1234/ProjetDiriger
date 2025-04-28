@@ -4,8 +4,8 @@ require 'src/class/Database.php';
 require 'src/class/Item.php';
 require 'models/ItemModel.php';
 require 'src/session.php';
-require 'models/PanierModel.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 sessionStart();
 
@@ -31,7 +31,18 @@ if(isPost()){
         redirect("/connexion");
     $panierModel = new PanierModel($pdo);
     $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
+
+    //MAJ de la session
+    $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
+
     redirect("/");
+}
+
+//MAJ de la session
+if (isset($_SESSION['user'])) {
+    $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
 }
 
 require 'views/item.php';

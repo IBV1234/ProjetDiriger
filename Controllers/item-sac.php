@@ -4,8 +4,8 @@ require 'src/class/Database.php';
 require 'src/class/Item.php';
 require 'models/ItemModel.php';
 require 'src/session.php';
-require 'models/PanierModel.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 sessionStart();
 
@@ -56,7 +56,16 @@ if(isPost()){
             redirect("/connexion");
         $userModel->sellItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
     }
+
+    //MAJ de la session
+    $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+
     redirect("/inventaire");
 }
+
+//MAJ de la session
+$_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+$_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
 
 require 'views/item-sac.php';
