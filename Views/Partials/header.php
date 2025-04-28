@@ -40,7 +40,7 @@
           <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user']->getAlias()  ?>
           </button>
-          <ul class="dropdown-menu text-small" style="">
+          <ul class="dropdown-menu text-small" style="z-index: 1050;">
             <li><a class="dropdown-item" href="/account">Profil</a></li>
             <li><a class="dropdown-item" href="/inventaire">Sac a dos</a></li>
             <li><hr class="dropdown-divider"></li>
