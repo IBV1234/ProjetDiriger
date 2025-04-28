@@ -15,6 +15,12 @@ function getPrixTotalPayer($items)
 
 }
 
+// function quantiteValide($items){
+//     foreach($items as $key => $item){
+//             $item->getQuantitePanier();
+//     }
+// }
+
 function getPoidPanier($items){
     $poids = 0;
    
