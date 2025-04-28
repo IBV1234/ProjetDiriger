@@ -1,7 +1,1 @@
-{"prixTotal":80,"poidsTotal":null,"items":[{"quantite":"2","id":"16","poids":"20","prix":"40","utilites":"5"}]}
-{"prixTotal":1000,"poidsTotal":null,"items":[{"quantite":"20","id":"7","poids":"10","prix":"50","utilites":"5"}]}
-{"prixTotal":40,"poidsTotal":null,"items":[{"quantite":"1","id":"15","poids":"1","prix":"40","utilites":"5"}]}
-{"prixTotal":1200,"poidsTotal":null,"items":[{"quantite":"10","id":"12","poids":"2","prix":"120","utilites":"5"}]}
-{"prixTotal":300,"poidsTotal":null,"items":[{"quantite":"10","id":"31","poids":"6","prix":"30","utilites":"1"}]}
-{"prixTotal":300,"poidsTotal":null,"items":[{"quantite":"10","id":"31","poids":"6","prix":"30","utilites":"1"}]}
-{"prixTotal":75,"poidsTotal":null,"items":[{"quantite":"1","id":"11","poids":"1","prix":"75","utilites":"5"}]}
+
