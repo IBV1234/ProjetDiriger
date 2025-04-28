@@ -10,7 +10,7 @@ require 'partials/header.php';
         <a class="btn bg-dark-yellow-fallout" href="/inventaire">Retour</a>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
+        <div class="bg-blue-fallout d-flex m-3 item-container pt-2"> <!-- body item container -->
             <div class="row item-row-container">
                 <div class="col d-flex align-items-center flex-column m-3 mt-5 position-relative">
                     <img src="<?php echo $item->getLienPhoto() ?>" class="item-image image-bg" alt="placeholder">
@@ -37,7 +37,6 @@ require 'partials/header.php';
                                         <div style="transform: skew(0deg, -5deg);">
                                             <h2>
                                                 <img src="/public/images/sac.png" class="bag" alt="panier" />
-                                                <span></span>
                                                 <?= $itemQt ?>
                                             </h2>
                                         </div>
