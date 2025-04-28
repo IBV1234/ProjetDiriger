@@ -10,7 +10,7 @@ require 'partials/header.php';
         <a class="btn bg-dark-yellow-fallout" href="/">Retour</a>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
+        <div class="bg-blue-fallout d-flex m-3 item-container pt-2"> <!-- body item container -->
             <div class="row item-row-container">
                 <div class="col d-flex align-items-center flex-column m-3 mt-5 position-relative">
                     <img src="<?php echo $item->getLienPhoto() ?>" class="item-image image-bg" alt="placeholder">
