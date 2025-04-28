@@ -154,3 +154,13 @@ textarea{
     height:auto;
     border-radius: 30px;
 }
+.rating-container {
+    display: flex;
+    justify-content: center; /* Centrer les étoiles dans le conteneur */
+    align-items: center;
+    flex-wrap: wrap; /* Gérer plusieurs lignes si nécessaire */
+    max-width: 100%; /* Empêche le dépassement */
+    height: auto;
+    flex-shrink: 1;
+}
+

@@ -90,7 +90,7 @@ require 'partials/header.php';
         <div class="add-comment">
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
                 <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
-                <textarea style="width: 80%;" name="comment" id="comment" placeholder="Entrez votre commentaire"
+                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment" placeholder="Entrez votre commentaire"
                     maxlength="35"></textarea>
                 <div>
                     <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
@@ -115,8 +115,13 @@ require 'partials/header.php';
                             <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
                             </p>
                         </div>
+                        <div class="rating-containe" data-coreui-size="lg" data-coreui-precision="1"
+                            data-coreui-read-only="true" data-coreui-toggle="rating"
+                            data-coreui-value="<?= $commentaire->getEvaluation() ?>">
+                        </div>
                         <?php if ($visibilityIconAddMessageIcon): ?>
-                            <div class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '':'hide-add-message'?>">
+                            <div
+                                class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '' : 'hide-add-message' ?>">
                                 <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
                                     <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
 
