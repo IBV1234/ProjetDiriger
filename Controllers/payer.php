@@ -18,6 +18,10 @@ if(isPost()){
     // Récupération des valeurs
     $maxPoids = intval($_POST['maxPoids']);
     $items = $_POST['items'] ?? [];
+    $valide = quantiteValide( $items,$PanierModel);
+    $_SESSION['isQtBdIsValide'] = $valide;
+    if($valide ==  false) redirect("/panier-achat");
+
 
     $prixTotal = getPrixTotalPayer($items);
     $poidPanier = getPoidPanier($items);

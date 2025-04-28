@@ -1,4 +1,5 @@
 <?php
+
 function isPost()
 {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -15,11 +16,18 @@ function getPrixTotalPayer($items)
 
 }
 
-// function quantiteValide($items){
-//     foreach($items as $key => $item){
-//             $item->getQuantitePanier();
-//     }
-// }
+function quantiteValide($items,$PanierModel){
+    $valide = true;
+    foreach($items as $key => $item){
+        $quantiteBD = $PanierModel->Quantite((int)$item['id']);
+        // $qtItem =(int)$item['quantite'];
+        if((int)$item['quantite']> (int)$quantiteBD['quantiteStock']){
+            $valide = false;
+            break;
+        }
+    }
+    return $valide;
+}
 
 function getPoidPanier($items){
     $poids = 0;
