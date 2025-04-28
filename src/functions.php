@@ -28,7 +28,16 @@ function quantiteValide($items,$PanierModel){
     }
     return $valide;
 }
-
+function UserComment($commentaires,$userId){
+    $yes = false;
+    foreach($commentaires as $key => $commentaire){
+        if((int)$commentaire->getIdJoueur()=== $userId){
+            $yes = true;
+            break;
+        }
+    }
+    return $yes;
+}
 function getPoidPanier($items){
     $poids = 0;
    

@@ -17,8 +17,9 @@ $commentairesModel = new CommentaireModel($pdo);
 $panierModel = new panierModel($pdo);
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;
+$visibilityIconDeleteMessageIcon = false;
 $isInPanier = false;
-
+$isTherUserComment = false;
 if(!isset($_GET['id']))
     redirect("error");
 else {
@@ -26,9 +27,12 @@ else {
     if(isset($_SESSION['user']))$isInPanier = $panierModel->isInSacAdos($_SESSION['user']->getId(),(int)$_GET['id']);
 
     $comentaires = $commentairesModel->selectByItem((int)$_GET['id']);
-    if(!$isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = false;
-    if($isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = true;
-    if($isInPanier && !empty($comentaires)) $visibilityIconAddMessageIcon = true;
+    $isTherUserComment = UserComment($comentaires,$_SESSION['user']->getId());
+    if(!$isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = false;
+    if($isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = true; $visibilityIconDeleteMessageIcon = true;
+    if($isInPanier && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
+    if($isInPanier && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
+
 
     $_SESSION['item'] = $item;
 }

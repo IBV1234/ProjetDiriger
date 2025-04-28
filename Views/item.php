@@ -119,7 +119,7 @@ require 'partials/header.php';
                             data-coreui-read-only="true" data-coreui-toggle="rating"
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
-                        <?php if ($visibilityIconAddMessageIcon): ?>
+                        <?php if ($visibilityIconDeleteMessageIcon): ?>
                             <div
                                 class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '' : 'hide-add-message' ?>">
                                 <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
