@@ -17,7 +17,7 @@ if(!isset($_SESSION['bonus'])){
 
 $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
 $QuestionsModel = new QuestionsModel($pdo);
-$question = $QuestionsModel->select_question_reponses();
+$question = $QuestionsModel->select_question_reponses($_SESSION['user']->getId());
 
 $ReponseModel = new ReponseModel($pdo);
 $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());
