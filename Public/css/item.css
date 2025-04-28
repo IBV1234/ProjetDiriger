@@ -14,7 +14,6 @@
     width: 40px;
     border-radius: 10%;
     background-color: #FCEF6F;
-
 }
 .bg-light-green-fallout {
     background-color: #9BD997;
@@ -50,3 +49,118 @@
 .bg-light-dark-red-fallout {
     background-color: #e79191;
 }
+.container-comments{
+    display: flex;
+    margin-left: 8%;
+    flex-direction:row ; 
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4%;
+   background-color: #4169E1;
+   border-radius: 20px;
+    width: 84% ;
+    padding-left: 0;
+    height: auto;
+    position: relative;
+    padding-bottom: 2%;
+}
+.container-body-comment{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    margin-top: 3%;
+    gap: 20px;
+    justify-content: center;
+    width: 80% ;
+    text-align: center;
+    height:250px;
+    padding: 20px;
+    margin: 0;
+    border-radius: 30px;
+    background-color: #DCDCDC;
+
+}
+
+.container-body-comment::-webkit-scrollbar {
+    width: 15px; /* Largeur de la barre de défilement */
+}
+
+.container-body-comment::-webkit-scrollbar-thumb {
+    background-color:#FFD700; /* Couleur de la barre */
+    border-radius: 10px; /* Arrondi de la barre */
+}
+
+.container-body-comment::-webkit-scrollbar-track {
+    background-color:grey; /* Couleur de l'arrière-plan */
+    border-radius: 10px;
+}
+.container-icon-comment{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 70%;
+    grid-template-rows: auto;
+    justify-content: space-evenly;
+    gap:10px;
+    height: auto;
+    width: auto;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: #FCEF6F;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5); /* Ombre */
+    
+}
+.container-icon-comment:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+textarea{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    border-radius: 20px;
+}
+.img-icon{
+    height: 45px;
+    width: 45px;
+    border-radius: 30px;
+}
+
+.noComment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 10%;
+    flex-basis: 70%;
+    gap:30px;
+    height: auto;
+    width: auto;
+    max-height: 135px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #FCEF6F;
+}
+.hide-add-message{
+    visibility:hidden;
+}
+.add-comment{
+    display: flex;
+    justify-content: center;
+    width: 50% ;
+    text-align: center;
+    height:auto;
+    border-radius: 30px;
+}
+.rating-container {
+    display: flex;
+    justify-content: center; /* Centrer les étoiles dans le conteneur */
+    align-items: center;
+    flex-wrap: wrap; /* Gérer plusieurs lignes si nécessaire */
+    max-width: 100%; /* Empêche le dépassement */
+    height: auto;
+    flex-shrink: 1;
+}
+

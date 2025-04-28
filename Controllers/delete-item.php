@@ -1,6 +1,7 @@
 <?php
 require 'src/session.php';
 require 'src/class/Database.php';
+
 require 'Models/PanierModel.php';
 
 sessionStart();
