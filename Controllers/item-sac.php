@@ -53,7 +53,7 @@ if(isPost()){
 
 
     if($_POST['action'] === 'use') {
-        if($_SESSION['user']->getHp() <10){
+        if($_SESSION['user']->getHp() < 100){
             if (!isset($_SESSION['user']))
                 redirect("/connexion");
             $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());

@@ -216,5 +216,20 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    public function canSellItem(string $userId, string $itemId): bool{
+        try{
+            $request = $this->pdo->prepare('SELECT canSellItem(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
+            $data = $request->fetch(PDO::FETCH_NUM);
+
+            if($data[0] == 1) 
+                return true;
+            return false;
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 
