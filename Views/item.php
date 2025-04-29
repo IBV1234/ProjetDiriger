@@ -120,9 +120,9 @@ require 'partials/header.php';
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
                         <?php if ($visibilityIconDeleteMessageIcon): ?>
-                            <div
-                                class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '' : 'hide-add-message' ?>">
-                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
+                            <di
+                            class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user']) ? $_SESSION['user']->getId() : 0)) ? '' : 'hide-add-message' ?>">
+                            <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
                                     <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
 
                                 </a>

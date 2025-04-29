@@ -27,7 +27,7 @@ else {
     if(isset($_SESSION['user']))$isInPanier = $panierModel->isInSacAdos($_SESSION['user']->getId(),(int)$_GET['id']);
 
     $comentaires = $commentairesModel->selectByItem((int)$_GET['id']);
-    $isTherUserComment = UserComment($comentaires,$_SESSION['user']->getId());
+    if(isset($_SESSION['user']))$isTherUserComment = UserComment($comentaires,$_SESSION['user']->getId());
     if(!$isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = false;
     if($isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = true; $visibilityIconDeleteMessageIcon = true;
     if($isInPanier && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
