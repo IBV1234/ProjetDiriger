@@ -70,8 +70,8 @@
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
-    overflow-y: auto;
     margin-top: 3%;
+    overflow-y: auto;
     gap: 20px;
     justify-content: center;
     width: 80% ;

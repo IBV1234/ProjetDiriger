@@ -115,13 +115,12 @@ require 'partials/header.php';
                             <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
                             </p>
                         </div>
-                        <div class="rating-containe" data-coreui-size="lg" data-coreui-precision="1"
+                        <div class="rating-container" data-coreui-size="lg" data-coreui-precision="1"
                             data-coreui-read-only="true" data-coreui-toggle="rating"
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
                         <?php if ($visibilityIconDeleteMessageIcon): ?>
-                            <di
-                            class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user']) ? $_SESSION['user']->getId() : 0)) ? '' : 'hide-add-message' ?>">
+                            <div class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user']) ? $_SESSION['user']->getId() : 0)) ? '' : 'hide-add-message' ?>">
                             <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
                                     <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
 

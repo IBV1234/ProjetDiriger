@@ -7,6 +7,7 @@ require 'src/session.php';
 require 'models/PanierModel.php';
 require 'models/UserModel.php';
 require 'models/CommentaireModel.php';
+require 'models/historiqueAchatsModel.php';
 sessionStart();
 
 //db..................................................................
@@ -15,23 +16,25 @@ $pdo = $db->getPDO();
 $itemModel = new ItemModel($pdo);
 $commentairesModel = new CommentaireModel($pdo);
 $panierModel = new panierModel($pdo);
+$historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
+
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;
 $visibilityIconDeleteMessageIcon = false;
-$isInPanier = false;
+$isInAchats = false;
 $isTherUserComment = false;
 if(!isset($_GET['id']))
     redirect("error");
 else {
     $item = $itemModel->selectById($_GET['id']);
-    if(isset($_SESSION['user']))$isInPanier = $panierModel->isInSacAdos($_SESSION['user']->getId(),(int)$_GET['id']);
+    if(isset($_SESSION['user']))$isInAchats = $historiqueAchatsModel->isIn($_SESSION['user']->getId(),(int)$_GET['id']);
 
     $comentaires = $commentairesModel->selectByItem((int)$_GET['id']);
     if(isset($_SESSION['user']))$isTherUserComment = UserComment($comentaires,$_SESSION['user']->getId());
-    if(!$isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = false;
-    if($isInPanier && empty($comentaires)) $visibilityIconAddMessageIcon = true; $visibilityIconDeleteMessageIcon = true;
-    if($isInPanier && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
-    if($isInPanier && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
+    if(!$isInAchats && empty($comentaires)) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = false;
+    if($isInAchats && empty($comentaires)) $visibilityIconAddMessageIcon = true; $visibilityIconDeleteMessageIcon = true;
+    if($isInAchats && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
+    if($isInAchats && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
 
 
     $_SESSION['item'] = $item;

@@ -20,13 +20,18 @@ function quantiteValide($items,$PanierModel){
     $valide = true;
     foreach($items as $key => $item){
         $quantiteBD = $PanierModel->Quantite((int)$item['id']);
-        // $qtItem =(int)$item['quantite'];
         if((int)$item['quantite']> (int)$quantiteBD['quantiteStock']){
             $valide = false;
             break;
         }
     }
     return $valide;
+}
+function insertIntoBDHistoriqueAchats($items,$historiqueAchatsModel,$idJoueur){
+    foreach($items as $key => $item){
+        $historiqueAchatsModel->insertAchats((int)$item['id'],$idJoueur);
+
+    }
 }
 function UserComment($commentaires,$userId){
     $yes = false;
