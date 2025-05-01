@@ -1,7 +1,7 @@
 <?php
 
-require 'partials/head.php';
-require 'partials/header.php';
+require 'Partials/head.php';
+require 'Partials/header.php';
 
 ?>
 
@@ -47,4 +47,4 @@ require 'partials/header.php';
 
         <script src="/public/scripts/index.js"></script>
 
-<?php require 'partials/footer.php' ?>
+<?php require 'Partials/footer.php' ?>

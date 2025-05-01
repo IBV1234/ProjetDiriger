@@ -10,7 +10,7 @@ require 'partials/header.php';
         <a class="btn bg-dark-yellow-fallout" href="/">Retour</a>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="bg-blue-fallout d-flex m-3 item-container"> <!-- body item container -->
+        <div class="bg-blue-fallout d-flex m-3 item-container pt-2"> <!-- body item container -->
             <div class="row item-row-container">
                 <div class="col d-flex align-items-center flex-column m-3 mt-5 position-relative">
                     <img src="<?php echo $item->getLienPhoto() ?>" class="item-image image-bg" alt="placeholder">
@@ -70,14 +70,74 @@ require 'partials/header.php';
                             <!-- make this add the item to the cart in the SESSION -->
                         </button>
                         <div class="flex-row bg-light-blue-fallout p-1 rounded mt-1">Quantité en stock :
-                            <?php echo $item->getQteStock() ?></div>
+                            <?php echo $item->getQteStock() ?>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div>
+    <div class="container-comments">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
+        <div id="icon-message" class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
+            style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
+            <button type="button" style="background: none; border: none;"
+                onclick="showTextAerea(this)"><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
+                <img width="30px" height="30px" src="public/images/Add-message.png">
+
+            </button>
+        </div>
+        <div class="add-comment">
+            <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
+                <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
+                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment" placeholder="Entrez votre commentaire"
+                    maxlength="35"></textarea>
+                <div>
+                    <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
+                    <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
+                </div>
+            </form>
+        </div>
+        <div class="container-body-comment">
+
+            <?php if (!empty($comentaires)): ?>
+
+                <?php foreach ($comentaires as $key => $commentaire): ?>
+                    <div class="container-icon-comment">
+                        <div style="border-right: 2px solid black;">
+                            <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
+                        </div>
+                        <div>
+                            <p style="font-weight: bold; color:blue;"> <?= $commentaire->getAlias(); ?> a dit:</p>
+
+                        </div>
+                        <div>
+                            <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
+                            </p>
+                        </div>
+                        <div class="rating-containe" data-coreui-size="lg" data-coreui-precision="1"
+                            data-coreui-read-only="true" data-coreui-toggle="rating"
+                            data-coreui-value="<?= $commentaire->getEvaluation() ?>">
+                        </div>
+                        <?php if ($visibilityIconAddMessageIcon): ?>
+                            <div
+                                class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '' : 'hide-add-message' ?>">
+                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
+                                    <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
+
+                                </a>
+                            </div>
+                        <?php endif ?>
+
+                    </div>
+                <?php endforeach ?>
+            <?php else: ?>
+                <div class="noComment">
+                    <p> l'item n'a aucun commentaire pour l'instant</p>
+                </div>
+            <?php endif ?>
+        </div>
+
     </div>
 </div>
 

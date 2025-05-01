@@ -8,6 +8,7 @@ const ROUTES = [
     '/connexion' => 'connexion.php',
     '/inscription' => 'inscription.php',
     '/item' => 'item.php',
+    '/delete-comment'=>'delete-comment.php',
     '/panier-achat' => 'panier-achat.php',
     '/delete-item' => 'delete-item.php',
     '/payer' => 'payer.php',
@@ -21,4 +22,5 @@ const ROUTES = [
     '/reponse' => '/reponseEnigma.php',
     '/info' => '/info-enigma.php',
     '/statistiques' => '/statistiques-enigma.php',
+    '/ajout-commentaire' =>'ajout-commentaire.php'
 ];
