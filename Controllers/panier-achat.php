@@ -3,8 +3,8 @@
 require 'src/session.php';
 require 'src/class/Database.php';
 require 'models/ItemModel.php';
-require 'models/PanierModel.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 sessionStart();
 
@@ -48,5 +48,9 @@ if(!empty($panier)){
     
     $_SESSION["isEmptyPanier"] = true;
 }
+
+//MAJ de la session
+$_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+$_SESSION['poidsSac'] = $PanierModel->getPoidsSacDos($_SESSION['user']->getId());
 
 require 'views/panier-achat.php';
