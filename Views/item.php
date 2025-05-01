@@ -139,6 +139,19 @@ require 'partials/header.php';
 
     </div>
 </div>
+<div class="row">
+    <div id="confirmationModalDetail" class="modal">
+        <div class="modal-content">
+            <div>
+                <p style="font-weight: bold;" id="messageDetail"></p>
+            </div>
+            <div>
+                <button type="button" id="okBtnDetail">Continuer</button>
+                <button type="button" id="cancelBtnDetail"> Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 
