@@ -33,6 +33,12 @@ function insertIntoBDHistoriqueAchats($items,$historiqueAchatsModel,$idJoueur){
 
     }
 }
+
+function insertIntoBDHistoriqueAchats2($id,$historiqueAchatsModel,$idJoueur){
+    
+        $historiqueAchatsModel->insertAchats($id,$idJoueur);
+
+}
 function UserComment($commentaires,$userId){
     $yes = false;
     foreach($commentaires as $key => $commentaire){

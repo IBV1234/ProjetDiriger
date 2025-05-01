@@ -32,7 +32,10 @@ if(isPost()){
     $soldeFinal = $caps - $prixTotal;
 
     $PanierModel->insertSacADos($_SESSION['user']->getId());
-    insertIntoBDHistoriqueAchats($items,$historiqueAchatsModel,$_SESSION['user']->getId());
+    if(!$historiqueAchatsModel->isIn($_SESSION['user']->getId(),$_SESSION['item']->getIdItem())){
+        insertIntoBDHistoriqueAchats($items, $historiqueAchatsModel,$_SESSION['user']->getId());
+
+    }
 
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
     $_SESSION['user']->setBalance($soldeFinal);
