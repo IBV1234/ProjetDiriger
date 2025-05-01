@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.sell_eat_btn = function (action) {
 
         const dex = document.getElementById('dexteriter').value;
+        const vie = document.getElementById('vie').value;
         const sell = document.getElementById('sell').value ?? null;
         const eat = document.getElementById('eat')?.value ?? null;
         const idTem = document.getElementById('idItem').value ;
@@ -74,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (eat !== null || sell !== null) {
 
             let dexteriter = parseInt(dex,10);
-
-                if(dexteriter < 100){
+            let hp = parseInt(vie,10);
+                if(dexteriter < 100 && hp< 100){
                     document.getElementById('action').value = action;
                     document.getElementById('sell_eat_form').submit();
 

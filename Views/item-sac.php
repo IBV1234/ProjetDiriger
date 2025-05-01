@@ -66,6 +66,7 @@ require 'partials/header.php';
                 <form method="POST" id="sell_eat_form">
                     <!-- donné à envyoyer au fichier js controller-dexteriter -->
                     <input type="hidden" name="dexteriter" id="dexteriter" value="<?=$_SESSION['user']->getDexterite()?>">
+                    <input type="hidden" name="vie" id="vie" value="<?=$_SESSION['user']->getHp()?>">
                     <input type="hidden" name="idItem" id="idItem" value="<?= $item->getIdItem() ?>"> 
                     <!-- ---------------------------------------------------------------- -->
 
