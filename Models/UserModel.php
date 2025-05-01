@@ -231,5 +231,28 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    public function DeleteFromSac(string $userId, string $itemId): void{
+        try{
+            $request = $this->pdo->prepare('CALL deleteFromSac(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function modifierNomUser(string $newName, string $userId): bool{
+        try{
+            $stm = $this->pdo->prepare('CALL modifierNomUser(:newName, :userId, @success)');
+            $stm->bindValue(":userId", (int)$userId, PDO::PARAM_INT);
+            $stm->bindValue(":newName", $newName, PDO::PARAM_STR);
+            $stm->execute();
+
+            $result = $this->pdo->query('SELECT @success')->fetch(PDO::FETCH_NUM);
+            return $result[0] == 1;
+        } catch (PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 
