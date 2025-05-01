@@ -1,10 +1,10 @@
 <?php
 require 'src/class/Database.php';
 require 'src/session.php';
-require 'src/class/User.php';
-require 'models/UserModel.php';
 require 'models/QuestionModel.php';
 require 'models/ReponseModel.php';
+require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 ////////////////////////////////////////
 sessionStart();
@@ -67,5 +67,9 @@ if($reponse->getEstBonne() == 1) {
     //statistiques
     $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  0);
 }
+
+//MAJ de la session
+$_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+$_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
 
 require 'views/enigma-reponse.php';

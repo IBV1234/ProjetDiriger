@@ -1,9 +1,10 @@
 <?php
 require 'src/session.php';
 require 'src/class/Database.php';
-require 'src/class/User.php';
 require 'models/QuestionModel.php';
 require 'models/ReponseModel.php';
+require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 ////////////////////////////////////////
 sessionStart();
@@ -26,7 +27,16 @@ shuffle($reponses);
 if (isPost()) {
     $_SESSION['reponse'] = $_POST['reponse'];
     $_SESSION['idEgnime'] = $_POST['idEgnime'];
+
+    //MAJ de la session
+    $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+
     redirect('/reponse');
 }
+
+//MAJ de la session
+$_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+$_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
 
 require "views/random-question.php";

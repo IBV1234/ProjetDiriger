@@ -4,7 +4,7 @@ require 'src/class/Database.php';
 require 'src/session.php';
 require 'src/class/Item.php';
 require 'models/ItemModel.php';
-require 'src/class/User.php';
+require 'models/UserModel.php';
 require 'models/PanierModel.php';
 
 ////////////////////////////////////////
@@ -23,6 +23,10 @@ $panierModel = new PanierModel($pdo);
 $items = $itemModel->selectByInventory($_SESSION['user']->getId());
 $poidsSac = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
 
+//MAJ de la session
+$_SESSION['poidsSac'] = $poidsSac;
+$userModel = new UserModel($pdo);
+$_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
 
 require 'views/inventaire.php';
 

@@ -3,6 +3,7 @@
 require 'src/class/Database.php';
 require 'src/session.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 sessionStart();
 
@@ -38,5 +39,10 @@ if(isPost()){
     }
     exit;
 }
+
+//MAJ de la session
+$_SESSION['user'] = $userModel -> selectById($_SESSION['user']->getId());
+$panierModel = new PanierModel($pdo);
+$_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
 
 require 'views/account-modify.php';
