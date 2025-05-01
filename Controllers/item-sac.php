@@ -66,7 +66,7 @@ if(isPost()){
     if(isset($data['action'])&& $data['action']==="use") {
 
 
-        if( $_SESSION['user']->getHp() < 10){
+        if( $_SESSION['user']->getHp() < 100){
 
             if (!isset($_SESSION['user']))
                  redirect("/connexion");
@@ -78,7 +78,7 @@ if(isPost()){
 
                 }
 
-             if (!isset($data['isMaxDex']) && !isset($_GET['id'])) {
+             if (!isset($data['isMaxDex'])) {
                 $NouvelleDexterite = ($_SESSION['user']->getDexterite() + 2 );
                 $userModel->nouvelleDexterite($NouvelleDexterite,$_SESSION['user']->getId());
                 $_SESSION['user']->setDexterite($NouvelleDexterite);
@@ -99,7 +99,7 @@ if(isPost()){
             }
 
         
-            if (!isset($data['isMaxDex']) && !isset($_GET['id'])) {
+            if (!isset($data['isMaxDex'])) {
                 $NouvelleDexterite = ($_SESSION['user']->getDexterite() + 1 );
                 $userModel->nouvelleDexterite($NouvelleDexterite,$_SESSION['user']->getId());
                 $_SESSION['user']->setDexterite($NouvelleDexterite);

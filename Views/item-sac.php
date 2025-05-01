@@ -83,7 +83,7 @@ require 'partials/header.php';
                     </div>
 
                         <?php if($item->getType() == 'nourriture' || $item->getType() == 'medicament') : ?>
-                            <button class="flex-row bg-light-green-fallout cart-button btn" type="button" id="use" onclick="sell_eat_btn('use')" name="action" value="use" <?php echo $itemQt > 0 && $_SESSION['user']->getHp() < 10 ? "" : "disabled" ?>>
+                            <button class="flex-row bg-light-green-fallout cart-button btn" type="button" id="use" onclick="sell_eat_btn('use')" name="action" value="use" <?php echo $itemQt > 0 && $_SESSION['user']->getHp() < 100 ? "" : "disabled" ?>>
                             <i class="m-2"><img src="../public/images/food-icon.png" width="25"></i>Consommer
                         </button>
                         <?php endif; ?>

@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    function maxDex(idItem,eat,sell) {
+    function maxDex(idItem,action) {
 
 
         // Préparer les données à envoyer
         const data = {
             isMaxDex: true,
-            action: eat ?? sell
+            action:action
         };
 
         // Envoyer la requête AJAX
@@ -76,6 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let dexteriter = parseInt(dex,10);
             let hp = parseInt(vie,10);
+            let messae ="";
+            if(action=="use") messae ="consommer";
+            if(action=="sell") messae ="vendre";
+
                 if(dexteriter < 100 && hp< 100){
                     document.getElementById('action').value = action;
                     document.getElementById('sell_eat_form').submit();
@@ -83,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }else{
                         showModal((callback) => {
                             if (callback) {
-                                maxDex(idTem,eat,sell);
+                                maxDex(idTem,action);
                                 console.log("");
                             } else {
                                 console.log("");
                             }
-                        }, "Vous ne pouvez plus augmenter votre dextériter.Voulez-vous toujours acheter?")
+                        }, `Vous ne pouvez plus augmenter votre dextériter.Voulez-vous toujours ${messae} ?`)
                     
                 }
         } 
