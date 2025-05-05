@@ -55,12 +55,6 @@ if(isPost()){
         if (!isset($_SESSION['user']))
             redirect("/connexion");
         $userModel->DeleteFromSac($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
-        
-        // if ($poidAutoriser <= $maxPoids) {
-            $NouvelleDexterite = ($_SESSION['user']->getDexterite() + 1 );
-            $userModel->nouvelleDexterite($NouvelleDexterite,$_SESSION['user']->getId());
-            $_SESSION['user']->setDexterite($NouvelleDexterite);
-        // }  
     }
     if($_POST['action'] === 'use') {
         if($_SESSION['user']->getHp() < 100){
