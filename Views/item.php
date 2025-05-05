@@ -77,7 +77,7 @@ require 'partials/header.php';
             </div>
         </div>
     </div>
-    <div class="container-comments">
+    <div class="container-comments bg-blue-fallout">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
         <div id="icon-message" class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
             style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
@@ -120,7 +120,7 @@ require 'partials/header.php';
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
                         <?php if ($visibilityIconDeleteMessageIcon): ?>
-                            <div class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user']) ? $_SESSION['user']->getId() : 0)) ? '' : 'hide-add-message' ?>">
+                            <div class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user'])  ? $_SESSION['user']->getId() : 0) ) ? '' : 'hide-add-message' ?>">
                             <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
                                     <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
 
