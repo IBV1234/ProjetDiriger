@@ -24,7 +24,8 @@ require 'partials/header.php';
             </div>
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Nom d'utilisateur<br>
-                <input type="text" class="form-control mt-1" disabled value="<?php echo $user->getAlias() ?>">
+                <input type="text" class="form-control mt-1 mb-2" disabled value="<?php echo $user->getAlias() ?>">
+                <a class="mb-3 bg-lightblue-fallout account-display-modify nameModifyIcon px-2 pt-1 pb-1" href="#"><i class="bi bi-pencil-square"></i></a>
             </div>
             <div class="mb-3 account-display mx-auto bg-lightblue-fallout-contrast p-2">
                 Email<br>
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        action: 'updatePassword',
                         newPassword: newPassword
                     })
                 })
@@ -154,6 +156,100 @@ document.addEventListener('DOMContentLoaded', () => {
     modifyIcon.addEventListener('click', (event) => {
         event.preventDefault();
         togglePasswordEdit(); 
+    });
+
+    let isEditingUsername = false;
+
+    const nameModifyIcon = document.querySelector('.nameModifyIcon');
+    const usernameInput = document.querySelector('input[type="text"][value="<?php echo $user->getAlias() ?>"]');
+    const usernameContainer = usernameInput.parentElement;
+
+    const toggleUsernameEdit = () => {
+        if (isEditingUsername) return;
+
+        isEditingUsername = true;
+
+        const checkmarkIcon = document.createElement('a');
+        checkmarkIcon.className = 'mb-3 bg-lightblue-fallout account-display-modify px-2 pt-1 pb-1';
+        checkmarkIcon.href = '#';
+        checkmarkIcon.innerHTML = '<i class="bi bi-check"></i>';
+
+        const cancelIcon = document.createElement('a');
+        cancelIcon.className = 'mb-3 m-2 bg-lightblue-fallout account-display-modify px-2 pt-1 pb-1';
+        cancelIcon.href = '#';
+        cancelIcon.innerHTML = '<i class="bi bi-x"></i>';
+
+        usernameInput.disabled = false; // Enable the input field
+        nameModifyIcon.style.display = 'none'; // Hide the pencil icon
+
+        usernameContainer.appendChild(checkmarkIcon);
+        usernameContainer.appendChild(cancelIcon);
+
+        checkmarkIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+            const newUsername = usernameInput.value.trim(); // Trim whitespace
+
+            // Clear any existing feedback label
+            let feedbackLabel = usernameContainer.querySelector('.feedback-label');
+            if (!feedbackLabel) {
+                feedbackLabel = document.createElement('div');
+                feedbackLabel.className = 'mt-2 fw-bold feedback-label';
+                usernameContainer.insertBefore(feedbackLabel, usernameInput);
+            }
+
+            if (!newUsername) {
+                feedbackLabel.textContent = 'Nom d\'utilisateur requis';
+                feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
+                return;
+            }
+
+            fetch('/account-modify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'updateUsername',
+                    newUsername: newUsername
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not OK');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    feedbackLabel.textContent = 'Nom d\'utilisateur changé avec succès!';
+                    feedbackLabel.className = 'mt-2 fw-bold feedback-label text-success';
+                    setTimeout(() => cancelIcon.click(), 10); 
+                } else {
+                    feedbackLabel.textContent = data.error || 'Erreur lors de la modification du nom d\'utilisateur.';
+                    feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
+                }
+            })
+            .catch(error => {
+                feedbackLabel.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+                feedbackLabel.className = 'mt-2 fw-bold feedback-label text-danger';
+                console.error('Error:', error);
+            });
+        });
+
+        cancelIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            usernameInput.disabled = true; 
+            nameModifyIcon.style.display = ''; 
+
+            checkmarkIcon.remove();
+            cancelIcon.remove();
+
+            isEditingUsername = false;
+        });
+    };
+
+    nameModifyIcon.addEventListener('click', (event) => {
+        event.preventDefault();
+        toggleUsernameEdit();
     });
 });
 </script>
