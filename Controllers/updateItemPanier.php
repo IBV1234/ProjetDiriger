@@ -1,11 +1,10 @@
 <?php
+  require 'src/session.php';
+  require 'src/class/Database.php';
+  require 'models/UserModel.php';
+  require 'models/PanierModel.php';
+
   if(isPost()){
-
-    require 'src/session.php';
-    require 'src/class/Database.php';
-
-    require 'models/PanierModel.php';
-    require 'models/UserModel.php';
 
     sessionStart();
     header('Content-Type: application/json');
@@ -20,9 +19,22 @@
         $idItem = (int)$data['id'];
         $newQuantity = (int)$data['quantite'];
         $PanierModel-> UpdateQtPanier($_SESSION['user']->getId(),$newQuantity,  $idItem);
+
+        //MAJ de la session
+        $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+        $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+
          redirect("/panier-achat");
  
     }
  
   }
+
+  //MAJ de la session
+  $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
+  $pdo = $db->getPDO();
+
+  $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+  $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+
    redirect("/panier-achat");

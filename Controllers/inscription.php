@@ -3,6 +3,7 @@
 require 'src/session.php';
 require 'src/class/Database.php';
 require 'models/UserModel.php';
+require 'models/PanierModel.php';
 
 //INITIALISATION......................
 sessionStart();

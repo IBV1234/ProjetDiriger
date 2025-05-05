@@ -1,4 +1,5 @@
 <?php
+
 function isPost()
 {
     return $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -15,12 +16,39 @@ function getPrixTotalPayer($items)
 
 }
 
-// function quantiteValide($items){
-//     foreach($items as $key => $item){
-//             $item->getQuantitePanier();
-//     }
-// }
+function quantiteValide($items,$PanierModel){
+    $valide = true;
+    foreach($items as $key => $item){
+        $quantiteBD = $PanierModel->Quantite((int)$item['id']);
+        if((int)$item['quantite']> (int)$quantiteBD['quantiteStock']){
+            $valide = false;
+            break;
+        }
+    }
+    return $valide;
+}
+function insertIntoBDHistoriqueAchats($items,$historiqueAchatsModel,$idJoueur){
+    foreach($items as $key => $item){
+        $historiqueAchatsModel->insertAchats((int)$item['id'],$idJoueur);
 
+    }
+}
+
+function insertIntoBDHistoriqueAchats2($id,$historiqueAchatsModel,$idJoueur){
+    
+        $historiqueAchatsModel->insertAchats($id,$idJoueur);
+
+}
+function UserComment($commentaires,$userId){
+    $yes = false;
+    foreach($commentaires as $key => $commentaire){
+        if((int)$commentaire->getIdJoueur()=== $userId){
+            $yes = true;
+            break;
+        }
+    }
+    return $yes;
+}
 function getPoidPanier($items){
     $poids = 0;
    

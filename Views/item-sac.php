@@ -62,32 +62,56 @@ require 'partials/header.php';
                         </div>
                     </div>
                 </div>
-                <form method="POST">
-                    <div class="col d-flex justify-content-around align-items-center m-3">
-                        <button class="flex-row bg-light-red-fallout cart-button btn" type="submit" name="action" value="sell" <?php echo $itemQt > 0 ? "" : "disabled" ?> <?php echo $userModel->canSellItem($_SESSION['user']->getId(), $item->getIdItem()) ? "" : "disabled" ?>>
-                            <div class="sell-button"><i class="m-1 bi bi-cash-coin"></i>Vendre</div>
-                            <div class="bg-light-dark-red-fallout p-1 rounded mt-1 sell-button border border-black">
-                                <p class="fw-bold m-2"><?php echo round($item->getPrix() / 3,0) ?></p>
-                                <img src="/public/images/caps_icon.webp" alt="caps" class="mb-2 caps-icon-index" width="25">
-                            </div>
-                        </button>
+                <div class="w-100"></div>
+                <form method="POST" id="sell_eat_form">
+                    <!-- donné à envyoyer au fichier js controller-dexteriter -->
+                    <input type="hidden" name="dexteriter" id="dexteriter" value="<?=$_SESSION['user']->getDexterite()?>">
+                    <input type="hidden" name="vie" id="vie" value="<?=$_SESSION['user']->getHp()?>">
+                    <input type="hidden" name="idItem" id="idItem" value="<?= $item->getIdItem() ?>"> 
+                    <!-- ---------------------------------------------------------------- -->
+
+                    <input type="hidden" name="action" id="action">
+
+                    <div class="col d-flex align-items-center flex-column m-3">
+                    <button class="flex-row bg-light-red-fallout cart-button btn" type="button" id="sell" onclick="sell_eat_btn('sell')" name="action" value="sell" <?php echo $itemQt > 0 ? "" : "disabled" ?>>
+
+                    <div class="sell-button"><i class="m-1 bi bi-cash-coin"> </i> Vendre </div>
+
+                    <div class="bg-light-dark-red-fallout p-1 rounded mt-1 sell-button border border-black">
+                        <p class="fw-bold m-2"><?php echo round($item->getPrix() / 3,0) ?></p>
+                        <img src="/public/images/caps_icon.webp" alt="caps" class="mb-2 caps-icon-index" width="25">
+                    </div>
 
                         <?php if($item->getType() == 'nourriture' || $item->getType() == 'medicament') : ?>
-                            <button class="flex-row bg-light-green-fallout cart-button btn" type="submit" name="action" value="use" <?php echo $itemQt > 0 && $_SESSION['user']->getHp() < 100 ? "" : "disabled" ?> <?php echo $userModel->canSellItem($_SESSION['user']->getId(), $item->getIdItem()) ? "" : "disabled" ?>>
-                                <i class="m-2"><img src="../public/images/food-icon.png" width="25"></i>Consommer
-                            </button>
+                            <button class="flex-row bg-light-green-fallout cart-button btn" type="button" id="use" onclick="sell_eat_btn('use')" name="action" value="use" <?php echo $itemQt > 0 && $_SESSION['user']->getHp() < 100 ? "" : "disabled" ?>>
+                            <i class="m-2"><img src="../public/images/food-icon.png" width="25"></i>Consommer
+                        </button>
+
                         <?php endif; ?>
 
                         <button class="flex-row bg-danger cart-button btn" type="submit" name="action" value="delete" <?php echo $itemQt > 0 ? "" : "disabled" ?> <?php echo $userModel->canSellItem($_SESSION['user']->getId(), $item->getIdItem()) ? "" : "disabled" ?>>
                             <i class="m-2 bi bi-trash"></i>Jeter
                         </button>
                     </div>
+                    
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<div class="row">
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div>
+                <p style="font-weight: bold;" id="message"></p>
+            </div>
+            <div>
+                <button type="button" id="okBtn">Continuer</button>
+                <button type="button" id="cancelBtn"> Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 
 require 'partials/footer.php';
