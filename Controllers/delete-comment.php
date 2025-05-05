@@ -10,6 +10,7 @@ $pdo = $db->getPDO();
 $commentairesModel = new CommentaireModel($pdo);
 
 $idItem = (int)$_GET['id'] ?? null;
-$commentairesModel->deleteComment($idItem,$_SESSION['user']->getId());
+$idJoueur =(int)$_GET['idJoueur'] ?? null;
+$commentairesModel->deleteComment($idItem,$idJoueur);
 redirectWitParams("/item",$idItem);
 
