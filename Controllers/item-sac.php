@@ -66,8 +66,14 @@ if(isPost()){
     if(isset($data['action'])&& $data['action']==="use") {
 
 
-        if( $_SESSION['user']->getHp() < 100){
 
+    if($data['action'] === 'delete') {
+        if (!isset($_SESSION['user']))
+            redirect("/connexion");
+        $userModel->DeleteFromSac($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+    }
+    if($data['action'] === 'use') {
+        if($_SESSION['user']->getHp() < 100){
             if (!isset($_SESSION['user']))
                  redirect("/connexion");
 
