@@ -34,7 +34,11 @@ if ($difficulty) {
     //PDO
     $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
     $QuestionsModel = new QuestionsModel($pdo);
-    $question = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
+    $question = $QuestionsModel->chercherQuestionSelonDifficulte($_SESSION['user']->getId(), $difficulty);
+
+    if (!$question) { // Si aucune question n'est trouvée, redirigez vers la page d'énigmes (toutes les énigmes ont ete repondues))
+        redirect('/enigma');
+    }    
 
     $ReponseModel = new ReponseModel($pdo);
     $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());
