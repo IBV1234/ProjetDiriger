@@ -17,6 +17,7 @@ $itemModel = new ItemModel($pdo);
 $commentairesModel = new CommentaireModel($pdo);
 $panierModel = new panierModel($pdo);
 $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
+$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;

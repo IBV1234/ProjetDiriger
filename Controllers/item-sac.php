@@ -35,6 +35,7 @@ $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
 $user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
+$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //get item from index.................................................
 
