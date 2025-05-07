@@ -254,5 +254,16 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+
+    public function updatePointDeVie(int $newPointDeVie, int $userId): void{
+        try{
+            $request = $this->pdo->prepare('CALL updatePointDeVie(:newPointDeVie, :userId)');
+            $request->bindValue(':newPointDeVie', $newPointDeVie, PDO::PARAM_INT);
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 

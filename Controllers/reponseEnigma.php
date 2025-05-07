@@ -55,7 +55,12 @@ if($reponse->getEstBonne() == 1) {
     //statistiques
     $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  1);
 
-} else {
+} else { //mauvaise reponse
+    //perte de points de vie
+    $perteDeVie = $question->getPerteDeVie();
+    $_SESSION['user']->setVie($_SESSION['user']->getVie() - $perteDeVie);
+    $ModelUser->updatePointDeVie($_SESSION['user']->getVie(), $_SESSION['user']->getId());
+
     //messages
     $messageAvant = "Mauvaise réponse !";
     $messageApres = "Meilleure chance la prochaine fois !";
