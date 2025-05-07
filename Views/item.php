@@ -90,8 +90,8 @@ require 'partials/header.php';
         <div class="add-comment">
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
                 <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
-                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment" placeholder="Entrez votre commentaire"
-                    maxlength="35"></textarea>
+                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment"
+                    placeholder="Entrez votre commentaire" maxlength="35"></textarea>
                 <div>
                     <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
                     <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
@@ -120,12 +120,16 @@ require 'partials/header.php';
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
                         <?php if ($visibilityIconDeleteMessageIcon): ?>
-                            <div class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user'])  ? $_SESSION['user']->getId() : 0) ) ? '' : 'hide-add-message' ?>">
-                            <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
-                                    <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
-
+                            <?php
+                            $joueur = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+                            ?>
+                            <div
+                                class="<?= ($commentaire->getIdJoueur() === ($joueur ? $joueur->getId() : 0) || ($joueur ? $joueur->isAdmin() : false)) ? '' : 'hide-add-message' ?>">
+                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>&idJoueur=<?= $commentaire->getIdJoueur() ?>">
+                                        <img style="height:30px; width:30px;" src="public/images/delete-icon.png" class="icon-User">
                                 </a>
                             </div>
+
                         <?php endif ?>
 
                     </div>
