@@ -15,7 +15,7 @@ if(!isset($_SESSION['bonus'])){
     $_SESSION['bonus'] = 0;
 }
 if($_SESSION['user']->getHp() <= 0) {
-    redirect('/enigma');
+    redirect('/gameover');
 }
 ///////////////////////////////////////
 
@@ -23,8 +23,8 @@ $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
 $QuestionsModel = new QuestionsModel($pdo);
 $question = $QuestionsModel->select_question_reponses($_SESSION['user']->getId());
 
-if (!$question) { // Si aucune question n'est trouvée, redirigez vers la page d'énigmes (toutes les énigmes ont ete repondues))
-    redirect('/enigma');
+if (!$question) { // Si aucune question n'est trouvée, redirigez vers la page gameover (toutes les énigmes ont ete repondues))
+    redirect('/gameover');
 }
 
 $ReponseModel = new ReponseModel($pdo);

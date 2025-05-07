@@ -18,7 +18,7 @@ if(!isset($_SESSION['bonus'])){
     $_SESSION['bonus'] = 0;
 }
 if($_SESSION['user']->getHp() <= 0) {
-    redirect('/enigma');
+    redirect('/gameover');
 }
 ///////////////////////////////////////
 

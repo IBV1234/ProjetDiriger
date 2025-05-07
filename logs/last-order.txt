@@ -2,3 +2,4 @@
 {"prixTotal":1000,"poidsTotal":null,"items":[{"quantite":"20","id":"7","poids":"10","prix":"50","utilites":"5"}]}
 {"prixTotal":40,"poidsTotal":null,"items":[{"quantite":"1","id":"15","poids":"1","prix":"40","utilites":"5"}]}
 {"prixTotal":150,"poidsTotal":null,"items":[{"quantite":"1","id":"13","poids":"6","prix":"100","utilites":"5"},{"quantite":"1","id":"29","poids":"1","prix":"50","utilites":"4"}]}
+{"prixTotal":50,"poidsTotal":null,"items":[{"quantite":"1","id":"8","poids":"1","prix":"50","utilites":"5"}]}
