@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'// indique que c’est une requête AJAX pour s'assurer d'envoyer une reponse en json et non html dans le controller qui affiche une vue
-
             },
             body: JSON.stringify(data)
         })
@@ -80,22 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
             if(action=="use") messae ="consommer";
             if(action=="sell") messae ="vendre";
 
-                if(dexteriter < 100 && hp< 100){
-                    if(dexteriter ==99 && hp == 99) dexteriter = 100; hp = 100;
-                    document.getElementById('action').value = action;
-                    document.getElementById('sell_eat_form').submit();
-
-                }else{
-                        showModal((callback) => {
-                            if (callback) {
-                                maxDex(idTem,action);
-                                console.log("");
-                            } else {
-                                console.log("");
-                            }
-                        }, `Vous ne pouvez plus augmenter votre dextériter.Voulez-vous toujours ${messae} ?`)
-                    
-                }
+            if(dexteriter < 100){
+                document.getElementById('action').value = action;
+                document.getElementById('sell_eat_form').submit();
+            }else{
+                showModal((callback) => {
+                    if (callback) {
+                        maxDex(idTem,action);
+                    }
+                }, `Vous ne pouvez plus augmenter votre dextérité. Voulez-vous toujours ${messae} ?`)
+            }
         } 
     }
 

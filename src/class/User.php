@@ -82,6 +82,12 @@ class User
         $this->hp = $hp;
     }
     public function setDexterite(int $dexterite): void {
+        if($dexterite < 0) {
+            $dexterite = 0;
+        }
+        if($dexterite > 100) {
+            $dexterite = 100;
+        }
         $this->dexterite = $dexterite;
     }
     public function setPoidsMax(int $poidsMax): void {
