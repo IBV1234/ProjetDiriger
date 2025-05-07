@@ -14,6 +14,9 @@ if (!isset($_SESSION['user'])) {
 if(!isset($_SESSION['bonus'])){
     $_SESSION['bonus'] = 0;
 }
+if($_SESSION['user']->getHp() <= 0) {
+    redirect('/enigma');
+}
 ///////////////////////////////////////
 
 $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();

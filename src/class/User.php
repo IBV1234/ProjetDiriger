@@ -76,6 +76,9 @@ class User
         $this->balance = $balance;
     }
     public function setHp(int $hp): void {
+        if($hp < 0) {
+            $hp = 0;
+        }
         $this->hp = $hp;
     }
     public function setDexterite(int $dexterite): void {
