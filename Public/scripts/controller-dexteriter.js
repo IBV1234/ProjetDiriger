@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if(action=="sell") messae ="vendre";
 
                 if(dexteriter < 100 && hp< 100){
+                    if(dexteriter ==99 && hp == 99) dexteriter = 100; hp = 100;
                     document.getElementById('action').value = action;
                     document.getElementById('sell_eat_form').submit();
 

@@ -32,7 +32,7 @@ $userModel = new UserModel($pdo);
 $panierModel = new PanierModel($pdo);
 $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
 
- $user = $_SESSION['user'];
+$user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
 
@@ -63,71 +63,97 @@ if (!isset($_SESSION['item']))
 
 if (isPost()) {
 
+    if ($data['action'] === 'delete') {
+        if (!isset($_SESSION['user']))
+            redirect("/connexion");
+        $userModel->DeleteFromSac($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+    }
     if (isset($data['action']) && $data['action'] === "use") {
 
 
 
-        if ($data['action'] === 'delete') {
-            if (!isset($_SESSION['user']))
-                redirect("/connexion");
-            $userModel->DeleteFromSac($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
-        }
-        if ($data['action'] === 'use') {
-            if ($_SESSION['user']->getHp() < 100) {
-                if (!isset($_SESSION['user']))
-                    redirect("/connexion");
-
-                $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
-
-                if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
-                    insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
-
-                }
-
-                if (!isset($data['isMaxDex'])) {
-                    $NouvelleDexterite = ($_SESSION['user']->getDexterite() + 2);
-                    $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
-                    $_SESSION['user']->setDexterite($NouvelleDexterite);
-                }
-            }
-        }
-
-        if (isset($data['action']) && $data['action'] == "sell") {
-
+        if ($_SESSION['user']->getHp() < 100) {
             if (!isset($_SESSION['user']))
                 redirect("/connexion");
 
-            $userModel->sellItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+            $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
 
             if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
                 insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
 
             }
 
-
             if (!isset($data['isMaxDex'])) {
-                $NouvelleDexterite = ($_SESSION['user']->getDexterite() + 1);
+                $dex = (int) $_SESSION['user']->getDexterite();
+
+                if ($dex == 99) {
+                    $dex = 100;
+                    $userModel->nouvelleDexterite($dex, $_SESSION['user']->getId());
+                    $_SESSION['user']->setDexterite($dex);
+
+                } else {
+                    $NouvelleDexterite = $dex + 2;
+                    $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
+                    $_SESSION['user']->setDexterite($NouvelleDexterite);
+                }
+
+
+            }
+        }
+
+
+    }
+    
+    if (isset($data['action']) && $data['action'] == "sell") {
+
+        if (!isset($_SESSION['user']))
+            redirect("/connexion");
+
+        $userModel->sellItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+
+        if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
+            insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
+
+        }
+
+
+        if (!isset($data['isMaxDex'])) {
+
+            $dex = (int) $_SESSION['user']->getDexterite();
+            if ($dex == 99) {
+                $dex = 100;
+                $userModel->nouvelleDexterite($dex, $_SESSION['user']->getId());
+                $_SESSION['user']->setDexterite($dex);
+
+            } else {
+                $NouvelleDexterite = $dex + 1;
                 $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
                 $_SESSION['user']->setDexterite($NouvelleDexterite);
             }
 
+
         }
 
-        // Gérer la redirection en fonction du type de requête
-        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-            echo json_encode(['redirect' => '/inventaire']);//retournez une réponse JSON contenant l'URL de redirection.
-            exit;//arrêter immédiatement l'exécution du script PHP après avoir envoyé une réponse JSON. Cela garantit que rien d'autre dans le fichier ne sera exécuté après avoir traité une requête AJAX.
-        } else {
-            redirect("/inventaire");
-        }
 
-        //MAJ de la session
-        $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
-        $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+    }
 
+    // Gérer la redirection en fonction du type de requête
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        echo json_encode(['redirect' => '/inventaire']);//retournez une réponse JSON contenant l'URL de redirection.
+        exit;//arrêter immédiatement l'exécution du script PHP après avoir envoyé une réponse JSON. Cela garantit que rien d'autre dans le fichier ne sera exécuté après avoir traité une requête AJAX.
+    } else {
         redirect("/inventaire");
     }
+
+    //MAJ de la session
+    $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
+    $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
+
+
+    redirect("/inventaire");
+
 }
+
 
 //MAJ de la session
 $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
