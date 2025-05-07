@@ -57,7 +57,6 @@
     align-items: center;
     justify-content: center;
     padding-top: 4%;
-   background-color: #4169E1;
    border-radius: 20px;
     width: 84% ;
     padding-left: 0;
@@ -70,8 +69,8 @@
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
-    overflow-y: auto;
     margin-top: 3%;
+    overflow-y: auto;
     gap: 20px;
     justify-content: center;
     width: 80% ;
@@ -164,3 +163,21 @@ textarea{
     flex-shrink: 1;
 }
 
+#okBtnDetail{
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(126, 189, 188);
+    color: black;
+    font-weight: bold;
+  }
+#cancelBtnDetail{
+    border-radius: 15px;
+    border: none;
+    color: black;
+    font-weight: bold;
+    background-color: rgb(194, 129, 129);
+  
+  }
+button{
+    margin: 10px;
+  }

@@ -99,4 +99,7 @@ class User
             'poidsMax' => $this->poidsMax
         ];
     }
+    public function isAdmin(): bool {
+        return $this->isAdmin === 1;
+    }
 } 

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const utilitesSac = document.getElementById('utilite').value; // Récupère tous les inputs utilite dans les colonnes    
         let isCorrectUtiliteInSac = false;
         let isUtiliteInPanier = false;
-
+        let qtValide = true;
         // Fonction pour envoyer un requête post au controller UpdateItemPanier pour update la quantité dans la bd
         window.updateItemQuantity = function (inputElement) {
             // Récupérer les données de l'élément
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return isInSac;
         }
 
-     
+
 
         //fonction poour savoir si il y a une utilité 1 dans le panier
         function getResultUtiliterInPanier(utilites) {
@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             quantityInputs.forEach(input => {
                 const quantity = parseInt(input.value, 10); // Ensure numeric value
+                const quantityInBd =parseInt(input.max,10);
+                if(quantity>quantityInBd){
+                    qtValide = false;
+                }else{
+                    qtValide = true;
+                }
                 const parentContainer = input.closest('.p-2.mb-3'); // Find the closest parent container
                 const poidsElement = parentContainer.querySelector('#poids'); // Use class instead of id
                 const poids = parseFloat(poidsElement.innerText); // Convertit en nombre
@@ -142,44 +148,55 @@ document.addEventListener('DOMContentLoaded', function () {
             let solde = parseInt(soldeJoueur);
             let prixTotal = parseInt(window.prixTotalElement.textContent);
             let totalPoidAuthorisé = totalPoidsPanier + parseInt(poidTotalSac);
-
             if (isCorrectUtiliteInSac == false && isUtiliteInPanier != false) isCorrectUtiliteInSac = isUtiliteInPanier;
             if (isCorrectUtiliteInSac == false && isUtiliteInPanier == false) isCorrectUtiliteInSac = false;
 
             if (isCorrectUtiliteInSac) {
                 if (dex > 0) {
-                    if (prixTotal <= solde) {
-                        if (totalPoidAuthorisé > maxPoids) {
-
-                            //showModal().then((userConfirmed) => { promesse
-
-                            showModal((userConfirmed) => {// callback
-
-                                if ((userConfirmed)) {
-                                    dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
-                                    dexteriter.textContent = dex.toFixed();
-                                    document.getElementById('payerForm').submit();
-                                } else {
-
-                                    dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
-                                }
-                            }, "Vous avez dépassé le poids maximum autorisé, êtes-vous sûr de vouloir continuer ?");
+                    if (qtValide) {
 
 
+                        if (prixTotal <= solde) {
+                            if (totalPoidAuthorisé > maxPoids) {
+
+                                //showModal().then((userConfirmed) => { promesse
+
+                                showModal((userConfirmed) => {// callback
+
+                                    if ((userConfirmed)) {
+                                        dex -= 1; // Réduction de la dextérité si l'utilisateur dépasse le poids max
+                                        dexteriter.textContent = dex.toFixed();
+                                        document.getElementById('payerForm').submit();
+                                    } else {
+
+                                        dexteriter.textContent = dex.toFixed(); // Réaffiche la dextérité sans changement
+                                    }
+                                }, "Vous avez dépassé le poids maximum autorisé, êtes-vous sûr de vouloir continuer ?");
+
+
+                            } else {
+                                document.getElementById('payerForm').submit();
+                            }
                         } else {
-                            document.getElementById('payerForm').submit();
+                            // confirm("Vous n'avez pas assez de caps pour cette achat");
+                            showModal((callback) => {
+                                if (callback) {
+                                    console.log("");
+                                } else {
+                                    console.log(""); // Réaffiche la dextérité sans changement
+                                }
+                            }, "Vous n'avez pas assez de caps pour cette achat");
                         }
                     } else {
-                        // confirm("Vous n'avez pas assez de caps pour cette achat");
                         showModal((callback) => {
                             if (callback) {
                                 console.log("");
                             } else {
                                 console.log(""); // Réaffiche la dextérité sans changement
                             }
-                        }, "Vous n'avez pas assez de caps pour cette achat");
+                        }, "Quantité trop grande pour un item");
                     }
-                }else{
+                } else {
                     showModal((callback) => {
                         if (callback) {
                             console.log("");
