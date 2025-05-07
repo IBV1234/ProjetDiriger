@@ -41,6 +41,7 @@
           <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
         </a>
         <div class="dropdown">
+        <img src=" <?= $_SESSION['user']->isAdmin() ?'public/images/admin-icon.png':'#' ?>" style="<?=$_SESSION['user']->isAdmin()?'heigth:30px; width: 30px;':'visibility:hidden;' ?>"></img>
           <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user']->getAlias()  ?>
           </button>

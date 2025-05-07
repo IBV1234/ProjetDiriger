@@ -32,7 +32,7 @@ $userModel = new UserModel($pdo);
 $panierModel = new PanierModel($pdo);
 $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
 
-$user = $_SESSION['user'];
+ $user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
 
