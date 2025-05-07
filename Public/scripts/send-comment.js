@@ -53,8 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (texte !== "" && etoile !== "" && texte.length > 0 && etoile.length > 0) {
 
-                document.getElementById('ajoutCommentaire').submit();
+                    if(etoile >=0 && etoile <= 5){
+                        document.getElementById('ajoutCommentaire').submit();
 
+                    }else{
+                        showModal((callback) => {
+                            if (callback) {
+                                console.log("");
+                            } else {
+                                console.log("");
+                            }
+                        }, "Vous devez mettre une évaluation entre 0 et 5")
+                    }
             } else {
                 showModal((callback) => {
                     if (callback) {
