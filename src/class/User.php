@@ -111,4 +111,4 @@ class User
     public function isAdmin(): bool {
         return $this->isAdmin === 1;
     }
-} 
+}

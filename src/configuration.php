@@ -24,4 +24,5 @@ const ROUTES = [
     '/statistiques' => '/statistiques-enigma.php',
     '/ajout-commentaire' =>'ajout-commentaire.php',
     '/gameover' => '/enigma-gameover.php',
+    '/admin' => '/admin.php',
 ];

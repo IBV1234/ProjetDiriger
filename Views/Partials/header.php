@@ -40,7 +40,9 @@
         <a href="/enigma" class="text-decoration-none text-black pe-4">
           <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
         </a>
-        <img src=" <?= $_SESSION['user']->isAdmin() ?'public/images/admin-icon.png':'#' ?>" style="<?=$_SESSION['user']->isAdmin()?'heigth:30px; width: 30px;':'visibility:hidden;' ?>"></img>
+        <?= $_SESSION['user']->isAdmin() ?
+          htmlTag("a", ["href" => "/admin", "class" => "text-decoration-none text-black pe-4"], htmlTag("img", ["src" => "public/images/admin-icon.png", "style" => "height:30px; width: 30px;"], ""))
+          : "" ?>
         <div class="dropdown">
           <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user']->getAlias()  ?>
