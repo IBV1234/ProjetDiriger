@@ -8,10 +8,10 @@ class QuestionsModel
 
     public function __construct(private PDO $pdo) {}
 
-    public function select_question_reponses() : null|Questions {
+    public function select_question_reponses($idJoueur) : null|Questions {
         try {
-            $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires()');
-
+            $stm = $this->pdo->prepare('CALL ChercherQuestionsAleatoires(:idJoueur)');
+            $stm->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
             $stm->execute();
 
             $data = $stm->fetch(PDO::FETCH_ASSOC);
@@ -44,9 +44,10 @@ class QuestionsModel
         }
     }
 
-    public function chercherQuestionSelonDifficulte($difficulty) : null|Questions {
+    public function chercherQuestionSelonDifficulte($idJoueur, $difficulty) : null|Questions {
         try {
-            $stm = $this->pdo->prepare('CALL Chercher_Questions_Aleatoires_Selon_laDiffculter(:difficulte)');
+            $stm = $this->pdo->prepare('CALL Chercher_Questions_Aleatoires_Selon_laDiffculter(:idJoueur, :difficulte)');
+            $stm->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
             $stm->bindValue(':difficulte', $difficulty, PDO::PARAM_STR);
             $stm->execute();
 

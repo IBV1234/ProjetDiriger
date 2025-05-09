@@ -216,5 +216,77 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    public function canSellItem(string $userId, string $itemId): bool{
+        try{
+            $request = $this->pdo->prepare('SELECT canSellItem(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
+            $data = $request->fetch(PDO::FETCH_NUM);
+
+            if($data[0] == 1) 
+                return true;
+            return false;
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function DeleteFromSac(string $userId, string $itemId): void{
+        try{
+            $request = $this->pdo->prepare('CALL deleteFromSac(:userId, :itemId)');
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->bindValue(':itemId', $itemId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    public function modifierNomUser(string $newName, string $userId): bool{
+        try{
+            $stm = $this->pdo->prepare('CALL modifierNomUser(:newName, :userId, @success)');
+            $stm->bindValue(":userId", (int)$userId, PDO::PARAM_INT);
+            $stm->bindValue(":newName", $newName, PDO::PARAM_STR);
+            $stm->execute();
+
+            $result = $this->pdo->query('SELECT @success')->fetch(PDO::FETCH_NUM);
+            return $result[0] == 1;
+        } catch (PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function updatePointDeVie(int $newPointDeVie, int $userId): void{
+        try{
+            $request = $this->pdo->prepare('CALL updatePointDeVie(:newPointDeVie, :userId)');
+            $request->bindValue(':newPointDeVie', $newPointDeVie, PDO::PARAM_INT);
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function adminAddCaps (int $idJoueur, int $idAdmin): void {
+        try {
+            $request = $this->pdo->prepare('CALL adminAddCaps(:idJoueur, :idAdmin)');
+            $request->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
+            $request->bindValue(':idAdmin', $idAdmin, PDO::PARAM_INT);
+            $request->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function getOfferCaps(int $idJoueur): int {
+        try {
+            $request = $this->pdo->prepare('CALL adminOfferCaps(:idJoueur)');
+            $request->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
+            $request->execute();
+            $resultArray = $request->fetch(PDO::FETCH_ASSOC);
+            return $resultArray['caps'];
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 

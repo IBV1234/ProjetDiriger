@@ -14,6 +14,9 @@ if (!isset($_SESSION['user'])) {
 if(!isset($_SESSION['bonus'])){
     $_SESSION['bonus'] = 0;
 }
+if($_SESSION['user']->getHp() <= 0) {
+    redirect('/gameover');
+}
 ///////////////////////////////////////
 
 $difficulty = isset($_GET['difficulty']) ? $_GET['difficulty'] : null;
@@ -34,7 +37,11 @@ if ($difficulty) {
     //PDO
     $pdo = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS)->getPDO();
     $QuestionsModel = new QuestionsModel($pdo);
-    $question = $QuestionsModel->chercherQuestionSelonDifficulte($difficulty);
+    $question = $QuestionsModel->chercherQuestionSelonDifficulte($_SESSION['user']->getId(), $difficulty);
+
+    if (!$question) { // Si aucune question n'est trouvée, redirigez vers la page d'énigmes (toutes les énigmes ont ete repondues))
+        redirect('/gameover');
+    }
 
     $ReponseModel = new ReponseModel($pdo);
     $reponses = $ReponseModel->chercherReponses($question->getIdEgnime());

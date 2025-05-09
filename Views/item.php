@@ -77,7 +77,7 @@ require 'partials/header.php';
             </div>
         </div>
     </div>
-    <div class="container-comments">
+    <div class="container-comments bg-blue-fallout">
         <!-- comment container {NOT TO DO IN SPRINT 1} -->
         <div id="icon-message" class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
             style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
@@ -90,8 +90,8 @@ require 'partials/header.php';
         <div class="add-comment">
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
                 <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
-                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment" placeholder="Entrez votre commentaire"
-                    maxlength="35"></textarea>
+                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment"
+                    placeholder="Entrez votre commentaire" maxlength="35"></textarea>
                 <div>
                     <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
                     <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
@@ -115,18 +115,21 @@ require 'partials/header.php';
                             <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
                             </p>
                         </div>
-                        <div class="rating-containe" data-coreui-size="lg" data-coreui-precision="1"
+                        <div class="rating-container" data-coreui-size="lg" data-coreui-precision="1"
                             data-coreui-read-only="true" data-coreui-toggle="rating"
                             data-coreui-value="<?= $commentaire->getEvaluation() ?>">
                         </div>
-                        <?php if ($visibilityIconAddMessageIcon): ?>
+                        <?php if ($visibilityIconDeleteMessageIcon): ?>
+                            <?php
+                            $joueur = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+                            ?>
                             <div
-                                class="<?= $commentaire->getIdJoueur() === $_SESSION['user']->getId() ? '' : 'hide-add-message' ?>">
-                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
-                                    <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
-
+                                class="<?= ($commentaire->getIdJoueur() === ($joueur ? $joueur->getId() : 0) || ($joueur ? $joueur->isAdmin() : false)) ? '' : 'hide-add-message' ?>">
+                                <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>&idJoueur=<?= $commentaire->getIdJoueur() ?>">
+                                        <img style="height:30px; width:30px;" src="public/images/delete-icon.png" class="icon-User">
                                 </a>
                             </div>
+
                         <?php endif ?>
 
                     </div>
@@ -138,6 +141,19 @@ require 'partials/header.php';
             <?php endif ?>
         </div>
 
+    </div>
+</div>
+<div class="row">
+    <div id="confirmationModalDetail" class="modal">
+        <div class="modal-content">
+            <div>
+                <p style="font-weight: bold;" id="messageDetail"></p>
+            </div>
+            <div>
+                <button type="button" id="okBtnDetail">Continuer</button>
+                <button type="button" id="cancelBtnDetail"> Annuler</button>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -22,5 +22,7 @@ const ROUTES = [
     '/reponse' => '/reponseEnigma.php',
     '/info' => '/info-enigma.php',
     '/statistiques' => '/statistiques-enigma.php',
-    '/ajout-commentaire' =>'ajout-commentaire.php'
+    '/ajout-commentaire' =>'ajout-commentaire.php',
+    '/gameover' => '/enigma-gameover.php',
+    '/admin' => '/admin.php',
 ];

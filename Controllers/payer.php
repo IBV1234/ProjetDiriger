@@ -5,18 +5,22 @@ if(isPost()){
     require 'src/class/Database.php';
     require 'models/UserModel.php';
     require 'models/PanierModel.php';
-
+    require 'models/historiqueAchatsModel.php';
     sessionStart();
 
     $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
     $pdo = $db->getPDO();
     $PanierModel =  new PanierModel($pdo);
     $userModel = new UserModel($pdo);
-
+    $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
 
     // Récupération des valeurs
     $maxPoids = intval($_POST['maxPoids']);
     $items = $_POST['items'] ?? [];
+    
+    // $valide = quantiteValide( $items,$PanierModel);
+    // if($valide ==  false) redirect("/panier-achat");
+
 
     $prixTotal = getPrixTotalPayer($items);
     $poidPanier = getPoidPanier($items);
@@ -27,6 +31,11 @@ if(isPost()){
     $soldeFinal = $caps - $prixTotal;
 
     $PanierModel->insertSacADos($_SESSION['user']->getId());
+    if(!$historiqueAchatsModel->isIn($_SESSION['user']->getId(),$_SESSION['item']->getIdItem())){
+        insertIntoBDHistoriqueAchats($items, $historiqueAchatsModel,$_SESSION['user']->getId());
+
+    }
+
     $userModel ->nouveauSolde( $soldeFinal ,$_SESSION['user']->getId());
     $_SESSION['user']->setBalance($soldeFinal);
 
