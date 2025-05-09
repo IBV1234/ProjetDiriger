@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($userId && $adminId) {
         $userModel->adminAddCaps($userId, $adminId);
+        
         redirect('/admin');
     } else {
         redirect('/admin');
@@ -44,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ///////////////////////////////////////
 $panierModel = new PanierModel($pdo);
 $sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
+
+//MAJ de la session
+$_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
+$_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
 ///////////////////////////////////////
 
 require 'views/admin.php';
