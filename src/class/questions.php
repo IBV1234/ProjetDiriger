@@ -63,4 +63,17 @@ class Questions {
         return 1000;
     }
 
+    public function getPerteDeVie(): int {
+        $difficulte = $this->getDifficulte();
+        switch($difficulte) {
+            case 'F':
+                return 3;
+            case 'M':
+                return 6;
+            case 'D':
+                return 10;
+        }
+        return 0;
+    }
+
 }

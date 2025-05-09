@@ -76,9 +76,18 @@ class User
         $this->balance = $balance;
     }
     public function setHp(int $hp): void {
+        if($hp < 0) {
+            $hp = 0;
+        }
         $this->hp = $hp;
     }
     public function setDexterite(int $dexterite): void {
+        if($dexterite < 0) {
+            $dexterite = 0;
+        }
+        if($dexterite > 100) {
+            $dexterite = 100;
+        }
         $this->dexterite = $dexterite;
     }
     public function setPoidsMax(int $poidsMax): void {
@@ -102,4 +111,4 @@ class User
     public function isAdmin(): bool {
         return $this->isAdmin === 1;
     }
-} 
+}

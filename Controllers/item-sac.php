@@ -9,6 +9,8 @@ require 'models/PanierModel.php';
 require 'models/historiqueAchatsModel.php';
 
 sessionStart();
+if (!isset($_SESSION['user']))
+    redirect("/connexion");
 
 //Vérification des requêtes AJAX : La variable $_SERVER['HTTP_X_REQUESTED_WITH'] est utilisée pour vérifier si la requête est une requête AJAX.
 //Si c'est le cas,l'en-tête Content-Type: application/json est envoyé.
@@ -23,7 +25,6 @@ if ($isAjax) {
     $data = $_POST;
 }
 
-
 //db..................................................................
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
@@ -35,6 +36,7 @@ $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
 $user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
+$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //get item from index.................................................
 
@@ -62,79 +64,39 @@ if (!isset($_SESSION['item']))
 //Eat item......................................................
 
 if (isPost()) {
-
     if ($data['action'] === 'delete') {
-        if (!isset($_SESSION['user']))
-            redirect("/connexion");
         $userModel->DeleteFromSac($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
     }
-    if (isset($data['action']) && $data['action'] === "use") {
 
+    if (isset($data['action']) && $data['action'] === "use") { //consommer un item
+        //MAJ dexterité
+        $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
+        $dex = (int) $_SESSION['user']->getDexterite();
+        $NouvelleDexterite = $dex + 2;
+        $_SESSION['user']->setDexterite($NouvelleDexterite);
+        $userModel->nouvelleDexterite($_SESSION['user']->getDexterite(), $_SESSION['user']->getId());
 
-
-        if ($_SESSION['user']->getHp() < 100) {
-            if (!isset($_SESSION['user']))
-                redirect("/connexion");
-
-            $userModel->useItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
-
-            if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
-                insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
-
-            }
-
-            if (!isset($data['isMaxDex'])) {
-                $dex = (int) $_SESSION['user']->getDexterite();
-
-                if ($dex == 99) {
-                    $dex = 100;
-                    $userModel->nouvelleDexterite($dex, $_SESSION['user']->getId());
-                    $_SESSION['user']->setDexterite($dex);
-
-                } else {
-                    $NouvelleDexterite = $dex + 2;
-                    $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
-                    $_SESSION['user']->setDexterite($NouvelleDexterite);
-                }
-
-
-            }
+        //MAJ de l'historique d'achats
+        if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
+            insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
         }
-
-
     }
     
+    
     if (isset($data['action']) && $data['action'] == "sell") {
-
-        if (!isset($_SESSION['user']))
-            redirect("/connexion");
-
         $userModel->sellItem($_SESSION['user']->getId(), $_SESSION['item']->getIdItem());
 
         if (!$historiqueAchatsModel->isIn($_SESSION['user']->getId(), $_SESSION['item']->getIdItem())) {
             insertIntoBDHistoriqueAchats2($_SESSION['item']->getIdItem(), $historiqueAchatsModel, $_SESSION['user']->getId());
-
         }
 
 
-        if (!isset($data['isMaxDex'])) {
-
+        { //MAJ dexterité
             $dex = (int) $_SESSION['user']->getDexterite();
-            if ($dex == 99) {
-                $dex = 100;
-                $userModel->nouvelleDexterite($dex, $_SESSION['user']->getId());
-                $_SESSION['user']->setDexterite($dex);
-
-            } else {
-                $NouvelleDexterite = $dex + 1;
-                $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
-                $_SESSION['user']->setDexterite($NouvelleDexterite);
-            }
-
-
+            $NouvelleDexterite = $dex + 1;
+            $_SESSION['user']->setDexterite($NouvelleDexterite);
+            $userModel->nouvelleDexterite($NouvelleDexterite, $_SESSION['user']->getId());
         }
-
-
     }
 
     // Gérer la redirection en fonction du type de requête
@@ -148,10 +110,7 @@ if (isPost()) {
     //MAJ de la session
     $_SESSION['user'] = $userModel->selectById($_SESSION['user']->getId());
     $_SESSION['poidsSac'] = (new PanierModel($pdo))->getPoidsSacDos($_SESSION['user']->getId());
-
-
     redirect("/inventaire");
-
 }
 
 
