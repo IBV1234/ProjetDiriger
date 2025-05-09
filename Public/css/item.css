@@ -52,12 +52,12 @@
 .container-comments{
     display: flex;
     margin-left: 8%;
-    flex-direction:row ; 
+    flex-direction:column ; 
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding-top: 4%;
-   border-radius: 20px;
+    border-radius: 20px;
     width: 84% ;
     padding-left: 0;
     height: auto;
@@ -181,7 +181,8 @@ textarea{
 button{
     margin: 10px;
   }
-    .rating-summary {
+
+  .rating-summary {
     background: #DCDCDC;
     width: 70%;
     padding: 15px;
