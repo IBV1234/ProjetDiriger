@@ -17,7 +17,6 @@ $itemModel = new ItemModel($pdo);
 $commentairesModel = new CommentaireModel($pdo);
 $panierModel = new panierModel($pdo);
 $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
-$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;
@@ -37,6 +36,7 @@ else {
     if($isInAchats && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
     if($isInAchats && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
 
+    $ratings = $itemModel->getItemRatings((int)$_GET['id']);
 
     $_SESSION['item'] = $item;
 }
