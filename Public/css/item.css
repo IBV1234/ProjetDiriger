@@ -57,7 +57,6 @@
     align-items: center;
     justify-content: center;
     padding-top: 4%;
-   background-color: #4169E1;
    border-radius: 20px;
     width: 84% ;
     padding-left: 0;
@@ -182,3 +181,36 @@ textarea{
 button{
     margin: 10px;
   }
+
+  .rating-summary {
+    background: #DCDCDC;
+    width: 70%;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.rating-label {
+    width: 80px;
+    font-weight: bold;
+}
+
+.bar {
+    height: 12px;
+    background: #ffffff;
+    border-radius: 5px;
+    margin: 0 10px;
+    position: relative;
+    flex-grow: 1;
+}
+
+.bar div {
+    height: 100%;
+    background: #ffc107;
+    border-radius: 5px;
+}

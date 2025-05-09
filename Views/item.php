@@ -77,67 +77,86 @@ require 'partials/header.php';
             </div>
         </div>
     </div>
-    <div class="container-comments">
-        <!-- comment container {NOT TO DO IN SPRINT 1} -->
+    <div class="d-flex container-comments bg-blue-fallout"> <!-- comment container {NOT TO DO IN SPRINT 1} -->
         <div id="icon-message" class="<?= $visibilityIconAddMessageIcon ? '' : 'hide-add-message' ?>"
-            style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire">
-            <button type="button" style="background: none; border: none;"
+            style="position: absolute; right: 20px; top:10px;" title="Ajouter un commentaire"> <button type="button"
+                style="background: none; border: none;"
                 onclick="showTextAerea(this)"><!-- lorsqu'on clique on mettra visible le textarea afin on puisse écrire et lorsqu'on apuui enter on rend invisible, et on l'nevoi au controller-->
                 <img width="30px" height="30px" src="public/images/Add-message.png">
-
             </button>
         </div>
         <div class="add-comment">
             <form method="post" style="width: 100%;" id="ajoutCommentaire" action="/ajout-commentaire">
                 <input type="hidden" name="idItem" value="<?= $_SESSION['item']->getIdItem() ?>">
-                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment" placeholder="Entrez votre commentaire"
-                    maxlength="35"></textarea>
+                <textarea style="width: 80%; font-weight: bold;" name="comment" id="comment"
+                    placeholder="Entrez votre commentaire" maxlength="35"></textarea>
                 <div>
                     <label class="h5" id="labelQt" for="quantity">Nombre d'étoile :</label>
                     <input type="number" id="quantity" name="evaluation" id="evaluation" value="" min="0" max="5">
                 </div>
             </form>
         </div>
-        <div class="container-body-comment">
-
-            <?php if (!empty($comentaires)): ?>
-
-                <?php foreach ($comentaires as $key => $commentaire): ?>
-                    <div class="container-icon-comment">
-                        <div style="border-right: 2px solid black;">
-                            <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
-                        </div>
-                        <div>
-                            <p style="font-weight: bold; color:blue;"> <?= $commentaire->getAlias(); ?> a dit:</p>
-
-                        </div>
-                        <div>
-                            <p style="font-weight: bold;text-decoration: underline;"> <?= $commentaire->getLeCommentaire(); ?>
-                            </p>
-                        </div>
-                        <div class="rating-container" data-coreui-size="lg" data-coreui-precision="1"
-                            data-coreui-read-only="true" data-coreui-toggle="rating"
-                            data-coreui-value="<?= $commentaire->getEvaluation() ?>">
-                        </div>
-                        <?php if ($visibilityIconDeleteMessageIcon): ?>
-                            <div class="<?= ($commentaire->getIdJoueur() === (isset($_SESSION['user']) ? $_SESSION['user']->getId() : 0)) ? '' : 'hide-add-message' ?>">
-                            <a href="/delete-comment?id=<?= $commentaire->getIdItem() ?>">
-                                    <img style="height:30px; height: 30px;" src="public/images/delete-icon.png" class="icon-User">
-
-                                </a>
+        <div class="d-flex justify-content-center row ">
+            <div class="col-md-5 order-md-1 order-2 d-flex flex-column align-items-center">
+                <div class="rating-summary text-center">
+                    <h4>Évaluations</h4>
+                    <?php for ($i = 5; $i >= 1; $i--): ?>
+                        <div class="rating-bar d-flex align-items-center">
+                            <span class="rating-label"><?= $i ?> étoiles</span>
+                            <div class="bar flex-grow-1">
+                                <div style="width: <?= $ratings[$i] * 20 ?>%;"></div>
                             </div>
-                        <?php endif ?>
-
-                    </div>
-                <?php endforeach ?>
-            <?php else: ?>
-                <div class="noComment">
-                    <p> l'item n'a aucun commentaire pour l'instant</p>
+                            <span><?= $ratings[$i] ?></span>
+                        </div>
+                    <?php endfor; ?>
                 </div>
-            <?php endif ?>
-        </div>
+            </div>
 
-    </div>
+            <div class="container-body-comment col order-md-2 order-1 mb-2">
+
+                <?php if (!empty($comentaires)): ?>
+
+                    <?php foreach ($comentaires as $key => $commentaire): ?>
+                        <div class="container-icon-comment">
+                            <div style="border-right: 2px solid black;">
+                                <img class="img-icon" src="public/images/icon-user.png" class="icon-User">
+                            </div>
+                            <div>
+                                <p style="font-weight: bold; color:blue;"> <?= $commentaire->getAlias(); ?> a dit:</p>
+
+                            </div>
+                            <div>
+                                <p style="font-weight: bold;text-decoration: underline;">
+                                    <?= $commentaire->getLeCommentaire(); ?>
+                                </p>
+                            </div>
+                            <div class="rating-container" data-coreui-size="lg" data-coreui-precision="1"
+                                data-coreui-read-only="true" data-coreui-toggle="rating"
+                                data-coreui-value="<?= $commentaire->getEvaluation() ?>">
+                            </div>
+                            <?php if ($visibilityIconDeleteMessageIcon): ?>
+                                <?php
+                                $joueur = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+                                ?>
+                                <div
+                                    class="<?= ($commentaire->getIdJoueur() === ($joueur ? $joueur->getId() : 0) || ($joueur ? $joueur->isAdmin() : false)) ? '' : 'hide-add-message' ?>">
+                                    <a
+                                        href="/delete-comment?id=<?= $commentaire->getIdItem() ?>&idJoueur=<?= $commentaire->getIdJoueur() ?>">
+                                        <img style="height:30px; width:30px;" src="public/images/delete-icon.png" class="icon-User">
+                                    </a>
+                                </div>
+
+                            <?php endif ?>
+
+                        </div>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <div class="noComment">
+                        <p> l'item n'a aucun commentaire pour l'instant</p>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
 </div>
 <div class="row">
     <div id="confirmationModalDetail" class="modal">

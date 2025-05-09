@@ -10,10 +10,13 @@ class ItemModel implements ModelInterface
     // private PDO $pdo
 
     // Ici la propriété $pdo est déclarée dans le constructeur directement
-    public function __construct(private PDO $pdo) {}
+    public function __construct(private PDO $pdo)
+    {
+    }
 
-    public function selectAll() : null|array {
-        
+    public function selectAll(): null|array
+    {
+
         $items = [];
 
         try {
@@ -22,8 +25,8 @@ class ItemModel implements ModelInterface
             $stm->execute();
 
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
-          
-            if (! empty($data)) {
+
+            if (!empty($data)) {
 
                 foreach ($data as $row) {
                     $items[] = new Item(
@@ -53,20 +56,21 @@ class ItemModel implements ModelInterface
         }
     }
 
-    public function selectActive() : null|array {
-        
+    public function selectActive(): null|array
+    {
+
         $items = [];
 
-        try{
+        try {
 
             // $this->pdo-> car $pdo est une propriété de l'objet
             $stm = $this->pdo->prepare('CALL ItemsGetActive()');
 
             $stm->execute();
-    
+
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-            if (! empty($data)) {
+            if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
                         $row['idItem'],
@@ -92,21 +96,22 @@ class ItemModel implements ModelInterface
         } catch (PDOException $e) {
 
             throw new PDOException($e->getMessage(), $e->getCode());
-            
+
         }
     }
-    
-    public function selectById(int $idItem): null|Item {
-        try{
+
+    public function selectById(int $idItem): null|Item
+    {
+        try {
             $stm = $this->pdo->prepare('CALL ItemGetById(:idItem)');
-    
+
             $stm->bindValue(":idItem", $idItem, PDO::PARAM_INT);
-            
+
             $stm->execute();
-    
+
             $data = $stm->fetch(PDO::FETCH_ASSOC);
 
-            if(! empty($data)) {
+            if (!empty($data)) {
                 return new Item(
                     $data['idItem'],
                     $data['nomItem'],
@@ -122,7 +127,7 @@ class ItemModel implements ModelInterface
                 );
             }
         } catch (PDOException $e) {
-    
+
             // throw new PDOException($e->getMessage(), $e->getCode());
             $errorMessage = sprintf(
                 "Exception ERROR : %s | Code : %s | Message : %s | Fichier : %s | Ligne : %d\n", // formatage 
@@ -131,28 +136,29 @@ class ItemModel implements ModelInterface
                 $e->getMessage(),
                 $e->getFile(),
                 $e->getLine()
-              );
+            );
 
-              file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
+            file_put_contents('logs/error.txt', $errorMessage, FILE_APPEND);
 
-              redirect('views/error.php');
+            redirect('views/error.php');
 
-        }  
+        }
         return null;
     }
 
-    public function selectByInventory(int $idJoueur) : null|array {
-        
+    public function selectByInventory(int $idJoueur): null|array
+    {
+
         $items = [];
 
-        try{
+        try {
             $stm = $this->pdo->prepare('CALL ItemsDansInventaire(:idDuJoueur)');
             $stm->bindValue(":idDuJoueur", $idJoueur, PDO::PARAM_INT);
             $stm->execute();
-    
+
             $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-            if (! empty($data)) {
+            if (!empty($data)) {
                 foreach ($data as $row) {
                     $items[] = new Item(
                         $row['idItem'],
@@ -160,12 +166,12 @@ class ItemModel implements ModelInterface
                         $row['typeItem'],
                         $row['poids'],
                         $row['quantite'],
-                        $row['prix']??0,
-                        $row['utilite']??0,
+                        $row['prix'] ?? 0,
+                        $row['utilite'] ?? 0,
                         $row['photo'],
-                        $row['flagDispo']??0,
-                        $row['descriptionItem']??'',
-                        $row['evaluation']??0
+                        $row['flagDispo'] ?? 0,
+                        $row['descriptionItem'] ?? '',
+                        $row['evaluation'] ?? 0
                     );
                 }
                 return $items;
@@ -176,7 +182,22 @@ class ItemModel implements ModelInterface
         } catch (PDOException $e) {
 
             throw new PDOException($e->getMessage(), $e->getCode());
-            
+
         }
-    }    
+    }
+    function getItemRatings($item_id)
+    {
+        $stmt = $this->pdo->prepare("CALL GetItemRatings(:item_id)");
+        $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $ratings = array_fill(1, 5, 0); // Ensure all ratings (1-5) are initialized
+
+        while ($row = $stmt->fetch()) {
+            $ratings[$row["Rating"]] = $row["RatingCount"];
+        }
+
+        return $ratings;
+    }
+
 }

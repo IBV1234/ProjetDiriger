@@ -36,6 +36,7 @@ else {
     if($isInAchats && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
     if($isInAchats && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
 
+    $ratings = $itemModel->getItemRatings((int)$_GET['id']);
 
     $_SESSION['item'] = $item;
 }
