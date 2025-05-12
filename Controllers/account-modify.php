@@ -17,6 +17,7 @@ if (!isset($_SESSION['user'])) {
 $db = Database::getInstance(CONFIGURATIONS['database'], DB_PARAMS);
 $pdo = $db->getPDO();
 $userModel = new UserModel($pdo);
+$panierModel = new PanierModel($pdo);
 $user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
