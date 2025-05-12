@@ -21,6 +21,7 @@ $userModel = new UserModel($pdo);
 $user = $_SESSION['user'];
 $user = $userModel->selectById($user->getId());
 $_SESSION['user'] = $user;
+$sumPanier = $PanierModel->SumPanier($_SESSION['user']->getId());
 
 //$PanierModel->insert(9,  1 ,5); //  for test
 $maxPoids = $_SESSION['user']->getPoidsMax();

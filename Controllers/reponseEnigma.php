@@ -17,6 +17,9 @@ if(!isset($_SESSION['reponse']) || !isset($_SESSION['idEgnime'])) {
 if(!isset($_SESSION['bonus'])){
     $_SESSION['bonus'] = 0;
 }
+if($_SESSION['user']->getHp() <= 0) {
+    redirect('/gameover');
+}
 ///////////////////////////////////////
 
 $idEgnime = $_SESSION['idEgnime'];
@@ -55,10 +58,15 @@ if($reponse->getEstBonne() == 1) {
     //statistiques
     $reponseModel->insertStatistique($_SESSION['user']->getId(), $question->getIdEgnime(),  1);
 
-} else {
+} else { //mauvaise reponse
+    //perte de points de vie
+    $perteDeVie = $question->getPerteDeVie();
+    $_SESSION['user']->setHp($_SESSION['user']->getHp() - $perteDeVie);
+    $ModelUser->updatePointDeVie($_SESSION['user']->getHp(), $_SESSION['user']->getId());
+
     //messages
     $messageAvant = "Mauvaise réponse !";
-    $messageApres = "Meilleure chance la prochaine fois !";
+    $messageApres = "Vous avez perdu " . $perteDeVie . " points de vie !";
     $srcImage = "public/images/invalid.png";
 
     //update de reponses de suite

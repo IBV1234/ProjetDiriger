@@ -21,6 +21,7 @@ $user = $_SESSION['user'];
 
 //MAJ de la session
 $panierModel = new PanierModel($pdo);
+$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 $_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
 
 require 'views/account.php';

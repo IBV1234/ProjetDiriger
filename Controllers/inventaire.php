@@ -22,6 +22,7 @@ $itemModel = new ItemModel($pdo);
 $panierModel = new PanierModel($pdo);
 $items = $itemModel->selectByInventory($_SESSION['user']->getId());
 $poidsSac = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
+$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //MAJ de la session
 $_SESSION['poidsSac'] = $poidsSac;

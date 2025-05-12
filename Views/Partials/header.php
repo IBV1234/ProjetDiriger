@@ -25,11 +25,11 @@
 <!-- /Disconnected only -->
 <!-- Connected only -->
 <?php if(isset($_SESSION['user'])): ?>
-  <?php if ($controllerFile == "Controllers/index.php") : ?>
+  <?php if ($controllerFile) : ?>
       <div class="d-flex justify-content-between align-items-center flex-row">
         <a href="/panier-achat" class="text-decoration-none text-black pe-4">
           <i class="bi bi-cart-fill d-flex cart-icon" style="font-size: 35px;">
-            <?php if($sumPanier != null)
+            <?php if($sumPanier)
                     if($sumPanier >= 10)
                       echo htmlTag("i", ["class" => "notification-num"], htmlTag("p", ["class" => "mt-3 notification-num-text fs-6"], "9+" . ""));
                     else
@@ -40,8 +40,10 @@
         <a href="/enigma" class="text-decoration-none text-black pe-4">
           <i class="bi bi-question-circle d-flex" style="font-size: 35px;"></i>
         </a>
+        <?= $_SESSION['user']->isAdmin() ?
+          htmlTag("a", ["href" => "/admin", "class" => "text-decoration-none text-black pe-4"], htmlTag("img", ["src" => "public/images/admin-icon.png", "style" => "height:30px; width: 30px;"], ""))
+          : "" ?>
         <div class="dropdown">
-        <img src=" <?= $_SESSION['user']->isAdmin() ?'public/images/admin-icon.png':'#' ?>" style="<?=$_SESSION['user']->isAdmin()?'heigth:30px; width: 30px;':'visibility:hidden;' ?>"></img>
           <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['user']->getAlias()  ?>
           </button>

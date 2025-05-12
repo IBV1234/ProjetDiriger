@@ -254,5 +254,39 @@ class UserModel implements ModelInterface
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+
+    public function updatePointDeVie(int $newPointDeVie, int $userId): void{
+        try{
+            $request = $this->pdo->prepare('CALL updatePointDeVie(:newPointDeVie, :userId)');
+            $request->bindValue(':newPointDeVie', $newPointDeVie, PDO::PARAM_INT);
+            $request->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $request->execute();
+        }catch(PDOException $e){
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function adminAddCaps (int $idJoueur, int $idAdmin): void {
+        try {
+            $request = $this->pdo->prepare('CALL adminAddCaps(:idJoueur, :idAdmin)');
+            $request->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
+            $request->bindValue(':idAdmin', $idAdmin, PDO::PARAM_INT);
+            $request->execute();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function getOfferCaps(int $idJoueur): int {
+        try {
+            $request = $this->pdo->prepare('CALL adminOfferCaps(:idJoueur)');
+            $request->bindValue(':idJoueur', $idJoueur, PDO::PARAM_INT);
+            $request->execute();
+            $resultArray = $request->fetch(PDO::FETCH_ASSOC);
+            return $resultArray['caps'];
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
 }
 
