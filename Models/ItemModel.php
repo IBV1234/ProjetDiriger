@@ -179,4 +179,18 @@ class ItemModel implements ModelInterface
             
         }
     }    
+        function getItemRatings($item_id)
+    {
+        $stmt = $this->pdo->prepare("CALL GetItemRatings(:item_id)");
+        $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $ratings = array_fill(1, 5, 0); // Ensure all ratings (1-5) are initialized
+
+        while ($row = $stmt->fetch()) {
+            $ratings[$row["Rating"]] = $row["RatingCount"];
+        }
+
+        return $ratings;
+    }
 }

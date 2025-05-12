@@ -17,7 +17,6 @@ $itemModel = new ItemModel($pdo);
 $commentairesModel = new CommentaireModel($pdo);
 $panierModel = new panierModel($pdo);
 $historiqueAchatsModel = new HistoriqueAchatsModel($pdo);
-$sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //get item from index.................................................
 $visibilityIconAddMessageIcon = false;
@@ -37,11 +36,14 @@ else {
     if($isInAchats && !empty($comentaires)) $visibilityIconAddMessageIcon = true;$visibilityIconDeleteMessageIcon = true;
     if($isInAchats && !empty($comentaires) && $isTherUserComment) $visibilityIconAddMessageIcon = false; $visibilityIconDeleteMessageIcon = true;
 
+    $ratings = $itemModel->getItemRatings((int)$_GET['id']);
 
     $_SESSION['item'] = $item;
 }
 if(!isset($_SESSION['item']))
     redirect("error");
+if(isset($_SESSION['user']))
+    $sumPanier = $panierModel->SumPanier($_SESSION['user']->getId());
 
 //send item to cart...................................................
 if(isPost()){
@@ -49,7 +51,6 @@ if(isPost()){
         redirect("/connexion");
     $panierModel = new PanierModel($pdo);
     $panierModel->insert($item->getIdItem(), 1, $_SESSION['user']->getId());
-
     //MAJ de la session
     $_SESSION['user'] = (new UserModel($pdo))->selectById($_SESSION['user']->getId());
     $_SESSION['poidsSac'] = $panierModel->getPoidsSacDos($_SESSION['user']->getId());
